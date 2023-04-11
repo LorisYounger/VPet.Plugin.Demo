@@ -1,0 +1,529 @@
+﻿using Panuon.WPF.UI;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Windows.Threading;
+using static VPet.Plugin.DemoClock.DemoClock;
+using System.Timers;
+
+namespace VPet.Plugin.DemoClock
+{
+    /// <summary>
+    /// TimeClock.xaml 的交互逻辑
+    /// </summary>
+    public partial class TimeClock : UserControl
+    {
+        DemoClock Master;
+        public DispatcherTimer TimeTimer;
+        public DispatcherTimer CountTimer;
+        public DateTime StartTime;
+        public TimeSpan PauseTime;
+        public bool IsPause = false;
+        Timer CloseTimer;
+
+        public TimeClock(DemoClock master)
+        {
+            InitializeComponent();
+            Master = master;
+            Master.MW.Main.UIGrid.Children.Insert(0, this);
+
+            TimeTimer = new DispatcherTimer();
+            TimeTimer.Interval = TimeSpan.FromSeconds(1);
+            TimeTimer.Tick += TimeTimer_Tick;
+            TimeTimer.Start();
+
+            CountTimer = new DispatcherTimer();
+            //CountTimer.Interval = TimeSpan.FromSeconds(1);
+            CountTimer.Tick += CountTimer_Tick;
+
+            CloseTimer = new Timer()
+            {
+                Interval = 4000,
+                AutoReset = false,
+                Enabled = false
+            };
+            CloseTimer.Elapsed += CloseTimer_Elapsed;
+
+            Opacity = master.Set.Opacity;
+            Margin = new Thickness(0, 0, 0, master.Set.PlaceBotton);
+            Master.MW.Main.MouseEnter += UserControl_MouseEnter;
+            Master.MW.Main.MouseLeave += UserControl_MouseLeave;
+            TimeTimer_Tick();
+
+        }
+
+        private void CloseTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                Opacity = Master.Set.Opacity;
+                if (Master.Set.PlaceAutoBack && Master.MW.Main.UIGrid.Children.Contains(this))
+                {
+                    Master.MW.Main.UIGrid.Children.Remove(this);
+                    Master.MW.Main.UIGrid_Back.Children.Add(this);
+                }
+            });
+        }
+        private void UserControl_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (Master.Set.PlaceAutoBack && Master.MW.Main.UIGrid_Back.Children.Contains(this))
+            {
+                Master.MW.Main.UIGrid_Back.Children.Remove(this);
+                Master.MW.Main.UIGrid.Children.Insert(0, this);
+            }
+            Opacity = 0.95;
+            CloseTimer.Enabled = false;
+        }
+
+        private void UserControl_MouseLeave(object sender, MouseEventArgs e)
+        {
+            CloseTimer.Start();
+        }
+
+        bool TimeSpanChanged = false;
+        private void CountTimer_Tick(object sender = null, EventArgs e = null)
+        {
+            if (IsPause)
+                return;
+            switch (Master.mode)
+            {
+                default:
+                case Mode.None:
+                    CountTimer.Stop();
+                    break;
+                case Mode.Timing:
+                    var diff = DateTime.Now - StartTime + PauseTime;
+                    if (diff.TotalMinutes > 1)
+                    {
+                        TTimes.Text = diff.ToString(@"mm\:ss");
+                        if (TimeSpanChanged)
+                        {
+                            CountTimer.Interval = TimeSpan.FromSeconds(1);
+                            TimeSpanChanged = false;
+                        }
+                    }
+                    else
+                        TTimes.Text = diff.ToString(@"ss\:ff");
+
+                    if (diff.TotalMinutes < 1.5)
+                    {
+                        TDates.Text = $"计时: {diff.TotalSeconds:f1} 秒";
+                    }
+                    else if (diff.TotalHours < 1.5)
+                    {
+                        TDates.Text = $"计时: {diff.TotalMinutes:f1} 分钟";
+                    }
+                    else
+                    {
+                        TDates.Text = $"计时: {diff.Hours:f1} 小时";
+                    }
+                    break;
+                case Mode.CountDown:
+                    diff = StartTime - DateTime.Now;
+                    if (diff <= TimeSpan.Zero)
+                    {
+                        TTimes.Text = "时间到";
+                        TDates.Text = "计时结束";
+                        TOthers.Text = "点击此处回到时间显示";
+                        TOthers.Visibility = Visibility.Visible;
+                        Master.mode = Mode.CountDown_End;
+                        CountTimer.Stop();
+                        return;
+                    }
+                    PBTimeLeft.Value = PBTimeLeft.Maximum - diff.TotalMinutes;
+                    if (diff.TotalMinutes < 1)
+                    {
+                        TTimes.Text = diff.ToString(@"ss\:ff");
+                        if (TimeSpanChanged)
+                        {
+                            CountTimer.Interval = TimeSpan.FromMilliseconds(10);
+                            TimeSpanChanged = false;
+                        }
+                    }
+                    else
+                    {
+                        TTimes.Text = diff.ToString(@"mm\:ss");
+                    }
+                    if (diff.TotalMinutes < 1.5)
+                    {
+                        TDates.Text = $"剩余: {diff.TotalSeconds:f1} 秒";
+                    }
+                    else if (diff.TotalHours < 1.5)
+                    {
+                        TDates.Text = $"剩余: {diff.TotalMinutes:f1} 分钟";
+                    }
+                    else
+                    {
+                        TDates.Text = $"剩余: {diff.Hours:f1} 小时";
+                    }
+                    break;
+                case Mode.Tomato_Work:
+                    diff = DateTime.Now - StartTime;
+                    var diffleft = TimeSpan.FromMinutes(Master.Set.Tomato_WorkTime) - diff;
+                    if (diffleft <= TimeSpan.Zero)
+                    {
+                        Master.Set.AddTomato((int)Master.Set.Tomato_WorkTime / 10);
+                        Master.MW.Core.Save.Money += (int)Master.Set.Tomato_WorkTime / 10;
+                        TTimes.Text = "时间到";
+                        TDates.Text = "工作结束";
+                        TOthers.Text = "点击此处开始休息";
+                        Master.mode = Mode.CountDown_End;
+                        CountTimer.Stop();
+                        return;
+                    }
+                    TTimes.Text = diff.TotalMinutes.ToString("f1") + 'm';
+                    PBTimeLeft.Value = diff.TotalMinutes;
+                    if (diffleft.TotalMinutes < 1.5)
+                    {
+                        TDates.Text = $"工作剩{diffleft.TotalSeconds:f1}秒";
+                    }
+                    else if (diffleft.TotalHours < 1.5)
+                    {
+                        TDates.Text = $"工作剩{diffleft.TotalMinutes:f1}分钟";
+                    }
+                    else
+                    {
+                        TDates.Text = $"工作剩{diffleft.Hours:f1}小时";
+                    }
+                    break;
+                case Mode.Tomato_Rest:
+                    diff = DateTime.Now - StartTime;
+                    diffleft = TimeSpan.FromMinutes(Master.Set.Tomato_RestTime) - diff;
+                    if (diffleft <= TimeSpan.Zero)
+                    {
+                        TTimes.Text = "时间到";
+                        TDates.Text = "休息结束";
+                        TOthers.Text = "点击此处开始工作";
+                        Master.mode = Mode.CountDown_End;
+                        CountTimer.Stop();
+                        return;
+                    }
+                    TTimes.Text = diff.TotalMinutes.ToString("f1") + 'm';
+                    PBTimeLeft.Value = diff.TotalMinutes;
+
+                    if (diffleft.TotalMinutes < 1.5)
+                    {
+                        TDates.Text = $"休息剩{diffleft.TotalSeconds:f1}秒";
+                    }
+                    else if (diffleft.TotalHours < 1.5)
+                    {
+                        TDates.Text = $"休息剩{diffleft.TotalMinutes:f1}分钟";
+                    }
+                    else
+                    {
+                        TDates.Text = $"休息剩{diffleft.Hours:f1}小时";
+                    }
+                    break;
+                case Mode.Tomato_Rest_Long:
+                    diff = DateTime.Now - StartTime;
+                    diffleft = TimeSpan.FromMinutes(Master.Set.Tomato_RestTimeLong) - diff;
+                    if (diffleft <= TimeSpan.Zero)
+                    {
+                        TTimes.Text = "时间到";
+                        TDates.Text = "长休息结束";
+                        TOthers.Text = "点击此处开始工作";
+                        Master.mode = Mode.CountDown_End;
+                        CountTimer.Stop();
+                        return;
+                    }
+                    TTimes.Text = diff.TotalMinutes.ToString("f1") + 'm';
+                    PBTimeLeft.Value = diff.TotalMinutes;
+
+                    if (diffleft.TotalMinutes < 1.5)
+                    {
+                        TDates.Text = $"休息剩{diffleft.TotalSeconds:f1}秒";
+                    }
+                    else if (diffleft.TotalHours < 1.5)
+                    {
+                        TDates.Text = $"休息剩{diffleft.TotalMinutes:f1}分钟";
+                    }
+                    else
+                    {
+                        TDates.Text = $"休息剩{diffleft.Hours:f1}小时";
+                    }
+                    break;
+            }
+        }
+        public void StartTiming()
+        {
+            StartTime = DateTime.Now;
+            TimeSpanChanged = true;
+            TOthers.Visibility = Visibility.Collapsed;
+            IsPause = false;
+            PauseTime = TimeSpan.Zero;
+            CountTimer.Interval = TimeSpan.FromMilliseconds(10);
+            CountTimer.Start();
+            Master.mode = Mode.Timing;
+        }
+        public void PauseTiming()
+        {
+            IsPause = true;
+            CountTimer.IsEnabled = false;
+            PauseTime += DateTime.Now - StartTime;
+            TDates.Text = "计时暂停" + TDates.Text.Substring(3);
+        }
+        public void ContinueTiming()
+        {
+            StartTime = DateTime.Now;
+            IsPause = false;
+            CountTimer.Start();
+            CountTimer_Tick();
+        }
+        public void StartCountDown(TimeSpan time)
+        {
+            Master.mode = Mode.CountDown;
+            StartTime = DateTime.Now + time;
+            TimeSpanChanged = true;
+            IsPause = false;
+            TOthers.Visibility = Visibility.Collapsed;
+            PauseTime = TimeSpan.Zero;
+            PBTimeLeft.Value = 0;
+            PBTimeLeft.Maximum = time.TotalMinutes;
+            PBTimeLeft.Visibility = Visibility.Visible;
+            CountTimer.Interval = TimeSpan.FromSeconds(1);
+            CountTimer.Start();
+        }
+        public void ContinueCountDown()
+        {
+            StartTime = DateTime.Now + PauseTime;
+            IsPause = false;
+            CountTimer.Start();
+            CountTimer_Tick();
+        }
+        public void PauseCountDown()
+        {
+            IsPause = true;
+            CountTimer.IsEnabled = false;
+            PauseTime = StartTime - DateTime.Now;
+        }
+        public void StartWork()
+        {
+            Master.mode = Mode.Tomato_Work;
+            StartTime = DateTime.Now;
+            IsPause = false;
+            TOthers.Visibility = Visibility.Visible;
+            TOthers.Text = $"番茄点数 {Master.Set.Tomato_Count} 累计点数 {Master.Set.Tomato_Count_Total}";
+            PauseTime = TimeSpan.Zero;
+            PBTimeLeft.Value = 0;
+            PBTimeLeft.Visibility = Visibility.Visible;
+            PBTimeLeft.Maximum = Master.Set.Tomato_WorkTime;
+            CountTimer.Interval = TimeSpan.FromSeconds(1);
+            CountTimer.Start();
+        }
+        public void StartRest()
+        {
+            Master.mode = Mode.Tomato_Rest;
+            StartTime = DateTime.Now;
+            IsPause = false;
+            TOthers.Visibility = Visibility.Visible;
+            TOthers.Text = $"番茄点数 {Master.Set.Tomato_Count} 累计点数 {Master.Set.Tomato_Count_Total}";
+            PauseTime = TimeSpan.Zero;
+            PBTimeLeft.Value = 0;
+            PBTimeLeft.Visibility = Visibility.Visible;
+            PBTimeLeft.Maximum = Master.Set.Tomato_RestTime;
+            CountTimer.Interval = TimeSpan.FromSeconds(1);
+            CountTimer.Start();
+        }
+        public void StartRestLong()
+        {
+            Master.mode = Mode.Tomato_Rest_Long;
+            StartTime = DateTime.Now;
+            IsPause = false;
+            TOthers.Visibility = Visibility.Visible;
+            TOthers.Text = $"番茄点数 {Master.Set.Tomato_Count} 累计点数 {Master.Set.Tomato_Count_Total}";
+            PauseTime = TimeSpan.Zero;
+            PBTimeLeft.Value = 0;
+            PBTimeLeft.Visibility = Visibility.Visible;
+            PBTimeLeft.Maximum = Master.Set.Tomato_RestTimeLong;
+            CountTimer.Interval = TimeSpan.FromSeconds(1);
+            CountTimer.Start();
+        }
+
+        private void TimeTimer_Tick(object sender = null, EventArgs e = null)
+        {
+            //相关UI更新
+            if (Master.mode == Mode.None)
+            {
+                if (Master.Set.Hour24)
+                {
+                    TTimes.Text = DateTime.Now.ToString("HH:mm");
+                }
+                else
+                {
+                    TTimes.Text = DateTime.Now.ToString("hh:mm");
+                }
+                TDayofWeek.Text = DateTime.Now.ToString("tt dddd");
+                TDates.Text = DateTime.Now.ToString("yyyy/MM/dd");
+            }
+            else
+            {
+                if (Master.Set.Hour24)
+                {
+                    TDayofWeek.Text = DateTime.Now.ToString("tt HH:mm");
+                }
+                else
+                {
+                    TDayofWeek.Text = DateTime.Now.ToString("tt hh:mm");
+                }
+            }
+        }
+
+        public void CountDownMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (Master.mode == Mode.CountDown)
+            {
+                if (IsPause)
+                {
+                    ContinueCountDown();
+                    CountDownMenuItem.Header = "暂停倒计时";
+                    Master.mCountDown.Header = "暂停倒计时";
+                }
+                else
+                {
+                    PauseCountDown();
+                    CountDownMenuItem.Header = "继续倒计时";
+                    Master.mCountDown.Header = "继续倒计时";
+                }
+            }
+            else
+            {
+                CountDownInput input = new CountDownInput(TimeSpan.FromMinutes(Master.Set.DefaultCountDown));
+                if (input.ShowDialog() == true && input.Return != TimeSpan.Zero)
+                {
+                    StartCountDown(input.Return);
+                    CountDownMenuItem.Header = "暂停倒计时";
+                    Master.mCountDown.Header = "暂停倒计时";
+                }
+            }
+        }
+
+        private void SettingMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Master.Setting();
+        }
+
+        public void TimingMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (Master.mode == Mode.Timing)
+            {
+                if (IsPause)
+                {
+                    ContinueTiming();
+                    TimingMenuItem.Header = "暂停计时";
+                    Master.mTiming.Header = "暂停计时";
+                }
+                else
+                {
+                    PauseTiming();
+                    TimingMenuItem.Header = "继续计时";
+                    Master.mTiming.Header = "继续计时";
+                }
+            }
+            else
+            {
+                StartTiming();
+                TimingMenuItem.Header = "暂停计时";
+                Master.mTiming.Header = "暂停计时";
+            }
+        }
+
+        public void WorkMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (Master.mode == Mode.Tomato_Work)
+            {
+                if (MessageBoxX.Show("是否停止当前工作?", "停止工作", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    Master.mode = Mode.None;
+                    CountTimer.IsEnabled = false;
+                    TOthers.Visibility = Visibility.Collapsed;
+                    PBTimeLeft.Visibility = Visibility.Collapsed;
+                    WorkMenuItem.Header = "开始工作";
+                    Master.mTotmatoWork.Header = "开始工作";
+                }
+            }
+            else if (Master.mode == Mode.Tomato_Rest)
+            {
+                if (MessageBoxX.Show("是否停止当前休息?", "停止休息", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    Master.mode = Mode.None;
+                    CountTimer.IsEnabled = false;
+                    TOthers.Visibility = Visibility.Collapsed;
+                    PBTimeLeft.Visibility = Visibility.Collapsed;
+                    WorkMenuItem.Header = "开始工作";
+                    Master.mTotmatoWork.Header = "开始工作";
+                }
+            }
+            else
+            {
+                StartWork();
+                WorkMenuItem.Header = "停止工作";
+                Master.mTotmatoWork.Header = "停止工作";
+            }
+        }
+
+        public void RestMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (Master.mode == Mode.Tomato_Rest || Master.mode == Mode.Tomato_Rest_Long)
+            {
+                if (MessageBoxX.Show("是否停止当前休息?\n扣除的番茄不会被退还", "停止休息", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    Master.mode = Mode.None;
+                    CountTimer.IsEnabled = false;
+                    TOthers.Visibility = Visibility.Collapsed;
+                    PBTimeLeft.Visibility = Visibility.Collapsed;
+                    WorkMenuItem.Header = "开始休息";
+                    Master.mTotmatoWork.Header = "开始休息";
+                }
+            }
+            else
+            {
+                int need = (int)Math.Round(Master.Set.Tomato_RestTimeLong / 2);
+                if (Master.Set.Tomato_Count <= Master.Set.Tomato_RestTimeLong / 2 && MessageBoxResult.Yes ==
+                    MessageBoxX.Show($"是否开始休息?\n休息所需番茄 {need}\n当前拥有番茄 {Master.Set.Tomato_Count}", "开始休息", MessageBoxButton.YesNo))
+                {
+                    Master.Set.Tomato_Count -= need;
+                    StartRestLong();
+                    WorkMenuItem.Header = "停止休息";
+                    Master.mTotmatoWork.Header = "停止休息";
+                }
+                else
+                {
+                    MessageBoxX.Show($"当前番茄不足,不能开始长休息\n休息所需番茄 {need}\n当前拥有番茄 {Master.Set.Tomato_Count}", "休息失败,请好好工作");
+                }
+            }
+        }
+
+        private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            switch (TDates.Text)
+            {
+                case "计时结束":
+                    Master.mode = Mode.None;
+                    CountTimer.IsEnabled = false;
+                    TOthers.Visibility = Visibility.Collapsed;
+                    PBTimeLeft.Visibility = Visibility.Collapsed;
+                    CountDownMenuItem.Header = "开始倒计时";
+                    Master.mCountDown.Header = "开始倒计时";
+                    break;
+                case "工作结束":
+                    StartRest();
+                    break;
+                case "休息结束":
+                case "长休息结束":
+                    StartWork();
+                    break;
+            }
+        }
+    }
+}
