@@ -10,12 +10,6 @@ namespace VPet.Plugin.VPetTTS
     public class Setting
     {
         /// <summary>
-        /// 音量大小
-        /// </summary>
-        [Line]
-        public int Volume { get; set; } = 100;
-
-        /// <summary>
         /// 语速
         /// </summary>
         [Line]
@@ -54,5 +48,10 @@ namespace VPet.Plugin.VPetTTS
         /// </summary>
         [Line]
         public string Speaker { get; set; } = "zh-CN-XiaoyiNeural";
+        /// <summary>
+        /// 启用EdgeTTS
+        /// </summary>
+        [Line]
+        public bool Enable { get; set; } = true;
     }
 }

@@ -9,22 +9,22 @@ using LinePutScript.Converter;
 using LinePutScript;
 using System.IO;
 using VPet_Simulator.Core;
+using System.Windows.Controls;
+using System.Windows;
 
 namespace VPet.Plugin.VPetTTS
 {
-    public class VPETTTS : MainPlugin
+    public class EdgeTTS : MainPlugin
     {
-        IMainWindow mw;
-        EdgeTTSClient etts;
-        Setting Set;
-        public VPETTTS(IMainWindow mainwin) : base(mainwin)
+        public EdgeTTSClient etts;
+        public Setting Set;
+        public EdgeTTS(IMainWindow mainwin) : base(mainwin)
         {
-            mw = mainwin;
+            etts = new EdgeTTSClient();
         }
         public override void LoadPlugin()
         {
-            etts = new EdgeTTSClient();
-            var line = MW.Set.FindLine("DemoClock");
+            var line = MW.Set.FindLine("EdgeTTS");
             if (line == null)
             {
                 Set = new Setting();
@@ -35,16 +35,21 @@ namespace VPet.Plugin.VPetTTS
             }
             if (!Directory.Exists(GraphCore.CachePath + @"\voice"))
                 Directory.CreateDirectory(GraphCore.CachePath + @"\voice");
-            mw.Main.OnSay += Main_OnSay;
+            if (Set.Enable)
+                MW.Main.OnSay += Main_OnSay;
         }
-
+        public override void LoadDIY()
+        {
+            MW.Main.ToolBar.AddMenuButton(VPet_Simulator.Core.ToolBar.MenuType.Setting, "EdgeTTS", Setting);
+        }
         private void Main_OnSay(string saythings)
         {//说话语音
             var path = GraphCore.CachePath + $"\\voice\\{Sub.GetHashCode(saythings):X}.mp3";
             if (File.Exists(path))
             {
-                mw.Main.PlayVoice(new Uri(path));
-            }else
+                MW.Main.PlayVoice(new Uri(path));
+            }
+            else
             {
                 var res = etts.SynthesisAsync(saythings, Set.Speaker, Set.PitchStr, Set.RateStr).Result;
                 if (res.Code == ResultCode.Success)
@@ -55,16 +60,24 @@ namespace VPet.Plugin.VPetTTS
                     fs.Close();
                     fs.Dispose();
                     w.Dispose();
-                    mw.Main.PlayVoice(new Uri(path));
+                    MW.Main.PlayVoice(new Uri(path));
                 }
-            }            
+            }
         }
 
-        //public override void Save()
-        //{
-        //    MW.Set.Remove("DemoClock");
-        //    MW.Set.Add(LPSConvert.SerializeObject(Set, "DemoClock"));
-        //}
+        public winSetting winSetting;
+        public override void Setting()
+        {
+            if (winSetting == null)
+            {
+                winSetting = new winSetting(this);
+                winSetting.Show();
+            }
+            else
+            {
+                winSetting.Topmost = true;
+            }
+        }
         public override string PluginName => "EdgeTTS";
     }
 }

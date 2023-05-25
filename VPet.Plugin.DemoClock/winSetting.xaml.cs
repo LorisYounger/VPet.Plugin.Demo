@@ -169,5 +169,10 @@ namespace VPet.Plugin.DemoClock
                     break;
             }
         }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            Master.winSetting = null;
+        }
     }
 }

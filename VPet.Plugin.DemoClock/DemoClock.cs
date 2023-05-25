@@ -62,6 +62,7 @@ namespace VPet.Plugin.DemoClock
         public MenuItem mTiming;
 
         public long CountDownLength;
+        public winSetting winSetting;
         public DemoClock(IMainWindow mainwin) : base(mainwin)
         {
         }
@@ -140,7 +141,15 @@ namespace VPet.Plugin.DemoClock
 
         public override void Setting()
         {
-            new winSetting(this).Show();
+            if (winSetting == null)
+            {
+                winSetting = new winSetting(this);
+                winSetting.Show();
+            }
+            else
+            {
+                winSetting.Topmost = true;
+            }
         }
     }
 }

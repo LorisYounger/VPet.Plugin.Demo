@@ -5,7 +5,7 @@
         xmlns:local="clr-namespace:VPet.Plugin.DemoClock" mc:Ignorable="d"
         xmlns:pu="clr-namespace:Panuon.WPF.UI;assembly=Panuon.WPF.UI" Title="Demo Clock 设置" Width="450" FontSize="16"
         Height="Auto" ResizeMode="NoResize" WindowState="Normal" SizeToContent="Height"
-        Background="{DynamicResource PrimaryLighter}">
+        Background="{DynamicResource PrimaryLighter}" Closed="Window_Closed">
     <Window.Resources>
         <ResourceDictionary Source="/VPet-Simulator.Windows.Interface;component/ResourceStyle.xaml" />
     </Window.Resources>

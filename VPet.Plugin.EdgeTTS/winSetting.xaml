@@ -1,0 +1,74 @@
+﻿<Window x:Class="VPet.Plugin.VPetTTS.winSetting" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="clr-namespace:VPet.Plugin.VPetTTS"
+        mc:Ignorable="d" xmlns:pu="clr-namespace:Panuon.WPF.UI;assembly=Panuon.WPF.UI" Title="EdgeTTS 设置" Width="450"
+        FontSize="16" Height="Auto" ResizeMode="NoResize" WindowState="Normal" SizeToContent="Height"
+        Background="{DynamicResource PrimaryLighter}" Closed="Window_Closed">
+    <Window.Resources>
+        <ResourceDictionary Source="/VPet-Simulator.Windows.Interface;component/ResourceStyle.xaml" />
+    </Window.Resources>
+    <Grid Margin="8" Background="{DynamicResource PrimaryLighter}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="15" />
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="启用" VerticalAlignment="Center" />
+        <TextBlock Grid.Row="1" Text="音量" VerticalAlignment="Center" />
+        <TextBlock Grid.Row="2" Text="音调" VerticalAlignment="Center" />
+        <TextBlock Grid.Row="3" Text="语速" VerticalAlignment="Center" />
+        <TextBlock Grid.Row="4" Text="讲述人" VerticalAlignment="Center" />
+
+        <pu:Switch x:Name="SwitchOn" BorderBrush="{DynamicResource DARKPrimaryDark}"
+                CheckedBackground="{DynamicResource DARKPrimary}" CheckedBorderBrush="{DynamicResource DARKPrimary}"
+                Background="Transparent" BoxWidth="35" BoxHeight="18" ToggleSize="14" ToggleShadowColor="{x:Null}"
+                ToggleBrush="{DynamicResource DARKPrimaryDark}" Content="启用 EdgeTTS"
+                CheckedToggleBrush="{DynamicResource DARKPrimaryText}" Grid.Column="2" />
+        <pu:NumberInput Grid.Row="1" Grid.Column="3" Minimum="0" MaxHeight="350" Margin="5"
+                Value="{Binding Value, ElementName=VolumeSilder}" CornerRadius="3" Maximum="100" />
+        <Slider Grid.Row="1" Grid.Column="2" x:Name="VolumeSilder" Maximum="100" Value="100" VerticalAlignment="Center"
+                Background="{DynamicResource DARKPrimaryLighter}" LargeChange="10" SmallChange="2"
+                pu:SliderHelper.CoveredBackground="{DynamicResource DARKPrimaryDarker}" />
+        <pu:NumberInput Grid.Row="2" Grid.Column="3" Margin="5" Minimum="-50" Maximum="50"
+                Value="{Binding Value, ElementName=PitchSilder}" CornerRadius="3" />
+        <Slider Grid.Row="2" Grid.Column="2" x:Name="PitchSilder" Minimum="-50" Maximum="50" VerticalAlignment="Center"
+                Background="{DynamicResource DARKPrimaryLighter}" LargeChange="2" SmallChange=".5"
+                pu:SliderHelper.CoveredBackground="{DynamicResource DARKPrimaryDarker}" />
+        <pu:NumberInput Grid.Row="3" Grid.Column="3" Margin="5" Minimum="-200" Maximum="200"
+                Value="{Binding Value, ElementName=RateSilder}" CornerRadius="3" />
+        <Slider x:Name="RateSilder" Grid.Row="3" Grid.Column="2" Minimum="-200" Maximum="200" VerticalAlignment="Center"
+                Background="{DynamicResource DARKPrimaryLighter}" LargeChange="5" SmallChange="1"
+                pu:SliderHelper.CoveredBackground="{DynamicResource DARKPrimaryDarker}" />
+        <ComboBox x:Name="CombSpeaker" Grid.Row="4" Grid.Column="2" Style="{DynamicResource StandardComboBoxStyle}"
+                FontSize="16" Margin="5" SelectedIndex="1">
+            <System:String>zh-CN-XiaoxiaoNeural</System:String>
+            <System:String>zh-CN-XiaoyiNeural</System:String>
+            <System:String>zh-CN-YunjianNeural</System:String>
+            <System:String>zh-CN-YunxiNeural</System:String>
+            <System:String>zh-CN-YunxiaNeural</System:String>
+            <System:String>zh-CN-YunyangNeural</System:String>
+            <System:String>zh-CN-liaoning-XiaobeiNeural</System:String>
+            <System:String>zh-CN-shaanxi-XiaoniNeural</System:String>
+            <System:String>zh-HK-HiuGaaiNeural</System:String>
+            <System:String>zh-HK-HiuMaanNeural</System:String>
+            <System:String>zh-HK-WanLungNeural</System:String>
+            <System:String>zh-TW-HsiaoChenNeural</System:String>
+            <System:String>zh-TW-HsiaoYuNeural</System:String>
+            <System:String>zh-TW-YunJheNeural</System:String>
+        </ComboBox>
+        <Button pu:ButtonHelper.CornerRadius="4" Content="保存设置" Background="{DynamicResource SecondaryLight}"
+                BorderBrush="{DynamicResource SecondaryDark}" BorderThickness="2" Grid.Row="5" Margin="5,5,5,5"
+                Grid.ColumnSpan="4" Click="Save_Click" />
+    </Grid>
+</Window>
