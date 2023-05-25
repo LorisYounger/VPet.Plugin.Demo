@@ -17,7 +17,7 @@ namespace VPet.Plugin.DemoClock
             tomato_resttime = 15;
             tomato_resttimelong = 45;
         }
-        public Setting(Line line) : base(line)
+        public Setting(ILine line) : base(line)
         {
             timeshifting = GetFloat("timeshifting", 0);
             hour24 = GetBool("hour24");

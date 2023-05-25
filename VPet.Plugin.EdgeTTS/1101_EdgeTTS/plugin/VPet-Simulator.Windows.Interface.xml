@@ -1,0 +1,225 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VPet-Simulator.Windows.Interface</name>
+    </assembly>
+    <members>
+        <member name="P:VPet_Simulator.Windows.Interface.IMainWindow.IsSteamUser">
+            <summary>
+            是否为Steam用户
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.IMainWindow.Set">
+            <summary>
+            游戏设置
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.IMainWindow.Pets">
+            <summary>
+            宠物加载器列表
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.IMainWindow.Core">
+            <summary>
+            桌宠数据核心
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.IMainWindow.Main">
+            <summary>
+            桌宠主要部件
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.IMainWindow.verison">
+            <summary>
+            版本号
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.IMainWindow.Verison">
+            <summary>
+            版本号
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.IMainWindow.lastclicktime">
+            <summary>
+            上次点击时间 (Tick)
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.IMainWindow.Plugins">
+            <summary>
+            所有三方插件
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Windows.Interface.IMainWindow.SetZoomLevel(System.Double)">
+            <summary>
+            设置游戏缩放倍率
+            </summary>
+            <param name="zl">缩放倍率 范围0.1-10</param>
+        </member>
+        <member name="M:VPet_Simulator.Windows.Interface.IMainWindow.Save">
+            <summary>
+            保存设置
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Windows.Interface.IMainWindow.LoadDIY">
+            <summary>
+            加载DIY内容
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Windows.Interface.IMainWindow.RunAction(System.String)">
+            <summary>
+            运行动作
+            </summary>
+            <param name="action">动作名称</param>
+        </member>
+        <member name="T:VPet_Simulator.Windows.Interface.MainPlugin">
+            <summary>
+            这是插件的主体内容 请继承这个类
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.MainPlugin.PluginName">
+            <summary>
+            通过插件名称定位插件
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Windows.Interface.MainPlugin.MW">
+            <summary>
+            主窗体, 主程序提供的各种功能和设置等 大部分参数和调用均在这里
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Windows.Interface.MainPlugin.#ctor(VPet_Simulator.Windows.Interface.IMainWindow)">
+            <summary>
+            MOD插件初始化
+            </summary>
+            <param name="mainwin">主窗体</param>
+            请不要加载游戏和玩家数据,仅用作初始化
+            加载数据(CORE)/游戏(SAVE),请使用 LoadPlugin
+        </member>
+        <member name="M:VPet_Simulator.Windows.Interface.MainPlugin.LoadPlugin">
+            <summary>
+            初始化程序+读取存档
+            </summary>
+            例:添加自己的Tick到 mw.Main.EventTimer
+            例:创建使用UI的桌面控件
+        </member>
+        <member name="M:VPet_Simulator.Windows.Interface.MainPlugin.EndGame">
+            <summary>
+            游戏结束 (可以保存或清空等,不过保存有专门的Save())
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Windows.Interface.MainPlugin.Save">
+            <summary>
+            储存游戏 (可以写 GameSave.Other 储存设置和数据等)
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Windows.Interface.MainPlugin.Setting">
+            <summary>
+            打开代码插件设置
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Windows.Interface.MainPlugin.LoadDIY">
+            <summary>
+            重载DIY按钮, 如需添加自定义按钮可在此处添加
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.Setting.ZoomLevel">
+            <summary>
+            缩放倍率
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.Setting.IsBiggerScreen">
+            <summary>
+            是否为更大的屏幕
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.Setting.Diagnosis">
+            <summary>
+            是否启用数据收集 //TODO:判断游戏是否是原版的
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.Setting.DiagnosisInterval">
+            <summary>
+            数据收集频率
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.Setting.AutoSaveInterval">
+            <summary>
+            自动保存频率 (min)
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.Setting.TopMost">
+            <summary>
+            是否置于顶层
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Windows.Interface.Setting.DiagnosisDayEnable">
+            <summary>
+            数据收集是否被禁止(当日)
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.Setting.PressLength">
+            <summary>
+            按多久视为长按 单位毫秒
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.Setting.InteractionCycle">
+            <summary>
+            互动周期
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.Setting.LogicInterval">
+            <summary>
+            计算间隔
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.Setting.AllowMove">
+            <summary>
+            允许移动事件
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.Setting.SmartMove">
+            <summary>
+            智能移动
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.Setting.EnableFunction">
+            <summary>
+            启用计算等数据功能
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.Setting.SmartMoveInterval">
+            <summary>
+            智能移动周期 (秒)
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.Setting.StartUPBoot">
+            <summary>
+            开机启动
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.Setting.StartUPBootSteam">
+            <summary>
+            开机启动 Steam
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.Setting.PetGraph">
+            <summary>
+            桌宠选择内容
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.Setting.StartRecordLast">
+            <summary>
+            是否记录游戏退出位置 (默认:是)
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.Setting.StartRecordLastPoint">
+            <summary>
+            记录上次退出位置
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.Setting.StartRecordPoint">
+            <summary>
+            设置中桌宠启动的位置
+            </summary>
+        </member>
+    </members>
+</doc>

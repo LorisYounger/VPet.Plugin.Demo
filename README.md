@@ -1,4 +1,9 @@
-# VPet.Plugin.DemoClock
+# VPet.Plugin.Demo
+由开发者制作的桌宠插件案例
+* DemoClock: 给桌宠添加一个时钟显示的功能
+* EdgeTTS: 桌宠说话的时候附带语音,使用EdgeTTS
+
+## VPet.Plugin.DemoClock
 给桌宠添加一个时钟显示的功能,这算是代码嵌入类型MOD的DEMO
 
 ![democlock](democlock.png)
@@ -40,6 +45,26 @@
 时间到
 
 ![image-20230411135345438](README.assets/image-20230411135345438.png)
+
+游戏设置窗口
+
+![image-20230411134959369](README.assets/image-20230411134959369.png)
+
+## VPet.Plugin.EdgeTTS
+
+桌宠说话的时候附带语音,使用EdgeTTS
+
+![edgetts](edgetts.png)
+
+参考本软件即可编写自己的代码MOD
+
+### 功能
+
+让桌宠说话的时候说出来
+
+* 支持自定义讲述人和语音语调语速等
+
+### 相关截图
 
 游戏设置窗口
 

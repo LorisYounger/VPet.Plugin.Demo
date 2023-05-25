@@ -147,7 +147,7 @@ namespace VPet.Plugin.DemoClock
                         TTimes.Text = diff.ToString(@"ss\:ff");
                         if (TimeSpanChanged)
                         {
-                            CountTimer.Interval = TimeSpan.FromMilliseconds(10);
+                            CountTimer.Interval = TimeSpan.FromMilliseconds(50);
                             TimeSpanChanged = false;
                         }
                     }
@@ -262,7 +262,7 @@ namespace VPet.Plugin.DemoClock
             TOthers.Visibility = Visibility.Collapsed;
             IsPause = false;
             PauseTime = TimeSpan.Zero;
-            CountTimer.Interval = TimeSpan.FromMilliseconds(10);
+            CountTimer.Interval = TimeSpan.FromMilliseconds(50);
             CountTimer.Start();
             Master.mode = Mode.Timing;
         }
