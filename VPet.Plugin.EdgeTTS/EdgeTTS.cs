@@ -40,7 +40,7 @@ namespace VPet.Plugin.VPetTTS
         }
         public override void LoadDIY()
         {
-            MW.Main.ToolBar.AddMenuButton(VPet_Simulator.Core.ToolBar.MenuType.Setting, "EdgeTTS", Setting);
+            MW.Main.ToolBar.AddMenuButton(VPet_Simulator.Core.ToolBar.MenuType.DIY, "EdgeTTS", Setting);
         }
         private void Main_OnSay(string saythings)
         {//说话语音

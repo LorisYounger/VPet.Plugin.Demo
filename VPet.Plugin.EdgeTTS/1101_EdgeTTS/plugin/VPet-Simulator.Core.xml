@@ -96,9 +96,19 @@
         </member>
         <member name="M:VPet_Simulator.Core.Main.PlayVoice(System.Uri)">
             <summary>
-            播放语音
+            播放语音 语音播放时不会停止播放说话表情
             </summary>
             <param name="VoicePath">语音位置</param>
+        </member>
+        <member name="P:VPet_Simulator.Core.Main.PlayVoiceVolume">
+            <summary>
+            声音音量
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.Main.PlayingVoice">
+            <summary>
+            当前是否正在播放
+            </summary>
         </member>
         <member name="M:VPet_Simulator.Core.Main.CleanState">
             <summary>

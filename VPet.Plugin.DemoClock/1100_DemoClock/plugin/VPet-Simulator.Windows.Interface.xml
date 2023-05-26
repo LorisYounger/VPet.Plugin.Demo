@@ -108,7 +108,7 @@
         </member>
         <member name="M:VPet_Simulator.Windows.Interface.MainPlugin.Save">
             <summary>
-            储存游戏 (可以写 Save.Other 储存设置和数据等)
+            储存游戏 (可以写 GameSave.Other 储存设置和数据等)
             </summary>
         </member>
         <member name="M:VPet_Simulator.Windows.Interface.MainPlugin.Setting">

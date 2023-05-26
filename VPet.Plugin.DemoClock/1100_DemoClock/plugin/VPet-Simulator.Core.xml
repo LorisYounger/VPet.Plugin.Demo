@@ -4,6 +4,48 @@
         <name>VPet-Simulator.Core</name>
     </assembly>
     <members>
+        <member name="T:VPet_Simulator.Core.WorkTimer">
+            <summary>
+            WorkTimer.xaml 的交互逻辑
+            </summary>
+            <summary>
+            WorkTimer
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.WorkTimer.DisplayType">
+            <summary>
+            显示模式
+            0 = 默认
+            1 = 剩余时间
+            2 = 已获取(金钱/等级)
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.WorkTimer.GetCount">
+            <summary>
+            累计获得的钱/经验值
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.WorkTimer.StartTime">
+            <summary>
+            开始时间
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.WorkTimer.MaxTime">
+            <summary>
+            最大时间(分钟)
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Core.WorkTimer.M_TimeUIHandle(VPet_Simulator.Core.Main)">
+            <summary>
+            UI相关显示
+            </summary>
+            <param name="m"></param>
+        </member>
+        <member name="M:VPet_Simulator.Core.WorkTimer.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
         <member name="T:VPet_Simulator.Core.Main">
             <summary>
             Main.xaml 的交互逻辑
@@ -24,7 +66,12 @@
         </member>
         <member name="F:VPet_Simulator.Core.Main.MsgBar">
             <summary>
-            菜单栏
+            消息栏
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.Main.WorkTimer">
+            <summary>
+            工作显示栏
             </summary>
         </member>
         <member name="E:VPet_Simulator.Core.Main.TimeHandle">
@@ -47,6 +94,12 @@
             自动加载触摸事件
             </summary>
         </member>
+        <member name="M:VPet_Simulator.Core.Main.PlayVoice(System.Uri)">
+            <summary>
+            播放语音
+            </summary>
+            <param name="VoicePath">语音位置</param>
+        </member>
         <member name="M:VPet_Simulator.Core.Main.CleanState">
             <summary>
             清理所有状态
@@ -60,6 +113,11 @@
         <member name="F:VPet_Simulator.Core.Main.CountNomal">
             <summary>
             默认循环次数
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Core.Main.DisplayToNomal">
+            <summary>
+            以标准形式显示当前默认状态
             </summary>
         </member>
         <member name="M:VPet_Simulator.Core.Main.DisplayNomal">
@@ -142,6 +200,46 @@
         <member name="M:VPet_Simulator.Core.Main.DisplaySleepingForce">
             <summary>
             显示睡觉情况 (强制)
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Core.Main.DisplayWorkONE">
+            <summary>
+            显示工作情况
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Core.Main.DisplayWorkONEend">
+            <summary>
+            显示工作情况结束
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Core.Main.DisplayWorkONEing">
+            <summary>
+            显示工作情况循环
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Core.Main.DisplayWorkTWO">
+            <summary>
+            显示工作情况
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Core.Main.DisplayWorkTWOing">
+            <summary>
+            显示工作情况循环
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Core.Main.DisplayWorkTWOend">
+            <summary>
+            显示工作情况结束
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Core.Main.DisplayStudy">
+            <summary>
+            显示学习情况
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Core.Main.DisplayStudying">
+            <summary>
+            显示学习情况
             </summary>
         </member>
         <member name="M:VPet_Simulator.Core.Main.DisplayRaised">
@@ -284,13 +382,12 @@
             显示掉落向右
             </summary>
         </member>
-        <member name="M:VPet_Simulator.Core.Main.Display(VPet_Simulator.Core.GraphCore.GraphType,System.Action,System.Boolean)">
+        <member name="M:VPet_Simulator.Core.Main.Display(VPet_Simulator.Core.GraphCore.GraphType,System.Action)">
             <summary>
             显示动画 
             </summary>
             <param name="Type">动画类型</param>
             <param name="EndAction">动画结束后操作</param>
-            <param name="storernd">是否储存随机数字典</param>
         </member>
         <member name="M:VPet_Simulator.Core.Main.Display(VPet_Simulator.Core.IGraph,System.Action)">
             <summary>
@@ -349,6 +446,41 @@
             <param name="AllowMove">允许移动</param>
             <param name="smartMove">启用智能移动</param>
             <param name="SmartMoveInterval">智能移动周期</param>
+        </member>
+        <member name="F:VPet_Simulator.Core.Main.State">
+            <summary>
+            当前状态
+            </summary>
+        </member>
+        <member name="T:VPet_Simulator.Core.Main.WorkingState">
+            <summary>
+            当前正在的状态
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.Main.WorkingState.Nomal">
+            <summary>
+            默认:啥都没干
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.Main.WorkingState.WorkONE">
+            <summary>
+            正在干活1
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.Main.WorkingState.WorkTWO">
+            <summary>
+            正在干活1
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.Main.WorkingState.Study">
+            <summary>
+            学习中 
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.Main.WorkingState.Sleep">
+            <summary>
+            睡觉
+            </summary>
         </member>
         <member name="F:VPet_Simulator.Core.Main.MainGrid">
             <summary>
@@ -799,6 +931,51 @@
             关机
             </summary>
         </member>
+        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Study_A_Start">
+            <summary>
+            学习 (开始)
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Study_B_Loop">
+            <summary>
+            学习 (循环)
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Study_C_End">
+            <summary>
+            学习 (结束)
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.WorkONE_A_Start">
+            <summary>
+            工作 (开始)
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.WorkONE_B_Loop">
+            <summary>
+            工作 (循环)
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.WorkONE_C_End">
+            <summary>
+            工作 (结束)
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.WorkTWO_A_Start">
+            <summary>
+            直播 (开始)
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.WorkTWO_B_Loop">
+            <summary>
+            直播 (循环)
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.WorkTWO_C_End">
+            <summary>
+            直播 (结束)
+            </summary>
+        </member>
         <member name="F:VPet_Simulator.Core.GraphCore.Graphs">
             <summary>
             图像字典
@@ -834,13 +1011,7 @@
             随机数字典(用于确保随机动画不会错位)
             </summary>
         </member>
-        <member name="M:VPet_Simulator.Core.GraphCore.FindGraph(VPet_Simulator.Core.GraphCore.GraphType,VPet_Simulator.Core.GameSave.ModeType,System.Boolean)">
-            <summary>
-            查找动画
-            </summary>
-            <param name="type">动画类型</param>
-            <param name="mode">状态类型,找不到就找相同动画类型</param>
-            <param name="storernd">是否储存随机数字典</param>
+        <member name="M:VPet_Simulator.Core.GraphCore.FindGraph(VPet_Simulator.Core.GraphCore.GraphType,VPet_Simulator.Core.GameSave.ModeType)">
             <returns></returns>
         </member>
         <member name="P:VPet_Simulator.Core.GraphCore.GraphTypeValue">
@@ -1403,31 +1574,6 @@
             存档
             </summary>
             <returns>存档行</returns>
-        </member>
-        <member name="T:VPet_Simulator.Core.GameSave.WorkingState">
-            <summary>
-            当前正在的状态
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GameSave.WorkingState.Nomal">
-            <summary>
-            默认:啥都没干
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GameSave.WorkingState.Working">
-            <summary>
-            正在干活, workingobj指示正在干啥活
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GameSave.WorkingState.Studying">
-            <summary>
-            学习中 
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GameSave.WorkingState.Playing">
-            <summary>
-            玩耍中
-            </summary>
         </member>
         <member name="T:VPet_Simulator.Core.Properties.Resources">
             <summary>

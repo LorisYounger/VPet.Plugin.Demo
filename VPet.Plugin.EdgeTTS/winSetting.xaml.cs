@@ -29,7 +29,7 @@ namespace VPet.Plugin.VPetTTS
             InitializeComponent();
             this.vts = vts;
             SwitchOn.IsChecked = vts.Set.Enable;
-            //TODO VolumeSilder
+            VolumeSilder.Value = vts.MW.Main.PlayVoiceVolume * 100;
             PitchSilder.Value = vts.Set.Pitch;
             RateSilder.Value = vts.Set.Rate;
             CombSpeaker.Text = vts.Set.Speaker;
@@ -41,6 +41,7 @@ namespace VPet.Plugin.VPetTTS
             vts.Set.Pitch = PitchSilder.Value;
             vts.Set.Rate = RateSilder.Value;
             vts.Set.Speaker = CombSpeaker.Text;
+            vts.MW.Main.PlayVoiceVolume = VolumeSilder.Value / 100;
             vts.MW.Set.Remove("DemoClock");
             vts.MW.Set.Add(LPSConvert.SerializeObject(vts.Set, "DemoClock"));
             foreach (var tmpfile in Directory.GetFiles(GraphCore.CachePath + @"\voice"))
@@ -52,7 +53,7 @@ namespace VPet.Plugin.VPetTTS
                 finally
                 {
 
-                }               
+                }
             }
             Close();
         }
