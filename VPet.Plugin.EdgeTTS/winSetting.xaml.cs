@@ -1,4 +1,7 @@
-﻿using LinePutScript.Converter;
+﻿using EdgeTTS;
+using LinePutScript;
+using LinePutScript.Converter;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -37,7 +40,14 @@ namespace VPet.Plugin.VPetTTS
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            vts.Set.Enable = SwitchOn.IsChecked.Value;
+            if (vts.Set.Enable != SwitchOn.IsChecked.Value)
+            {
+                if (SwitchOn.IsChecked.Value)
+                    vts.MW.Main.OnSay += vts.Main_OnSay;
+                else
+                    vts.MW.Main.OnSay -= vts.Main_OnSay;
+                vts.Set.Enable = SwitchOn.IsChecked.Value;
+            }
             vts.Set.Pitch = PitchSilder.Value;
             vts.Set.Rate = RateSilder.Value;
             vts.Set.Speaker = CombSpeaker.Text;
@@ -61,6 +71,39 @@ namespace VPet.Plugin.VPetTTS
         private void Window_Closed(object sender, EventArgs e)
         {
             vts.winSetting = null;
+        }
+
+        private void Test_Click(object sender, RoutedEventArgs e)
+        {
+            Test.IsEnabled = false;
+            var cbt = CombSpeaker.Text;
+            var pit = $"{(PitchSilder.Value >= 0 ? "+" : "")}{PitchSilder.Value:f2}Hz";
+            var rat = $"{(RateSilder.Value >= 0 ? "+" : "")}{RateSilder.Value:f2}%";
+            Task.Run(() =>
+            {
+                var path = GraphCore.CachePath + $"\\voice\\{DateTime.Now.Ticks:X}.mp3";
+                if (File.Exists(path))
+                {
+                    File.Delete(path);
+                }
+
+                var res = vts.etts.SynthesisAsync($"你好,主人\n现在是 {DateTime.Now}", cbt, pit, rat).Result;
+                if (res.Code == ResultCode.Success)
+                {
+                    FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
+                    BinaryWriter w = new BinaryWriter(fs);
+                    w.Write(res.Data.ToArray());
+                    fs.Close();
+                    fs.Dispose();
+                    w.Dispose();
+                    vts.MW.Main.PlayVoice(new Uri(path));
+                }
+                else
+                {
+                    MessageBox.Show($"错误代码: {res.Code}\n消息: {res.Message}", "生成失败");
+                }
+                Dispatcher.Invoke(() => Test.IsEnabled = true);
+            });
         }
     }
 }

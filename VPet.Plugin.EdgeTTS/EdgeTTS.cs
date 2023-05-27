@@ -42,7 +42,7 @@ namespace VPet.Plugin.VPetTTS
         {
             MW.Main.ToolBar.AddMenuButton(VPet_Simulator.Core.ToolBar.MenuType.DIY, "EdgeTTS", Setting);
         }
-        private void Main_OnSay(string saythings)
+        public void Main_OnSay(string saythings)
         {//说话语音
             var path = GraphCore.CachePath + $"\\voice\\{Sub.GetHashCode(saythings):X}.mp3";
             if (File.Exists(path))
