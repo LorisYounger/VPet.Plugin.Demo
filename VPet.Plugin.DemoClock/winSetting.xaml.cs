@@ -29,7 +29,7 @@ namespace VPet.Plugin.DemoClock
             Master = master;
             Set = Master.Set;
             Switch24h.IsChecked = Set.Hour24;
-            PlaceSilder.Value = Set.PlaceBotton;
+            PlaceSilder.Value = Set.PlaceTop;
             OpacitySilder.Value = Set.Opacity * 100;
             SwitchAutoLayer.IsChecked = Set.PlaceAutoBack;
             NumTimeDiff.Value = Set.TimeShifting;
@@ -56,8 +56,8 @@ namespace VPet.Plugin.DemoClock
         {
             if (!AllowChange)
                 return;
-            Set.PlaceBotton = PlaceSilder.Value;
-            Master.WPFTimeClock.Margin = new Thickness(0, 0, 0, Set.PlaceBotton);
+            Set.PlaceTop = PlaceSilder.Value;
+            Master.WPFTimeClock.Margin = new Thickness(0, Set.PlaceTop, 0, 0);
         }
 
         private void OpacitySilder_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

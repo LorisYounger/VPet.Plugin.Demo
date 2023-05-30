@@ -49,10 +49,10 @@ namespace VPet.Plugin.DemoClock
         /// <summary>
         /// 放置距离设置
         /// </summary>
-        public double PlaceBotton
+        public double PlaceTop
         {
-            get => GetDouble("placebotton", 100);
-            set => SetDouble("placebotton", value);
+            get => GetDouble("placetop", 400);
+            set => SetDouble("placetop", value);
         }
         /// <summary>
         /// 默认倒计时

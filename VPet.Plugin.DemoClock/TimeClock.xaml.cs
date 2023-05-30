@@ -56,7 +56,7 @@ namespace VPet.Plugin.DemoClock
             CloseTimer.Elapsed += CloseTimer_Elapsed;
 
             Opacity = master.Set.Opacity;
-            Margin = new Thickness(0, 0, 0, master.Set.PlaceBotton);
+            Margin = new Thickness(0, master.Set.PlaceTop, 0, 0);
             Master.MW.Main.MouseEnter += UserControl_MouseEnter;
             Master.MW.Main.MouseLeave += UserControl_MouseLeave;
             TimeTimer_Tick();

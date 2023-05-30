@@ -44,9 +44,9 @@
                         ToggleBrush="{DynamicResource DARKPrimaryDark}" Content="显示时间时启用24小时制"
                         CheckedToggleBrush="{DynamicResource DARKPrimaryText}" Grid.Column="2"
                         Checked="Switch24h_Checked" Unchecked="Switch24h_Checked" />
-                <pu:NumberInput Grid.Row="1" Grid.Column="3" Minimum="0" MaxHeight="350" Margin="5"
+                <pu:NumberInput Grid.Row="1" Grid.Column="3" Minimum="-100" Maximum="600" Margin="5"
                         Value="{Binding ElementName=PlaceSilder, Path=Value}" CornerRadius="3" />
-                <Slider Grid.Row="1" Grid.Column="2" x:Name="PlaceSilder" Minimum="0" Maximum="350" Value="100"
+                <Slider Grid.Row="1" Grid.Column="2" x:Name="PlaceSilder" Minimum="-100" Maximum="600" Value="300"
                         VerticalAlignment="Center" Background="{DynamicResource DARKPrimaryLighter}"
                         pu:SliderHelper.CoveredBackground="{DynamicResource DARKPrimaryDarker}"
                         ValueChanged="PlaceSilder_ValueChanged" />
