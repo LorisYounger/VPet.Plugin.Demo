@@ -174,5 +174,16 @@ namespace VPet.Plugin.DemoClock
         {
             Master.winSetting = null;
         }
+
+        private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Master.MW
+        }
+
+        //private void SwitchOn_Checked(object sender, RoutedEventArgs e)
+        //{
+        //    if (!AllowChange)
+        //        return;
+        //}
     }
 }

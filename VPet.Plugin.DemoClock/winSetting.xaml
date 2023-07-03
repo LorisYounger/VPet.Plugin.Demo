@@ -28,6 +28,7 @@
                     <RowDefinition Height="40" />
                     <RowDefinition Height="40" />
                     <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="24小时制" VerticalAlignment="Center" />
                 <TextBlock Grid.Row="1" Text="时钟位置" VerticalAlignment="Center" />
@@ -36,6 +37,7 @@
                 <TextBlock Grid.Row="4" Text="时间偏移" VerticalAlignment="Center" />
                 <TextBlock Grid.Row="5" Text="默认倒计时" VerticalAlignment="Center" />
                 <TextBlock Grid.Row="6" Text="倒计时语音" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="7" Text="关闭时钟" VerticalAlignment="Center" />
 
                 <pu:Switch x:Name="Switch24h" BorderBrush="{DynamicResource DARKPrimaryDark}"
                         CheckedBackground="{DynamicResource DARKPrimary}"
@@ -77,6 +79,16 @@
                         Background="{DynamicResource SecondaryLight}" HorizontalAlignment="Center" IsEnabled="False"
                         VerticalAlignment="Center" Height="30" BorderBrush="{DynamicResource SecondaryDark}"
                         BorderThickness="2" Grid.Row="6" />
+                <!--<pu:Switch x:Name="SwitchOn" BorderBrush="{DynamicResource DARKPrimaryDark}"
+                        CheckedBackground="{DynamicResource DARKPrimary}" IsChecked="True"
+                        CheckedBorderBrush="{DynamicResource DARKPrimary}" Background="Transparent" BoxWidth="35"
+                        BoxHeight="18" ToggleSize="14" ToggleShadowColor="{x:Null}"
+                        ToggleBrush="{DynamicResource DARKPrimaryDark}" Content="启用或关闭显示时钟"
+                        CheckedToggleBrush="{DynamicResource DARKPrimaryText}" Grid.Column="2" Grid.Row="7"
+                        Checked="SwitchOn_Checked" />-->
+                <TextBlock Grid.Column="2" Grid.Row="7" Text="前往 设置-MOD设置 启用/停用MOD" HorizontalAlignment="Center"
+                        VerticalAlignment="Center" Grid.ColumnSpan="2" TextDecorations="Underline" Cursor="Hand"
+                        Foreground="{DynamicResource DARKPrimaryDark}" MouseDown="TextBlock_MouseDown" />
             </Grid>
         </TabItem>
         <TabItem Header="番茄钟相关设置">
@@ -122,10 +134,10 @@
                         VerticalAlignment="Center" Height="30" BorderBrush="{DynamicResource SecondaryDark}"
                         BorderThickness="2" Grid.Row="5" />
 
-                <pu:NumberInput x:Name="NumTomatoWork" Minimum="5" Maximum="480" Margin="5" Value="45"
-                        CornerRadius="3" Grid.Column="2" ValueChanged="NumTomatoWork_ValueChanged" />
-                <pu:NumberInput x:Name="NumTomatoRest" Minimum="5" Maximum="480" Margin="5" Value="15"
-                        CornerRadius="3" Grid.Column="2" Grid.Row="1" ValueChanged="NumTomatoRest_ValueChanged" />
+                <pu:NumberInput x:Name="NumTomatoWork" Minimum="5" Maximum="480" Margin="5" Value="45" CornerRadius="3"
+                        Grid.Column="2" ValueChanged="NumTomatoWork_ValueChanged" />
+                <pu:NumberInput x:Name="NumTomatoRest" Minimum="5" Maximum="480" Margin="5" Value="15" CornerRadius="3"
+                        Grid.Column="2" Grid.Row="1" ValueChanged="NumTomatoRest_ValueChanged" />
                 <pu:NumberInput x:Name="NumTomatoRestLong" Minimum="5" Maximum="480" Margin="5" Value="45"
                         CornerRadius="3" Grid.Column="2" Grid.Row="2" ValueChanged="NumTomatoRestLong_ValueChanged" />
                 <TextBox x:Name="TextTomatoWork" Grid.Row="3" Grid.Column="2"

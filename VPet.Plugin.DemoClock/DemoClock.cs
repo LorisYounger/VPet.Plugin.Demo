@@ -131,6 +131,16 @@ namespace VPet.Plugin.DemoClock
             mTotmatoRest.Click += WPFTimeClock.RestMenuItem_Click;
             menuItem.Items.Add(mTotmatoRest);
 
+            //这是个临时举措,未来会支持直接调用
+            MenuItem modset = ((MenuItem)MW.Main.ToolBar.MenuSetting.Items[0]);
+            modset.Visibility = Visibility.Visible;
+            var menuset = new MenuItem()
+            {
+                Header = "DM时钟",
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+            };
+            menuset.Click += (s, e) => { Setting(); };
+            modset.Items.Add(menuset);
         }
         public override void LoadDIY()
         {

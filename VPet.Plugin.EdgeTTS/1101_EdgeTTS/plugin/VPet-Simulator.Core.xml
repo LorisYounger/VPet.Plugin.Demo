@@ -84,6 +84,11 @@
             刷新时间时会调用该方法,在所有任务处理完之后
             </summary>
         </member>
+        <member name="F:VPet_Simulator.Core.Main.NoFunctionMOD">
+            <summary>
+            如果不开启功能模式,默认状态设置
+            </summary>
+        </member>
         <member name="P:VPet_Simulator.Core.Main.IsWorking">
             <summary>
             是否开始运行
@@ -406,6 +411,12 @@
             <param name="graph">动画</param>
             <param name="EndAction">结束操作</param>
         </member>
+        <member name="M:VPet_Simulator.Core.Main.FindDisplayBorder(VPet_Simulator.Core.IGraph)">
+            <summary>
+            查找可用与显示的Border (自动多层切换)
+            </summary>
+            <param name="graph">动画</param>
+        </member>
         <member name="E:VPet_Simulator.Core.Main.OnSay">
             <summary>
             处理说话内容
@@ -593,6 +604,11 @@
             BdrPanel Name Field
             </summary>
         </member>
+        <member name="F:VPet_Simulator.Core.ToolBar.MenuFeed">
+            <summary>
+            MenuFeed Name Field
+            </summary>
+        </member>
         <member name="F:VPet_Simulator.Core.ToolBar.MenuDIY">
             <summary>
             MenuDIY Name Field
@@ -608,17 +624,100 @@
             InitializeComponent
             </summary>
         </member>
-        <member name="T:VPet_Simulator.Core.Graph.FoodAnimation">
+        <member name="T:VPet_Simulator.Core.FoodAnimation">
             <summary>
-            FoodAnimation.xaml 的交互逻辑
-            </summary>
-            <summary>
-            FoodAnimation
+            食物动画 支持显示前中后3层夹心动画
+            不一定只用于食物,只是叫这个名字
             </summary>
         </member>
-        <member name="M:VPet_Simulator.Core.Graph.FoodAnimation.InitializeComponent">
+        <member name="M:VPet_Simulator.Core.FoodAnimation.#ctor(VPet_Simulator.Core.GraphCore,VPet_Simulator.Core.GameSave.ModeType,VPet_Simulator.Core.GraphCore.GraphType,System.String,System.String,LinePutScript.ILine,System.Boolean)">
             <summary>
-            InitializeComponent
+            创建食物动画 第二层夹心为运行时提供
+            </summary>
+            <param name="graphCore">动画核心</param>
+            <param name="modetype">动画模式</param>
+            <param name="graphtype">动画类型</param>
+            <param name="front_Lay">前层 动画名</param>
+            <param name="back_Lay">后层 动画名</param>
+            <param name="animations">中间层运动轨迹</param>
+            <param name="isLoop">是否循环</param>
+        </member>
+        <member name="F:VPet_Simulator.Core.FoodAnimation.Front_Lay">
+            <summary>
+            前层名字
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.FoodAnimation.Back_Lay">
+            <summary>
+            后层名字
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.FoodAnimation.Animations">
+            <summary>
+            所有动画帧
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.FoodAnimation.PlayState">
+            <summary>
+            当前动画播放状态
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.FoodAnimation.DoEndAction">
+            <summary>
+            当前动画是否执行ENDACTION
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.FoodAnimation.IsLoop">
+            <summary>
+            是否循环播放
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.FoodAnimation.IsContinue">
+            <summary>
+            是否循环播放
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.FoodAnimation.IsReady">
+            <summary>
+            是否准备完成
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.FoodAnimation.StopAction">
+            <summary>
+            动画停止时运行的方法
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.FoodAnimation.Path">
+            <summary>
+            图片资源
+            </summary>
+        </member>
+        <member name="T:VPet_Simulator.Core.FoodAnimation.Animation">
+            <summary>
+            单帧动画
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.FoodAnimation.Animation.Time">
+            <summary>
+            帧时间
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Core.FoodAnimation.Animation.#ctor(VPet_Simulator.Core.FoodAnimation,System.Int32,System.Windows.Thickness,System.Double,System.Double,System.Boolean,System.Double)">
+            <summary>
+            创建单帧动画
+            </summary>
+            <param name="parent">FoodAnimation</param>
+            <param name="time">持续时间</param>
+            <param name="wx"></param>
+        </member>
+        <member name="M:VPet_Simulator.Core.FoodAnimation.Animation.#ctor(VPet_Simulator.Core.FoodAnimation,LinePutScript.ISub)">
+            <summary>
+            创建单帧动画
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Core.FoodAnimation.Animation.Run(System.Windows.FrameworkElement,System.Action)">
+            <summary>
+            运行该图层
             </summary>
         </member>
         <member name="T:VPet_Simulator.Core.GraphCore">
@@ -629,6 +728,11 @@
         <member name="T:VPet_Simulator.Core.GraphCore.GraphType">
             <summary>
             动画类型
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Not_Able">
+            <summary>
+            不被启用/使用的 不包含在GrapType
             </summary>
         </member>
         <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Raised_Dynamic">
@@ -986,9 +1090,24 @@
             直播 (结束)
             </summary>
         </member>
+        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Switch_Thirsty">
+            <summary>
+            口渴
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Eat">
+            <summary>
+            吃东西
+            </summary>
+        </member>
         <member name="F:VPet_Simulator.Core.GraphCore.Graphs">
             <summary>
             图像字典
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.GraphCore.CommGraphs">
+            <summary>
+            图像字典(不被主要引用)
             </summary>
         </member>
         <member name="F:VPet_Simulator.Core.GraphCore.CommUIElements">
@@ -1002,6 +1121,19 @@
             </summary>
         </member>
         <member name="M:VPet_Simulator.Core.GraphCore.AddGraph(VPet_Simulator.Core.IGraph,VPet_Simulator.Core.GraphCore.GraphType)">
+            <summary>
+            添加动画
+            </summary>
+            <param name="graph">动画</param>
+            <param name="type">类型</param>
+        </member>
+        <member name="M:VPet_Simulator.Core.GraphCore.AddGraph(VPet_Simulator.Core.IGraph)">
+            <summary>
+            添加动画
+            </summary>
+            <param name="graph">动画</param>
+        </member>
+        <member name="M:VPet_Simulator.Core.GraphCore.AddCOMMGraph(VPet_Simulator.Core.IGraph,System.String)">
             <summary>
             添加动画
             </summary>
@@ -1022,7 +1154,18 @@
             </summary>
         </member>
         <member name="M:VPet_Simulator.Core.GraphCore.FindGraph(VPet_Simulator.Core.GraphCore.GraphType,VPet_Simulator.Core.GameSave.ModeType)">
-            <returns></returns>
+            <summary>
+            查找动画
+            </summary>
+            <param name="type">动画类型</param>
+            <param name="mode">状态类型,找不到就找相同动画类型</param>
+        </member>
+        <member name="M:VPet_Simulator.Core.GraphCore.FindCOMMGraph(System.String,VPet_Simulator.Core.GameSave.ModeType)">
+            <summary>
+            查找动画
+            </summary>
+            <param name="type">动画类型</param>
+            <param name="mode">状态类型,找不到就找相同动画类型</param>
         </member>
         <member name="P:VPet_Simulator.Core.GraphCore.GraphTypeValue">
             <summary>
@@ -1183,9 +1326,9 @@
             是否继续播放
             </summary>
         </member>
-        <member name="M:VPet_Simulator.Core.IGraph.WaitForReadyRun(System.Windows.Controls.Border,System.Action)">
+        <member name="P:VPet_Simulator.Core.IGraph.IsReady">
             <summary>
-            从0开始运行该动画, 等待部署完成后执行
+            是否准备完成
             </summary>
         </member>
         <member name="P:VPet_Simulator.Core.IGraph.ModeType">
@@ -1204,6 +1347,19 @@
             </summary>
             <param name="StopEndAction">停止动画时是否允许执行停止帧</param>
         </member>
+        <member name="T:VPet_Simulator.Core.IGraph.IRunImage">
+            <summary>
+            指示该ImageRun支持
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Core.IGraph.IRunImage.Run(System.Windows.Controls.Border,System.Windows.Media.ImageSource,System.Action)">
+            <summary>
+            从0开始运行该动画
+            </summary>
+            <param name="parant">显示位置</param>
+            <param name="EndAction">结束方法</param>
+            <param name="image">额外图片</param>
+        </member>
         <member name="T:VPet_Simulator.Core.Picture">
             <summary>
             Picture.xaml 的交互逻辑
@@ -1219,6 +1375,14 @@
             <summary>
             图片资源
             </summary>
+        </member>
+        <member name="M:VPet_Simulator.Core.Picture.IImageRun.Run(System.Windows.Controls.Image,System.Action)">
+            <summary>
+            指定图像图像控件准备运行该动画
+            </summary>
+            <param name="img">用于显示的Image</param>
+            <param name="EndAction">结束动画</param>
+            <returns>准备好的线程</returns>
         </member>
         <member name="T:VPet_Simulator.Core.PNGAnimation">
             <summary>
@@ -1292,6 +1456,14 @@
             <summary>
             从0开始运行该动画
             </summary>
+        </member>
+        <member name="M:VPet_Simulator.Core.PNGAnimation.Run(System.Windows.Controls.Image,System.Action)">
+            <summary>
+            指定图像图像控件准备运行该动画
+            </summary>
+            <param name="img">用于显示的Image</param>
+            <param name="EndAction">结束动画</param>
+            <returns>准备好的线程</returns>
         </member>
         <member name="M:VPet_Simulator.Core.Function.ResourcesBrush(VPet_Simulator.Core.Function.BrushType)">
             <summary>
@@ -1423,6 +1595,41 @@
             互动周期
             </summary>
         </member>
+        <member name="P:VPet_Simulator.Core.IFood.Exp">
+            <summary>
+            经验值
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.IFood.Strength">
+            <summary>
+            体力 0-100
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.IFood.StrengthFood">
+            <summary>
+            饱腹度
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.IFood.StrengthDrink">
+            <summary>
+            口渴度
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.IFood.Feeling">
+            <summary>
+            心情
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.IFood.Health">
+            <summary>
+            健康
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.IFood.Likability">
+            <summary>
+            好感度
+            </summary>
+        </member>
         <member name="T:VPet_Simulator.Core.PetLoader">
             <summary>
             宠物加载器
@@ -1446,6 +1653,11 @@
         <member name="F:VPet_Simulator.Core.PetLoader.Intor">
             <summary>
             宠物介绍
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.PetLoader.IGraphConvert">
+            <summary>
+            自定义图片加载方法
             </summary>
         </member>
         <member name="T:VPet_Simulator.Core.GameSave">
@@ -1484,6 +1696,11 @@
             体力 0-100
             </summary>
         </member>
+        <member name="F:VPet_Simulator.Core.GameSave.StoreStrength">
+            <summary>
+            待补充的体力,随着时间缓慢加给桌宠
+            </summary>//让游戏更有游戏性
+        </member>
         <member name="F:VPet_Simulator.Core.GameSave.ChangeStrength">
             <summary>
             变化 体力
@@ -1493,6 +1710,11 @@
             <summary>
             饱腹度
             </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.GameSave.StoreStrengthFood">
+            <summary>
+            待补充的饱腹度,随着时间缓慢加给桌宠
+            </summary>//让游戏更有游戏性
         </member>
         <member name="F:VPet_Simulator.Core.GameSave.ChangeStrengthFood">
             <summary>
@@ -1504,6 +1726,11 @@
             口渴度
             </summary>
         </member>
+        <member name="F:VPet_Simulator.Core.GameSave.StoreStrengthDrink">
+            <summary>
+            待补充的口渴度,随着时间缓慢加给桌宠
+            </summary>//让游戏更有游戏性
+        </member>
         <member name="F:VPet_Simulator.Core.GameSave.ChangeStrengthDrink">
             <summary>
             变化 口渴度
@@ -1513,6 +1740,11 @@
             <summary>
             心情
             </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.GameSave.StoreFeeling">
+            <summary>
+            待补充的心情,随着时间缓慢加给桌宠
+            </summary>//让游戏更有游戏性
         </member>
         <member name="F:VPet_Simulator.Core.GameSave.ChangeFeeling">
             <summary>
@@ -1532,6 +1764,11 @@
         <member name="M:VPet_Simulator.Core.GameSave.CleanChange(System.Boolean)">
             <summary>
             清除变化
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Core.GameSave.StoreTake">
+            <summary>
+            取回被储存的体力
             </summary>
         </member>
         <member name="T:VPet_Simulator.Core.GameSave.ModeType">

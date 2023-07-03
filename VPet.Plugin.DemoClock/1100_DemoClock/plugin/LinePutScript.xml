@@ -11,7 +11,7 @@
         </member>
         <member name="M:LinePutScript.Converter.LineAttribute.#ctor">
             <summary>
-            将改内容转换成Line
+            将该内容转换成Line
             </summary>
         </member>
         <member name="M:LinePutScript.Converter.LineAttribute.#ctor(LinePutScript.Converter.LPSConvert.ConvertType,System.Type,System.String,System.Type,System.Boolean)">
@@ -107,6 +107,63 @@
             通过Type获取转换方法
             </summary>
             <param name="type">ConvertFunction</param>
+            <param name="info">储存的Info</param>
+            <returns>要转换的值</returns>
+        </member>
+        <member name="T:LinePutScript.Converter.LPSConvert.ConvertFunction.CF_LPS`1">
+            <summary>
+            LPS储存转换器
+            </summary>
+        </member>
+        <member name="M:LinePutScript.Converter.LPSConvert.ConvertFunction.CF_LPS`1.Convert(System.Object)">
+            <summary>
+            指定转换方法
+            </summary>
+            <param name="value">要转换的值</param>
+            <returns>String:Info</returns>
+        </member>
+        <member name="M:LinePutScript.Converter.LPSConvert.ConvertFunction.CF_LPS`1.ConvertBack(System.String)">
+            <summary>
+            指定反转方法
+            </summary>
+            <param name="info">储存的Info</param>
+            <returns>要转换的值</returns>
+        </member>
+        <member name="T:LinePutScript.Converter.LPSConvert.ConvertFunction.CF_Line`1">
+            <summary>
+            Line储存转换器
+            </summary>
+        </member>
+        <member name="M:LinePutScript.Converter.LPSConvert.ConvertFunction.CF_Line`1.Convert(System.Object)">
+            <summary>
+            指定转换方法
+            </summary>
+            <param name="value">要转换的值</param>
+            <returns>String:Info</returns>
+        </member>
+        <member name="M:LinePutScript.Converter.LPSConvert.ConvertFunction.CF_Line`1.ConvertBack(System.String)">
+            <summary>
+            指定反转方法
+            </summary>
+            <param name="info">储存的Info</param>
+            <returns>要转换的值</returns>
+        </member>
+        <member name="T:LinePutScript.Converter.LPSConvert.ConvertFunction.CF_Sub`1">
+            <summary>
+            Sub储存转换器
+            </summary>
+        </member>
+        <member name="M:LinePutScript.Converter.LPSConvert.ConvertFunction.CF_Sub`1.Convert(System.Object)">
+            <summary>
+            指定转换方法
+            </summary>
+            <param name="value">要转换的值</param>
+            <returns>String:Info</returns>
+        </member>
+        <member name="M:LinePutScript.Converter.LPSConvert.ConvertFunction.CF_Sub`1.ConvertBack(System.String)">
+            <summary>
+            指定反转方法
+            </summary>
             <param name="info">储存的Info</param>
             <returns>要转换的值</returns>
         </member>
@@ -313,6 +370,23 @@
             <summary>
             通过字典类型的行, Name不会重复
             </summary>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D.#ctor">
+            <summary>
+            创建一行
+            </summary>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D.#ctor(System.String)">
+            <summary>
+            通过lpsLine文本创建一行
+            </summary>
+            <param name="lpsLine">lpsSub文本</param>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D.#ctor(LinePutScript.ILine)">
+            <summary>
+            通过其他Line创建新的Line
+            </summary>
+            <param name="line">其他line</param>
         </member>
         <member name="P:LinePutScript.Dictionary.Line_D.Subs">
             <summary>
@@ -625,7 +699,7 @@
             <param name="text">文本 在末尾没有结束行号的文本 (正常)</param>
             <param name="subs">子类集合</param>
         </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.Set(LinePutScript.ILine)">
+        <member name="M:LinePutScript.Dictionary.Line_D.Load(LinePutScript.ILine)">
             <summary>
             将其他Line内容拷贝到本Line
             </summary>
@@ -815,6 +889,18 @@
             通过字典类型的文件 包括文件读写等一系列操作
             </summary>
         </member>
+        <member name="M:LinePutScript.Dictionary.LPS_D.#ctor(LinePutScript.ILine[])">
+            <summary>
+            从指定行创建 LPS_D
+            </summary>
+            <param name="lines">多个行</param>
+        </member>
+        <member name="M:LinePutScript.Dictionary.LPS_D.#ctor(LinePutScript.ILPS)">
+            <summary>
+            从另一个LPS文件创建该LPS
+            </summary>
+            <param name="lps"></param>
+        </member>
         <member name="P:LinePutScript.Dictionary.LPS_D.Assemblage">
             <summary>
             集合 全部文件的数据
@@ -822,7 +908,7 @@
         </member>
         <member name="M:LinePutScript.Dictionary.LPS_D.#ctor">
             <summary>
-            创建一个 LpsDocument
+            创建一个 空的 LPS_D
             </summary>
         </member>
         <member name="M:LinePutScript.Dictionary.LPS_D.#ctor(System.String)">
@@ -1097,6 +1183,12 @@
             从指定的字符串加载LPS文档
             </summary>
             <param name="lps">包含要加载的LPS文档的字符串</param>
+        </member>
+        <member name="M:LinePutScript.Dictionary.LPS_D.Load(LinePutScript.ILine[])">
+            <summary>
+            从指定行加载LPS文档
+            </summary>
+            <param name="lines">多个行</param>
         </member>
         <member name="M:LinePutScript.Dictionary.LPS_D.First">
             <summary>
@@ -1753,7 +1845,7 @@
             <param name="text">文本 在末尾没有结束行号的文本 (正常)</param>
             <param name="subs">子类集合</param>
         </member>
-        <member name="M:LinePutScript.ILine.Set(LinePutScript.ILine)">
+        <member name="M:LinePutScript.ILine.Load(LinePutScript.ILine)">
             <summary>
             将其他Line内容拷贝到本Line
             </summary>
@@ -1926,12 +2018,6 @@
             </summary>
             <param name="subName">用于定义匹配的名称</param>
             <returns>如果找到相同名称的sub的元素,则为该元素的从零开始的索引组; 否则为空的Array</returns>
-        </member>
-        <member name="M:LinePutScript.ILine.ToString">
-            <summary>
-            将当前Line转换成文本格式 (info已经被转义/去除关键字)
-            </summary>
-            <returns>Line的文本格式 (info已经被转义/去除关键字)</returns>
         </member>
         <member name="M:LinePutScript.ILine.ToString(System.Text.StringBuilder)">
             <summary>
@@ -2203,6 +2289,12 @@
             </summary>
             <param name="lps">包含要加载的LPS文档的字符串</param>
         </member>
+        <member name="M:LinePutScript.ILPS.Load(LinePutScript.ILine[])">
+            <summary>
+            从指定行加载LPS文档
+            </summary>
+            <param name="lines">多个行</param>
+        </member>
         <member name="M:LinePutScript.ILPS.First">
             <summary>
             返回一个Assemblage的第一个元素。
@@ -2444,11 +2536,11 @@
             </summary>
             <param name="lpsLine">lpsSub文本</param>
         </member>
-        <member name="M:LinePutScript.Line.Load(System.String)">
+        <member name="M:LinePutScript.Line.#ctor(LinePutScript.ILine)">
             <summary>
-            加载 通过lps文本创建一个子类
+            通过其他Line创建新的Line
             </summary>
-            <param name="lps">lps文本</param>
+            <param name="line">其他line</param>
         </member>
         <member name="M:LinePutScript.Line.#ctor(System.String,System.String,System.String,LinePutScript.ISub[])">
             <summary>
@@ -2459,6 +2551,12 @@
             <param name="text">文本 在末尾没有结束行号的文本 (正常)</param>
             <param name="subs">子类集合</param>
         </member>
+        <member name="M:LinePutScript.Line.Load(System.String)">
+            <summary>
+            加载 通过lps文本创建一个子类
+            </summary>
+            <param name="lps">lps文本</param>
+        </member>
         <member name="M:LinePutScript.Line.Load(System.String,System.String,System.String,LinePutScript.ISub[])">
             <summary>
             通过名字和信息创建新的Line
@@ -2468,13 +2566,7 @@
             <param name="text">文本 在末尾没有结束行号的文本 (正常)</param>
             <param name="subs">子类集合</param>
         </member>
-        <member name="M:LinePutScript.Line.#ctor(LinePutScript.ILine)">
-            <summary>
-            通过其他Line创建新的Line
-            </summary>
-            <param name="line">其他line</param>
-        </member>
-        <member name="M:LinePutScript.Line.Set(LinePutScript.ILine)">
+        <member name="M:LinePutScript.Line.Load(LinePutScript.ILine)">
             <summary>
             将其他Line内容拷贝到本Line
             </summary>
@@ -2988,7 +3080,7 @@
         </member>
         <member name="M:LinePutScript.LpsDocument.#ctor">
             <summary>
-            创建一个 LpsDocument
+            创建一个 空的LpsDocument
             </summary>
         </member>
         <member name="M:LinePutScript.LpsDocument.#ctor(System.String)">
@@ -2996,6 +3088,18 @@
             从指定的字符串创建 LpsDocument
             </summary>
             <param name="lps">包含要加载的LPS文档的字符串</param>
+        </member>
+        <member name="M:LinePutScript.LpsDocument.#ctor(LinePutScript.ILine[])">
+            <summary>
+            从指定行创建 LpsDocument
+            </summary>
+            <param name="lines">多个行</param>
+        </member>
+        <member name="M:LinePutScript.LpsDocument.#ctor(LinePutScript.ILPS)">
+            <summary>
+            从另一个LPS文件创建该LPS
+            </summary>
+            <param name="lps"></param>
         </member>
         <member name="M:LinePutScript.LpsDocument.AddLine(LinePutScript.ILine)">
             <summary>
@@ -3263,6 +3367,12 @@
             从指定的字符串加载LPS文档
             </summary>
             <param name="lps">包含要加载的LPS文档的字符串</param>
+        </member>
+        <member name="M:LinePutScript.LpsDocument.Load(LinePutScript.ILine[])">
+            <summary>
+            从指定行加载LPS文档
+            </summary>
+            <param name="lines">多个行</param>
         </member>
         <member name="M:LinePutScript.LpsDocument.First">
             <summary>
@@ -3606,7 +3716,7 @@
         </member>
         <member name="T:LinePutScript.SetObject">
             <summary>
-            Set Object 可以储存任何类型的值 对性能进行优化
+            Load Object 可以储存任何类型的值 对性能进行优化
             </summary>
         </member>
         <member name="T:LinePutScript.SetObject.ObjectType">

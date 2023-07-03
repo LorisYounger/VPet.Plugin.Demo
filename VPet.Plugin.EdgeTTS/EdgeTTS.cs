@@ -37,11 +37,22 @@ namespace VPet.Plugin.VPetTTS
                 Directory.CreateDirectory(GraphCore.CachePath + @"\voice");
             if (Set.Enable)
                 MW.Main.OnSay += Main_OnSay;
+
+            //这是个临时举措,未来会支持直接调用
+            MenuItem modset = ((MenuItem)MW.Main.ToolBar.MenuSetting.Items[0]);
+            modset.Visibility = Visibility.Visible;
+            var menuItem = new MenuItem()
+            {
+                Header = "EdgeTTS",
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+            };
+            menuItem.Click += (s, e) => { Setting(); };
+            modset.Items.Add(menuItem);
         }
-        public override void LoadDIY()
-        {
-            MW.Main.ToolBar.AddMenuButton(VPet_Simulator.Core.ToolBar.MenuType.DIY, "EdgeTTS", Setting);
-        }
+        //public override void LoadDIY()
+        //{
+        //    MW.Main.ToolBar.AddMenuButton(VPet_Simulator.Core.ToolBar.MenuType.DIY, "EdgeTTS", Setting);
+        //}
         public void Main_OnSay(string saythings)
         {//说话语音
             var path = GraphCore.CachePath + $"\\voice\\{Sub.GetHashCode(saythings):X}.mp3";

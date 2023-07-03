@@ -4,6 +4,11 @@
         <name>VPet-Simulator.Windows.Interface</name>
     </assembly>
     <members>
+        <member name="T:VPet_Simulator.Windows.Interface.IMainWindow">
+            <summary>
+            游戏主窗体
+            </summary>
+        </member>
         <member name="P:VPet_Simulator.Windows.Interface.IMainWindow.IsSteamUser">
             <summary>
             是否为Steam用户
@@ -49,6 +54,11 @@
             所有三方插件
             </summary>
         </member>
+        <member name="P:VPet_Simulator.Windows.Interface.IMainWindow.Items">
+            <summary>
+            所有食物
+            </summary>
+        </member>
         <member name="M:VPet_Simulator.Windows.Interface.IMainWindow.SetZoomLevel(System.Double)">
             <summary>
             设置游戏缩放倍率
@@ -70,6 +80,11 @@
             运行动作
             </summary>
             <param name="action">动作名称</param>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.Food.Price">
+            <summary>
+            食物价格
+            </summary>
         </member>
         <member name="T:VPet_Simulator.Windows.Interface.MainPlugin">
             <summary>
@@ -121,9 +136,29 @@
             重载DIY按钮, 如需添加自定义按钮可在此处添加
             </summary>
         </member>
+        <member name="T:VPet_Simulator.Windows.Interface.Setting">
+            <summary>
+            游戏设置
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Windows.Interface.Setting.#ctor(System.String)">
+            <summary>
+            游戏设置
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Windows.Interface.Setting.Statistics">
+            <summary>
+            统计数据信息
+            </summary>
+        </member>
         <member name="P:VPet_Simulator.Windows.Interface.Setting.ZoomLevel">
             <summary>
             缩放倍率
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.Setting.VoiceVolume">
+            <summary>
+            播放声音大小
             </summary>
         </member>
         <member name="P:VPet_Simulator.Windows.Interface.Setting.IsBiggerScreen">
@@ -189,6 +224,11 @@
         <member name="P:VPet_Simulator.Windows.Interface.Setting.SmartMoveInterval">
             <summary>
             智能移动周期 (秒)
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.Setting.MessageBarOutside">
+            <summary>
+            消息框外置
             </summary>
         </member>
         <member name="P:VPet_Simulator.Windows.Interface.Setting.StartUPBoot">

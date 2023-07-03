@@ -46,6 +46,14 @@ namespace VPet.Plugin.DemoClock
             get => !GetBool("placeautofront");
             set => SetBool("placeautofront", !value);
         }
+        ///// <summary>
+        ///// 是否启用
+        ///// </summary>
+        //public bool TurnON
+        //{
+        //    get => !GetBool("turnon");
+        //    set => SetBool("turnon", !value);
+        //}
         /// <summary>
         /// 放置距离设置
         /// </summary>

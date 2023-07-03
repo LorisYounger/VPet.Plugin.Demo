@@ -174,7 +174,7 @@ namespace VPet.Plugin.DemoClock
                     if (diffleft <= TimeSpan.Zero)
                     {
                         Master.Set.AddTomato((int)Master.Set.Tomato_WorkTime / 10);
-                        Master.MW.Core.Save.Money += (int)Master.Set.Tomato_WorkTime / 10;
+                        Master.MW.Core.Save.Money += (int)Master.Set.Tomato_WorkTime;
                         TTimes.Text = "时间到";
                         TDates.Text = "工作结束";
                         TOthers.Text = "点击此处开始休息";
