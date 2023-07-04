@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using static VPet.Plugin.DemoClock.DemoClock;
 using System.Timers;
+using LinePutScript.Localization.WPF;
 
 namespace VPet.Plugin.DemoClock
 {
@@ -118,24 +119,24 @@ namespace VPet.Plugin.DemoClock
 
                     if (diff.TotalMinutes < 1.5)
                     {
-                        TDates.Text = $"计时: {diff.TotalSeconds:f1} 秒";
+                        TDates.Text = "计时: {0:f1} 秒".Translate(diff.TotalSeconds);
                     }
                     else if (diff.TotalHours < 1.5)
                     {
-                        TDates.Text = $"计时: {diff.TotalMinutes:f1} 分钟";
+                        TDates.Text = "计时: {0:f1} 分钟".Translate(diff.TotalMinutes);
                     }
                     else
                     {
-                        TDates.Text = $"计时: {diff.Hours:f1} 小时";
+                        TDates.Text = "计时: {0:f1} 小时".Translate(diff.Hours);
                     }
                     break;
                 case Mode.CountDown:
                     diff = StartTime - DateTime.Now;
                     if (diff <= TimeSpan.Zero)
                     {
-                        TTimes.Text = "时间到";
-                        TDates.Text = "计时结束";
-                        TOthers.Text = "点击此处回到时间显示";
+                        TTimes.Text = "时间到".Translate();
+                        TDates.Text = "计时结束".Translate();
+                        TOthers.Text = "点击此处回到时间显示".Translate();
                         TOthers.Visibility = Visibility.Visible;
                         Master.mode = Mode.CountDown_End;
                         CountTimer.Stop();
@@ -157,15 +158,15 @@ namespace VPet.Plugin.DemoClock
                     }
                     if (diff.TotalMinutes < 1.5)
                     {
-                        TDates.Text = $"剩余: {diff.TotalSeconds:f1} 秒";
+                        TDates.Text = "剩余: {0:f1} 秒".Translate(diff.TotalSeconds);
                     }
                     else if (diff.TotalHours < 1.5)
                     {
-                        TDates.Text = $"剩余: {diff.TotalMinutes:f1} 分钟";
+                        TDates.Text = "剩余: {0:f1} 分钟".Translate(diff.TotalMinutes);
                     }
                     else
                     {
-                        TDates.Text = $"剩余: {diff.Hours:f1} 小时";
+                        TDates.Text = "剩余: {0:f1} 小时".Translate(diff.Hours);
                     }
                     break;
                 case Mode.Tomato_Work:
@@ -175,9 +176,9 @@ namespace VPet.Plugin.DemoClock
                     {
                         Master.Set.AddTomato((int)Master.Set.Tomato_WorkTime / 10);
                         Master.MW.Core.Save.Money += (int)Master.Set.Tomato_WorkTime;
-                        TTimes.Text = "时间到";
-                        TDates.Text = "工作结束";
-                        TOthers.Text = "点击此处开始休息";
+                        TTimes.Text = "时间到".Translate();
+                        TDates.Text = "工作结束".Translate();
+                        TOthers.Text = "点击此处开始休息".Translate();
                         Master.mode = Mode.CountDown_End;
                         CountTimer.Stop();
                         return;
@@ -186,15 +187,15 @@ namespace VPet.Plugin.DemoClock
                     PBTimeLeft.Value = diff.TotalMinutes;
                     if (diffleft.TotalMinutes < 1.5)
                     {
-                        TDates.Text = $"工作剩{diffleft.TotalSeconds:f1}秒";
+                        TDates.Text = "工作剩{0:f1}秒".Translate(diffleft.TotalSeconds);
                     }
                     else if (diffleft.TotalHours < 1.5)
                     {
-                        TDates.Text = $"工作剩{diffleft.TotalMinutes:f1}分钟";
+                        TDates.Text = "工作剩{0:f1}分钟".Translate(diffleft.TotalMinutes);
                     }
                     else
                     {
-                        TDates.Text = $"工作剩{diffleft.Hours:f1}小时";
+                        TDates.Text = "工作剩{0:f1}小时".Translate(diffleft.Hours);
                     }
                     break;
                 case Mode.Tomato_Rest:
@@ -202,9 +203,9 @@ namespace VPet.Plugin.DemoClock
                     diffleft = TimeSpan.FromMinutes(Master.Set.Tomato_RestTime) - diff;
                     if (diffleft <= TimeSpan.Zero)
                     {
-                        TTimes.Text = "时间到";
-                        TDates.Text = "休息结束";
-                        TOthers.Text = "点击此处开始工作";
+                        TTimes.Text = "时间到".Translate();
+                        TDates.Text = "休息结束".Translate();
+                        TOthers.Text = "点击此处开始工作".Translate();
                         Master.mode = Mode.CountDown_End;
                         CountTimer.Stop();
                         return;
@@ -214,15 +215,15 @@ namespace VPet.Plugin.DemoClock
 
                     if (diffleft.TotalMinutes < 1.5)
                     {
-                        TDates.Text = $"休息剩{diffleft.TotalSeconds:f1}秒";
+                        TDates.Text = "休息剩{0:f1}秒".Translate(diffleft.TotalSeconds);
                     }
                     else if (diffleft.TotalHours < 1.5)
                     {
-                        TDates.Text = $"休息剩{diffleft.TotalMinutes:f1}分钟";
+                        TDates.Text = "休息剩{0:f1}分钟".Translate(diffleft.TotalMinutes);
                     }
                     else
                     {
-                        TDates.Text = $"休息剩{diffleft.Hours:f1}小时";
+                        TDates.Text = "休息剩{0:f1}小时".Translate(diffleft.Hours);
                     }
                     break;
                 case Mode.Tomato_Rest_Long:
@@ -230,9 +231,9 @@ namespace VPet.Plugin.DemoClock
                     diffleft = TimeSpan.FromMinutes(Master.Set.Tomato_RestTimeLong) - diff;
                     if (diffleft <= TimeSpan.Zero)
                     {
-                        TTimes.Text = "时间到";
-                        TDates.Text = "长休息结束";
-                        TOthers.Text = "点击此处开始工作";
+                        TTimes.Text = "时间到".Translate();
+                        TDates.Text = "长休息结束".Translate();
+                        TOthers.Text = "点击此处开始工作".Translate();
                         Master.mode = Mode.CountDown_End;
                         CountTimer.Stop();
                         return;
@@ -271,7 +272,7 @@ namespace VPet.Plugin.DemoClock
             IsPause = true;
             CountTimer.IsEnabled = false;
             PauseTime += DateTime.Now - StartTime;
-            TDates.Text = "计时暂停" + TDates.Text.Substring(3);
+            TDates.Text = "计时暂停".Translate() + TDates.Text.Substring(3);
         }
         public void ContinueTiming()
         {
@@ -313,7 +314,7 @@ namespace VPet.Plugin.DemoClock
             StartTime = DateTime.Now;
             IsPause = false;
             TOthers.Visibility = Visibility.Visible;
-            TOthers.Text = $"番茄点数 {Master.Set.Tomato_Count} 累计点数 {Master.Set.Tomato_Count_Total}";
+            TOthers.Text = "番茄点数 {0} 累计点数 {1}".Translate(Master.Set.Tomato_Count, Master.Set.Tomato_Count_Total);
             PauseTime = TimeSpan.Zero;
             PBTimeLeft.Value = 0;
             PBTimeLeft.Visibility = Visibility.Visible;
@@ -327,7 +328,7 @@ namespace VPet.Plugin.DemoClock
             StartTime = DateTime.Now;
             IsPause = false;
             TOthers.Visibility = Visibility.Visible;
-            TOthers.Text = $"番茄点数 {Master.Set.Tomato_Count} 累计点数 {Master.Set.Tomato_Count_Total}";
+            TOthers.Text = "番茄点数 {0} 累计点数 {1}".Translate(Master.Set.Tomato_Count, Master.Set.Tomato_Count_Total);
             PauseTime = TimeSpan.Zero;
             PBTimeLeft.Value = 0;
             PBTimeLeft.Visibility = Visibility.Visible;
@@ -341,7 +342,7 @@ namespace VPet.Plugin.DemoClock
             StartTime = DateTime.Now;
             IsPause = false;
             TOthers.Visibility = Visibility.Visible;
-            TOthers.Text = $"番茄点数 {Master.Set.Tomato_Count} 累计点数 {Master.Set.Tomato_Count_Total}";
+            TOthers.Text = "番茄点数 {0} 累计点数 {1}".Translate(Master.Set.Tomato_Count, Master.Set.Tomato_Count_Total);
             PauseTime = TimeSpan.Zero;
             PBTimeLeft.Value = 0;
             PBTimeLeft.Visibility = Visibility.Visible;
@@ -386,14 +387,14 @@ namespace VPet.Plugin.DemoClock
                 if (IsPause)
                 {
                     ContinueCountDown();
-                    CountDownMenuItem.Header = "暂停倒计时";
-                    Master.mCountDown.Header = "暂停倒计时";
+                    CountDownMenuItem.Header = "暂停倒计时".Translate();
+                    Master.mCountDown.Header = "暂停倒计时".Translate();
                 }
                 else
                 {
                     PauseCountDown();
-                    CountDownMenuItem.Header = "继续倒计时";
-                    Master.mCountDown.Header = "继续倒计时";
+                    CountDownMenuItem.Header = "继续倒计时".Translate();
+                    Master.mCountDown.Header = "继续倒计时".Translate();
                 }
             }
             else
@@ -402,8 +403,8 @@ namespace VPet.Plugin.DemoClock
                 if (input.ShowDialog() == true && input.Return != TimeSpan.Zero)
                 {
                     StartCountDown(input.Return);
-                    CountDownMenuItem.Header = "暂停倒计时";
-                    Master.mCountDown.Header = "暂停倒计时";
+                    CountDownMenuItem.Header = "暂停倒计时".Translate();
+                    Master.mCountDown.Header = "暂停倒计时".Translate();
                 }
             }
         }
@@ -420,21 +421,21 @@ namespace VPet.Plugin.DemoClock
                 if (IsPause)
                 {
                     ContinueTiming();
-                    TimingMenuItem.Header = "暂停计时";
-                    Master.mTiming.Header = "暂停计时";
+                    TimingMenuItem.Header = "暂停计时".Translate();
+                    Master.mTiming.Header = "暂停计时".Translate();
                 }
                 else
                 {
                     PauseTiming();
-                    TimingMenuItem.Header = "继续计时";
-                    Master.mTiming.Header = "继续计时";
+                    TimingMenuItem.Header = "继续计时".Translate();
+                    Master.mTiming.Header = "继续计时".Translate();
                 }
             }
             else
             {
                 StartTiming();
-                TimingMenuItem.Header = "暂停计时";
-                Master.mTiming.Header = "暂停计时";
+                TimingMenuItem.Header = "暂停计时".Translate();
+                Master.mTiming.Header = "暂停计时".Translate();
             }
         }
 
@@ -442,33 +443,33 @@ namespace VPet.Plugin.DemoClock
         {
             if (Master.mode == Mode.Tomato_Work)
             {
-                if (MessageBoxX.Show("是否停止当前工作?", "停止工作", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if (MessageBoxX.Show("是否停止当前工作?".Translate(), "停止工作".Translate(), MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     Master.mode = Mode.None;
                     CountTimer.IsEnabled = false;
                     TOthers.Visibility = Visibility.Collapsed;
                     PBTimeLeft.Visibility = Visibility.Collapsed;
-                    WorkMenuItem.Header = "开始工作";
-                    Master.mTotmatoWork.Header = "开始工作";
+                    WorkMenuItem.Header = "开始工作".Translate();
+                    Master.mTotmatoWork.Header = "开始工作".Translate();
                 }
             }
             else if (Master.mode == Mode.Tomato_Rest)
             {
-                if (MessageBoxX.Show("是否停止当前休息?", "停止休息", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if (MessageBoxX.Show("是否停止当前休息?".Translate(), "停止休息".Translate(), MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     Master.mode = Mode.None;
                     CountTimer.IsEnabled = false;
                     TOthers.Visibility = Visibility.Collapsed;
                     PBTimeLeft.Visibility = Visibility.Collapsed;
-                    WorkMenuItem.Header = "开始工作";
-                    Master.mTotmatoWork.Header = "开始工作";
+                    WorkMenuItem.Header = "开始工作".Translate();
+                    Master.mTotmatoWork.Header = "开始工作".Translate();
                 }
             }
             else
             {
                 StartWork();
-                WorkMenuItem.Header = "停止工作";
-                Master.mTotmatoWork.Header = "停止工作";
+                WorkMenuItem.Header = "停止工作".Translate();
+                Master.mTotmatoWork.Header = "停止工作".Translate();
             }
         }
 
@@ -476,21 +477,22 @@ namespace VPet.Plugin.DemoClock
         {
             if (Master.mode == Mode.Tomato_Rest || Master.mode == Mode.Tomato_Rest_Long)
             {
-                if (MessageBoxX.Show("是否停止当前休息?\n扣除的番茄不会被退还", "停止休息", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if (MessageBoxX.Show("是否停止当前休息?\n扣除的番茄不会被退还".Translate(), "停止休息".Translate(), MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     Master.mode = Mode.None;
                     CountTimer.IsEnabled = false;
                     TOthers.Visibility = Visibility.Collapsed;
                     PBTimeLeft.Visibility = Visibility.Collapsed;
-                    WorkMenuItem.Header = "开始休息";
-                    Master.mTotmatoWork.Header = "开始休息";
+                    WorkMenuItem.Header = "开始休息".Translate();
+                    Master.mTotmatoWork.Header = "开始休息".Translate();
                 }
             }
             else
             {
                 int need = (int)Math.Round(Master.Set.Tomato_RestTimeLong / 2);
                 if (Master.Set.Tomato_Count <= Master.Set.Tomato_RestTimeLong / 2 && MessageBoxResult.Yes ==
-                    MessageBoxX.Show($"是否开始休息?\n休息所需番茄 {need}\n当前拥有番茄 {Master.Set.Tomato_Count}", "开始休息", MessageBoxButton.YesNo))
+                    MessageBoxX.Show("是否开始休息?\n休息所需番茄 {0}\n当前拥有番茄 {1}".Translate(need, Master.Set.Tomato_Count),
+                    "开始休息".Translate(), MessageBoxButton.YesNo))
                 {
                     Master.Set.Tomato_Count -= need;
                     StartRestLong();
@@ -499,31 +501,45 @@ namespace VPet.Plugin.DemoClock
                 }
                 else
                 {
-                    MessageBoxX.Show($"当前番茄不足,不能开始长休息\n休息所需番茄 {need}\n当前拥有番茄 {Master.Set.Tomato_Count}", "休息失败,请好好工作");
+                    MessageBoxX.Show("当前番茄不足,不能开始长休息\n休息所需番茄 {0}\n当前拥有番茄 {1}".Translate(need, Master.Set.Tomato_Count),
+                        "休息失败,请好好工作".Translate());
                 }
             }
         }
 
         private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            switch (TDates.Text)
+            if (TDates.Text == "计时结束".Translate())
             {
-                case "计时结束":
-                    Master.mode = Mode.None;
-                    CountTimer.IsEnabled = false;
-                    TOthers.Visibility = Visibility.Collapsed;
-                    PBTimeLeft.Visibility = Visibility.Collapsed;
-                    CountDownMenuItem.Header = "开始倒计时";
-                    Master.mCountDown.Header = "开始倒计时";
-                    break;
-                case "工作结束":
-                    StartRest();
-                    break;
-                case "休息结束":
-                case "长休息结束":
-                    StartWork();
-                    break;
+                Master.mode = Mode.None;
+                CountTimer.IsEnabled = false;
+                TOthers.Visibility = Visibility.Collapsed;
+                PBTimeLeft.Visibility = Visibility.Collapsed;
+                CountDownMenuItem.Header = "开始倒计时";
+                Master.mCountDown.Header = "开始倒计时";
             }
+            else if (TDates.Text == "工作结束".Translate())
+                StartRest();
+            else if(TDates.Text == "休息结束".Translate() || TDates.Text == "长休息结束".Translate())
+                StartWork();
+            //switch (TDates.Text)
+            //{
+            //    case "计时结束".Translate():
+            //        Master.mode = Mode.None;
+            //        CountTimer.IsEnabled = false;
+            //        TOthers.Visibility = Visibility.Collapsed;
+            //        PBTimeLeft.Visibility = Visibility.Collapsed;
+            //        CountDownMenuItem.Header = "开始倒计时";
+            //        Master.mCountDown.Header = "开始倒计时";
+            //        break;
+            //    case "工作结束":
+            //        StartRest();
+            //        break;
+            //    case "休息结束":
+            //    case "长休息结束":
+            //        StartWork();
+            //        break;
+            //}
         }
     }
 }

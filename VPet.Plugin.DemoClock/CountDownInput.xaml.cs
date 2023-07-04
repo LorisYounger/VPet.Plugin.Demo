@@ -35,7 +35,7 @@ namespace VPet.Plugin.DemoClock
 
         private void OK_Click(object sender, RoutedEventArgs e)
         {
-            Return = TimeSpan.FromHours(hh.Value) + TimeSpan.FromSeconds(ss.Value) + TimeSpan.FromMinutes(mm.Value);
+            Return = TimeSpan.FromHours(hh.Value.Value) + TimeSpan.FromSeconds(ss.Value.Value) + TimeSpan.FromMinutes(mm.Value.Value);
             DialogResult = true;
         }
     }

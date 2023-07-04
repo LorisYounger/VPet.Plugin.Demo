@@ -85,14 +85,14 @@ namespace VPet.Plugin.DemoClock
         {
             if (!AllowChange)
                 return;
-            Set.TimeShifting = NumTimeDiff.Value;
+            Set.TimeShifting = NumTimeDiff.Value.Value;
         }
 
         private void NumDefCountDown_ValueChanged(object sender, Panuon.WPF.SelectedValueChangedRoutedEventArgs<double> e)
         {
             if (!AllowChange)
                 return;
-            Set.DefaultCountDown = NumDefCountDown.Value;
+            Set.DefaultCountDown = NumDefCountDown.Value.Value;
         }
 
         private void TextCountDown_TextChanged(object sender, TextChangedEventArgs e)
@@ -106,21 +106,21 @@ namespace VPet.Plugin.DemoClock
         {
             if (!AllowChange)
                 return;
-            Set.Tomato_WorkTime = NumTomatoWork.Value;
+            Set.Tomato_WorkTime = NumTomatoWork.Value.Value;
         }
 
         private void NumTomatoRest_ValueChanged(object sender, Panuon.WPF.SelectedValueChangedRoutedEventArgs<double> e)
         {
             if (!AllowChange)
                 return;
-            Set.Tomato_RestTime = NumTomatoRest.Value;
+            Set.Tomato_RestTime = NumTomatoRest.Value.Value;
         }
 
         private void NumTomatoRestLong_ValueChanged(object sender, Panuon.WPF.SelectedValueChangedRoutedEventArgs<double> e)
         {
             if (!AllowChange)
                 return;
-            Set.Tomato_RestTimeLong = NumTomatoRestLong.Value;
+            Set.Tomato_RestTimeLong = NumTomatoRestLong.Value.Value;
         }
         private void TextTomatoWork_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -177,7 +177,7 @@ namespace VPet.Plugin.DemoClock
 
         private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Master.MW
+            //Master.MW.
         }
 
         //private void SwitchOn_Checked(object sender, RoutedEventArgs e)

@@ -14,7 +14,7 @@
             将该内容转换成Line
             </summary>
         </member>
-        <member name="M:LinePutScript.Converter.LineAttribute.#ctor(LinePutScript.Converter.LPSConvert.ConvertType,System.Type,System.String,System.Type,System.Boolean)">
+        <member name="M:LinePutScript.Converter.LineAttribute.#ctor(LinePutScript.Converter.LPSConvert.ConvertType,System.Type,System.String,System.Type,System.Boolean,System.Boolean)">
             <summary>
             将改内容转换成Line
             </summary>
@@ -64,6 +64,11 @@
             true: 强制转换String
             </param>
             <returns>转换结果</returns>
+        </member>
+        <member name="P:LinePutScript.Converter.LineAttribute.IgnoreCase">
+            <summary>
+            忽略大小写
+            </summary>
         </member>
         <member name="T:LinePutScript.Converter.LPSConvert">
             <summary>
