@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows;
 using VPet_Simulator.Windows.Interface;
 using System.Windows.Threading;
+using LinePutScript.Localization.WPF;
 
 namespace VPet.Plugin.DemoClock
 {
@@ -85,7 +86,7 @@ namespace VPet.Plugin.DemoClock
 
             menuItem = new MenuItem()
             {
-                Header = "DM时钟",
+                Header = "DM时钟".Translate(),
                 HorizontalContentAlignment = HorizontalAlignment.Center
             };
             //foreach (MenuItem mi in WPFTimeClock.CM.Items)
@@ -93,7 +94,7 @@ namespace VPet.Plugin.DemoClock
 
             var mi = new MenuItem()
             {
-                Header = "设置",
+                Header = "设置".Translate(),
                 HorizontalContentAlignment = HorizontalAlignment.Center,
             };
             mi.Click += (s, e) => { Setting(); };
@@ -101,7 +102,7 @@ namespace VPet.Plugin.DemoClock
             menuItem.Items.Add(new Separator());
             mCountDown = new MenuItem()
             {
-                Header = "开始倒计时",
+                Header = "开始倒计时".Translate(),
                 HorizontalContentAlignment = HorizontalAlignment.Center,
             };
             mCountDown.Click += WPFTimeClock.CountDownMenuItem_Click;
@@ -109,7 +110,7 @@ namespace VPet.Plugin.DemoClock
 
             mTiming = new MenuItem()
             {
-                Header = "开始正计时",
+                Header = "开始正计时".Translate(),
                 HorizontalContentAlignment = HorizontalAlignment.Center,
             };
             mTiming.Click += WPFTimeClock.TimingMenuItem_Click;
@@ -117,7 +118,7 @@ namespace VPet.Plugin.DemoClock
 
             mTotmatoWork = new MenuItem()
             {
-                Header = "开始工作",
+                Header = "开始工作".Translate(),
                 HorizontalContentAlignment = HorizontalAlignment.Center,
             };
             mTotmatoWork.Click += WPFTimeClock.WorkMenuItem_Click;
@@ -125,18 +126,18 @@ namespace VPet.Plugin.DemoClock
 
             mTotmatoRest = new MenuItem()
             {
-                Header = "开始休息",
+                Header = "开始休息".Translate(),
                 HorizontalContentAlignment = HorizontalAlignment.Center,
             };
             mTotmatoRest.Click += WPFTimeClock.RestMenuItem_Click;
             menuItem.Items.Add(mTotmatoRest);
 
             //这是个临时举措,未来会支持直接调用
-            MenuItem modset = ((MenuItem)MW.Main.ToolBar.MenuSetting.Items[0]);
+            MenuItem modset = MW.Main.ToolBar.MenuMODConfig;
             modset.Visibility = Visibility.Visible;
             var menuset = new MenuItem()
             {
-                Header = "DM时钟",
+                Header = "DM时钟".Translate(),
                 HorizontalContentAlignment = HorizontalAlignment.Center,
             };
             menuset.Click += (s, e) => { Setting(); };

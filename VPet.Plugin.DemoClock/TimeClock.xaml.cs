@@ -521,25 +521,7 @@ namespace VPet.Plugin.DemoClock
             else if (TDates.Text == "工作结束".Translate())
                 StartRest();
             else if(TDates.Text == "休息结束".Translate() || TDates.Text == "长休息结束".Translate())
-                StartWork();
-            //switch (TDates.Text)
-            //{
-            //    case "计时结束".Translate():
-            //        Master.mode = Mode.None;
-            //        CountTimer.IsEnabled = false;
-            //        TOthers.Visibility = Visibility.Collapsed;
-            //        PBTimeLeft.Visibility = Visibility.Collapsed;
-            //        CountDownMenuItem.Header = "开始倒计时";
-            //        Master.mCountDown.Header = "开始倒计时";
-            //        break;
-            //    case "工作结束":
-            //        StartRest();
-            //        break;
-            //    case "休息结束":
-            //    case "长休息结束":
-            //        StartWork();
-            //        break;
-            //}
+                StartWork();        
         }
     }
 }

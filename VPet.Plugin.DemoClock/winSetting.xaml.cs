@@ -177,7 +177,7 @@ namespace VPet.Plugin.DemoClock
 
         private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            //Master.MW.
+            Master.MW.ShowSetting(5);
         }
 
         //private void SwitchOn_Checked(object sender, RoutedEventArgs e)

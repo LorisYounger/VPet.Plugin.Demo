@@ -1,0 +1,66 @@
+DM时钟#Demo Clock:|
+设置#Setting:|
+开始倒计时#Start Countdown:|
+开始正计时#Start Timing:|
+开始工作#Start working:|
+开始休息#Start rest:|
+计时: {0:f1} 秒#Timing: {0:f1} seconds:|
+计时: {0:f1} 分钟#Timing: {0:f1} minutes:|
+计时: {0:f1} 小时#Timing: {0:f1} hours:|
+时间到#Time expired:|
+计时结束#End of timer:|
+点击此处回到时间显示#Click here to go back to the time display:|
+剩余: {0:f1} 秒#Remaining: {0:f1} seconds:|
+剩余: {0:f1} 分钟#Remaining: {0:f1} minutes:|
+剩余: {0:f1} 小时#Remaining: {0:f1} hours:|
+工作结束#End of work:|
+点击此处开始休息#Click here to start break:|
+工作剩{0:f1}秒#{0:f1} seconds remaining:|
+工作剩{0:f1}分钟#{0:f1}minutes left to work:|
+工作剩{0:f1}小时#{0:f1}hours of work left.:|
+休息结束#End of break:|
+点击此处开始工作#Click here to start working:|
+休息剩{0:f1}秒#Break {0:f1}seconds left:|
+休息剩{0:f1}分钟#Minutes left in the rest period:|
+休息剩{0:f1}小时#Break left {0:f1}hours:|
+长休息结束#End of rest:|
+计时暂停#Timeout pause:|
+番茄点数 {0} 累计点数 {1}#Tomato Points {0} Cumulative Points {1}:|
+暂停倒计时#Pause countdown:|
+继续倒计时#Continue countdown:|
+暂停计时#Pause Timer:|
+继续计时#Continue countdown:|
+停止工作#Stop working:|
+是否停止当前工作?#Does it stop the current job?:|
+停止休息#Stop break:|
+是否停止当前休息?#Is the current break stopped?:|
+是否停止当前休息?\n扣除的番茄不会被退还#Does it stop the current rest? \n Deducted tomatoes will not be refunded.:|
+是否开始休息?\n休息所需番茄 {0}\n当前拥有番茄 {1}#Do you start the break? \nRequired tomatoes for break {0}\nCurrently have tomatoes {1}:|
+当前番茄不足,不能开始长休息\n休息所需番茄 {0}\n当前拥有番茄 {1}#We can't start a rest if we don't have enough tomatoes. \nTomatoes needed for break {0}\nCurrently have tomatoes {1}:|
+休息失败,请好好工作#Break failed. Please work hard.:|
+基本时间设置#Basic Time Setting:|
+24小时制#24 hours:|
+时钟位置#Clock position:|
+闲置透明度#Idle Transparency:|
+显示层次#Display level:|
+时间偏移#Time Offset:|
+默认倒计时#Default countdown:|
+倒计时语音#Countdown voice:|
+关闭时钟#Clock off:|
+显示时间时启用24小时制#Enable 24-hour system when displaying time:|
+闲置时置于桌宠后方#Behind desk favor when idle:|
+选择位置#Select:|
+前往 设置-MOD设置 启用/停用MOD#Go to Settings - MOD Settings:|
+番茄钟相关设置#Tomato clock related settings:|
+工作时长#Working hours:|
+休息时长#Break duration:|
+长休息时长#Rest Duration:|
+工作语音#Work Voice:|
+休息语音#Break Voice:|
+结束语音#End voice:|
+语音预设#Voice preset:|
+setwidth#550:|
+Demo Clock 设置#Demo Clock Settings:|
+倒计时时间设定#Countdown Time Setting:|
+请输入倒计时时间#Please enter the countdown time:|
+确定#OK:|

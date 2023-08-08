@@ -30,11 +30,6 @@
             开始时间
             </summary>
         </member>
-        <member name="F:VPet_Simulator.Core.WorkTimer.MaxTime">
-            <summary>
-            最大时间(分钟)
-            </summary>
-        </member>
         <member name="M:VPet_Simulator.Core.WorkTimer.M_TimeUIHandle(VPet_Simulator.Core.Main)">
             <summary>
             UI相关显示
@@ -140,21 +135,38 @@
             显示默认情况
             </summary>
         </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayStopMove(System.Action)">
+        <member name="M:VPet_Simulator.Core.Main.DisplayStop(System.Action)">
             <summary>
             显示结束动画
             </summary>
-            <param name="EndAction">结束后接下来</param>
+            <param name="EndAction">结束后接下来,不结束不运行</param>
             <returns>是否成功结束</returns>
         </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayClose(System.Action)">
+        <member name="M:VPet_Simulator.Core.Main.DisplayStopForce(System.Action)">
             <summary>
-            显示关机动画
+            显示结束动画 无论是否结束,都强制结束
+            </summary>
+            <param name="EndAction">结束后接下来,不结束也运行</param>
+        </member>
+        <member name="M:VPet_Simulator.Core.Main.DisplayMove">
+            <summary>
+            尝试触发移动
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="E:VPet_Simulator.Core.Main.Event_TouchHead">
+            <summary>
+            当发生摸头时触发改方法
             </summary>
         </member>
         <member name="M:VPet_Simulator.Core.Main.DisplayTouchHead">
             <summary>
             显示摸头情况
+            </summary>
+        </member>
+        <member name="E:VPet_Simulator.Core.Main.Event_TouchBody">
+            <summary>
+            当发生摸身体时触发改方法
             </summary>
         </member>
         <member name="M:VPet_Simulator.Core.Main.DisplayTouchBody">
@@ -167,39 +179,34 @@
             显示待机(模式1)情况
             </summary>
         </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayIdel_StateONEing">
+        <member name="M:VPet_Simulator.Core.Main.DisplayIdel_StateONEing(System.String)">
             <summary>
             显示待机(模式1)情况
             </summary>
         </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayIdel_StateTWO">
+        <member name="M:VPet_Simulator.Core.Main.DisplayIdel_StateTWO(System.String)">
             <summary>
             显示待机(模式2)情况
             </summary>
         </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayIdel_StateTWOing">
+        <member name="M:VPet_Simulator.Core.Main.DisplayIdel_StateTWOing(System.String)">
             <summary>
             显示待机(模式2)情况
             </summary>
         </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplaySquat">
+        <member name="M:VPet_Simulator.Core.Main.DisplayIdel">
             <summary>
-            显示蹲下情况
+            显示待机情况 (只有符合条件的才会显示)
             </summary>
         </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplaySquating">
+        <member name="M:VPet_Simulator.Core.Main.DisplayBLoopingToNomal(System.Int32)">
             <summary>
-            显示蹲下情况
+            显示B循环+C循环+ToNomal
             </summary>
         </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayBoring">
+        <member name="M:VPet_Simulator.Core.Main.DisplayBLoopingToNomal(System.String,System.Int32)">
             <summary>
-            显示无聊情况
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayBoringing">
-            <summary>
-            显示无聊情况
+            显示B循环+C循环+ToNomal
             </summary>
         </member>
         <member name="M:VPet_Simulator.Core.Main.DisplaySleep(System.Boolean)">
@@ -207,54 +214,9 @@
             显示睡觉情况
             </summary>
         </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplaySleeping">
+        <member name="M:VPet_Simulator.Core.Main.DisplayBLoopingForce(System.String)">
             <summary>
-            显示睡觉情况 (正常)
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplaySleepingForce">
-            <summary>
-            显示睡觉情况 (强制)
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayWorkONE">
-            <summary>
-            显示工作情况
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayWorkONEend">
-            <summary>
-            显示工作情况结束
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayWorkONEing">
-            <summary>
-            显示工作情况循环
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayWorkTWO">
-            <summary>
-            显示工作情况
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayWorkTWOing">
-            <summary>
-            显示工作情况循环
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayWorkTWOend">
-            <summary>
-            显示工作情况结束
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayStudy">
-            <summary>
-            显示学习情况
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayStudying">
-            <summary>
-            显示学习情况
+            显示B循环 (强制)
             </summary>
         </member>
         <member name="M:VPet_Simulator.Core.Main.DisplayRaised">
@@ -262,147 +224,55 @@
             显示拖拽情况
             </summary>
         </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayRaising">
+        <member name="M:VPet_Simulator.Core.Main.DisplayRaising(System.String)">
             <summary>
             显示拖拽中
             </summary>
         </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayFalled_Left">
+        <member name="M:VPet_Simulator.Core.Main.DisplayCEndtoNomal(System.String)">
             <summary>
-            显示掉到地上 从左边
+            显示结束动画到正常动画 (DisplayToNomal)
             </summary>
         </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayFalled_Right">
-            <summary>
-            显示掉到地上 从左边
-            </summary>
+        <member name="M:VPet_Simulator.Core.Main.Display(VPet_Simulator.Core.GraphInfo.GraphType,VPet_Simulator.Core.GraphInfo.AnimatType,System.Action{System.String})">
+            <param name="animat">动画的动作 Start Loop End</param>
         </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayWalk_Left">
+        <member name="M:VPet_Simulator.Core.Main.Display(System.String,VPet_Simulator.Core.GraphInfo.AnimatType,System.Action{System.String})">
             <summary>
-            显示向左走 (有判断)
+            显示动画 根据名字播放
             </summary>
+            <param name="name">动画名称</param>
+            <param name="EndAction">动画结束后操作(附带名字)</param>
+            <param name="animat">动画的动作 Start Loop End</param>
         </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayWalk_Lefting">
+        <member name="M:VPet_Simulator.Core.Main.Display(System.String,VPet_Simulator.Core.GraphInfo.AnimatType,VPet_Simulator.Core.GraphInfo.GraphType,System.Action{System.String})">
             <summary>
-            显示向左走
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayWalk_Right">
-            <summary>
-            显示向右走 (有判断)
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayWalk_Righting">
-            <summary>
-            显示向右走
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayCrawl_Left">
-            <summary>
-            显示向左爬 (有判断)
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayCrawl_Lefting">
-            <summary>
-            显示向左爬
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayCrawl_Right">
-            <summary>
-            显示向右爬 (有判断)
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayCrawl_Righting">
-            <summary>
-            显示向右爬
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayClimb_Left_UP(System.Action)">
-            <summary>
-            显示左墙壁爬行 上
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayClimb_Lefting_UP">
-            <summary>
-            显示左墙壁爬行 上
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayClimb_Left_DOWN(System.Action)">
-            <summary>
-            显示左墙壁爬行 下
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayClimb_Lefting_DOWN">
-            <summary>
-            显示左墙壁爬行 下
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayClimb_Right_UP(System.Action)">
-            <summary>
-            显示右墙壁爬行 上
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayClimb_Righting_UP">
-            <summary>
-            显示右墙壁爬行 上
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayClimb_Right_DOWN(System.Action)">
-            <summary>
-            显示右墙壁爬行 下
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayClimb_Righting_DOWN">
-            <summary>
-            显示右墙壁爬行 下
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayClimb_Top_Right">
-            <summary>
-            显示顶部墙壁爬行向右
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayClimb_Top_Righting">
-            <summary>
-            显示顶部墙壁爬行向左
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayClimb_Top_Left">
-            <summary>
-            显示顶部墙壁爬行向左
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayClimb_Top_Lefting">
-            <summary>
-            显示顶部墙壁爬行向左
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayFall_Left(System.Action)">
-            <summary>
-            显示掉落向左
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayFall_Lefting">
-            <summary>
-            显示掉落向左
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayFall_Right(System.Action)">
-            <summary>
-            显示掉落向右
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.Main.DisplayFall_Righting">
-            <summary>
-            显示掉落向右
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.Main.Display(VPet_Simulator.Core.GraphCore.GraphType,System.Action)">
-            <summary>
-            显示动画 
+            显示动画 根据名字和类型查找运行,若无则查找类型
             </summary>
             <param name="Type">动画类型</param>
+            <param name="name">动画名称</param>
+            <param name="EndAction">动画结束后操作(附带名字)</param>
+            <param name="animat">动画的动作 Start Loop End</param>
+        </member>
+        <member name="M:VPet_Simulator.Core.Main.Display(System.String,VPet_Simulator.Core.GraphInfo.AnimatType,VPet_Simulator.Core.GraphInfo.GraphType,System.Action)">
+            <summary>
+            显示动画 根据名字和类型查找运行,若无则查找类型
+            </summary>
+            <param name="Type">动画类型</param>
+            <param name="name">动画名称</param>
             <param name="EndAction">动画结束后操作</param>
+            <param name="animat">动画的动作 Start Loop End</param>
+        </member>
+        <member name="M:VPet_Simulator.Core.Main.Display(VPet_Simulator.Core.GraphInfo.GraphType,VPet_Simulator.Core.GraphInfo.AnimatType,System.Action)">
+            <param name="animat">动画的动作 Start Loop End</param>
+        </member>
+        <member name="M:VPet_Simulator.Core.Main.Display(System.String,VPet_Simulator.Core.GraphInfo.AnimatType,System.Action)">
+            <summary>
+            显示动画 根据名字播放
+            </summary>
+            <param name="name">动画名称</param>
+            <param name="EndAction">动画结束后操作</param>
+            <param name="animat">动画的动作 Start Loop End</param>
         </member>
         <member name="M:VPet_Simulator.Core.Main.Display(VPet_Simulator.Core.IGraph,System.Action)">
             <summary>
@@ -432,7 +302,12 @@
             事件Timer
             </summary>
         </member>
-        <member name="M:VPet_Simulator.Core.Main.Say(System.String,VPet_Simulator.Core.GraphCore.Helper.SayType,System.Boolean)">
+        <member name="M:VPet_Simulator.Core.Main.SayRnd(System.String,System.Boolean)">
+            <summary>
+            说话,使用随机表情
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Core.Main.Say(System.String,System.String,System.Boolean)">
             <summary>
             说话
             </summary>
@@ -459,6 +334,21 @@
             根据消耗计算相关数据
             </summary>
             <param name="TimePass">过去时间倍率</param>
+        </member>
+        <member name="E:VPet_Simulator.Core.Main.FunctionSpendHandle">
+            <summary>
+            状态计算Handle
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.Main.RandomInteractionAction">
+            <summary>
+            想要随机显示的接口 (return:是否成功)
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Core.Main.EventTimer_Elapsed">
+            <summary>
+            每隔指定时间自动触发计算 可以关闭EventTimer后手动计算
+            </summary>
         </member>
         <member name="F:VPet_Simulator.Core.Main.MoveTimerPoint">
             <summary>
@@ -494,6 +384,11 @@
             当前状态
             </summary>
         </member>
+        <member name="F:VPet_Simulator.Core.Main.StateID">
+            <summary>
+            当前状态辅助ID
+            </summary>
+        </member>
         <member name="T:VPet_Simulator.Core.Main.WorkingState">
             <summary>
             当前正在的状态
@@ -504,24 +399,24 @@
             默认:啥都没干
             </summary>
         </member>
-        <member name="F:VPet_Simulator.Core.Main.WorkingState.WorkONE">
+        <member name="F:VPet_Simulator.Core.Main.WorkingState.Work">
             <summary>
-            正在干活1
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.Main.WorkingState.WorkTWO">
-            <summary>
-            正在干活1
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.Main.WorkingState.Study">
-            <summary>
-            学习中 
+            正在干活/学习中
             </summary>
         </member>
         <member name="F:VPet_Simulator.Core.Main.WorkingState.Sleep">
             <summary>
             睡觉
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.Main.WorkingState.Travel">
+            <summary>
+            旅游中
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.Main.WorkingState.Empty">
+            <summary>
+            其他状态,给开发者留个空位计算
             </summary>
         </member>
         <member name="F:VPet_Simulator.Core.Main.MainGrid">
@@ -562,7 +457,7 @@
             MessageBar
             </summary>
         </member>
-        <member name="M:VPet_Simulator.Core.MessageBar.Show(System.String,System.String,VPet_Simulator.Core.GraphCore.Helper.SayType)">
+        <member name="M:VPet_Simulator.Core.MessageBar.Show(System.String,System.String,System.String)">
             <summary>
             显示消息
             </summary>
@@ -577,6 +472,11 @@
         <member name="F:VPet_Simulator.Core.MessageBar.TText">
             <summary>
             TText Name Field
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.MessageBar.MessageBoxContent">
+            <summary>
+            MessageBoxContent Name Field
             </summary>
         </member>
         <member name="M:VPet_Simulator.Core.MessageBar.InitializeComponent">
@@ -666,13 +566,12 @@
             不一定只用于食物,只是叫这个名字
             </summary>
         </member>
-        <member name="M:VPet_Simulator.Core.FoodAnimation.#ctor(VPet_Simulator.Core.GraphCore,VPet_Simulator.Core.GameSave.ModeType,VPet_Simulator.Core.GraphCore.GraphType,System.String,System.String,LinePutScript.ILine,System.Boolean)">
+        <member name="M:VPet_Simulator.Core.FoodAnimation.#ctor(VPet_Simulator.Core.GraphCore,VPet_Simulator.Core.GraphInfo,System.String,System.String,LinePutScript.ILine,System.Boolean)">
             <summary>
             创建食物动画 第二层夹心为运行时提供
             </summary>
             <param name="graphCore">动画核心</param>
-            <param name="modetype">动画模式</param>
-            <param name="graphtype">动画类型</param>
+            <param name="graphinfo">动画信息</param>
             <param name="front_Lay">前层 动画名</param>
             <param name="back_Lay">后层 动画名</param>
             <param name="animations">中间层运动轨迹</param>
@@ -711,6 +610,11 @@
         <member name="P:VPet_Simulator.Core.FoodAnimation.IsContinue">
             <summary>
             是否循环播放
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.FoodAnimation.GraphInfo">
+            <summary>
+            动画信息
             </summary>
         </member>
         <member name="P:VPet_Simulator.Core.FoodAnimation.IsReady">
@@ -761,399 +665,14 @@
             图像显示核心
             </summary>
         </member>
-        <member name="T:VPet_Simulator.Core.GraphCore.GraphType">
+        <member name="F:VPet_Simulator.Core.GraphCore.GraphsName">
             <summary>
-            动画类型
+            图像名字字典: 动画类型->动画名字
             </summary>
         </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Not_Able">
+        <member name="F:VPet_Simulator.Core.GraphCore.GraphsList">
             <summary>
-            不被启用/使用的 不包含在GrapType S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Raised_Dynamic">
-            <summary>
-            被提起动态 (循环) L
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Raised_Static_A_Start">
-            <summary>
-            被提起静态 (开始) L
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Raised_Static_B_Loop">
-            <summary>
-            被提起静态 (循环) L
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Climb_Top_Right">
-            <summary>
-            从上向右爬 (循环) M
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Climb_Top_Left">
-            <summary>
-            从上向左爬 (循环) M
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Climb_Up_Right">
-            <summary>
-            爬起向右 M
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Climb_Up_Left">
-            <summary>
-            爬起向左 M
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Climb_Right_A_Start">
-            <summary>
-            从右边爬 (开始) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Climb_Left_A_Start">
-            <summary>
-            从左边爬 (开始) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Climb_Right_B_Loop">
-            <summary>
-            从右边爬 (循环) M
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Climb_Left_B_Loop">
-            <summary>
-            从左边爬 (循环) M
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Default">
-            <summary>
-            呼吸 (循环) L
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Touch_Head_A_Start">
-            <summary>
-            摸头 (开始) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Touch_Head_B_Loop">
-            <summary>
-            摸头 (循环) M
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Touch_Head_C_End">
-            <summary>
-            摸头 (结束) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Touch_Body_A_Start">
-            <summary>
-            摸身体 (开始) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Touch_Body_B_Loop">
-            <summary>
-            摸身体 (循环) M
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Touch_Body_C_End">
-            <summary>
-            摸身体 (结束) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Crawl_Right_A_Start">
-            <summary>
-            爬行向右 (开始) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Crawl_Right_B_Loop">
-            <summary>
-            爬行向右 (循环) M
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Crawl_Right_C_End">
-            <summary>
-            爬行向右 (结束) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Crawl_Left_A_Start">
-            <summary>
-            爬行向左 (开始) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Crawl_Left_B_Loop">
-            <summary>
-            爬行向左 (循环) M
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Crawl_Left_C_End">
-            <summary>
-            爬行向左 (结束) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Squat_A_Start">
-            <summary>
-            下蹲 (开始) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Squat_B_Loop">
-            <summary>
-            下蹲 (循环) M
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Squat_C_End">
-            <summary>
-            下蹲 (结束) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Fall_Left_A_Start">
-            <summary>
-            下落向左 (开始) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Fall_Left_B_Loop">
-            <summary>
-            下落向左 (循环) M
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Fall_Left_C_End">
-            <summary>
-            下落向左 (结束) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Fall_Right_A_Start">
-            <summary>
-            下落向右 (开始) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Fall_Right_B_Loop">
-            <summary>
-            下落向右 (循环) M
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Fall_Right_C_End">
-            <summary>
-            下落向右 (结束) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Walk_Right_A_Start">
-            <summary>
-            走路向右 (开始) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Walk_Right_B_Loop">
-            <summary>
-            走路向右 (循环) M
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Walk_Right_C_End">
-            <summary>
-            走路向右 (结束) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Walk_Left_A_Start">
-            <summary>
-            走路向左 (开始) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Walk_Left_B_Loop">
-            <summary>
-            走路向左 (循环) M
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Walk_Left_C_End">
-            <summary>
-            走路向左 (结束) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Boring_A_Start">
-            <summary>
-            无聊 (开始) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Boring_B_Loop">
-            <summary>
-            无聊 (循环) M
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Boring_C_End">
-            <summary>
-            无聊 (结束) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Sleep_A_Start">
-            <summary>
-            睡觉 (开始) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Sleep_B_Loop">
-            <summary>
-            睡觉 (循环) M
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Sleep_C_End">
-            <summary>
-            睡觉 (结束) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Say_Serious_A_Start">
-            <summary>
-            说话 (开始) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Say_Serious_B_Loop">
-            <summary>
-            说话 (循环) M
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Say_Serious_C_End">
-            <summary>
-            说话 (结束) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Say_Shining_A_Start">
-            <summary>
-            说话 (开始) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Say_Shining_B_Loop">
-            <summary>
-            说话 (循环) M
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Say_Shining_C_End">
-            <summary>
-            说话 (结束) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Say_Self_A_Start">
-            <summary>
-            说话 (开始) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Say_Self_B_Loop">
-            <summary>
-            说话 (循环) M
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Say_Self_C_End">
-            <summary>
-            说话 (结束) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Idel_StateONE_A_Start">
-            <summary>
-            待机 模式1 (开始) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Idel_StateONE_B_Loop">
-            <summary>
-            待机 模式1 (循环) M
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Idel_StateONE_C_End">
-            <summary>
-            待机 模式1 (结束) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Idel_StateTWO_A_Start">
-            <summary>
-            待机 模式2 (开始) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Idel_StateTWO_B_Loop">
-            <summary>
-            待机 模式2 (循环) M
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Idel_StateTWO_C_End">
-            <summary>
-            待机 模式2 (结束) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.StartUP">
-            <summary>
-            开机 M
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Shutdown">
-            <summary>
-            关机 M
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Study_A_Start">
-            <summary>
-            学习 (开始) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Study_B_Loop">
-            <summary>
-            学习 (循环) M
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Study_C_End">
-            <summary>
-            学习 (结束) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.WorkONE_A_Start">
-            <summary>
-            工作 (开始) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.WorkONE_B_Loop">
-            <summary>
-            工作 (循环) M
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.WorkONE_C_End">
-            <summary>
-            工作 (结束) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.WorkTWO_A_Start">
-            <summary>
-            直播 (开始) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.WorkTWO_B_Loop">
-            <summary>
-            直播 (循环) M
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.WorkTWO_C_End">
-            <summary>
-            直播 (结束) S
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Switch_Thirsty">
-            <summary>
-            口渴 M
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Switch_Hunger">
-            <summary>
-            饥饿 M
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Eat">
-            <summary>
-            吃东西 M
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.GraphType.Drink">
-            <summary>
-            喝东西 M
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.Graphs">
-            <summary>
-            图像字典
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.CommGraphs">
-            <summary>
-            图像字典(不被主要引用)
+            图像字典 动画名字->状态+动作->动画
             </summary>
         </member>
         <member name="F:VPet_Simulator.Core.GraphCore.CommUIElements">
@@ -1166,57 +685,35 @@
             通用设置属性/方法
             </summary>
         </member>
-        <member name="M:VPet_Simulator.Core.GraphCore.AddGraph(VPet_Simulator.Core.IGraph,VPet_Simulator.Core.GraphCore.GraphType)">
-            <summary>
-            添加动画
-            </summary>
-            <param name="graph">动画</param>
-            <param name="type">类型</param>
-        </member>
         <member name="M:VPet_Simulator.Core.GraphCore.AddGraph(VPet_Simulator.Core.IGraph)">
             <summary>
             添加动画
             </summary>
             <param name="graph">动画</param>
         </member>
-        <member name="M:VPet_Simulator.Core.GraphCore.AddCOMMGraph(VPet_Simulator.Core.IGraph,System.String)">
+        <member name="M:VPet_Simulator.Core.GraphCore.FindName(VPet_Simulator.Core.GraphInfo.GraphType)">
             <summary>
-            添加动画
+            获得随机动画名字
             </summary>
-            <param name="graph">动画</param>
-            <param name="type">类型</param>
+            <param name="type">动画类型</param>
+            <returns>动画名字,找不到则返回null</returns>
         </member>
-        <member name="M:VPet_Simulator.Core.GraphCore.AddGraph(System.String,VPet_Simulator.Core.GameSave.ModeType,VPet_Simulator.Core.GraphCore.GraphType)">
-            <summary>
-            添加动画 自动创建
-            </summary>
-            <param name="path">位置</param>
-            <param name="modetype">状态类型</param>
-            <param name="graphtype">动画类型</param>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.RndGraph">
-            <summary>
-            随机数字典(用于确保随机动画不会错位)
-            </summary>
-        </member>
-        <member name="M:VPet_Simulator.Core.GraphCore.FindGraph(VPet_Simulator.Core.GraphCore.GraphType,VPet_Simulator.Core.GameSave.ModeType)">
+        <member name="M:VPet_Simulator.Core.GraphCore.FindGraph(System.String,VPet_Simulator.Core.GraphInfo.AnimatType,VPet_Simulator.Core.GameSave.ModeType)">
             <summary>
             查找动画
             </summary>
             <param name="type">动画类型</param>
+            <param name="GraphName">动画名字</param>
             <param name="mode">状态类型,找不到就找相同动画类型</param>
+            <param name="animat">动画的动作 Start Loop End</param>
         </member>
-        <member name="M:VPet_Simulator.Core.GraphCore.FindCOMMGraph(System.String,VPet_Simulator.Core.GameSave.ModeType)">
+        <member name="M:VPet_Simulator.Core.GraphCore.FindGraphs(System.String,VPet_Simulator.Core.GraphInfo.AnimatType,VPet_Simulator.Core.GameSave.ModeType)">
             <summary>
-            查找动画
+            查找动画列表
             </summary>
             <param name="type">动画类型</param>
             <param name="mode">状态类型,找不到就找相同动画类型</param>
-        </member>
-        <member name="P:VPet_Simulator.Core.GraphCore.GraphTypeValue">
-            <summary>
-            动画类型默认前文本
-            </summary>
+            <param name="animat">动画的动作 Start Loop End</param>
         </member>
         <member name="T:VPet_Simulator.Core.GraphCore.Config">
             <summary>
@@ -1248,50 +745,27 @@
             提起定位点
             </summary>
         </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.Config.SpeedWalk">
+        <member name="F:VPet_Simulator.Core.GraphCore.Config.Moves">
             <summary>
-            行走速度
+            所有移动
             </summary>
         </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.Config.SpeedClimb">
+        <member name="F:VPet_Simulator.Core.GraphCore.Config.Works">
             <summary>
-            侧边爬行速度
+            所有工作/学习
             </summary>
         </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.Config.SpeedClimbTop">
+        <member name="F:VPet_Simulator.Core.GraphCore.Config.Duration">
             <summary>
-            顶部爬行速度
+            持续时间
             </summary>
         </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.Config.SpeedCrawl">
+        <member name="M:VPet_Simulator.Core.GraphCore.Config.GetDuration(System.String)">
             <summary>
-            爬行速度
+            获取持续时间
             </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.Config.SpeedFallX">
-            <summary>
-            掉落速度 X轴
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.Config.SpeedFallY">
-            <summary>
-            掉落速度 Y轴
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.Config.LocateClimbLeft">
-            <summary>
-            定位爬行左边距离
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.Config.LocateClimbRight">
-            <summary>
-            定位爬行右边距离
-            </summary>
-        </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.Config.LocateClimbTop">
-            <summary>
-            定位爬行上边距离
-            </summary>
+            <param name="name">动画名称</param>
+            <returns>持续时间</returns>
         </member>
         <member name="M:VPet_Simulator.Core.GraphCore.Config.StrGetString(System.String)">
             <summary>
@@ -1311,47 +785,403 @@
             加载更多设置,新的替换后来的,允许空内容
             </summary>
         </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.Helper.SayType.None">
+        <member name="P:VPet_Simulator.Core.GraphHelper.GraphTypeValue">
             <summary>
-            无:不执行动作
+            动画类型默认前文本
             </summary>
         </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.Helper.SayType.Default">
+        <member name="M:VPet_Simulator.Core.GraphHelper.Run(VPet_Simulator.Core.IGraph,System.Windows.Controls.Border,System.Windows.Media.ImageSource,System.Action)">
             <summary>
-            默认说话
+            使用RunImage 从0开始运行该动画 若无RunImage 则使用Run
+            </summary>
+            <param name="graph">动画接口</param>
+            <param name="parant">显示位置</param>
+            <param name="EndAction">结束方法</param>
+            <param name="image">额外图片</param>
+        </member>
+        <member name="M:VPet_Simulator.Core.GraphHelper.Run(VPet_Simulator.Core.IGraph,System.Windows.Controls.Image,System.Action)">
+            <summary>
+            使用ImageRun 指定图像图像控件准备运行该动画
+            </summary>
+            <param name="graph">动画接口</param>
+            <param name="img">用于显示的Image</param>
+            <param name="EndAction">结束动画</param>
+            <returns>准备好的线程</returns>
+        </member>
+        <member name="T:VPet_Simulator.Core.GraphHelper.Work">
+            <summary>
+            工作/学习
             </summary>
         </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.Helper.SayType.Serious">
+        <member name="T:VPet_Simulator.Core.GraphHelper.Work.WorkType">
             <summary>
-            严肃
+            类型
             </summary>
         </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.Helper.SayType.Shining">
+        <member name="P:VPet_Simulator.Core.GraphHelper.Work.Type">
             <summary>
-            闪亮
+            工作/学习
             </summary>
         </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.Helper.SayType.Self">
+        <member name="P:VPet_Simulator.Core.GraphHelper.Work.Name">
             <summary>
-            自己
+            工作名称
             </summary>
         </member>
-        <member name="F:VPet_Simulator.Core.GraphCore.Helper.SayType.Error">
+        <member name="P:VPet_Simulator.Core.GraphHelper.Work.NameTrans">
             <summary>
-            错误
+            工作名称 已翻译
             </summary>
         </member>
-        <member name="T:VPet_Simulator.Core.EyeTracking">
+        <member name="P:VPet_Simulator.Core.GraphHelper.Work.Graph">
             <summary>
-            IEyeTracking.xaml 的交互逻辑
-            </summary>
-            <summary>
-            EyeTracking
+            使用动画名称
             </summary>
         </member>
-        <member name="M:VPet_Simulator.Core.EyeTracking.InitializeComponent">
+        <member name="P:VPet_Simulator.Core.GraphHelper.Work.MoneyLevel">
             <summary>
-            InitializeComponent
+            工作盈利/学习等级倍率
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.GraphHelper.Work.MoneyBase">
+            <summary>
+            工作盈利/学习基本倍率
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.GraphHelper.Work.StrengthFood">
+            <summary>
+            工作体力(食物)消耗倍率
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.GraphHelper.Work.StrengthDrink">
+            <summary>
+            工作体力(饮料)消耗倍率
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.GraphHelper.Work.Feeling">
+            <summary>
+            心情消耗倍率
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.GraphHelper.Work.LevelLimit">
+            <summary>
+            等级限制
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.GraphHelper.Work.Time">
+            <summary>
+            花费时间(分钟)
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.GraphHelper.Work.FinishBonus">
+            <summary>
+            完成奖励倍率(0+)
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Core.GraphHelper.Work.Display(VPet_Simulator.Core.Main)">
+            <summary>
+            显示工作/学习动画
+            </summary>
+            <param name="m"></param>
+        </member>
+        <member name="T:VPet_Simulator.Core.GraphHelper.Move">
+            <summary>
+            移动
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.GraphHelper.Move.Graph">
+            <summary>
+            使用动画名称
+            </summary>
+        </member>
+        <member name="T:VPet_Simulator.Core.GraphHelper.Move.DirectionType">
+            <summary>
+            定位类型
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.GraphHelper.Move.LocateType">
+            <summary>
+            定位类型: 需要固定到屏幕边缘启用这个
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.GraphHelper.Move.Interval">
+            <summary>
+            移动间隔
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.GraphHelper.Move.CheckType">
+            <summary>
+            检查类型
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.GraphHelper.Move.Mode">
+            <summary>
+            支持的动画模式
+            </summary>
+        </member>
+        <member name="T:VPet_Simulator.Core.GraphHelper.Move.ModeType">
+            <summary>
+            宠物状态模式 (Flag版)
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.GraphHelper.Move.ModeType.Happy">
+            <summary>
+            高兴
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.GraphHelper.Move.ModeType.Nomal">
+            <summary>
+            普通
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.GraphHelper.Move.ModeType.PoorCondition">
+            <summary>
+            状态不佳
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.GraphHelper.Move.ModeType.Ill">
+            <summary>
+            生病(躺床)
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.GraphHelper.Move.CheckLeft">
+            <summary>
+            检查距离左边
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.GraphHelper.Move.CheckRight">
+            <summary>
+            检查距离右边
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.GraphHelper.Move.CheckTop">
+            <summary>
+            检查距离上面
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.GraphHelper.Move.CheckBottom">
+            <summary>
+            检查距离下面
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.GraphHelper.Move.SpeedX">
+            <summary>
+            移动速度(X轴)
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.GraphHelper.Move.SpeedY">
+            <summary>
+            移动速度(Y轴)
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.GraphHelper.Move.LocateLength">
+            <summary>
+            定位位置
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.GraphHelper.Move.Distance">
+            <summary>
+            移动距离
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.GraphHelper.Move.TriggerType">
+            <summary>
+            触发检查类型
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.GraphHelper.Move.TriggerLeft">
+            <summary>
+            检查距离左边
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.GraphHelper.Move.TriggerRight">
+            <summary>
+            检查距离右边
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.GraphHelper.Move.TriggerTop">
+            <summary>
+            检查距离上面
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.GraphHelper.Move.TriggerBottom">
+            <summary>
+            检查距离下面
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Core.GraphHelper.Move.Triggered(VPet_Simulator.Core.Main)">
+            <summary>
+            是否可以触发
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Core.GraphHelper.Move.Checked(VPet_Simulator.Core.IController)">
+            <summary>
+            是否可以继续动
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Core.GraphHelper.Move.GetCompatibilityMove(VPet_Simulator.Core.Main)">
+            <summary>
+            获取兼容支持下个播放的移动
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Core.GraphHelper.Move.Display(VPet_Simulator.Core.Main)">
+            <summary>
+            显示开始移动 (假设已经检查过了)
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Core.GraphHelper.Move.Displaying(VPet_Simulator.Core.Main)">
+            <summary>
+            显示正在移动
+            </summary>
+            <param name="m"></param>
+        </member>
+        <member name="T:VPet_Simulator.Core.GraphInfo">
+            <summary>
+            动画信息
+            </summary>
+            新版本动画类型是根据整体类型+名字定义而成
+            动画类型->动画名字
+            动画名字->状态+动作->动画
+            类型: 主要动作分类
+            动画名字: 用户自定义, 同名字动画支持相同随机,不再使用StoreRand
+            动作: 动画的动作 Start Loop End
+            状态: 动画的状态 Save.GameSave.ModeType
+        </member>
+        <member name="M:VPet_Simulator.Core.GraphInfo.#ctor(System.String,VPet_Simulator.Core.GraphInfo.GraphType,VPet_Simulator.Core.GraphInfo.AnimatType,VPet_Simulator.Core.GameSave.ModeType)">
+            <summary>
+            创建动画信息
+            </summary>
+            <param name="name">动画名字: 用户自定义 同名字动画支持相同随机,不再使用StoreRand</param>
+            <param name="animat">动作: 动画的动作 Start Loop End</param>
+            <param name="type">类型: 主要动作分类</param>
+            <param name="modeType">状态: 4种状态</param>
+        </member>
+        <member name="M:VPet_Simulator.Core.GraphInfo.#ctor(System.IO.FileSystemInfo,LinePutScript.ILine)">
+            <summary>
+            通过文件位置和信息获取动画信息
+            </summary>
+            <param name="path">文件夹位置</param>
+            <param name="info">信息</param>
+        </member>
+        <member name="T:VPet_Simulator.Core.GraphInfo.GraphType">
+            <summary>
+            类型: 主要动作分类
+            </summary>
+            * 为必须有的动画
+        </member>
+        <member name="F:VPet_Simulator.Core.GraphInfo.GraphType.Common">
+            <summary>
+            通用动画,用于被被其他动画调用或者mod等用途
+            </summary>
+            不被默认启用/使用的 不包含在GrapType
+        </member>
+        <member name="F:VPet_Simulator.Core.GraphInfo.GraphType.Raised_Dynamic">
+            <summary>
+            被提起动态 *
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:VPet_Simulator.Core.GraphInfo.GraphType.Raised_Static" -->
+        <member name="F:VPet_Simulator.Core.GraphInfo.GraphType.Move">
+            <summary>
+            现在所有会动的东西都是MOVE
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.GraphInfo.GraphType.Default">
+            <summary>
+            呼吸 *
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:VPet_Simulator.Core.GraphInfo.GraphType.Touch_Head" -->
+        <!-- Badly formed XML comment ignored for member "F:VPet_Simulator.Core.GraphInfo.GraphType.Touch_Body" -->
+        <!-- Badly formed XML comment ignored for member "F:VPet_Simulator.Core.GraphInfo.GraphType.Idel" -->
+        <!-- Badly formed XML comment ignored for member "F:VPet_Simulator.Core.GraphInfo.GraphType.Sleep" -->
+        <!-- Badly formed XML comment ignored for member "F:VPet_Simulator.Core.GraphInfo.GraphType.Say" -->
+        <!-- Badly formed XML comment ignored for member "F:VPet_Simulator.Core.GraphInfo.GraphType.StateONE" -->
+        <!-- Badly formed XML comment ignored for member "F:VPet_Simulator.Core.GraphInfo.GraphType.StateTWO" -->
+        <member name="F:VPet_Simulator.Core.GraphInfo.GraphType.StartUP">
+            <summary>
+            开机 *
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.GraphInfo.GraphType.Shutdown">
+            <summary>
+            关机
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:VPet_Simulator.Core.GraphInfo.GraphType.Work" -->
+        <member name="F:VPet_Simulator.Core.GraphInfo.GraphType.Switch_Up">
+            <summary>
+            向上切换状态
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.GraphInfo.GraphType.Switch_Down">
+            <summary>
+            向下切换状态
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.GraphInfo.GraphType.Switch_Thirsty">
+            <summary>
+            口渴
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.GraphInfo.GraphType.Switch_Hunger">
+            <summary>
+            饥饿
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.GraphInfo.GraphType.Eat">
+            <summary>
+            吃东西
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.GraphInfo.GraphType.Drink">
+            <summary>
+            喝东西
+            </summary>
+        </member>
+        <member name="T:VPet_Simulator.Core.GraphInfo.AnimatType">
+            <summary>
+            动作: 动画的动作 Start Loop End
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.GraphInfo.AnimatType.Single">
+            <summary>
+            动画只有一个动作
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.GraphInfo.AnimatType.A_Start">
+            <summary>
+            开始动作
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.GraphInfo.AnimatType.B_Loop">
+            <summary>
+            循环动作
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.GraphInfo.AnimatType.C_End">
+            <summary>
+            结束动作
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.GraphInfo.Name">
+            <summary>
+            动画名字: 用户自定义 同名字动画支持相同随机,不再使用StoreRand
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.GraphInfo.Animat">
+            <summary>
+            动作: 动画的动作 Start Loop End
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.GraphInfo.Type">
+            <summary>
+            类型: 主要动作分类
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.GraphInfo.ModeType">
+            <summary>
+            状态: 4种状态
             </summary>
         </member>
         <member name="T:VPet_Simulator.Core.IGraph">
@@ -1384,14 +1214,9 @@
             是否准备完成
             </summary>
         </member>
-        <member name="P:VPet_Simulator.Core.IGraph.ModeType">
+        <member name="P:VPet_Simulator.Core.IGraph.GraphInfo">
             <summary>
-            该动画模式
-            </summary>
-        </member>
-        <member name="P:VPet_Simulator.Core.IGraph.GraphType">
-            <summary>
-            该动画类型
+            该动画信息
             </summary>
         </member>
         <member name="M:VPet_Simulator.Core.IGraph.Stop(System.Boolean)">
@@ -1418,7 +1243,7 @@
             Picture.xaml 的交互逻辑
             </summary>
         </member>
-        <member name="M:VPet_Simulator.Core.Picture.#ctor(VPet_Simulator.Core.GraphCore,System.String,VPet_Simulator.Core.GameSave.ModeType,VPet_Simulator.Core.GraphCore.GraphType,System.Int32,System.Boolean)">
+        <member name="M:VPet_Simulator.Core.Picture.#ctor(VPet_Simulator.Core.GraphCore,System.String,VPet_Simulator.Core.GraphInfo,System.Int32,System.Boolean)">
             <summary>
             新建新静态图像
             </summary>
@@ -1427,6 +1252,11 @@
         <member name="F:VPet_Simulator.Core.Picture.Path">
             <summary>
             图片资源
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Core.Picture.GraphInfo">
+            <summary>
+            动画信息
             </summary>
         </member>
         <member name="M:VPet_Simulator.Core.Picture.IImageRun.Run(System.Windows.Controls.Image,System.Action)">
@@ -1467,6 +1297,11 @@
             是否循环播放
             </summary>
         </member>
+        <member name="P:VPet_Simulator.Core.PNGAnimation.GraphInfo">
+            <summary>
+            动画信息
+            </summary>
+        </member>
         <member name="P:VPet_Simulator.Core.PNGAnimation.IsReady">
             <summary>
             是否准备完成
@@ -1482,7 +1317,7 @@
             图片资源
             </summary>
         </member>
-        <member name="M:VPet_Simulator.Core.PNGAnimation.#ctor(VPet_Simulator.Core.GraphCore,System.String,System.IO.FileInfo[],VPet_Simulator.Core.GameSave.ModeType,VPet_Simulator.Core.GraphCore.GraphType,System.Boolean)">
+        <member name="M:VPet_Simulator.Core.PNGAnimation.#ctor(VPet_Simulator.Core.GraphCore,System.String,System.IO.FileInfo[],VPet_Simulator.Core.GraphInfo,System.Boolean)">
             <summary>
             新建 PNG 动画
             </summary>
@@ -1648,6 +1483,11 @@
             互动周期
             </summary>
         </member>
+        <member name="T:VPet_Simulator.Core.IFood">
+            <summary>
+            食物接口
+            </summary>
+        </member>
         <member name="P:VPet_Simulator.Core.IFood.Exp">
             <summary>
             经验值
@@ -1712,6 +1552,14 @@
             <summary>
             自定义图片加载方法
             </summary>
+        </member>
+        <member name="M:VPet_Simulator.Core.PetLoader.LoadGraph(VPet_Simulator.Core.GraphCore,System.IO.DirectoryInfo,System.String)">
+            <summary>
+            加载图像动画
+            </summary>
+            <param name="graph">要加载的动画核心</param>
+            <param name="di">当前历遍的目录</param>
+            <param name="startuppath">起始目录</param>
         </member>
         <member name="T:VPet_Simulator.Core.GameSave">
             <summary>
@@ -1883,12 +1731,12 @@
         </member>
         <member name="T:VPet_Simulator.Core.Properties.Resources">
             <summary>
-              强类型资源类，用于查找本地化字符串等。
+              一个强类型的资源类，用于查找本地化的字符串等。
             </summary>
         </member>
         <member name="P:VPet_Simulator.Core.Properties.Resources.ResourceManager">
             <summary>
-              返回此类使用的缓存 ResourceManager 实例。
+              返回此类使用的缓存的 ResourceManager 实例。
             </summary>
         </member>
         <member name="P:VPet_Simulator.Core.Properties.Resources.Culture">

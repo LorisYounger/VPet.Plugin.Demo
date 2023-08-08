@@ -1,22 +1,10 @@
 ﻿using EdgeTTS;
-using LinePutScript;
 using LinePutScript.Converter;
-using Newtonsoft.Json.Linq;
+using LinePutScript.Localization.WPF;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using VPet_Simulator.Core;
 
 namespace VPet.Plugin.VPetTTS
@@ -87,7 +75,7 @@ namespace VPet.Plugin.VPetTTS
                     File.Delete(path);
                 }
 
-                var res = vts.etts.SynthesisAsync($"你好,主人\n现在是 {DateTime.Now}", cbt, pit, rat).Result;
+                var res = vts.etts.SynthesisAsync("你好,主人\n现在是".Translate() + DateTime.Now, cbt, pit, rat).Result;
                 if (res.Code == ResultCode.Success)
                 {
                     FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
@@ -100,7 +88,7 @@ namespace VPet.Plugin.VPetTTS
                 }
                 else
                 {
-                    MessageBox.Show($"错误代码: {res.Code}\n消息: {res.Message}", "生成失败");
+                    MessageBox.Show("错误代码: {0}\n消息: {1}".Translate(res.Code, res.Message), "生成失败".Translate());
                 }
                 Dispatcher.Invoke(() => Test.IsEnabled = true);
             });

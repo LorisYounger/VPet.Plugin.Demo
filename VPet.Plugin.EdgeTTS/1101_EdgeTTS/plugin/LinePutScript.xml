@@ -23,6 +23,7 @@
             <param name="name">指定名称</param>
             <param name="iLineType">如果为类,指定转换ILine的类型,默认为T</param>
             <param name="fourceToString">强制转换内容为String (多用于当前类为Sub)</param>
+            <param name="ignoreCase">忽略名称的大小写</param>
         </member>
         <member name="F:LinePutScript.Converter.LineAttribute.Converter">
             <summary>
@@ -371,9 +372,568 @@
             <param name="value">ILine列表</param>
             <returns>生成的对象</returns>
         </member>
-        <member name="T:LinePutScript.Dictionary.Line_D">
+        <member name="T:LinePutScript.Dictionary.Line_D`1">
             <summary>
             通过字典类型的行, Name不会重复
+            </summary>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.#ctor">
+            <summary>
+            创建一行
+            </summary>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.#ctor(System.String)">
+            <summary>
+            通过lpsLine文本创建一行
+            </summary>
+            <param name="lpsLine">lpsSub文本</param>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.#ctor(LinePutScript.ILine)">
+            <summary>
+            通过其他Line创建新的Line
+            </summary>
+            <param name="line">其他line</param>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.#ctor(System.String,System.String,System.String,LinePutScript.ISub[])">
+            <summary>
+            通过名字和信息创建新的Line
+            </summary>
+            <param name="name">名称</param>
+            <param name="info">信息 (正常)</param>
+            <param name="text">文本 在末尾没有结束行号的文本 (正常)</param>
+            <param name="subs">子类集合</param>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.#ctor(System.String,System.String,System.Collections.Generic.IEnumerable{LinePutScript.ISub},System.String)">
+            <summary>
+            通过名字和信息创建新的Line
+            </summary>
+            <param name="name">名称</param>
+            <param name="info">信息 (正常)</param>
+            <param name="text">文本 在末尾没有结束行号的文本 (正常)</param>
+            <param name="subs">子类集合</param>
+        </member>
+        <member name="P:LinePutScript.Dictionary.Line_D`1.Subs">
+            <summary>
+            子项目
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Dictionary.Line_D`1.text">
+            <summary>
+            文本 在末尾没有结束行号的文本 (去除关键字的文本)
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Dictionary.Line_D`1.Text">
+            <summary>
+            文本 在末尾没有结束行号的文本 (正常)
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Dictionary.Line_D`1.Texts">
+            <summary>
+            获得Text的String结构
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Dictionary.Line_D`1.TextToInt">
+            <summary>
+            文本 (int)
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Dictionary.Line_D`1.TextToInt64">
+            <summary>
+            文本 (int64)
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Dictionary.Line_D`1.TextToDouble">
+            <summary>
+            文本 (double)
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Dictionary.Line_D`1.Comments">
+            <summary>
+            注释 ///为注释
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Dictionary.Line_D`1.Count">
+            <summary>
+            获取Sub数量
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Dictionary.Line_D`1.IsReadOnly">
+            <summary>
+            是否只读
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Dictionary.Line_D`1.Item(System.Int32)">
+            <summary>
+            通过引索修改Line中Sub内容(错误:字典没有引索)
+            </summary>
+            <param name="index">要获得或设置的引索</param>
+            <returns>引索指定的Sub</returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.Add(LinePutScript.ISub)">
+            <summary>
+            将指定的Sub添加到Subs列表的末尾
+            </summary>
+            <param name="item">要添加的Sub</param>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.AddorReplaceSub(LinePutScript.ISub)">
+            <summary>
+            若无相同名称(Name)的Sub,则将指定的Sub添加到Subs列表的末尾
+            若有,则替换成要添加的Sub
+            </summary>
+            <param name="newSub">要添加的Sub</param>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.AddRange(System.Collections.Generic.IEnumerable{LinePutScript.ISub})">
+            <summary>
+            将指定Sub的元素添加到Subs的末尾
+            </summary>
+            <param name="newSubs">要添加的多个Sub</param>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.AddSub(LinePutScript.ISub)">
+            <summary>
+            将指定的Sub添加到Subs列表的末尾
+            </summary>
+            <param name="newSub">要添加的Sub</param>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.Clear">
+            <summary>
+            移除Line中所有的Sub
+            </summary>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.Contains(System.String)">
+            <summary>
+            返回一个值,该值指示指定的字段是否出现在Subs的Sub的名字
+            </summary>
+            <param name="value">字段</param>
+            <returns>如果在Line集合中找到符合的名字,则为True; 否则为false</returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.Contains(LinePutScript.ISub)">
+            <summary>
+            确定某Sub是否在Line集合中
+            </summary>
+            <param name="item">要在Line集合中定位的Sub</param>
+            <returns>如果在Line集合中找到sub,则为True; 否则为false</returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.CopyTo(LinePutScript.ISub[],System.Int32)">
+            <summary>
+            将整个array复制到Line的Subs
+            </summary>
+            <param name="array">复制到Subs的Sub列表</param>
+            <param name="arrayIndex">从零开始的引索,从引索处开始复制</param>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.Find(System.String)">
+            <summary>
+            搜索与指定名称,并返回Line或整个Subs中的第一个匹配元素
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <returns>如果找到相同名称的第一个sub,则为该sub; 否则为null</returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.Find(System.String,System.String)">
+            <summary>
+            搜索与指定名称,并返回整个Assemblage中的第一个匹配元素
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <param name="subinfo">用于定义匹配的信息 (去除关键字的文本)</param>
+            <returns>如果找到相同名称和信息的第一个Line,则为该Line; 否则为null</returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.FindAll(System.String)">
+            <summary>
+            匹配拥有相同名称的Line或sub的所有元素(注意:在字典中,信息是唯一的)
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <returns>如果找到相同名称的sub,其中所有元素均与指定谓词定义的条件匹配,则为该数组; 否则为一个空的Array</returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.FindAll(System.String,System.String)">
+            <summary>
+            匹配拥有相同名称和信息的Line或sub的所有元素(注意:在字典中,信息是唯一的)
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <param name="subinfo">用于定义匹配的信息 (去除关键字的文本)</param>
+            <returns>如果找到相同名称和信息的sub,其中所有元素均与指定谓词定义的条件匹配,则为该数组; 否则为一个空的Array</returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.FindAllInfo(System.String)">
+            <summary>
+            匹配拥有相同信息的Line或sub的所有元素(注意:在字典中,信息是唯一的)
+            </summary>
+            <param name="subinfo">用于定义匹配的信息 (去除关键字的文本)</param>
+            <returns>如果找到相同信息的sub,其中所有元素均与指定谓词定义的条件匹配,则为该数组; 否则为一个空的Array</returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.FindInfo(System.String)">
+            <summary>
+            搜索与指定信息,并返回整个Assemblage中的第一个匹配元素
+            </summary>
+            <param name="subinfo">用于定义匹配的信息 (去除关键字的文本)</param>
+            <returns>如果找到相同信息的第一个Line,则为该Line; 否则为null</returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.FindorAdd(System.String)">
+            <summary>
+            搜索与指定名称,并返回Line或整个Subs中的第一个匹配元素;若未找到,则新建并添加相同名称的Sub,并且返回这个Sub
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <returns>如果找到相同名称的第一个sub,则为该sub; 否则为新建的相同名称sub</returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.First">
+            <summary>
+            返回一个 Subs 的第一个元素。
+            </summary>
+            <returns>要返回的第一个元素</returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.Last">
+            <summary>
+            返回一个 Subs 的最后一个元素。
+            </summary>
+            <returns>要返回的最后一个元素</returns>
+        </member>
+        <member name="P:LinePutScript.Dictionary.Line_D`1.Item(System.String)">
+            <summary>
+            搜索与指定名称,并返回Line或整个Subs中的第一个匹配元素;若未找到,则新建并添加相同名称的Sub,并且返回这个Sub
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <returns>如果找到相同名称的第一个sub,则为该sub; 否则为新建的相同名称sub</returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.GetBool(System.String)">
+            <summary>
+            获得bool属性的sub
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <returns>如果找到相同名称的sub,则为True; 否则为false</returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.SetBool(System.String,System.Boolean)">
+            <summary>
+            设置bool属性的sub
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <param name="value">
+            值
+            </param>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.GetInt(System.String,System.Int32)">
+            <summary>
+            获得int属性的sub
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <param name="defaultvalue">如果没找到返回的默认值</param>
+            <returns>
+            如果找到相同名称的sub,返回sub中储存的int值
+            如果没找到,则返回默认值
+            </returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.SetInt(System.String,System.Int32)">
+            <summary>
+            设置int属性的sub
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <param name="value">储存进sub的int值</param>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.GetInt64(System.String,System.Int64)">
+            <summary>
+            获得long属性的sub
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <param name="defaultvalue">如果没找到返回的默认值</param>
+            <returns>
+            如果找到相同名称的sub,返回sub中储存的long值
+            如果没找到,则返回默认值
+            </returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.SetInt64(System.String,System.Int64)">
+            <summary>
+            设置long属性的sub
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <param name="value">储存进sub的long值</param>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.GetFloat(System.String,System.Double)">
+            <summary>
+            获得double(long)属性的sub 通过转换long获得更精确的小数,小数位最大保留9位
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <param name="defaultvalue">如果没找到返回的默认值</param>
+            <returns>
+            如果找到相同名称的sub,返回sub中储存的double(long)值
+            如果没找到,则返回默认值
+            </returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.SetFloat(System.String,System.Double)">
+            <summary>
+            设置double(long)属性的sub 通过转换long获得更精确的小数,小数位最大保留9位
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <param name="value">储存进sub的double(long)值</param>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.GetDateTime(System.String,System.DateTime)">
+            <summary>
+            获得DateTime属性的sub
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <param name="defaultvalue">如果没找到返回的默认值</param>
+            <returns>
+            如果找到相同名称的sub,返回sub中储存的DateTime值
+            如果没找到,则返回默认值
+            </returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.SetDateTime(System.String,System.DateTime)">
+            <summary>
+            设置DateTime属性的sub
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <param name="value">储存进sub的DateTime值</param>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.GetString(System.String,System.String)">
+            <summary>
+            获得String属性的sub
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <param name="defaultvalue">如果没找到返回的默认值</param>
+            <returns>
+            如果找到相同名称的sub,返回sub中储存的String值
+            如果没找到,则返回默认值
+            </returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.SetString(System.String,System.String)">
+            <summary>
+            设置String属性的sub
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <param name="value">储存进sub的String值</param>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.GetDouble(System.String,System.Double)">
+            <summary>
+            获得double属性的sub
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <param name="defaultvalue">如果没找到返回的默认值</param>
+            <returns>
+            如果找到相同名称的sub,返回sub中储存的double值
+            如果没找到,则返回默认值
+            </returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.SetDouble(System.String,System.Double)">
+            <summary>
+            设置double属性的sub
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <param name="value">储存进sub的double值</param>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.Load(System.String,System.String,System.String,LinePutScript.ISub[])">
+            <summary>
+            通过名字和信息创建新的Line
+            </summary>
+            <param name="name">名称</param>
+            <param name="info">信息 (正常)</param>
+            <param name="text">文本 在末尾没有结束行号的文本 (正常)</param>
+            <param name="subs">子类集合</param>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.Load(System.String,System.String,System.Collections.Generic.IEnumerable{LinePutScript.ISub},System.String)">
+            <summary>
+            通过名字和信息创建新的Line
+            </summary>
+            <param name="name">名称</param>
+            <param name="info">信息 (正常)</param>
+            <param name="text">文本 在末尾没有结束行号的文本 (正常)</param>
+            <param name="subs">子类集合</param>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.Load(LinePutScript.ILine)">
+            <summary>
+            将其他Line内容拷贝到本Line
+            </summary>
+            <param name="line">其他line</param>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.GetText">
+            <summary>
+            退回Text的反转义文本 (正常显示)
+            </summary>
+            <returns>Text的反转义文本 (正常显示)</returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.InsertSub(System.Int32,LinePutScript.ISub)">
+            <summary>
+            将指定的Sub添加到指定索引处(失效:字典没有顺序)
+            </summary>
+            <param name="index">应插入 Sub 的从零开始的索引(失效)</param>
+            <param name="newSub">要添加的Sub</param>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.InsertRange(System.Int32,System.Collections.Generic.IEnumerable{LinePutScript.ISub})">
+            <summary>
+            将指定Sub的元素添加指定索引处(失效:字典没有顺序)
+            </summary>
+            <param name="index">应插入 Sub 的从零开始的索引</param>
+            <param name="newSubs">要添加的多个Sub</param>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.Remove(System.String)">
+            <summary>
+            从Subs中移除特定名称
+            </summary>
+            <param name="SubName">要从Subs中删除的Sub的名称</param>
+            <returns>如果成功移除了Sub,则为 true; 否则为 false</returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.RemoveAll(System.String)">
+            <summary>
+            从Subs中移除特定名称的所有元素(失效:字典为单一性)
+            </summary>
+            <param name="SubName">要从Subs中删除的Sub的名称</param>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.SeachALL(System.String)">
+            <summary>
+            搜索全部相似名称的Sub的所有元素
+            </summary>
+            <param name="value">%字段%</param>
+            <returns>如果找到相似名称的Sub,则为数组; 否则为一个空的Array</returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.Seach(System.String)">
+            <summary>
+            搜索字段是否出现在Line名称,并返回整个Subs中的第一个匹配元素
+            </summary>
+            <param name="value">%字段%</param>
+            <returns>如果找到相似名称的第一个Sub,则为该Sub; 否则为null</returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.IndexOf(System.String)">
+            <summary>
+            搜索相同名称的Sub,并返回整个Subs中第一个匹配的sub从零开始的索引(错误:字典没有引索)
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <returns>如果找到相同名称的sub的第一个元素,则为该元素的从零开始的索引; 否则为 -1</returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.IndexOf(LinePutScript.ISub)">
+            <summary>
+            搜索相同名称的Sub,并返回整个Subs中第一个匹配的Sub从零开始的索引(错误:字典没有引索)
+            </summary>
+            <param name="item">用于定义匹配的Sub</param>
+            <returns>如果找到相同名称的Sub的第一个元素,则为该元素的从零开始的索引; 否则为 -1</returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.IndexsOf(System.String)">
+            <summary>
+            搜索相同名称的Sub,并返回整个Sub中全部匹配的sub从零开始的索引(错误:字典没有引索)
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <returns>如果找到相同名称的sub的元素,则为该元素的从零开始的索引组; 否则为空的Array</returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.ToString(System.Text.StringBuilder)">
+            <summary>
+            将当前Line转换成文本格式 (info已经被转义/去除关键字)
+            </summary>
+            <returns>Line的文本格式 (info已经被转义/去除关键字)</returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.ToString">
+            <summary>
+            将当前Line转换成文本格式 (info已经被转义/去除关键字)
+            </summary>
+            <returns>Line的文本格式 (info已经被转义/去除关键字)</returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.ToList">
+            <summary>
+            返回一个新List,包含所有Subs
+            </summary>
+            <returns>所有储存的Subs</returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.Load(System.String)">
+            <summary>
+            加载 通过lps文本创建一个子类
+            </summary>
+            <param name="lps">lps文本</param>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.GetLongHashCode">
+            <summary>
+            获得该Line的长哈希代码
+            </summary>
+            <returns>64位哈希代码</returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.GetHashCode">
+            <summary>
+            获得该Line的哈希代码
+            </summary>
+            <returns>32位哈希代码</returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.Insert(System.Int32,LinePutScript.ISub)">
+            <summary>
+            将指定的Sub添加到指定索引处 (失效:字典没有顺序)
+            </summary>
+            <param name="index">应插入 Sub 的从零开始的索引(失效)</param>
+            <param name="item">要添加的Sub</param>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.RemoveAt(System.Int32)">
+            <summary>
+            从Subs中移除特定引索的Sub (错误:字典没有顺序)
+            </summary>
+            <param name="index">要删除Sub的引索</param>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.Remove(LinePutScript.ISub)">
+            <summary>
+            从Subs中移除特定对象的第一个匹配项
+            </summary>
+            <param name="item">要从Subs中删除的Sub</param>
+            <returns>如果成功移除了Sub,则为 true; 否则为 false</returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.GetEnumerator">
+            <summary>
+            返回循环访问 Subs 的枚举数。
+            </summary>
+            <returns>用于 Subs 的枚举数</returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.CompareTo(LinePutScript.ILine)">
+            <summary>
+            将当前line与另一个line进行比较,并退回一个整数指示在排序位置中是位于另一个对象之前之后还是相同位置
+            </summary>
+            <param name="other">另一个line</param>
+            <returns>值小于零时排在 other 之前 值等于零时出现在相同排序位置 值大于零则排在 other 之后</returns>
+        </member>
+        <member name="M:LinePutScript.Dictionary.Line_D`1.Equals(LinePutScript.ILine)">
+            <summary>
+            将当前line与另一个line进行比较, 判断是否内容相同
+            </summary>
+            <param name="other">另一个line</param>
+            <returns>如果为True则内容相同</returns>
+        </member>
+        <member name="P:LinePutScript.Dictionary.Line_D`1.Item(LinePutScript.gstr)">
+            <summary>
+            获取或设置 String 属性的sub
+            </summary>
+            <param name="subName">(gstr)用于定义匹配的名称</param>
+            <returns>获取或设置对 String 属性的Sub</returns>
+        </member>
+        <member name="P:LinePutScript.Dictionary.Line_D`1.Item(LinePutScript.gbol)">
+            <summary>
+            获取或设置 Bool 属性的sub
+            </summary>
+            <param name="subName">(gbol)用于定义匹配的名称</param>
+            <returns>获取或设置对 bool 属性的Sub</returns>
+        </member>
+        <member name="P:LinePutScript.Dictionary.Line_D`1.Item(LinePutScript.gint)">
+            <summary>
+            获取或设置 Int 属性的sub
+            </summary>
+            <param name="subName">(gint)用于定义匹配的名称</param>
+            <returns>获取或设置对 int 属性的Sub</returns>
+        </member>
+        <member name="P:LinePutScript.Dictionary.Line_D`1.Item(LinePutScript.gi64)">
+            <summary>
+            获取或设置 Long 属性的sub
+            </summary>
+            <param name="subName">(gi64)用于定义匹配的名称</param>
+            <returns>获取或设置对 long 属性的Sub</returns>
+        </member>
+        <member name="P:LinePutScript.Dictionary.Line_D`1.Item(LinePutScript.gdbe)">
+            <summary>
+            获取或设置 Double 属性的sub
+            </summary>
+            <param name="subName">(gdbe)用于定义匹配的名称</param>
+            <returns>获取或设置对 double 属性的Sub</returns>
+        </member>
+        <member name="P:LinePutScript.Dictionary.Line_D`1.Item(LinePutScript.gflt)">
+            <summary>
+            获取或设置 Double(long) 属性的sub  通过转换long获得更精确的小数,小数位最大保留9位
+            </summary>
+            <param name="subName">(gflt)用于定义匹配的名称</param>
+            <returns>获取或设置对 double 属性的Sub</returns>
+        </member>
+        <member name="P:LinePutScript.Dictionary.Line_D`1.Item(LinePutScript.gdat)">
+            <summary>
+            获取或设置 DateTime 属性的sub
+            </summary>
+            <param name="subName">(gdbe)用于定义匹配的名称</param>
+            <returns>获取或设置对 double 属性的Sub</returns>
+        </member>
+        <member name="T:LinePutScript.Dictionary.Line_D">
+            <summary>
+            通过字典类型的行, Name不会重复 
             </summary>
         </member>
         <member name="M:LinePutScript.Dictionary.Line_D.#ctor">
@@ -393,309 +953,7 @@
             </summary>
             <param name="line">其他line</param>
         </member>
-        <member name="P:LinePutScript.Dictionary.Line_D.Subs">
-            <summary>
-            子项目
-            </summary>
-        </member>
-        <member name="P:LinePutScript.Dictionary.Line_D.text">
-            <summary>
-            文本 在末尾没有结束行号的文本 (去除关键字的文本)
-            </summary>
-        </member>
-        <member name="P:LinePutScript.Dictionary.Line_D.Text">
-            <summary>
-            文本 在末尾没有结束行号的文本 (正常)
-            </summary>
-        </member>
-        <member name="P:LinePutScript.Dictionary.Line_D.Texts">
-            <summary>
-            获得Text的String结构
-            </summary>
-        </member>
-        <member name="P:LinePutScript.Dictionary.Line_D.TextToInt">
-            <summary>
-            文本 (int)
-            </summary>
-        </member>
-        <member name="P:LinePutScript.Dictionary.Line_D.TextToInt64">
-            <summary>
-            文本 (int64)
-            </summary>
-        </member>
-        <member name="P:LinePutScript.Dictionary.Line_D.TextToDouble">
-            <summary>
-            文本 (double)
-            </summary>
-        </member>
-        <member name="P:LinePutScript.Dictionary.Line_D.Comments">
-            <summary>
-            注释 ///为注释
-            </summary>
-        </member>
-        <member name="P:LinePutScript.Dictionary.Line_D.Count">
-            <summary>
-            获取Sub数量
-            </summary>
-        </member>
-        <member name="P:LinePutScript.Dictionary.Line_D.IsReadOnly">
-            <summary>
-            是否只读
-            </summary>
-        </member>
-        <member name="P:LinePutScript.Dictionary.Line_D.Item(System.Int32)">
-            <summary>
-            通过引索修改Line中Sub内容(错误:字典没有引索)
-            </summary>
-            <param name="index">要获得或设置的引索</param>
-            <returns>引索指定的Sub</returns>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.Add(LinePutScript.ISub)">
-            <summary>
-            将指定的Sub添加到Subs列表的末尾
-            </summary>
-            <param name="item">要添加的Sub</param>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.AddorReplaceSub(LinePutScript.ISub)">
-            <summary>
-            若无相同名称(Name)的Sub,则将指定的Sub添加到Subs列表的末尾
-            若有,则替换成要添加的Sub
-            </summary>
-            <param name="newSub">要添加的Sub</param>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.AddRange(LinePutScript.ISub[])">
-            <summary>
-            将指定Sub的元素添加到Subs的末尾
-            </summary>
-            <param name="newSubs">要添加的多个Sub</param>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.AddSub(LinePutScript.ISub)">
-            <summary>
-            将指定的Sub添加到Subs列表的末尾
-            </summary>
-            <param name="newSub">要添加的Sub</param>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.Clear">
-            <summary>
-            移除Line中所有的Sub
-            </summary>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.Contains(System.String)">
-            <summary>
-            返回一个值,该值指示指定的字段是否出现在Subs的Sub的名字
-            </summary>
-            <param name="value">字段</param>
-            <returns>如果在Line集合中找到符合的名字,则为True; 否则为false</returns>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.Contains(LinePutScript.ISub)">
-            <summary>
-            确定某Sub是否在Line集合中
-            </summary>
-            <param name="item">要在Line集合中定位的Sub</param>
-            <returns>如果在Line集合中找到sub,则为True; 否则为false</returns>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.CopyTo(LinePutScript.ISub[],System.Int32)">
-            <summary>
-            将整个array复制到Line的Subs
-            </summary>
-            <param name="array">复制到Subs的Sub列表</param>
-            <param name="arrayIndex">从零开始的引索,从引索处开始复制</param>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.Find(System.String)">
-            <summary>
-            搜索与指定名称,并返回Line或整个Subs中的第一个匹配元素
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <returns>如果找到相同名称的第一个sub,则为该sub; 否则为null</returns>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.Find(System.String,System.String)">
-            <summary>
-            搜索与指定名称,并返回整个Assemblage中的第一个匹配元素
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <param name="subinfo">用于定义匹配的信息 (去除关键字的文本)</param>
-            <returns>如果找到相同名称和信息的第一个Line,则为该Line; 否则为null</returns>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.FindAll(System.String)">
-            <summary>
-            匹配拥有相同名称的Line或sub的所有元素(注意:在字典中,信息是唯一的)
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <returns>如果找到相同名称的sub,其中所有元素均与指定谓词定义的条件匹配,则为该数组; 否则为一个空的Array</returns>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.FindAll(System.String,System.String)">
-            <summary>
-            匹配拥有相同名称和信息的Line或sub的所有元素(注意:在字典中,信息是唯一的)
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <param name="subinfo">用于定义匹配的信息 (去除关键字的文本)</param>
-            <returns>如果找到相同名称和信息的sub,其中所有元素均与指定谓词定义的条件匹配,则为该数组; 否则为一个空的Array</returns>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.FindAllInfo(System.String)">
-            <summary>
-            匹配拥有相同信息的Line或sub的所有元素(注意:在字典中,信息是唯一的)
-            </summary>
-            <param name="subinfo">用于定义匹配的信息 (去除关键字的文本)</param>
-            <returns>如果找到相同信息的sub,其中所有元素均与指定谓词定义的条件匹配,则为该数组; 否则为一个空的Array</returns>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.FindInfo(System.String)">
-            <summary>
-            搜索与指定信息,并返回整个Assemblage中的第一个匹配元素
-            </summary>
-            <param name="subinfo">用于定义匹配的信息 (去除关键字的文本)</param>
-            <returns>如果找到相同信息的第一个Line,则为该Line; 否则为null</returns>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.FindorAdd(System.String)">
-            <summary>
-            搜索与指定名称,并返回Line或整个Subs中的第一个匹配元素;若未找到,则新建并添加相同名称的Sub,并且返回这个Sub
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <returns>如果找到相同名称的第一个sub,则为该sub; 否则为新建的相同名称sub</returns>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.First">
-            <summary>
-            返回一个 Subs 的第一个元素。
-            </summary>
-            <returns>要返回的第一个元素</returns>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.Last">
-            <summary>
-            返回一个 Subs 的最后一个元素。
-            </summary>
-            <returns>要返回的最后一个元素</returns>
-        </member>
-        <member name="P:LinePutScript.Dictionary.Line_D.Item(System.String)">
-            <summary>
-            搜索与指定名称,并返回Line或整个Subs中的第一个匹配元素;若未找到,则新建并添加相同名称的Sub,并且返回这个Sub
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <returns>如果找到相同名称的第一个sub,则为该sub; 否则为新建的相同名称sub</returns>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.GetBool(System.String)">
-            <summary>
-            获得bool属性的sub
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <returns>如果找到相同名称的sub,则为True; 否则为false</returns>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.SetBool(System.String,System.Boolean)">
-            <summary>
-            设置bool属性的sub
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <param name="value">
-            值
-            </param>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.GetInt(System.String,System.Int32)">
-            <summary>
-            获得int属性的sub
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <param name="defaultvalue">如果没找到返回的默认值</param>
-            <returns>
-            如果找到相同名称的sub,返回sub中储存的int值
-            如果没找到,则返回默认值
-            </returns>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.SetInt(System.String,System.Int32)">
-            <summary>
-            设置int属性的sub
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <param name="value">储存进sub的int值</param>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.GetInt64(System.String,System.Int64)">
-            <summary>
-            获得long属性的sub
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <param name="defaultvalue">如果没找到返回的默认值</param>
-            <returns>
-            如果找到相同名称的sub,返回sub中储存的long值
-            如果没找到,则返回默认值
-            </returns>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.SetInt64(System.String,System.Int64)">
-            <summary>
-            设置long属性的sub
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <param name="value">储存进sub的long值</param>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.GetFloat(System.String,System.Double)">
-            <summary>
-            获得double(long)属性的sub 通过转换long获得更精确的小数,小数位最大保留9位
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <param name="defaultvalue">如果没找到返回的默认值</param>
-            <returns>
-            如果找到相同名称的sub,返回sub中储存的double(long)值
-            如果没找到,则返回默认值
-            </returns>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.SetFloat(System.String,System.Double)">
-            <summary>
-            设置double(long)属性的sub 通过转换long获得更精确的小数,小数位最大保留9位
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <param name="value">储存进sub的double(long)值</param>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.GetDateTime(System.String,System.DateTime)">
-            <summary>
-            获得DateTime属性的sub
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <param name="defaultvalue">如果没找到返回的默认值</param>
-            <returns>
-            如果找到相同名称的sub,返回sub中储存的DateTime值
-            如果没找到,则返回默认值
-            </returns>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.SetDateTime(System.String,System.DateTime)">
-            <summary>
-            设置DateTime属性的sub
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <param name="value">储存进sub的DateTime值</param>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.GetString(System.String,System.String)">
-            <summary>
-            获得String属性的sub
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <param name="defaultvalue">如果没找到返回的默认值</param>
-            <returns>
-            如果找到相同名称的sub,返回sub中储存的String值
-            如果没找到,则返回默认值
-            </returns>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.SetString(System.String,System.String)">
-            <summary>
-            设置String属性的sub
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <param name="value">储存进sub的String值</param>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.GetDouble(System.String,System.Double)">
-            <summary>
-            获得double属性的sub
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <param name="defaultvalue">如果没找到返回的默认值</param>
-            <returns>
-            如果找到相同名称的sub,返回sub中储存的double值
-            如果没找到,则返回默认值
-            </returns>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.SetDouble(System.String,System.Double)">
-            <summary>
-            设置double属性的sub
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <param name="value">储存进sub的double值</param>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.Load(System.String,System.String,System.String,LinePutScript.ISub[])">
+        <member name="M:LinePutScript.Dictionary.Line_D.#ctor(System.String,System.String,System.String,LinePutScript.ISub[])">
             <summary>
             通过名字和信息创建新的Line
             </summary>
@@ -704,338 +962,156 @@
             <param name="text">文本 在末尾没有结束行号的文本 (正常)</param>
             <param name="subs">子类集合</param>
         </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.Load(LinePutScript.ILine)">
+        <member name="M:LinePutScript.Dictionary.Line_D.#ctor(System.String,System.String,System.Collections.Generic.IEnumerable{LinePutScript.ISub},System.String)">
             <summary>
-            将其他Line内容拷贝到本Line
+            通过名字和信息创建新的Line
             </summary>
-            <param name="line">其他line</param>
+            <param name="name">名称</param>
+            <param name="info">信息 (正常)</param>
+            <param name="text">文本 在末尾没有结束行号的文本 (正常)</param>
+            <param name="subs">子类集合</param>
         </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.GetText">
-            <summary>
-            退回Text的反转义文本 (正常显示)
-            </summary>
-            <returns>Text的反转义文本 (正常显示)</returns>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.InsertSub(System.Int32,LinePutScript.ISub)">
-            <summary>
-            将指定的Sub添加到指定索引处(失效:字典没有顺序)
-            </summary>
-            <param name="index">应插入 Sub 的从零开始的索引(失效)</param>
-            <param name="newSub">要添加的Sub</param>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.InsertRange(System.Int32,LinePutScript.ISub[])">
-            <summary>
-            将指定Sub的元素添加指定索引处(失效:字典没有顺序)
-            </summary>
-            <param name="index">应插入 Sub 的从零开始的索引</param>
-            <param name="newSubs">要添加的多个Sub</param>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.Remove(System.String)">
-            <summary>
-            从Subs中移除特定名称
-            </summary>
-            <param name="SubName">要从Subs中删除的Sub的名称</param>
-            <returns>如果成功移除了Sub,则为 true; 否则为 false</returns>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.RemoveAll(System.String)">
-            <summary>
-            从Subs中移除特定名称的所有元素(失效:字典为单一性)
-            </summary>
-            <param name="SubName">要从Subs中删除的Sub的名称</param>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.SeachALL(System.String)">
-            <summary>
-            搜索全部相似名称的Sub的所有元素
-            </summary>
-            <param name="value">%字段%</param>
-            <returns>如果找到相似名称的Sub,则为数组; 否则为一个空的Array</returns>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.Seach(System.String)">
-            <summary>
-            搜索字段是否出现在Line名称,并返回整个Subs中的第一个匹配元素
-            </summary>
-            <param name="value">%字段%</param>
-            <returns>如果找到相似名称的第一个Sub,则为该Sub; 否则为null</returns>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.IndexOf(System.String)">
-            <summary>
-            搜索相同名称的Sub,并返回整个Subs中第一个匹配的sub从零开始的索引(错误:字典没有引索)
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <returns>如果找到相同名称的sub的第一个元素,则为该元素的从零开始的索引; 否则为 -1</returns>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.IndexOf(LinePutScript.ISub)">
-            <summary>
-            搜索相同名称的Sub,并返回整个Subs中第一个匹配的Sub从零开始的索引(错误:字典没有引索)
-            </summary>
-            <param name="item">用于定义匹配的Sub</param>
-            <returns>如果找到相同名称的Sub的第一个元素,则为该元素的从零开始的索引; 否则为 -1</returns>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.IndexsOf(System.String)">
-            <summary>
-            搜索相同名称的Sub,并返回整个Sub中全部匹配的sub从零开始的索引(错误:字典没有引索)
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <returns>如果找到相同名称的sub的元素,则为该元素的从零开始的索引组; 否则为空的Array</returns>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.ToString(System.Text.StringBuilder)">
-            <summary>
-            将当前Line转换成文本格式 (info已经被转义/去除关键字)
-            </summary>
-            <returns>Line的文本格式 (info已经被转义/去除关键字)</returns>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.ToString">
-            <summary>
-            将当前Line转换成文本格式 (info已经被转义/去除关键字)
-            </summary>
-            <returns>Line的文本格式 (info已经被转义/去除关键字)</returns>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.ToList">
-            <summary>
-            返回一个新List,包含所有Subs
-            </summary>
-            <returns>所有储存的Subs</returns>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.Load(System.String)">
-            <summary>
-            加载 通过lps文本创建一个子类
-            </summary>
-            <param name="lps">lps文本</param>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.GetLongHashCode">
-            <summary>
-            获得该Line的长哈希代码
-            </summary>
-            <returns>64位哈希代码</returns>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.GetHashCode">
-            <summary>
-            获得该Line的哈希代码
-            </summary>
-            <returns>32位哈希代码</returns>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.Insert(System.Int32,LinePutScript.ISub)">
-            <summary>
-            将指定的Sub添加到指定索引处 (失效:字典没有顺序)
-            </summary>
-            <param name="index">应插入 Sub 的从零开始的索引(失效)</param>
-            <param name="item">要添加的Sub</param>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.RemoveAt(System.Int32)">
-            <summary>
-            从Subs中移除特定引索的Sub (错误:字典没有顺序)
-            </summary>
-            <param name="index">要删除Sub的引索</param>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.Remove(LinePutScript.ISub)">
-            <summary>
-            从Subs中移除特定对象的第一个匹配项
-            </summary>
-            <param name="item">要从Subs中删除的Sub</param>
-            <returns>如果成功移除了Sub,则为 true; 否则为 false</returns>
-        </member>
-        <member name="M:LinePutScript.Dictionary.Line_D.GetEnumerator">
-            <summary>
-            返回循环访问 Subs 的枚举数。
-            </summary>
-            <returns>用于 Subs 的枚举数</returns>
-        </member>
-        <member name="P:LinePutScript.Dictionary.Line_D.Item(LinePutScript.gstr)">
-            <summary>
-            获取或设置 String 属性的sub
-            </summary>
-            <param name="subName">(gstr)用于定义匹配的名称</param>
-            <returns>获取或设置对 String 属性的Sub</returns>
-        </member>
-        <member name="P:LinePutScript.Dictionary.Line_D.Item(LinePutScript.gbol)">
-            <summary>
-            获取或设置 Bool 属性的sub
-            </summary>
-            <param name="subName">(gbol)用于定义匹配的名称</param>
-            <returns>获取或设置对 bool 属性的Sub</returns>
-        </member>
-        <member name="P:LinePutScript.Dictionary.Line_D.Item(LinePutScript.gint)">
-            <summary>
-            获取或设置 Int 属性的sub
-            </summary>
-            <param name="subName">(gint)用于定义匹配的名称</param>
-            <returns>获取或设置对 int 属性的Sub</returns>
-        </member>
-        <member name="P:LinePutScript.Dictionary.Line_D.Item(LinePutScript.gi64)">
-            <summary>
-            获取或设置 Long 属性的sub
-            </summary>
-            <param name="subName">(gi64)用于定义匹配的名称</param>
-            <returns>获取或设置对 long 属性的Sub</returns>
-        </member>
-        <member name="P:LinePutScript.Dictionary.Line_D.Item(LinePutScript.gdbe)">
-            <summary>
-            获取或设置 Double 属性的sub
-            </summary>
-            <param name="subName">(gdbe)用于定义匹配的名称</param>
-            <returns>获取或设置对 double 属性的Sub</returns>
-        </member>
-        <member name="P:LinePutScript.Dictionary.Line_D.Item(LinePutScript.gflt)">
-            <summary>
-            获取或设置 Double(long) 属性的sub  通过转换long获得更精确的小数,小数位最大保留9位
-            </summary>
-            <param name="subName">(gflt)用于定义匹配的名称</param>
-            <returns>获取或设置对 double 属性的Sub</returns>
-        </member>
-        <member name="P:LinePutScript.Dictionary.Line_D.Item(LinePutScript.gdat)">
-            <summary>
-            获取或设置 DateTime 属性的sub
-            </summary>
-            <param name="subName">(gdbe)用于定义匹配的名称</param>
-            <returns>获取或设置对 double 属性的Sub</returns>
-        </member>
-        <member name="T:LinePutScript.Dictionary.LPS_D">
+        <member name="T:LinePutScript.Dictionary.LPS_D`1">
             <summary>
             通过字典类型的文件 包括文件读写等一系列操作
             </summary>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.#ctor(LinePutScript.ILine[])">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.#ctor(LinePutScript.ILine,LinePutScript.ILine[])">
             <summary>
             从指定行创建 LPS_D
             </summary>
+            <param name="line">多个行</param>
             <param name="lines">多个行</param>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.#ctor(LinePutScript.ILPS)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.#ctor(LinePutScript.ILPS)">
             <summary>
             从另一个LPS文件创建该LPS
             </summary>
             <param name="lps"></param>
         </member>
-        <member name="P:LinePutScript.Dictionary.LPS_D.Assemblage">
+        <member name="P:LinePutScript.Dictionary.LPS_D`1.Assemblage">
             <summary>
             集合 全部文件的数据
             </summary>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.#ctor">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.#ctor">
             <summary>
             创建一个 空的 LPS_D
             </summary>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.#ctor(System.String)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.#ctor(System.String)">
             <summary>
             从指定的字符串创建 LpsDocument
             </summary>
             <param name="lps">包含要加载的LPS文档的字符串</param>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.AddLine(LinePutScript.ILine)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.#ctor(System.Collections.Generic.IEnumerable{LinePutScript.ILine})">
+            <summary>
+            从指定行创建 LPS_D
+            </summary>
+            <param name="lines">多个行</param>
+        </member>
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.AddLine(LinePutScript.ILine)">
             <summary>
             将指定的Line添加到Assemblage列表
             </summary>
             <param name="newLine">要添加的Line</param>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.AddorReplaceLine(LinePutScript.ILine)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.AddorReplaceLine(LinePutScript.ILine)">
             <summary>
             若无相同名称(Name)的Line,则将指定的Line添加到Assemblage列表
             若有,则替换成要添加的Line
             </summary>
             <param name="newLine">要添加的Line</param>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.AddRange(LinePutScript.ILine[])">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.AddRange(System.Collections.Generic.IEnumerable{LinePutScript.ILine})">
             <summary>
             将指定Line的元素添加到Assemblage
             </summary>
             <param name="newLines">要添加的多个Line</param>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.AddRange(System.Collections.Generic.IEnumerable{LinePutScript.ILine})">
-            <summary>
-            将指定Line的元素添加到Assemblage
-            </summary>
-            <param name="newLines">要添加的多个Line</param>
-        </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.InsertLine(System.Int32,LinePutScript.ILine)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.InsertLine(System.Int32,LinePutScript.ILine)">
             <summary>
             将指定的Line添加到指定索引处(失效:字典没有顺序)
             </summary>
             <param name="index">应插入 Line 的从零开始的索引</param>
             <param name="newLine">要添加的Line</param>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.InsertRange(System.Int32,LinePutScript.ILine[])">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.InsertRange(System.Int32,System.Collections.Generic.IEnumerable{LinePutScript.ILine})">
             <summary>
             将指定Line的元素添加指定索引处(失效:字典没有顺序)
             </summary>
             <param name="index">应插入 Line 的从零开始的索引</param>
             <param name="newLines">要添加的多个Line</param>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.InsertRange(System.Int32,System.Collections.Generic.IEnumerable{LinePutScript.ILine})">
-            <summary>
-            将指定Line的元素添加指定索引处(失效:字典没有顺序)
-            </summary>
-            <param name="index">应插入 Line 的从零开始的索引</param>
-            <param name="newLines">要添加的多个Line</param>
-        </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.Remove(LinePutScript.ILine)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.Remove(LinePutScript.ILine)">
             <summary>
             从Assemblage中移除特定对象的第一个匹配项
             </summary>
             <param name="line">要从Assemblage中删除的Line的名称</param>
             <returns>如果成功移除了line,则为 true; 否则为 false</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.Remove(System.String)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.Remove(System.String)">
             <summary>
             从Assemblage中移除特定名称的第一个匹配项 
             </summary>
             <param name="lineName">要从Assemblage中删除的Line的名称</param>
             <returns>如果成功移除了line,则为 true; 否则为 false</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.RemoveAll(LinePutScript.ILine)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.RemoveAll(LinePutScript.ILine)">
             <summary>
             从Assemblage中移除移除与条件相匹配的所有Line (失效:字典没有顺序)
             </summary>
             <param name="line">要从Assemblage中删除的Line</param>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.RemoveAll(System.String)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.RemoveAll(System.String)">
             <summary>
             从Assemblage中移除移除与名称相匹配的所有Line (失效:字典没有顺序)
             </summary>
             <param name="lineName">要从Assemblage中删除的Line的名称</param>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.RemoveAt(System.Int32)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.RemoveAt(System.Int32)">
             <summary>
             移除Assemblage的指定索引处的Line (错误:字典没有引索)
             </summary>
             <param name="index">要移除的Line的从零开始的索引</param>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.Contains(LinePutScript.ILine)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.Contains(LinePutScript.ILine)">
             <summary>
             确定某Line是否在Assemblage中
             </summary>
             <param name="line">要在Assemblage中定位的Line</param>
             <returns>如果在Assemblage中找到line,则为True; 否则为false </returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.Contains(LinePutScript.ISub)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.Contains(LinePutScript.ISub)">
             <summary>
             确定某Sub是否在Assemblage中
             </summary>
             <param name="sub">要在Assemblage中定位的Sub</param>
             <returns>如果在Assemblage中找到line,则为True; 否则为false</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.ContainsLine(System.String)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.ContainsLine(System.String)">
             <summary>
             确定某Line(名字定位)是否在Assemblage中
             </summary>
             <param name="value">Line的名字</param>
             <returns>如果在Assemblage中找到相同的名字,则为True; 否则为false</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.ContainsSub(System.String)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.ContainsSub(System.String)">
             <summary>
             确定某sub(名字定位)是否在Assemblage中
             </summary>
             <param name="value">sub的名字</param>
             <returns>如果在Assemblage的sub中找到相同的名字,则为True; 否则为false</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.FindAllLine(System.String)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.FindAllLine(System.String)">
             <summary>
             匹配拥有相同名称的Line的所有元素(注意:在字典中,信息是唯一的)
             </summary>
             <param name="lineName">用于定义匹配的名称</param>
             <returns>如果找到相同名称的Line,其中所有元素均与指定谓词定义的条件匹配,则为该数组; 否则为一个空的Array</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.FindAllLine(System.String,System.String)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.FindAllLine(System.String,System.String)">
             <summary>
             匹配拥有相同名称和信息的Line的所有元素(注意:在字典中,信息是唯一的)
             </summary>
@@ -1043,21 +1119,21 @@
             <param name="lineinfo">用于定义匹配的信息 (去除关键字的文本)</param>
             <returns>如果找到相同名称和信息的Line,其中所有元素均与指定谓词定义的条件匹配,则为该数组; 否则为一个空的Array</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.FindAllLineInfo(System.String)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.FindAllLineInfo(System.String)">
             <summary>
             匹配拥有相同信息的Line的所有元素(注意:在字典中,信息是唯一的)
             </summary>
             <param name="lineinfo">用于定义匹配的信息 (去除关键字的文本)</param>
             <returns>如果找到相同信息的Line,其中所有元素均与指定谓词定义的条件匹配,则为该数组; 否则为一个空的Array</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.FindLine(System.String)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.FindLine(System.String)">
             <summary>
             搜索与指定名称,并返回整个Assemblage中的第一个匹配元素
             </summary>
             <param name="lineName">用于定义匹配的名称</param>
             <returns>如果找到相同名称的第一个Line,则为该Line; 否则为null</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.FindLine(System.String,System.String)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.FindLine(System.String,System.String)">
             <summary>
             搜索与指定名称和信息,并返回整个Assemblage中的第一个匹配元素
             </summary>
@@ -1065,35 +1141,35 @@
             <param name="lineinfo">用于定义匹配的信息 (去除关键字的文本)</param>
             <returns>如果找到相同名称和信息的第一个Line,则为该Line; 否则为null</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.FindLineInfo(System.String)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.FindLineInfo(System.String)">
             <summary>
             搜索与指定信息,并返回整个Assemblage中的第一个匹配元素
             </summary>
             <param name="lineinfo">用于定义匹配的信息 (去除关键字的文本)</param>
             <returns>如果找到相同信息的第一个Line,则为该Line; 否则为null</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.FindorAddLine``1(System.String)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.FindorAddLine``1(System.String)">
             <summary>
             搜索与指定名称,并返回整个Assemblage中的第一个匹配元素; 若未找到,则新建并添加相同名称的Line,并且返回这个Line
             </summary>
             <param name="lineName">用于定义匹配的名称</param>
             <returns>如果找到相同名称的第一个Line,则为该Line; 否则为新建的相同名称Line</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.FindorAddLine(System.String)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.FindorAddLine(System.String)">
             <summary>
             搜索与指定名称,并返回整个Assemblage中的第一个匹配元素; 若未找到,则新建并添加相同名称的Line,并且返回这个Line
             </summary>
             <param name="lineName">用于定义匹配的名称</param>
             <returns>如果找到相同名称的第一个Line,则为该Line; 否则为新建的相同名称Line</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.FindAllSub(System.String)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.FindAllSub(System.String)">
             <summary>
             匹配拥有相同名称的Sub的所有元素
             </summary>
             <param name="subName">用于定义匹配的名称</param>
             <returns>如果找到相同名称的Sub,其中所有元素均与指定谓词定义的条件匹配,则为该数组; 否则为一个空的Array</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.FindAllSub(System.String,System.String)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.FindAllSub(System.String,System.String)">
             <summary>
             匹配拥有相同名称和信息的Sub的所有元素
             </summary>
@@ -1101,21 +1177,21 @@
             <param name="subinfo">用于定义匹配的信息 (去除关键字的文本)</param>
             <returns>如果找到相同名称和信息的Sub,其中所有元素均与指定谓词定义的条件匹配,则为该数组; 否则为一个空的Array</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.FindAllSubInfo(System.String)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.FindAllSubInfo(System.String)">
             <summary>
             匹配拥有相同信息的Sub的所有元素
             </summary>
             <param name="subinfo">用于定义匹配的信息 (去除关键字的文本)</param>
             <returns>如果找到相同信息的Sub,其中所有元素均与指定谓词定义的条件匹配,则为该数组; 否则为一个空的Array</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.FindSub(System.String)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.FindSub(System.String)">
             <summary>
             搜索与指定名称,并返回整个Assemblage中的第一个匹配元素
             </summary>
             <param name="subName">用于定义匹配的名称</param>
             <returns>如果找到相同名称的第一个Sub,则为该Line; 否则为null</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.FindSub(System.String,System.String)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.FindSub(System.String,System.String)">
             <summary>
             搜索与指定名称和信息,并返回整个Assemblage中的第一个匹配元素
             </summary>
@@ -1123,153 +1199,153 @@
             <param name="subinfo">用于定义匹配的信息 (去除关键字的文本)</param>
             <returns>如果找到相同名称和信息的第一个Sub,则为该Line; 否则为null</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.FindSubInfo(System.String)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.FindSubInfo(System.String)">
             <summary>
             搜索与指定信息,并返回整个Assemblage中的第一个匹配元素
             </summary>
             <param name="subinfo">用于定义匹配的信息 (去除关键字的文本)</param>
             <returns>如果找到相同信息的第一个Sub,则为该Line; 否则为null</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.SearchAllLine(System.String)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.SearchAllLine(System.String)">
             <summary>
             搜索全部相似名称的Line的所有元素
             </summary>
             <param name="value">%字段%</param>
             <returns>如果找到相似名称的Line,则为数组; 否则为一个空的Array</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.SearchLine(System.String)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.SearchLine(System.String)">
             <summary>
             搜索字段是否出现在Line名称,并返回整个Assemblage中的第一个匹配元素
             </summary>
             <param name="value">%字段%</param>
             <returns>如果找到相似名称的第一个Line,则为该Line; 否则为null</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.SearchAllSub(System.String)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.SearchAllSub(System.String)">
             <summary>
             搜索全部相似名称的Sub的所有元素
             </summary>
             <param name="value">%字段%</param>
             <returns>如果找到相似名称的Line,则为该数组; 否则为一个空的Array</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.SearchSub(System.String)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.SearchSub(System.String)">
             <summary>
             搜索字段是否出现在Sub名称,并返回整个Assemblage中的第一个匹配元素
             </summary>
             <param name="value">%字段%</param>
             <returns>如果找到相同名称的第一个Sub,则为该Sub; 否则为null</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.IndexOf(System.String)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.IndexOf(System.String)">
             <summary>
             搜索相同名称的Line,并返回整个Assemblage中第一个匹配的Line从零开始的索引 (错误:字典没有引索)
             </summary>
             <param name="lineName">用于定义匹配的名称</param>
             <returns>如果找到相同名称的Line的第一个元素,则为该元素的从零开始的索引; 否则为 -1</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.IndexsOf(System.String)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.IndexsOf(System.String)">
             <summary>
             搜索相同名称的Line,并返回整个Assemblage中全部匹配的Line从零开始的索引 (错误:字典没有引索)
             </summary>
             <param name="lineName">用于定义匹配的名称</param>
             <returns>如果找到相同名称的Line的元素,则为该元素的从零开始的索引组; 否则为空的Array</returns>
         </member>
-        <member name="P:LinePutScript.Dictionary.LPS_D.Count">
+        <member name="P:LinePutScript.Dictionary.LPS_D`1.Count">
             <summary>
             获得Assemblage目前储存的Line数量
             </summary>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.Load``1(System.String)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.Load``1(System.String)">
             <summary>
             从指定的字符串加载LPS文档
             </summary>
             <param name="lps">包含要加载的LPS文档的字符串</param>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.Load(System.String)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.Load(System.String)">
             <summary>
             从指定的字符串加载LPS文档
             </summary>
             <param name="lps">包含要加载的LPS文档的字符串</param>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.Load(LinePutScript.ILine[])">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.Load(System.Collections.Generic.IEnumerable{LinePutScript.ILine})">
             <summary>
             从指定行加载LPS文档
             </summary>
             <param name="lines">多个行</param>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.First">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.First">
             <summary>
             返回一个Assemblage的第一个元素。
             </summary>
             <returns>要返回的第一个元素</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.Last">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.Last">
             <summary>
             返回一个Assemblage的最后一个元素。
             </summary>
             <returns>要返回的最后一个元素</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.GetEnumerator">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.GetEnumerator">
             <summary>
             返回循环访问 Assemblage 的枚举数。
             </summary>
             <returns>用于 Assemblage 的枚举数</returns>
         </member>
-        <member name="P:LinePutScript.Dictionary.LPS_D.Item(System.String)">
+        <member name="P:LinePutScript.Dictionary.LPS_D`1.Item(System.String)">
             <summary>
             搜索与指定名称,并返回整个Assemblage中的第一个匹配元素; 若未找到,则新建并添加相同名称的Line,并且返回这个Line
             </summary>
             <param name="lineName">用于定义匹配的名称</param>
             <returns>如果找到相同名称的第一个Line,则为该Line; 否则为新建的相同名称Line</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.ToString">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.ToString">
             <summary>
             将当前Documents转换成文本格式
             </summary>
             <returns>LinePutScript的文本格式</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.GetLongHashCode">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.GetLongHashCode">
             <summary>
             获得该LPS文档的长哈希代码
             </summary>
             <returns>64位哈希代码</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.GetHashCode">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.GetHashCode">
             <summary>
             获得该LPS文档的哈希代码
             </summary>
             <returns>32位哈希代码</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.Equals(System.Object)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.Equals(System.Object)">
             <summary>
             确认对象是否等于当前对象
             </summary>
             <param name="obj">Subs</param>
             <returns></returns>
         </member>
-        <member name="P:LinePutScript.Dictionary.LPS_D.Length">
+        <member name="P:LinePutScript.Dictionary.LPS_D`1.Length">
             <summary>
             获得当前文档大小 单位:字符
             </summary>
         </member>
-        <member name="P:LinePutScript.Dictionary.LPS_D.IsReadOnly">
+        <member name="P:LinePutScript.Dictionary.LPS_D`1.IsReadOnly">
             <summary>
             是否只读
             </summary>
         </member>
-        <member name="P:LinePutScript.Dictionary.LPS_D.Item(System.Int32)">
+        <member name="P:LinePutScript.Dictionary.LPS_D`1.Item(System.Int32)">
             <summary>
             通过引索修改lps中Line内容 (错误:字典没有引索)
             </summary>
             <param name="index">要获得或设置的引索</param>
             <returns>引索指定的Line</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.GetBool(System.String)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.GetBool(System.String)">
             <summary>
             获得bool属性的line
             </summary>
             <param name="lineName">用于定义匹配的名称</param>
             <returns>如果找到相同名称的line,则为True; 否则为false</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.SetBool(System.String,System.Boolean)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.SetBool(System.String,System.Boolean)">
             <summary>
             设置bool属性的line
             </summary>
@@ -1279,7 +1355,7 @@
             如果为false,则删除所有name为lineName的line
             </param>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.GetInt(System.String,System.Int32)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.GetInt(System.String,System.Int32)">
             <summary>
             获得int属性的line
             </summary>
@@ -1290,14 +1366,14 @@
             如果没找到,则返回默认值
             </returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.SetInt(System.String,System.Int32)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.SetInt(System.String,System.Int32)">
             <summary>
             设置int属性的line
             </summary>
             <param name="lineName">用于定义匹配的名称</param>
             <param name="value">储存进line的int值</param>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.GetInt64(System.String,System.Int64)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.GetInt64(System.String,System.Int64)">
             <summary>
             获得long属性的line
             </summary>
@@ -1308,14 +1384,14 @@
             如果没找到,则返回默认值
             </returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.SetInt64(System.String,System.Int64)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.SetInt64(System.String,System.Int64)">
             <summary>
             设置long属性的line
             </summary>
             <param name="lineName">用于定义匹配的名称</param>
             <param name="value">储存进line的long值</param>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.GetString(System.String,System.String)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.GetString(System.String,System.String)">
             <summary>
             获得String属性的line
             </summary>
@@ -1326,14 +1402,14 @@
             如果没找到,则返回默认值
             </returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.SetString(System.String,System.String)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.SetString(System.String,System.String)">
             <summary>
             设置String属性的line
             </summary>
             <param name="lineName">用于定义匹配的名称</param>
             <param name="value">储存进line的String值</param>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.GetDouble(System.String,System.Double)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.GetDouble(System.String,System.Double)">
             <summary>
             获得double属性的line
             </summary>
@@ -1344,14 +1420,14 @@
             如果没找到,则返回默认值
             </returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.SetDouble(System.String,System.Double)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.SetDouble(System.String,System.Double)">
             <summary>
             设置double属性的line
             </summary>
             <param name="lineName">用于定义匹配的名称</param>
             <param name="value">储存进line的double值</param>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.GetFloat(System.String,System.Double)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.GetFloat(System.String,System.Double)">
             <summary>
             获得double(long)属性的line 通过转换long获得更精确的小数,小数位最大保留9位
             </summary>
@@ -1362,14 +1438,14 @@
             如果没找到,则返回默认值
             </returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.SetFloat(System.String,System.Double)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.SetFloat(System.String,System.Double)">
             <summary>
             设置double(long)属性的line 通过转换long获得更精确的小数,小数位最大保留9位
             </summary>
             <param name="lineName">用于定义匹配的名称</param>
             <param name="value">储存进line的double(long)值</param>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.GetDateTime(System.String,System.DateTime)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.GetDateTime(System.String,System.DateTime)">
             <summary>
             获得DateTime属性的line
             </summary>
@@ -1380,99 +1456,134 @@
             如果没找到,则返回默认值
             </returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.SetDateTime(System.String,System.DateTime)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.SetDateTime(System.String,System.DateTime)">
             <summary>
             设置DateTime属性的line
             </summary>
             <param name="lineName">用于定义匹配的名称</param>
             <param name="value">储存进line的DateTime值</param>
         </member>
-        <member name="P:LinePutScript.Dictionary.LPS_D.Item(LinePutScript.gstr)">
+        <member name="P:LinePutScript.Dictionary.LPS_D`1.Item(LinePutScript.gstr)">
             <summary>
             获取或设置 String 属性的line
             </summary>
             <param name="lineName">(gstr)用于定义匹配的名称</param>
             <returns>获取或设置对 String 属性的Line</returns>
         </member>
-        <member name="P:LinePutScript.Dictionary.LPS_D.Item(LinePutScript.gbol)">
+        <member name="P:LinePutScript.Dictionary.LPS_D`1.Item(LinePutScript.gbol)">
             <summary>
             获取或设置 Bool 属性的line
             </summary>
             <param name="lineName">(gbol)用于定义匹配的名称</param>
             <returns>获取或设置对 bool 属性的Line</returns>
         </member>
-        <member name="P:LinePutScript.Dictionary.LPS_D.Item(LinePutScript.gint)">
+        <member name="P:LinePutScript.Dictionary.LPS_D`1.Item(LinePutScript.gint)">
             <summary>
             获取或设置 Int 属性的line
             </summary>
             <param name="lineName">(gint)用于定义匹配的名称</param>
             <returns>获取或设置对 int 属性的Line</returns>
         </member>
-        <member name="P:LinePutScript.Dictionary.LPS_D.Item(LinePutScript.gi64)">
+        <member name="P:LinePutScript.Dictionary.LPS_D`1.Item(LinePutScript.gi64)">
             <summary>
             获取或设置 Long 属性的line
             </summary>
             <param name="lineName">(gi64)用于定义匹配的名称</param>
             <returns>获取或设置对 long 属性的Line</returns>
         </member>
-        <member name="P:LinePutScript.Dictionary.LPS_D.Item(LinePutScript.gdbe)">
+        <member name="P:LinePutScript.Dictionary.LPS_D`1.Item(LinePutScript.gdbe)">
             <summary>
             获取或设置 Double 属性的line
             </summary>
             <param name="lineName">(gdbe)用于定义匹配的名称</param>
             <returns>获取或设置对 double 属性的Line</returns>
         </member>
-        <member name="P:LinePutScript.Dictionary.LPS_D.Item(LinePutScript.gflt)">
+        <member name="P:LinePutScript.Dictionary.LPS_D`1.Item(LinePutScript.gflt)">
             <summary>
             获取或设置 Double(long) 属性的line  通过转换long获得更精确的小数,小数位最大保留9位
             </summary>
             <param name="lineName">(gflt)用于定义匹配的名称</param>
             <returns>获取或设置对 double 属性的line</returns>
         </member>
-        <member name="P:LinePutScript.Dictionary.LPS_D.Item(LinePutScript.gdat)">
+        <member name="P:LinePutScript.Dictionary.LPS_D`1.Item(LinePutScript.gdat)">
             <summary>
             获取或设置 DateTime 属性的line
             </summary>
             <param name="lineName">(gdbe)用于定义匹配的名称</param>
             <returns>获取或设置对 double 属性的line</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.IndexOf(LinePutScript.ILine)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.IndexOf(LinePutScript.ILine)">
             <summary>
             搜索相同Line,并返回整个Assemblage中第一个匹配的Line从零开始的索引 (错误:字典没有引索)
             </summary>
             <param name="line">用于定义匹配的Line</param>
             <returns>如果找到相同名称的Line的第一个元素,则为该元素的从零开始的索引; 否则为 -1</returns>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.Insert(System.Int32,LinePutScript.ILine)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.Insert(System.Int32,LinePutScript.ILine)">
             <summary>
             将指定的Line添加到指定索引处 (失效:字典没有顺序)
             </summary>
             <param name="index">应插入 Line 的从零开始的索引</param>
             <param name="newLine">要添加的Line</param>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.Add(LinePutScript.ILine)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.Add(LinePutScript.ILine)">
             <summary>
             将指定的Line添加到Assemblage列表
             </summary>
             <param name="newLine">要添加的Line</param>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.Clear">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.Clear">
             <summary>
             移除Assemblage中所有的Line
             </summary>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.CopyTo(LinePutScript.ILine[],System.Int32)">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.CopyTo(LinePutScript.ILine[],System.Int32)">
             <summary>
             将整个array复制到Assemblage
             </summary>
             <param name="array">复制到Assemblage的Line列表</param>
             <param name="arrayIndex">从零开始的引索,从引索处开始复制</param>
         </member>
-        <member name="M:LinePutScript.Dictionary.LPS_D.ToList">
+        <member name="M:LinePutScript.Dictionary.LPS_D`1.ToList">
             <summary>
             返回一个新List,包含所有Line
             </summary>
             <returns>所有储存的Line</returns>
+        </member>
+        <member name="T:LinePutScript.Dictionary.LPS_D">
+            <summary>
+            通过字典类型的文件 包括文件读写等一系列操作
+            </summary>
+        </member>
+        <member name="M:LinePutScript.Dictionary.LPS_D.#ctor">
+            <summary>
+            创建一个 空的 LPS_D
+            </summary>
+        </member>
+        <member name="M:LinePutScript.Dictionary.LPS_D.#ctor(LinePutScript.ILine,LinePutScript.ILine[])">
+            <summary>
+            从指定行创建 LPS_D
+            </summary>
+            <param name="line">多个行</param>
+            <param name="lines">多个行</param>
+        </member>
+        <member name="M:LinePutScript.Dictionary.LPS_D.#ctor(LinePutScript.ILPS)">
+            <summary>
+            从另一个LPS文件创建该LPS
+            </summary>
+            <param name="lps"></param>
+        </member>
+        <member name="M:LinePutScript.Dictionary.LPS_D.#ctor(System.String)">
+            <summary>
+            从指定的字符串创建 LpsDocument
+            </summary>
+            <param name="lps">包含要加载的LPS文档的字符串</param>
+        </member>
+        <member name="M:LinePutScript.Dictionary.LPS_D.#ctor(System.Collections.Generic.IEnumerable{LinePutScript.ILine})">
+            <summary>
+            从指定行创建 LPS_D
+            </summary>
+            <param name="lines">多个行</param>
         </member>
         <member name="T:LinePutScript.gobj">
             <summary>
@@ -1850,6 +1961,15 @@
             <param name="text">文本 在末尾没有结束行号的文本 (正常)</param>
             <param name="subs">子类集合</param>
         </member>
+        <member name="M:LinePutScript.ILine.Load(System.String,System.String,System.Collections.Generic.IEnumerable{LinePutScript.ISub},System.String)">
+            <summary>
+            通过名字和信息创建新的Line
+            </summary>
+            <param name="name">名称</param>
+            <param name="info">信息 (正常)</param>
+            <param name="text">文本 在末尾没有结束行号的文本 (正常)</param>
+            <param name="subs">子类集合</param>
+        </member>
         <member name="M:LinePutScript.ILine.Load(LinePutScript.ILine)">
             <summary>
             将其他Line内容拷贝到本Line
@@ -1905,7 +2025,7 @@
             </summary>
             <param name="newSub">要添加的Sub</param>
         </member>
-        <member name="M:LinePutScript.ILine.AddRange(LinePutScript.ISub[])">
+        <member name="M:LinePutScript.ILine.AddRange(System.Collections.Generic.IEnumerable{LinePutScript.ISub})">
             <summary>
             将指定Sub的元素添加到Subs的末尾
             </summary>
@@ -1918,7 +2038,7 @@
             <param name="index">应插入 Sub 的从零开始的索引</param>
             <param name="newSub">要添加的Sub</param>
         </member>
-        <member name="M:LinePutScript.ILine.InsertRange(System.Int32,LinePutScript.ISub[])">
+        <member name="M:LinePutScript.ILine.InsertRange(System.Int32,System.Collections.Generic.IEnumerable{LinePutScript.ISub})">
             <summary>
             将指定Sub的元素添加指定索引处
             </summary>
@@ -2078,12 +2198,6 @@
             </summary>
             <param name="newLine">要添加的Line</param>
         </member>
-        <member name="M:LinePutScript.ILPS.AddRange(LinePutScript.ILine[])">
-            <summary>
-            将指定Line的元素添加到Assemblage的末尾
-            </summary>
-            <param name="newLines">要添加的多个Line</param>
-        </member>
         <member name="M:LinePutScript.ILPS.AddRange(System.Collections.Generic.IEnumerable{LinePutScript.ILine})">
             <summary>
             将指定Line的元素添加到Assemblage的末尾
@@ -2096,13 +2210,6 @@
             </summary>
             <param name="index">应插入 Line 的从零开始的索引</param>
             <param name="newLine">要添加的Line</param>
-        </member>
-        <member name="M:LinePutScript.ILPS.InsertRange(System.Int32,LinePutScript.ILine[])">
-            <summary>
-            将指定Line的元素添加指定索引处
-            </summary>
-            <param name="index">应插入 Line 的从零开始的索引</param>
-            <param name="newLines">要添加的多个Line</param>
         </member>
         <member name="M:LinePutScript.ILPS.InsertRange(System.Int32,System.Collections.Generic.IEnumerable{LinePutScript.ILine})">
             <summary>
@@ -2294,7 +2401,7 @@
             </summary>
             <param name="lps">包含要加载的LPS文档的字符串</param>
         </member>
-        <member name="M:LinePutScript.ILPS.Load(LinePutScript.ILine[])">
+        <member name="M:LinePutScript.ILPS.Load(System.Collections.Generic.IEnumerable{LinePutScript.ILine})">
             <summary>
             从指定行加载LPS文档
             </summary>
@@ -2525,6 +2632,572 @@
             获得Info的String结构
             </summary>
         </member>
+        <member name="T:LinePutScript.Line`1">
+            <summary>
+            行 包含多个子类 继承自子类
+            </summary>
+        </member>
+        <member name="M:LinePutScript.Line`1.#ctor">
+            <summary>
+            创建一行
+            </summary>
+        </member>
+        <member name="M:LinePutScript.Line`1.#ctor(System.String)">
+            <summary>
+            通过lpsLine文本创建一行
+            </summary>
+            <param name="lpsLine">lpsSub文本</param>
+        </member>
+        <member name="M:LinePutScript.Line`1.#ctor(LinePutScript.ILine)">
+            <summary>
+            通过其他Line创建新的Line
+            </summary>
+            <param name="line">其他line</param>
+        </member>
+        <member name="M:LinePutScript.Line`1.#ctor(System.String,System.String,System.String,LinePutScript.ISub[])">
+            <summary>
+            通过名字和信息创建新的Line
+            </summary>
+            <param name="name">名称</param>
+            <param name="info">信息 (正常)</param>
+            <param name="text">文本 在末尾没有结束行号的文本 (正常)</param>
+            <param name="subs">子类集合</param>
+        </member>
+        <member name="M:LinePutScript.Line`1.#ctor(System.String,System.String,System.Collections.Generic.IEnumerable{LinePutScript.ISub},System.String)">
+            <summary>
+            通过名字和信息创建新的Line
+            </summary>
+            <param name="name">名称</param>
+            <param name="info">信息 (正常)</param>
+            <param name="text">文本 在末尾没有结束行号的文本 (正常)</param>
+            <param name="subs">子类集合</param>
+        </member>
+        <member name="M:LinePutScript.Line`1.Load(System.String)">
+            <summary>
+            加载 通过lps文本创建一个子类
+            </summary>
+            <param name="lps">lps文本</param>
+        </member>
+        <member name="M:LinePutScript.Line`1.Load(System.String,System.String,System.Collections.Generic.IEnumerable{LinePutScript.ISub},System.String)">
+            <summary>
+            通过名字和信息创建新的Line
+            </summary>
+            <param name="name">名称</param>
+            <param name="info">信息 (正常)</param>
+            <param name="text">文本 在末尾没有结束行号的文本 (正常)</param>
+            <param name="subs">子类集合</param>
+        </member>
+        <member name="M:LinePutScript.Line`1.Load(System.String,System.String,System.String,LinePutScript.ISub[])">
+            <summary>
+            通过名字和信息创建新的Line
+            </summary>
+            <param name="name">名称</param>
+            <param name="info">信息 (正常)</param>
+            <param name="text">文本 在末尾没有结束行号的文本 (正常)</param>
+            <param name="subs">子类集合</param>
+        </member>
+        <member name="M:LinePutScript.Line`1.Load(LinePutScript.ILine)">
+            <summary>
+            将其他Line内容拷贝到本Line
+            </summary>
+            <param name="line">其他line</param>
+        </member>
+        <member name="P:LinePutScript.Line`1.text">
+            <summary>
+            文本 在末尾没有结束行号的文本 (去除关键字的文本)
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Line`1.Text">
+            <summary>
+            文本 在末尾没有结束行号的文本 (正常)
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Line`1.Texts">
+            <summary>
+            获得Text的String结构
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Line`1.Comments">
+            <summary>
+            注释 ///为注释
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Line`1.TextToInt">
+            <summary>
+            文本 (int)
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Line`1.TextToInt64">
+            <summary>
+            文本 (int64)
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Line`1.TextToDouble">
+            <summary>
+            文本 (double)
+            </summary>
+        </member>
+        <member name="M:LinePutScript.Line`1.GetText">
+            <summary>
+            退回Text的反转义文本 (正常显示)
+            </summary>
+            <returns>Text的反转义文本 (正常显示)</returns>
+        </member>
+        <member name="P:LinePutScript.Line`1.Subs">
+            <summary>
+            子项目
+            </summary>
+        </member>
+        <member name="M:LinePutScript.Line`1.AddSub(LinePutScript.ISub)">
+            <summary>
+            将指定的Sub添加到Subs列表的末尾
+            </summary>
+            <param name="newSub">要添加的Sub</param>
+        </member>
+        <member name="M:LinePutScript.Line`1.AddorReplaceSub(LinePutScript.ISub)">
+            <summary>
+            若无相同名称(Name)的Sub,则将指定的Sub添加到Subs列表的末尾
+            若有,则替换成要添加的Sub
+            </summary>
+            <param name="newSub">要添加的Sub</param>
+        </member>
+        <member name="M:LinePutScript.Line`1.AddRange(System.Collections.Generic.IEnumerable{LinePutScript.ISub})">
+            <summary>
+            将指定Sub的元素添加到Subs的末尾
+            </summary>
+            <param name="newSubs">要添加的多个Sub</param>
+        </member>
+        <member name="M:LinePutScript.Line`1.InsertSub(System.Int32,LinePutScript.ISub)">
+            <summary>
+            将指定的Sub添加到指定索引处
+            </summary>
+            <param name="index">应插入 Sub 的从零开始的索引</param>
+            <param name="newSub">要添加的Sub</param>
+        </member>
+        <member name="M:LinePutScript.Line`1.InsertRange(System.Int32,System.Collections.Generic.IEnumerable{LinePutScript.ISub})">
+            <summary>
+            将指定Sub的元素添加指定索引处
+            </summary>
+            <param name="index">应插入 Sub 的从零开始的索引</param>
+            <param name="newSubs">要添加的多个Sub</param>
+        </member>
+        <member name="M:LinePutScript.Line`1.Remove(LinePutScript.ISub)">
+            <summary>
+            从Subs中移除特定对象的第一个匹配项
+            </summary>
+            <param name="Sub">要从Subs中删除的Sub</param>
+            <returns>如果成功移除了Sub,则为 true; 否则为 false</returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.Remove(System.String)">
+            <summary>
+            从Subs中移除特定名称的第一个匹配项
+            </summary>
+            <param name="SubName">要从Subs中删除的Sub的名称</param>
+            <returns>如果成功移除了Sub,则为 true; 否则为 false</returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.RemoveAll(System.String)">
+            <summary>
+            从Subs中移除特定名称的所有元素
+            </summary>
+            <param name="SubName">要从Subs中删除的Sub的名称</param>
+        </member>
+        <member name="M:LinePutScript.Line`1.Contains(LinePutScript.ISub)">
+            <summary>
+            确定某Sub是否在Line集合中
+            </summary>
+            <param name="sub">要在Line集合中定位的Sub</param>
+            <returns>如果在Line集合中找到sub,则为True; 否则为false</returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.Contains(System.String)">
+            <summary>
+            返回一个值,确定某Sub是否在Line集合中
+            </summary>
+            <param name="value">要在Line集合中定位的Sub的名字</param>
+            <returns>如果在Line集合中找到符合的名字,则为True; 否则为false</returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.FindAll(System.String)">
+            <summary>
+            匹配拥有相同名称的Line或sub的所有元素
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <returns>如果找到相同名称的sub,其中所有元素均与指定谓词定义的条件匹配,则为该数组; 否则为一个空的Array</returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.FindAll(System.String,System.String)">
+            <summary>
+            匹配拥有相同名称和信息的Line或sub的所有元素
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <param name="subinfo">用于定义匹配的信息 (去除关键字的文本)</param>
+            <returns>如果找到相同名称和信息的sub,其中所有元素均与指定谓词定义的条件匹配,则为该数组; 否则为一个空的Array</returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.FindAllInfo(System.String)">
+            <summary>
+            匹配拥有相同信息的Line或sub的所有元素
+            </summary>
+            <param name="subinfo">用于定义匹配的信息 (去除关键字的文本)</param>
+            <returns>如果找到相同信息的sub,其中所有元素均与指定谓词定义的条件匹配,则为该数组; 否则为一个空的Array</returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.Find(System.String)">
+            <summary>
+            搜索与指定名称,并返回Line或整个Subs中的第一个匹配元素
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <returns>如果找到相同名称的第一个sub,则为该sub; 否则为null</returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.Find(System.String,System.String)">
+            <summary>
+            搜索与指定名称,并返回整个Assemblage中的第一个匹配元素
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <param name="subinfo">用于定义匹配的信息 (去除关键字的文本)</param>
+            <returns>如果找到相同名称和信息的第一个Line,则为该Line; 否则为null</returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.FindInfo(System.String)">
+            <summary>
+            搜索与指定信息,并返回整个Assemblage中的第一个匹配元素
+            </summary>
+            <param name="subinfo">用于定义匹配的信息 (去除关键字的文本)</param>
+            <returns>如果找到相同信息的第一个Line,则为该Line; 否则为null</returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.FindorAdd(System.String)">
+            <summary>
+            搜索与指定名称,并返回Line或整个Subs中的第一个匹配元素;若未找到,则新建并添加相同名称的Sub,并且返回这个Sub
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <returns>如果找到相同名称的第一个sub,则为该sub; 否则为新建的相同名称sub</returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.SeachALL(System.String)">
+            <summary>
+            搜索全部相似名称的Sub的所有元素
+            </summary>
+            <param name="value">%字段%</param>
+            <returns>如果找到相似名称的Sub,则为数组; 否则为一个空的Array</returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.Seach(System.String)">
+            <summary>
+            搜索字段是否出现在Line名称,并返回整个Subs中的第一个匹配元素
+            </summary>
+            <param name="value">%字段%</param>
+            <returns>如果找到相似名称的第一个Sub,则为该Sub; 否则为null</returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.IndexOf(System.String)">
+            <summary>
+            搜索相同名称的Sub,并返回整个Subs中第一个匹配的sub从零开始的索引
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <returns>如果找到相同名称的sub的第一个元素,则为该元素的从零开始的索引; 否则为 -1</returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.IndexsOf(System.String)">
+            <summary>
+            搜索相同名称的Sub,并返回整个Sub中全部匹配的sub从零开始的索引
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <returns>如果找到相同名称的sub的元素,则为该元素的从零开始的索引组; 否则为空的Array</returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.ToString">
+            <summary>
+            将当前Line转换成文本格式 (info已经被转义/去除关键字)
+            </summary>
+            <returns>Line的文本格式 (info已经被转义/去除关键字)</returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.ToString(System.Text.StringBuilder)">
+            <summary>
+            将当前Line转换成文本格式 (info已经被转义/去除关键字) 将输出储存到StringBuilder
+            </summary>
+            <param name="str">储存到的 StringBuilder</param>
+            <returns>Line的文本格式 (info已经被转义/去除关键字)</returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.GetLongHashCode">
+            <summary>
+            获得该Line的长哈希代码
+            </summary>
+            <returns>64位哈希代码</returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.GetHashCode">
+            <summary>
+            获得该Line的哈希代码
+            </summary>
+            <returns>32位哈希代码</returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.GetEnumerator">
+            <summary>
+            返回循环访问 Subs 的枚举数。
+            </summary>
+            <returns>用于 Subs 的枚举数</returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.First">
+            <summary>
+            返回一个 Subs 的第一个元素。
+            </summary>
+            <returns>要返回的第一个元素</returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.Last">
+            <summary>
+            返回一个 Subs 的最后一个元素。
+            </summary>
+            <returns>要返回的最后一个元素</returns>
+        </member>
+        <member name="P:LinePutScript.Line`1.Item(System.String)">
+            <summary>
+            搜索与指定名称,并返回Line或整个Subs中的第一个匹配元素;若未找到,则新建并添加相同名称的Sub,并且返回这个Sub
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <returns>如果找到相同名称的第一个sub,则为该sub; 否则为新建的相同名称sub</returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.GetBool(System.String)">
+            <summary>
+            获得bool属性的sub
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <returns>如果找到相同名称的sub,则为True; 否则为false</returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.SetBool(System.String,System.Boolean)">
+            <summary>
+            设置bool属性的sub
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <param name="value">
+            值
+            </param>
+        </member>
+        <member name="M:LinePutScript.Line`1.GetInt(System.String,System.Int32)">
+            <summary>
+            获得int属性的sub
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <param name="defaultvalue">如果没找到返回的默认值</param>
+            <returns>
+            如果找到相同名称的sub,返回sub中储存的int值
+            如果没找到,则返回默认值
+            </returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.SetInt(System.String,System.Int32)">
+            <summary>
+            设置int属性的sub
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <param name="value">储存进sub的int值</param>
+        </member>
+        <member name="M:LinePutScript.Line`1.GetInt64(System.String,System.Int64)">
+            <summary>
+            获得long属性的sub
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <param name="defaultvalue">如果没找到返回的默认值</param>
+            <returns>
+            如果找到相同名称的sub,返回sub中储存的long值
+            如果没找到,则返回默认值
+            </returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.SetInt64(System.String,System.Int64)">
+            <summary>
+            设置long属性的sub
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <param name="value">储存进sub的long值</param>
+        </member>
+        <member name="M:LinePutScript.Line`1.GetFloat(System.String,System.Double)">
+            <summary>
+            获得double(long)属性的sub 通过转换long获得更精确的小数,小数位最大保留9位
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <param name="defaultvalue">如果没找到返回的默认值</param>
+            <returns>
+            如果找到相同名称的sub,返回sub中储存的double(long)值
+            如果没找到,则返回默认值
+            </returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.SetFloat(System.String,System.Double)">
+            <summary>
+            设置double(long)属性的sub 通过转换long获得更精确的小数,小数位最大保留9位
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <param name="value">储存进sub的double(long)值</param>
+        </member>
+        <member name="M:LinePutScript.Line`1.GetDateTime(System.String,System.DateTime)">
+            <summary>
+            获得DateTime属性的sub
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <param name="defaultvalue">如果没找到返回的默认值</param>
+            <returns>
+            如果找到相同名称的sub,返回sub中储存的DateTime值
+            如果没找到,则返回默认值
+            </returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.SetDateTime(System.String,System.DateTime)">
+            <summary>
+            设置DateTime属性的sub
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <param name="value">储存进sub的DateTime值</param>
+        </member>
+        <member name="M:LinePutScript.Line`1.GetString(System.String,System.String)">
+            <summary>
+            获得String属性的sub
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <param name="defaultvalue">如果没找到返回的默认值</param>
+            <returns>
+            如果找到相同名称的sub,返回sub中储存的String值
+            如果没找到,则返回默认值
+            </returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.SetString(System.String,System.String)">
+            <summary>
+            设置String属性的sub
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <param name="value">储存进sub的String值</param>
+        </member>
+        <member name="M:LinePutScript.Line`1.GetDouble(System.String,System.Double)">
+            <summary>
+            获得double属性的sub
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <param name="defaultvalue">如果没找到返回的默认值</param>
+            <returns>
+            如果找到相同名称的sub,返回sub中储存的double值
+            如果没找到,则返回默认值
+            </returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.SetDouble(System.String,System.Double)">
+            <summary>
+            设置double属性的sub
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <param name="value">储存进sub的double值</param>
+        </member>
+        <member name="P:LinePutScript.Line`1.Item(LinePutScript.gstr)">
+            <summary>
+            获取或设置 String 属性的sub
+            </summary>
+            <param name="subName">(gstr)用于定义匹配的名称</param>
+            <returns>获取或设置对 String 属性的Sub</returns>
+        </member>
+        <member name="P:LinePutScript.Line`1.Item(LinePutScript.gbol)">
+            <summary>
+            获取或设置 Bool 属性的sub
+            </summary>
+            <param name="subName">(gbol)用于定义匹配的名称</param>
+            <returns>获取或设置对 bool 属性的Sub</returns>
+        </member>
+        <member name="P:LinePutScript.Line`1.Item(LinePutScript.gint)">
+            <summary>
+            获取或设置 Int 属性的sub
+            </summary>
+            <param name="subName">(gint)用于定义匹配的名称</param>
+            <returns>获取或设置对 int 属性的Sub</returns>
+        </member>
+        <member name="P:LinePutScript.Line`1.Item(LinePutScript.gi64)">
+            <summary>
+            获取或设置 Long 属性的sub
+            </summary>
+            <param name="subName">(gi64)用于定义匹配的名称</param>
+            <returns>获取或设置对 long 属性的Sub</returns>
+        </member>
+        <member name="P:LinePutScript.Line`1.Item(LinePutScript.gdbe)">
+            <summary>
+            获取或设置 Double 属性的sub
+            </summary>
+            <param name="subName">(gdbe)用于定义匹配的名称</param>
+            <returns>获取或设置对 double 属性的Sub</returns>
+        </member>
+        <member name="P:LinePutScript.Line`1.Item(LinePutScript.gflt)">
+            <summary>
+            获取或设置 Double(long) 属性的sub  通过转换long获得更精确的小数,小数位最大保留9位
+            </summary>
+            <param name="subName">(gflt)用于定义匹配的名称</param>
+            <returns>获取或设置对 double 属性的Sub</returns>
+        </member>
+        <member name="P:LinePutScript.Line`1.Item(LinePutScript.gdat)">
+            <summary>
+            获取或设置 DateTime 属性的sub
+            </summary>
+            <param name="subName">(gdbe)用于定义匹配的名称</param>
+            <returns>获取或设置对 double 属性的Sub</returns>
+        </member>
+        <member name="P:LinePutScript.Line`1.Count">
+            <summary>
+            获取Sub数量
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Line`1.IsReadOnly">
+            <summary>
+            是否只读
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Line`1.Item(System.Int32)">
+            <summary>
+            通过引索修改Line中Sub内容
+            </summary>
+            <param name="index">要获得或设置的引索</param>
+            <returns>引索指定的Sub</returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.IndexOf(LinePutScript.ISub)">
+            <summary>
+            搜索相同名称的Sub,并返回整个Subs中第一个匹配的Sub从零开始的索引
+            </summary>
+            <param name="sub">用于定义匹配的Sub</param>
+            <returns>如果找到相同名称的Sub的第一个元素,则为该元素的从零开始的索引; 否则为 -1</returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.Insert(System.Int32,LinePutScript.ISub)">
+            <summary>
+            将指定的Sub添加到指定索引处
+            </summary>
+            <param name="index">应插入 Sub 的从零开始的索引</param>
+            <param name="newSub">要添加的Sub</param>
+        </member>
+        <member name="M:LinePutScript.Line`1.RemoveAt(System.Int32)">
+            <summary>
+            从Subs中移除特定引索的Sub
+            </summary>
+            <param name="index">要删除Sub的引索</param>
+        </member>
+        <member name="M:LinePutScript.Line`1.Add(LinePutScript.ISub)">
+            <summary>
+            将指定的Sub添加到Subs列表的末尾
+            </summary>
+            <param name="newSub">要添加的Sub</param>
+        </member>
+        <member name="M:LinePutScript.Line`1.Clear">
+            <summary>
+            移除Line中所有的Sub
+            </summary>
+        </member>
+        <member name="M:LinePutScript.Line`1.CopyTo(LinePutScript.ISub[],System.Int32)">
+            <summary>
+            将整个array复制到Line的Subs
+            </summary>
+            <param name="array">复制到Subs的Sub列表</param>
+            <param name="arrayIndex">从零开始的引索,从引索处开始复制</param>
+        </member>
+        <member name="M:LinePutScript.Line`1.CompareTo(LinePutScript.ILine)">
+            <summary>
+            将当前line与另一个line进行比较,并退回一个整数指示在排序位置中是位于另一个对象之前之后还是相同位置
+            </summary>
+            <param name="other">另一个line</param>
+            <returns>值小于零时排在 other 之前 值等于零时出现在相同排序位置 值大于零则排在 other 之后</returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.Equals(LinePutScript.ILine)">
+            <summary>
+            将当前line与另一个line进行比较, 判断是否内容相同
+            </summary>
+            <param name="other">另一个line</param>
+            <returns>如果为True则内容相同</returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.Clone">
+            <summary>
+            克隆一个Line
+            </summary>
+            <returns>相同的Line</returns>
+        </member>
+        <member name="M:LinePutScript.Line`1.ToList">
+            <summary>
+            返回一个新List,包含所有Subs
+            </summary>
+            <returns>所有储存的Subs</returns>
+        </member>
         <member name="T:LinePutScript.Line">
             <summary>
             行 包含多个子类 继承自子类
@@ -2556,13 +3229,7 @@
             <param name="text">文本 在末尾没有结束行号的文本 (正常)</param>
             <param name="subs">子类集合</param>
         </member>
-        <member name="M:LinePutScript.Line.Load(System.String)">
-            <summary>
-            加载 通过lps文本创建一个子类
-            </summary>
-            <param name="lps">lps文本</param>
-        </member>
-        <member name="M:LinePutScript.Line.Load(System.String,System.String,System.String,LinePutScript.ISub[])">
+        <member name="M:LinePutScript.Line.#ctor(System.String,System.String,System.Collections.Generic.IEnumerable{LinePutScript.ISub},System.String)">
             <summary>
             通过名字和信息创建新的Line
             </summary>
@@ -2571,516 +3238,588 @@
             <param name="text">文本 在末尾没有结束行号的文本 (正常)</param>
             <param name="subs">子类集合</param>
         </member>
-        <member name="M:LinePutScript.Line.Load(LinePutScript.ILine)">
+        <member name="T:LinePutScript.LpsDocument`1">
             <summary>
-            将其他Line内容拷贝到本Line
-            </summary>
-            <param name="line">其他line</param>
-        </member>
-        <member name="P:LinePutScript.Line.text">
-            <summary>
-            文本 在末尾没有结束行号的文本 (去除关键字的文本)
+            文件 包括文件读写等一系列操作
             </summary>
         </member>
-        <member name="P:LinePutScript.Line.Text">
+        <member name="P:LinePutScript.LpsDocument`1.Assemblage">
             <summary>
-            文本 在末尾没有结束行号的文本 (正常)
+            集合 全部文件的数据
             </summary>
         </member>
-        <member name="P:LinePutScript.Line.Texts">
+        <member name="M:LinePutScript.LpsDocument`1.#ctor">
             <summary>
-            获得Text的String结构
+            创建一个 空的LpsDocument
             </summary>
         </member>
-        <member name="P:LinePutScript.Line.Comments">
+        <member name="M:LinePutScript.LpsDocument`1.#ctor(System.String)">
             <summary>
-            注释 ///为注释
+            从指定的字符串创建 LpsDocument
             </summary>
+            <param name="lps">包含要加载的LPS文档的字符串</param>
         </member>
-        <member name="P:LinePutScript.Line.TextToInt">
+        <member name="M:LinePutScript.LpsDocument`1.#ctor(LinePutScript.ILine,LinePutScript.ILine[])">
             <summary>
-            文本 (int)
+            从指定行创建 LpsDocument
             </summary>
+            <param name="line">多个行</param>
+            <param name="lines">多个行</param>
         </member>
-        <member name="P:LinePutScript.Line.TextToInt64">
+        <member name="M:LinePutScript.LpsDocument`1.#ctor(System.Collections.Generic.IEnumerable{LinePutScript.ILine})">
             <summary>
-            文本 (int64)
+            从指定行创建 LpsDocument
             </summary>
+            <param name="lines">多个行</param>
         </member>
-        <member name="P:LinePutScript.Line.TextToDouble">
+        <member name="M:LinePutScript.LpsDocument`1.#ctor(LinePutScript.ILPS)">
             <summary>
-            文本 (double)
+            从另一个LPS文件创建该LPS
             </summary>
+            <param name="lps"></param>
         </member>
-        <member name="M:LinePutScript.Line.GetText">
+        <member name="M:LinePutScript.LpsDocument`1.AddLine(LinePutScript.ILine)">
             <summary>
-            退回Text的反转义文本 (正常显示)
+            将指定的Line添加到Assemblage列表的末尾
             </summary>
-            <returns>Text的反转义文本 (正常显示)</returns>
+            <param name="newLine">要添加的Line</param>
         </member>
-        <member name="P:LinePutScript.Line.Subs">
+        <member name="M:LinePutScript.LpsDocument`1.AddorReplaceLine(LinePutScript.ILine)">
             <summary>
-            子项目
+            若无相同名称(Name)的Line,则将指定的Line添加到Assemblage列表的末尾
+            若有,则替换成要添加的Line
             </summary>
+            <param name="newLine">要添加的Line</param>
         </member>
-        <member name="M:LinePutScript.Line.AddSub(LinePutScript.ISub)">
+        <member name="M:LinePutScript.LpsDocument`1.AddRange(System.Collections.Generic.IEnumerable{LinePutScript.ILine})">
             <summary>
-            将指定的Sub添加到Subs列表的末尾
+            将指定Line的元素添加到Assemblage的末尾
             </summary>
-            <param name="newSub">要添加的Sub</param>
+            <param name="newLines">要添加的多个Line</param>
         </member>
-        <member name="M:LinePutScript.Line.AddorReplaceSub(LinePutScript.ISub)">
+        <member name="M:LinePutScript.LpsDocument`1.InsertLine(System.Int32,LinePutScript.ILine)">
             <summary>
-            若无相同名称(Name)的Sub,则将指定的Sub添加到Subs列表的末尾
-            若有,则替换成要添加的Sub
+            将指定的Line添加到指定索引处
             </summary>
-            <param name="newSub">要添加的Sub</param>
+            <param name="index">应插入 Line 的从零开始的索引</param>
+            <param name="newLine">要添加的Line</param>
         </member>
-        <member name="M:LinePutScript.Line.AddRange(LinePutScript.ISub[])">
+        <member name="M:LinePutScript.LpsDocument`1.InsertRange(System.Int32,System.Collections.Generic.IEnumerable{LinePutScript.ILine})">
             <summary>
-            将指定Sub的元素添加到Subs的末尾
+            将指定Line的元素添加指定索引处
             </summary>
-            <param name="newSubs">要添加的多个Sub</param>
+            <param name="index">应插入 Line 的从零开始的索引</param>
+            <param name="newLines">要添加的多个Line</param>
         </member>
-        <member name="M:LinePutScript.Line.InsertSub(System.Int32,LinePutScript.ISub)">
+        <member name="M:LinePutScript.LpsDocument`1.Remove(LinePutScript.ILine)">
             <summary>
-            将指定的Sub添加到指定索引处
+            从Assemblage中移除特定对象的第一个匹配项
             </summary>
-            <param name="index">应插入 Sub 的从零开始的索引</param>
-            <param name="newSub">要添加的Sub</param>
+            <param name="line">要从Assemblage中删除的Line的名称</param>
+            <returns>如果成功移除了line,则为 true; 否则为 false</returns>
         </member>
-        <member name="M:LinePutScript.Line.InsertRange(System.Int32,LinePutScript.ISub[])">
+        <member name="M:LinePutScript.LpsDocument`1.Remove(System.String)">
             <summary>
-            将指定Sub的元素添加指定索引处
+            从Assemblage中移除特定名称的第一个匹配项
             </summary>
-            <param name="index">应插入 Sub 的从零开始的索引</param>
-            <param name="newSubs">要添加的多个Sub</param>
+            <param name="lineName">要从Assemblage中删除的Line的名称</param>
+            <returns>如果成功移除了line,则为 true; 否则为 false</returns>
         </member>
-        <member name="M:LinePutScript.Line.Remove(LinePutScript.ISub)">
+        <member name="M:LinePutScript.LpsDocument`1.RemoveAll(LinePutScript.ILine)">
             <summary>
-            从Subs中移除特定对象的第一个匹配项
+            从Assemblage中移除移除与条件相匹配的所有Line
             </summary>
-            <param name="Sub">要从Subs中删除的Sub</param>
-            <returns>如果成功移除了Sub,则为 true; 否则为 false</returns>
+            <param name="line">要从Assemblage中删除的Line</param>
         </member>
-        <member name="M:LinePutScript.Line.Remove(System.String)">
+        <member name="M:LinePutScript.LpsDocument`1.RemoveAll(System.String)">
             <summary>
-            从Subs中移除特定名称的第一个匹配项
+            从Assemblage中移除移除与名称相匹配的所有Line
             </summary>
-            <param name="SubName">要从Subs中删除的Sub的名称</param>
-            <returns>如果成功移除了Sub,则为 true; 否则为 false</returns>
+            <param name="lineName">要从Assemblage中删除的Line的名称</param>
         </member>
-        <member name="M:LinePutScript.Line.RemoveAll(System.String)">
+        <member name="M:LinePutScript.LpsDocument`1.RemoveAt(System.Int32)">
             <summary>
-            从Subs中移除特定名称的所有元素
+            移除Assemblage的指定索引处的Line
             </summary>
-            <param name="SubName">要从Subs中删除的Sub的名称</param>
+            <param name="index">要移除的Line的从零开始的索引</param>
         </member>
-        <member name="M:LinePutScript.Line.Contains(LinePutScript.ISub)">
+        <member name="M:LinePutScript.LpsDocument`1.Contains(LinePutScript.ILine)">
             <summary>
-            确定某Sub是否在Line集合中
+            确定某Line是否在Assemblage中
             </summary>
-            <param name="sub">要在Line集合中定位的Sub</param>
-            <returns>如果在Line集合中找到sub,则为True; 否则为false</returns>
+            <param name="line">要在Assemblage中定位的Line</param>
+            <returns>如果在Assemblage中找到line,则为True; 否则为false </returns>
         </member>
-        <member name="M:LinePutScript.Line.Contains(System.String)">
+        <member name="M:LinePutScript.LpsDocument`1.Contains(LinePutScript.ISub)">
             <summary>
-            返回一个值,确定某Sub是否在Line集合中
+            确定某Sub是否在Assemblage中
             </summary>
-            <param name="value">要在Line集合中定位的Sub的名字</param>
-            <returns>如果在Line集合中找到符合的名字,则为True; 否则为false</returns>
+            <param name="sub">要在Assemblage中定位的Sub</param>
+            <returns>如果在Assemblage中找到line,则为True; 否则为false</returns>
         </member>
-        <member name="M:LinePutScript.Line.FindAll(System.String)">
+        <member name="M:LinePutScript.LpsDocument`1.ContainsLine(System.String)">
             <summary>
-            匹配拥有相同名称的Line或sub的所有元素
+            确定某Line(名字定位)是否在Assemblage中
+            </summary>
+            <param name="value">Line的名字</param>
+            <returns>如果在Assemblage中找到相同的名字,则为True; 否则为false</returns>
+        </member>
+        <member name="M:LinePutScript.LpsDocument`1.ContainsSub(System.String)">
+            <summary>
+            确定某sub(名字定位)是否在Assemblage中
+            </summary>
+            <param name="value">sub的名字</param>
+            <returns>如果在Assemblage的sub中找到相同的名字,则为True; 否则为false</returns>
+        </member>
+        <member name="M:LinePutScript.LpsDocument`1.FindAllLine(System.String)">
+            <summary>
+            匹配拥有相同名称的Line的所有元素
+            </summary>
+            <param name="lineName">用于定义匹配的名称</param>
+            <returns>如果找到相同名称的Line,其中所有元素均与指定谓词定义的条件匹配,则为该数组; 否则为一个空的Array</returns>
+        </member>
+        <member name="M:LinePutScript.LpsDocument`1.FindAllLine(System.String,System.String)">
+            <summary>
+            匹配拥有相同名称和信息的Line的所有元素
+            </summary>
+            <param name="lineName">用于定义匹配的名称</param>
+            <param name="lineinfo">用于定义匹配的信息 (去除关键字的文本)</param>
+            <returns>如果找到相同名称和信息的Line,其中所有元素均与指定谓词定义的条件匹配,则为该数组; 否则为一个空的Array</returns>
+        </member>
+        <member name="M:LinePutScript.LpsDocument`1.FindAllLineInfo(System.String)">
+            <summary>
+            匹配拥有相同信息的Line的所有元素
+            </summary>
+            <param name="lineinfo">用于定义匹配的信息 (去除关键字的文本)</param>
+            <returns>如果找到相同信息的Line,其中所有元素均与指定谓词定义的条件匹配,则为该数组; 否则为一个空的Array</returns>
+        </member>
+        <member name="M:LinePutScript.LpsDocument`1.FindLine(System.String)">
+            <summary>
+            搜索与指定名称,并返回整个Assemblage中的第一个匹配元素
+            </summary>
+            <param name="lineName">用于定义匹配的名称</param>
+            <returns>如果找到相同名称的第一个Line,则为该Line; 否则为null</returns>
+        </member>
+        <member name="M:LinePutScript.LpsDocument`1.FindLine(System.String,System.String)">
+            <summary>
+            搜索与指定名称和信息,并返回整个Assemblage中的第一个匹配元素
+            </summary>
+            <param name="lineName">用于定义匹配的名称</param>
+            <param name="lineinfo">用于定义匹配的信息 (去除关键字的文本)</param>
+            <returns>如果找到相同名称和信息的第一个Line,则为该Line; 否则为null</returns>
+        </member>
+        <member name="M:LinePutScript.LpsDocument`1.FindLineInfo(System.String)">
+            <summary>
+            搜索与指定信息,并返回整个Assemblage中的第一个匹配元素
+            </summary>
+            <param name="lineinfo">用于定义匹配的信息 (去除关键字的文本)</param>
+            <returns>如果找到相同信息的第一个Line,则为该Line; 否则为null</returns>
+        </member>
+        <member name="M:LinePutScript.LpsDocument`1.FindorAddLine``1(System.String)">
+            <summary>
+            搜索与指定名称,并返回整个Assemblage中的第一个匹配元素; 若未找到,则新建并添加相同名称的Line,并且返回这个Line
+            </summary>
+            <param name="lineName">用于定义匹配的名称</param>
+            <returns>如果找到相同名称的第一个Line,则为该Line; 否则为新建的相同名称Line</returns>
+        </member>
+        <member name="M:LinePutScript.LpsDocument`1.FindorAddLine(System.String)">
+            <summary>
+            搜索与指定名称,并返回整个Assemblage中的第一个匹配元素; 若未找到,则新建并添加相同名称的Line,并且返回这个Line
+            </summary>
+            <param name="lineName">用于定义匹配的名称</param>
+            <returns>如果找到相同名称的第一个Line,则为该Line; 否则为新建的相同名称Line</returns>
+        </member>
+        <member name="M:LinePutScript.LpsDocument`1.FindAllSub(System.String)">
+            <summary>
+            匹配拥有相同名称的Sub的所有元素
             </summary>
             <param name="subName">用于定义匹配的名称</param>
-            <returns>如果找到相同名称的sub,其中所有元素均与指定谓词定义的条件匹配,则为该数组; 否则为一个空的Array</returns>
+            <returns>如果找到相同名称的Sub,其中所有元素均与指定谓词定义的条件匹配,则为该数组; 否则为一个空的Array</returns>
         </member>
-        <member name="M:LinePutScript.Line.FindAll(System.String,System.String)">
+        <member name="M:LinePutScript.LpsDocument`1.FindAllSub(System.String,System.String)">
             <summary>
-            匹配拥有相同名称和信息的Line或sub的所有元素
+            匹配拥有相同名称和信息的Sub的所有元素
             </summary>
             <param name="subName">用于定义匹配的名称</param>
             <param name="subinfo">用于定义匹配的信息 (去除关键字的文本)</param>
-            <returns>如果找到相同名称和信息的sub,其中所有元素均与指定谓词定义的条件匹配,则为该数组; 否则为一个空的Array</returns>
+            <returns>如果找到相同名称和信息的Sub,其中所有元素均与指定谓词定义的条件匹配,则为该数组; 否则为一个空的Array</returns>
         </member>
-        <member name="M:LinePutScript.Line.FindAllInfo(System.String)">
+        <member name="M:LinePutScript.LpsDocument`1.FindAllSubInfo(System.String)">
             <summary>
-            匹配拥有相同信息的Line或sub的所有元素
+            匹配拥有相同信息的Sub的所有元素
             </summary>
             <param name="subinfo">用于定义匹配的信息 (去除关键字的文本)</param>
-            <returns>如果找到相同信息的sub,其中所有元素均与指定谓词定义的条件匹配,则为该数组; 否则为一个空的Array</returns>
+            <returns>如果找到相同信息的Sub,其中所有元素均与指定谓词定义的条件匹配,则为该数组; 否则为一个空的Array</returns>
         </member>
-        <member name="M:LinePutScript.Line.Find(System.String)">
-            <summary>
-            搜索与指定名称,并返回Line或整个Subs中的第一个匹配元素
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <returns>如果找到相同名称的第一个sub,则为该sub; 否则为null</returns>
-        </member>
-        <member name="M:LinePutScript.Line.Find(System.String,System.String)">
+        <member name="M:LinePutScript.LpsDocument`1.FindSub(System.String)">
             <summary>
             搜索与指定名称,并返回整个Assemblage中的第一个匹配元素
             </summary>
             <param name="subName">用于定义匹配的名称</param>
-            <param name="subinfo">用于定义匹配的信息 (去除关键字的文本)</param>
-            <returns>如果找到相同名称和信息的第一个Line,则为该Line; 否则为null</returns>
+            <returns>如果找到相同名称的第一个Sub,则为该Line; 否则为null</returns>
         </member>
-        <member name="M:LinePutScript.Line.FindInfo(System.String)">
+        <member name="M:LinePutScript.LpsDocument`1.FindSub(System.String,System.String)">
+            <summary>
+            搜索与指定名称和信息,并返回整个Assemblage中的第一个匹配元素
+            </summary>
+            <param name="subName">用于定义匹配的名称</param>
+            <param name="subinfo">用于定义匹配的信息 (去除关键字的文本)</param>
+            <returns>如果找到相同名称和信息的第一个Sub,则为该Line; 否则为null</returns>
+        </member>
+        <member name="M:LinePutScript.LpsDocument`1.FindSubInfo(System.String)">
             <summary>
             搜索与指定信息,并返回整个Assemblage中的第一个匹配元素
             </summary>
             <param name="subinfo">用于定义匹配的信息 (去除关键字的文本)</param>
-            <returns>如果找到相同信息的第一个Line,则为该Line; 否则为null</returns>
+            <returns>如果找到相同信息的第一个Sub,则为该Line; 否则为null</returns>
         </member>
-        <member name="M:LinePutScript.Line.FindorAdd(System.String)">
+        <member name="M:LinePutScript.LpsDocument`1.SearchAllLine(System.String)">
             <summary>
-            搜索与指定名称,并返回Line或整个Subs中的第一个匹配元素;若未找到,则新建并添加相同名称的Sub,并且返回这个Sub
+            搜索全部相似名称的Line的所有元素
             </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <returns>如果找到相同名称的第一个sub,则为该sub; 否则为新建的相同名称sub</returns>
+            <param name="value">%字段%</param>
+            <returns>如果找到相似名称的Line,则为数组; 否则为一个空的Array</returns>
         </member>
-        <member name="M:LinePutScript.Line.SeachALL(System.String)">
+        <member name="M:LinePutScript.LpsDocument`1.SearchLine(System.String)">
+            <summary>
+            搜索字段是否出现在Line名称,并返回整个Assemblage中的第一个匹配元素
+            </summary>
+            <param name="value">%字段%</param>
+            <returns>如果找到相似名称的第一个Line,则为该Line; 否则为null</returns>
+        </member>
+        <member name="M:LinePutScript.LpsDocument`1.SearchAllSub(System.String)">
             <summary>
             搜索全部相似名称的Sub的所有元素
             </summary>
             <param name="value">%字段%</param>
-            <returns>如果找到相似名称的Sub,则为数组; 否则为一个空的Array</returns>
+            <returns>如果找到相似名称的Line,则为该数组; 否则为一个空的Array</returns>
         </member>
-        <member name="M:LinePutScript.Line.Seach(System.String)">
+        <member name="M:LinePutScript.LpsDocument`1.SearchSub(System.String)">
             <summary>
-            搜索字段是否出现在Line名称,并返回整个Subs中的第一个匹配元素
+            搜索字段是否出现在Sub名称,并返回整个Assemblage中的第一个匹配元素
             </summary>
             <param name="value">%字段%</param>
-            <returns>如果找到相似名称的第一个Sub,则为该Sub; 否则为null</returns>
+            <returns>如果找到相同名称的第一个Sub,则为该Sub; 否则为null</returns>
         </member>
-        <member name="M:LinePutScript.Line.IndexOf(System.String)">
+        <member name="M:LinePutScript.LpsDocument`1.IndexOf(System.String)">
             <summary>
-            搜索相同名称的Sub,并返回整个Subs中第一个匹配的sub从零开始的索引
+            搜索相同名称的Line,并返回整个Assemblage中第一个匹配的Line从零开始的索引
             </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <returns>如果找到相同名称的sub的第一个元素,则为该元素的从零开始的索引; 否则为 -1</returns>
+            <param name="lineName">用于定义匹配的名称</param>
+            <returns>如果找到相同名称的Line的第一个元素,则为该元素的从零开始的索引; 否则为 -1</returns>
         </member>
-        <member name="M:LinePutScript.Line.IndexsOf(System.String)">
+        <member name="M:LinePutScript.LpsDocument`1.IndexsOf(System.String)">
             <summary>
-            搜索相同名称的Sub,并返回整个Sub中全部匹配的sub从零开始的索引
+            搜索相同名称的Line,并返回整个Assemblage中全部匹配的Line从零开始的索引
             </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <returns>如果找到相同名称的sub的元素,则为该元素的从零开始的索引组; 否则为空的Array</returns>
+            <param name="lineName">用于定义匹配的名称</param>
+            <returns>如果找到相同名称的Line的元素,则为该元素的从零开始的索引组; 否则为空的Array</returns>
         </member>
-        <member name="M:LinePutScript.Line.ToString">
+        <member name="P:LinePutScript.LpsDocument`1.Count">
             <summary>
-            将当前Line转换成文本格式 (info已经被转义/去除关键字)
+            获得Assemblage目前储存的Line数量
             </summary>
-            <returns>Line的文本格式 (info已经被转义/去除关键字)</returns>
         </member>
-        <member name="M:LinePutScript.Line.ToString(System.Text.StringBuilder)">
+        <member name="M:LinePutScript.LpsDocument`1.Load``1(System.String)">
             <summary>
-            将当前Line转换成文本格式 (info已经被转义/去除关键字) 将输出储存到StringBuilder
+            从指定的字符串加载LPS文档
             </summary>
-            <param name="str">储存到的 StringBuilder</param>
-            <returns>Line的文本格式 (info已经被转义/去除关键字)</returns>
+            <param name="lps">包含要加载的LPS文档的字符串</param>
         </member>
-        <member name="M:LinePutScript.Line.GetLongHashCode">
+        <member name="M:LinePutScript.LpsDocument`1.Load(System.String)">
             <summary>
-            获得该Line的长哈希代码
+            从指定的字符串加载LPS文档
+            </summary>
+            <param name="lps">包含要加载的LPS文档的字符串</param>
+        </member>
+        <member name="M:LinePutScript.LpsDocument`1.Load(System.Collections.Generic.IEnumerable{LinePutScript.ILine})">
+            <summary>
+            从指定行加载LPS文档
+            </summary>
+            <param name="lines">多个行</param>
+        </member>
+        <member name="M:LinePutScript.LpsDocument`1.First">
+            <summary>
+            返回一个Assemblage的第一个元素。
+            </summary>
+            <returns>要返回的第一个元素</returns>
+        </member>
+        <member name="M:LinePutScript.LpsDocument`1.Last">
+            <summary>
+            返回一个Assemblage的最后一个元素。
+            </summary>
+            <returns>要返回的最后一个元素</returns>
+        </member>
+        <member name="M:LinePutScript.LpsDocument`1.GetEnumerator">
+            <summary>
+            返回循环访问 Assemblage 的枚举数。
+            </summary>
+            <returns>用于 Assemblage 的枚举数</returns>
+        </member>
+        <member name="P:LinePutScript.LpsDocument`1.Item(System.String)">
+            <summary>
+            搜索与指定名称,并返回整个Assemblage中的第一个匹配元素; 若未找到,则新建并添加相同名称的Line,并且返回这个Line
+            </summary>
+            <param name="lineName">用于定义匹配的名称</param>
+            <returns>如果找到相同名称的第一个Line,则为该Line; 否则为新建的相同名称Line</returns>
+        </member>
+        <member name="M:LinePutScript.LpsDocument`1.ToString">
+            <summary>
+            将当前Documents转换成文本格式
+            </summary>
+            <returns>LinePutScript的文本格式</returns>
+        </member>
+        <member name="M:LinePutScript.LpsDocument`1.GetLongHashCode">
+            <summary>
+            获得该LPS文档的长哈希代码
             </summary>
             <returns>64位哈希代码</returns>
         </member>
-        <member name="M:LinePutScript.Line.GetHashCode">
+        <member name="M:LinePutScript.LpsDocument`1.GetHashCode">
             <summary>
-            获得该Line的哈希代码
+            获得该LPS文档的哈希代码
             </summary>
             <returns>32位哈希代码</returns>
         </member>
-        <member name="M:LinePutScript.Line.Equals(LinePutScript.ILine)">
+        <member name="M:LinePutScript.LpsDocument`1.Equals(System.Object)">
             <summary>
             确认对象是否等于当前对象
             </summary>
             <param name="obj">Subs</param>
             <returns></returns>
         </member>
-        <member name="M:LinePutScript.Line.GetEnumerator">
+        <member name="P:LinePutScript.LpsDocument`1.Length">
             <summary>
-            返回循环访问 Subs 的枚举数。
-            </summary>
-            <returns>用于 Subs 的枚举数</returns>
-        </member>
-        <member name="M:LinePutScript.Line.First">
-            <summary>
-            返回一个 Subs 的第一个元素。
-            </summary>
-            <returns>要返回的第一个元素</returns>
-        </member>
-        <member name="M:LinePutScript.Line.Last">
-            <summary>
-            返回一个 Subs 的最后一个元素。
-            </summary>
-            <returns>要返回的最后一个元素</returns>
-        </member>
-        <member name="P:LinePutScript.Line.Item(System.String)">
-            <summary>
-            搜索与指定名称,并返回Line或整个Subs中的第一个匹配元素;若未找到,则新建并添加相同名称的Sub,并且返回这个Sub
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <returns>如果找到相同名称的第一个sub,则为该sub; 否则为新建的相同名称sub</returns>
-        </member>
-        <member name="M:LinePutScript.Line.GetBool(System.String)">
-            <summary>
-            获得bool属性的sub
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <returns>如果找到相同名称的sub,则为True; 否则为false</returns>
-        </member>
-        <member name="M:LinePutScript.Line.SetBool(System.String,System.Boolean)">
-            <summary>
-            设置bool属性的sub
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <param name="value">
-            值
-            </param>
-        </member>
-        <member name="M:LinePutScript.Line.GetInt(System.String,System.Int32)">
-            <summary>
-            获得int属性的sub
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <param name="defaultvalue">如果没找到返回的默认值</param>
-            <returns>
-            如果找到相同名称的sub,返回sub中储存的int值
-            如果没找到,则返回默认值
-            </returns>
-        </member>
-        <member name="M:LinePutScript.Line.SetInt(System.String,System.Int32)">
-            <summary>
-            设置int属性的sub
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <param name="value">储存进sub的int值</param>
-        </member>
-        <member name="M:LinePutScript.Line.GetInt64(System.String,System.Int64)">
-            <summary>
-            获得long属性的sub
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <param name="defaultvalue">如果没找到返回的默认值</param>
-            <returns>
-            如果找到相同名称的sub,返回sub中储存的long值
-            如果没找到,则返回默认值
-            </returns>
-        </member>
-        <member name="M:LinePutScript.Line.SetInt64(System.String,System.Int64)">
-            <summary>
-            设置long属性的sub
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <param name="value">储存进sub的long值</param>
-        </member>
-        <member name="M:LinePutScript.Line.GetFloat(System.String,System.Double)">
-            <summary>
-            获得double(long)属性的sub 通过转换long获得更精确的小数,小数位最大保留9位
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <param name="defaultvalue">如果没找到返回的默认值</param>
-            <returns>
-            如果找到相同名称的sub,返回sub中储存的double(long)值
-            如果没找到,则返回默认值
-            </returns>
-        </member>
-        <member name="M:LinePutScript.Line.SetFloat(System.String,System.Double)">
-            <summary>
-            设置double(long)属性的sub 通过转换long获得更精确的小数,小数位最大保留9位
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <param name="value">储存进sub的double(long)值</param>
-        </member>
-        <member name="M:LinePutScript.Line.GetDateTime(System.String,System.DateTime)">
-            <summary>
-            获得DateTime属性的sub
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <param name="defaultvalue">如果没找到返回的默认值</param>
-            <returns>
-            如果找到相同名称的sub,返回sub中储存的DateTime值
-            如果没找到,则返回默认值
-            </returns>
-        </member>
-        <member name="M:LinePutScript.Line.SetDateTime(System.String,System.DateTime)">
-            <summary>
-            设置DateTime属性的sub
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <param name="value">储存进sub的DateTime值</param>
-        </member>
-        <member name="M:LinePutScript.Line.GetString(System.String,System.String)">
-            <summary>
-            获得String属性的sub
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <param name="defaultvalue">如果没找到返回的默认值</param>
-            <returns>
-            如果找到相同名称的sub,返回sub中储存的String值
-            如果没找到,则返回默认值
-            </returns>
-        </member>
-        <member name="M:LinePutScript.Line.SetString(System.String,System.String)">
-            <summary>
-            设置String属性的sub
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <param name="value">储存进sub的String值</param>
-        </member>
-        <member name="M:LinePutScript.Line.GetDouble(System.String,System.Double)">
-            <summary>
-            获得double属性的sub
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <param name="defaultvalue">如果没找到返回的默认值</param>
-            <returns>
-            如果找到相同名称的sub,返回sub中储存的double值
-            如果没找到,则返回默认值
-            </returns>
-        </member>
-        <member name="M:LinePutScript.Line.SetDouble(System.String,System.Double)">
-            <summary>
-            设置double属性的sub
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <param name="value">储存进sub的double值</param>
-        </member>
-        <member name="P:LinePutScript.Line.Item(LinePutScript.gstr)">
-            <summary>
-            获取或设置 String 属性的sub
-            </summary>
-            <param name="subName">(gstr)用于定义匹配的名称</param>
-            <returns>获取或设置对 String 属性的Sub</returns>
-        </member>
-        <member name="P:LinePutScript.Line.Item(LinePutScript.gbol)">
-            <summary>
-            获取或设置 Bool 属性的sub
-            </summary>
-            <param name="subName">(gbol)用于定义匹配的名称</param>
-            <returns>获取或设置对 bool 属性的Sub</returns>
-        </member>
-        <member name="P:LinePutScript.Line.Item(LinePutScript.gint)">
-            <summary>
-            获取或设置 Int 属性的sub
-            </summary>
-            <param name="subName">(gint)用于定义匹配的名称</param>
-            <returns>获取或设置对 int 属性的Sub</returns>
-        </member>
-        <member name="P:LinePutScript.Line.Item(LinePutScript.gi64)">
-            <summary>
-            获取或设置 Long 属性的sub
-            </summary>
-            <param name="subName">(gi64)用于定义匹配的名称</param>
-            <returns>获取或设置对 long 属性的Sub</returns>
-        </member>
-        <member name="P:LinePutScript.Line.Item(LinePutScript.gdbe)">
-            <summary>
-            获取或设置 Double 属性的sub
-            </summary>
-            <param name="subName">(gdbe)用于定义匹配的名称</param>
-            <returns>获取或设置对 double 属性的Sub</returns>
-        </member>
-        <member name="P:LinePutScript.Line.Item(LinePutScript.gflt)">
-            <summary>
-            获取或设置 Double(long) 属性的sub  通过转换long获得更精确的小数,小数位最大保留9位
-            </summary>
-            <param name="subName">(gflt)用于定义匹配的名称</param>
-            <returns>获取或设置对 double 属性的Sub</returns>
-        </member>
-        <member name="P:LinePutScript.Line.Item(LinePutScript.gdat)">
-            <summary>
-            获取或设置 DateTime 属性的sub
-            </summary>
-            <param name="subName">(gdbe)用于定义匹配的名称</param>
-            <returns>获取或设置对 double 属性的Sub</returns>
-        </member>
-        <member name="P:LinePutScript.Line.Count">
-            <summary>
-            获取Sub数量
+            获得当前文档大小 单位:字符
             </summary>
         </member>
-        <member name="P:LinePutScript.Line.IsReadOnly">
+        <member name="P:LinePutScript.LpsDocument`1.IsReadOnly">
             <summary>
             是否只读
             </summary>
         </member>
-        <member name="P:LinePutScript.Line.Item(System.Int32)">
+        <member name="P:LinePutScript.LpsDocument`1.Item(System.Int32)">
             <summary>
-            通过引索修改Line中Sub内容
+            通过引索修改lps中Line内容
             </summary>
             <param name="index">要获得或设置的引索</param>
-            <returns>引索指定的Sub</returns>
+            <returns>引索指定的Line</returns>
         </member>
-        <member name="M:LinePutScript.Line.IndexOf(LinePutScript.ISub)">
+        <member name="M:LinePutScript.LpsDocument`1.GetBool(System.String)">
             <summary>
-            搜索相同名称的Sub,并返回整个Subs中第一个匹配的Sub从零开始的索引
+            获得bool属性的line
             </summary>
-            <param name="sub">用于定义匹配的Sub</param>
-            <returns>如果找到相同名称的Sub的第一个元素,则为该元素的从零开始的索引; 否则为 -1</returns>
+            <param name="lineName">用于定义匹配的名称</param>
+            <returns>如果找到相同名称的line,则为True; 否则为false</returns>
         </member>
-        <member name="M:LinePutScript.Line.Insert(System.Int32,LinePutScript.ISub)">
+        <member name="M:LinePutScript.LpsDocument`1.SetBool(System.String,System.Boolean)">
             <summary>
-            将指定的Sub添加到指定索引处
+            设置bool属性的line
             </summary>
-            <param name="index">应插入 Sub 的从零开始的索引</param>
-            <param name="newSub">要添加的Sub</param>
+            <param name="lineName">用于定义匹配的名称</param>
+            <param name="value">
+            如果为ture,则在没有相同name为lineName的line时候添加新的line
+            如果为false,则删除所有name为lineName的line
+            </param>
         </member>
-        <member name="M:LinePutScript.Line.RemoveAt(System.Int32)">
+        <member name="M:LinePutScript.LpsDocument`1.GetInt(System.String,System.Int32)">
             <summary>
-            从Subs中移除特定引索的Sub
+            获得int属性的line
             </summary>
-            <param name="index">要删除Sub的引索</param>
+            <param name="lineName">用于定义匹配的名称</param>
+            <param name="defaultvalue">如果没找到返回的默认值</param>
+            <returns>
+            如果找到相同名称的line,返回line中储存的int值
+            如果没找到,则返回默认值
+            </returns>
         </member>
-        <member name="M:LinePutScript.Line.Add(LinePutScript.ISub)">
+        <member name="M:LinePutScript.LpsDocument`1.SetInt(System.String,System.Int32)">
             <summary>
-            将指定的Sub添加到Subs列表的末尾
+            设置int属性的line
             </summary>
-            <param name="newSub">要添加的Sub</param>
+            <param name="lineName">用于定义匹配的名称</param>
+            <param name="value">储存进line的int值</param>
         </member>
-        <member name="M:LinePutScript.Line.Clear">
+        <member name="M:LinePutScript.LpsDocument`1.GetInt64(System.String,System.Int64)">
             <summary>
-            移除Line中所有的Sub
+            获得long属性的line
+            </summary>
+            <param name="lineName">用于定义匹配的名称</param>
+            <param name="defaultvalue">如果没找到返回的默认值</param>
+            <returns>
+            如果找到相同名称的line,返回line中储存的long值
+            如果没找到,则返回默认值
+            </returns>
+        </member>
+        <member name="M:LinePutScript.LpsDocument`1.SetInt64(System.String,System.Int64)">
+            <summary>
+            设置long属性的line
+            </summary>
+            <param name="lineName">用于定义匹配的名称</param>
+            <param name="value">储存进line的long值</param>
+        </member>
+        <member name="M:LinePutScript.LpsDocument`1.GetString(System.String,System.String)">
+            <summary>
+            获得String属性的line
+            </summary>
+            <param name="lineName">用于定义匹配的名称</param>
+            <param name="defaultvalue">如果没找到返回的默认值</param>
+            <returns>
+            如果找到相同名称的line,返回line中储存的string值
+            如果没找到,则返回默认值
+            </returns>
+        </member>
+        <member name="M:LinePutScript.LpsDocument`1.SetString(System.String,System.String)">
+            <summary>
+            设置String属性的line
+            </summary>
+            <param name="lineName">用于定义匹配的名称</param>
+            <param name="value">储存进line的String值</param>
+        </member>
+        <member name="M:LinePutScript.LpsDocument`1.GetDouble(System.String,System.Double)">
+            <summary>
+            获得double属性的line
+            </summary>
+            <param name="lineName">用于定义匹配的名称</param>
+            <param name="defaultvalue">如果没找到返回的默认值</param>
+            <returns>
+            如果找到相同名称的line,返回line中储存的double值
+            如果没找到,则返回默认值
+            </returns>
+        </member>
+        <member name="M:LinePutScript.LpsDocument`1.SetDouble(System.String,System.Double)">
+            <summary>
+            设置double属性的line
+            </summary>
+            <param name="lineName">用于定义匹配的名称</param>
+            <param name="value">储存进line的double值</param>
+        </member>
+        <member name="M:LinePutScript.LpsDocument`1.GetFloat(System.String,System.Double)">
+            <summary>
+            获得double(long)属性的line 通过转换long获得更精确的小数,小数位最大保留9位
+            </summary>
+            <param name="lineName">用于定义匹配的名称</param>
+            <param name="defaultvalue">如果没找到返回的默认值</param>
+            <returns>
+            如果找到相同名称的line,返回line中储存的double(long)值
+            如果没找到,则返回默认值
+            </returns>
+        </member>
+        <member name="M:LinePutScript.LpsDocument`1.SetFloat(System.String,System.Double)">
+            <summary>
+            设置double(long)属性的line 通过转换long获得更精确的小数,小数位最大保留9位
+            </summary>
+            <param name="lineName">用于定义匹配的名称</param>
+            <param name="value">储存进line的double(long)值</param>
+        </member>
+        <member name="M:LinePutScript.LpsDocument`1.GetDateTime(System.String,System.DateTime)">
+            <summary>
+            获得DateTime属性的line
+            </summary>
+            <param name="lineName">用于定义匹配的名称</param>
+            <param name="defaultvalue">如果没找到返回的默认值</param>
+            <returns>
+            如果找到相同名称的line,返回line中储存的DateTime值
+            如果没找到,则返回默认值
+            </returns>
+        </member>
+        <member name="M:LinePutScript.LpsDocument`1.SetDateTime(System.String,System.DateTime)">
+            <summary>
+            设置DateTime属性的line
+            </summary>
+            <param name="lineName">用于定义匹配的名称</param>
+            <param name="value">储存进line的DateTime值</param>
+        </member>
+        <member name="P:LinePutScript.LpsDocument`1.Item(LinePutScript.gstr)">
+            <summary>
+            获取或设置 String 属性的line
+            </summary>
+            <param name="lineName">(gstr)用于定义匹配的名称</param>
+            <returns>获取或设置对 String 属性的Line</returns>
+        </member>
+        <member name="P:LinePutScript.LpsDocument`1.Item(LinePutScript.gbol)">
+            <summary>
+            获取或设置 Bool 属性的line
+            </summary>
+            <param name="lineName">(gbol)用于定义匹配的名称</param>
+            <returns>获取或设置对 bool 属性的Line</returns>
+        </member>
+        <member name="P:LinePutScript.LpsDocument`1.Item(LinePutScript.gint)">
+            <summary>
+            获取或设置 Int 属性的line
+            </summary>
+            <param name="lineName">(gint)用于定义匹配的名称</param>
+            <returns>获取或设置对 int 属性的Line</returns>
+        </member>
+        <member name="P:LinePutScript.LpsDocument`1.Item(LinePutScript.gi64)">
+            <summary>
+            获取或设置 Long 属性的line
+            </summary>
+            <param name="lineName">(gi64)用于定义匹配的名称</param>
+            <returns>获取或设置对 long 属性的Line</returns>
+        </member>
+        <member name="P:LinePutScript.LpsDocument`1.Item(LinePutScript.gdbe)">
+            <summary>
+            获取或设置 Double 属性的line
+            </summary>
+            <param name="lineName">(gdbe)用于定义匹配的名称</param>
+            <returns>获取或设置对 double 属性的Line</returns>
+        </member>
+        <member name="P:LinePutScript.LpsDocument`1.Item(LinePutScript.gflt)">
+            <summary>
+            获取或设置 Double(long) 属性的line  通过转换long获得更精确的小数,小数位最大保留9位
+            </summary>
+            <param name="lineName">(gflt)用于定义匹配的名称</param>
+            <returns>获取或设置对 double 属性的line</returns>
+        </member>
+        <member name="P:LinePutScript.LpsDocument`1.Item(LinePutScript.gdat)">
+            <summary>
+            获取或设置 DateTime 属性的line
+            </summary>
+            <param name="lineName">(gdbe)用于定义匹配的名称</param>
+            <returns>获取或设置对 double 属性的line</returns>
+        </member>
+        <member name="M:LinePutScript.LpsDocument`1.IndexOf(LinePutScript.ILine)">
+            <summary>
+            搜索相同Line,并返回整个Assemblage中第一个匹配的Line从零开始的索引
+            </summary>
+            <param name="line">用于定义匹配的Line</param>
+            <returns>如果找到相同名称的Line的第一个元素,则为该元素的从零开始的索引; 否则为 -1</returns>
+        </member>
+        <member name="M:LinePutScript.LpsDocument`1.Insert(System.Int32,LinePutScript.ILine)">
+            <summary>
+            将指定的Line添加到指定索引处
+            </summary>
+            <param name="index">应插入 Line 的从零开始的索引</param>
+            <param name="newLine">要添加的Line</param>
+        </member>
+        <member name="M:LinePutScript.LpsDocument`1.Add(LinePutScript.ILine)">
+            <summary>
+            将指定的Line添加到Assemblage列表的末尾
+            </summary>
+            <param name="newLine">要添加的Line</param>
+        </member>
+        <member name="M:LinePutScript.LpsDocument`1.Clear">
+            <summary>
+            移除Assemblage中所有的Line
             </summary>
         </member>
-        <member name="M:LinePutScript.Line.CopyTo(LinePutScript.ISub[],System.Int32)">
+        <member name="M:LinePutScript.LpsDocument`1.CopyTo(LinePutScript.ILine[],System.Int32)">
             <summary>
-            将整个array复制到Line的Subs
+            将整个array复制到Assemblage
             </summary>
-            <param name="array">复制到Subs的Sub列表</param>
+            <param name="array">复制到Assemblage的Line列表</param>
             <param name="arrayIndex">从零开始的引索,从引索处开始复制</param>
         </member>
-        <member name="M:LinePutScript.Line.CompareTo(LinePutScript.ILine)">
+        <member name="M:LinePutScript.LpsDocument`1.ToList">
             <summary>
-            将当前line与另一个line进行比较,并退回一个整数指示在排序位置中是位于另一个对象之前之后还是相同位置
+            返回一个新List,包含所有Line
             </summary>
-            <param name="other">另一个line</param>
-            <returns>值小于零时排在 other 之前 值等于零时出现在相同排序位置 值大于零则排在 other 之后</returns>
-        </member>
-        <member name="M:LinePutScript.Line.Clone">
-            <summary>
-            克隆一个Line
-            </summary>
-            <returns>相同的Line</returns>
-        </member>
-        <member name="M:LinePutScript.Line.ToList">
-            <summary>
-            返回一个新List,包含所有Subs
-            </summary>
-            <returns>所有储存的Subs</returns>
+            <returns>所有储存的Line</returns>
         </member>
         <member name="T:LinePutScript.LpsDocument">
             <summary>
-            文件 包括文件读写等一系列操作
-            </summary>
-        </member>
-        <member name="P:LinePutScript.LpsDocument.Assemblage">
-            <summary>
-            集合 全部文件的数据
+            文件 包括文件读写等一系列操作 旧版: 兼容行操作和LineNode等
             </summary>
         </member>
         <member name="M:LinePutScript.LpsDocument.#ctor">
@@ -3094,7 +3833,14 @@
             </summary>
             <param name="lps">包含要加载的LPS文档的字符串</param>
         </member>
-        <member name="M:LinePutScript.LpsDocument.#ctor(LinePutScript.ILine[])">
+        <member name="M:LinePutScript.LpsDocument.#ctor(LinePutScript.ILine,LinePutScript.ILine[])">
+            <summary>
+            从指定行创建 LpsDocument
+            </summary>
+            <param name="line">多个行</param>
+            <param name="lines">多个行</param>
+        </member>
+        <member name="M:LinePutScript.LpsDocument.#ctor(System.Collections.Generic.IEnumerable{LinePutScript.ILine})">
             <summary>
             从指定行创建 LpsDocument
             </summary>
@@ -3105,558 +3851,6 @@
             从另一个LPS文件创建该LPS
             </summary>
             <param name="lps"></param>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.AddLine(LinePutScript.ILine)">
-            <summary>
-            将指定的Line添加到Assemblage列表的末尾
-            </summary>
-            <param name="newLine">要添加的Line</param>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.AddorReplaceLine(LinePutScript.ILine)">
-            <summary>
-            若无相同名称(Name)的Line,则将指定的Line添加到Assemblage列表的末尾
-            若有,则替换成要添加的Line
-            </summary>
-            <param name="newLine">要添加的Line</param>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.AddRange(LinePutScript.ILine[])">
-            <summary>
-            将指定Line的元素添加到Assemblage的末尾
-            </summary>
-            <param name="newLines">要添加的多个Line</param>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.AddRange(System.Collections.Generic.IEnumerable{LinePutScript.ILine})">
-            <summary>
-            将指定Line的元素添加到Assemblage的末尾
-            </summary>
-            <param name="newLines">要添加的多个Line</param>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.InsertLine(System.Int32,LinePutScript.ILine)">
-            <summary>
-            将指定的Line添加到指定索引处
-            </summary>
-            <param name="index">应插入 Line 的从零开始的索引</param>
-            <param name="newLine">要添加的Line</param>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.InsertRange(System.Int32,LinePutScript.ILine[])">
-            <summary>
-            将指定Line的元素添加指定索引处
-            </summary>
-            <param name="index">应插入 Line 的从零开始的索引</param>
-            <param name="newLines">要添加的多个Line</param>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.InsertRange(System.Int32,System.Collections.Generic.IEnumerable{LinePutScript.ILine})">
-            <summary>
-            将指定Line的元素添加指定索引处
-            </summary>
-            <param name="index">应插入 Line 的从零开始的索引</param>
-            <param name="newLines">要添加的多个Line</param>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.Remove(LinePutScript.ILine)">
-            <summary>
-            从Assemblage中移除特定对象的第一个匹配项
-            </summary>
-            <param name="line">要从Assemblage中删除的Line的名称</param>
-            <returns>如果成功移除了line,则为 true; 否则为 false</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.Remove(System.String)">
-            <summary>
-            从Assemblage中移除特定名称的第一个匹配项
-            </summary>
-            <param name="lineName">要从Assemblage中删除的Line的名称</param>
-            <returns>如果成功移除了line,则为 true; 否则为 false</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.RemoveAll(LinePutScript.ILine)">
-            <summary>
-            从Assemblage中移除移除与条件相匹配的所有Line
-            </summary>
-            <param name="line">要从Assemblage中删除的Line</param>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.RemoveAll(System.String)">
-            <summary>
-            从Assemblage中移除移除与名称相匹配的所有Line
-            </summary>
-            <param name="lineName">要从Assemblage中删除的Line的名称</param>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.RemoveAt(System.Int32)">
-            <summary>
-            移除Assemblage的指定索引处的Line
-            </summary>
-            <param name="index">要移除的Line的从零开始的索引</param>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.Contains(LinePutScript.ILine)">
-            <summary>
-            确定某Line是否在Assemblage中
-            </summary>
-            <param name="line">要在Assemblage中定位的Line</param>
-            <returns>如果在Assemblage中找到line,则为True; 否则为false </returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.Contains(LinePutScript.ISub)">
-            <summary>
-            确定某Sub是否在Assemblage中
-            </summary>
-            <param name="sub">要在Assemblage中定位的Sub</param>
-            <returns>如果在Assemblage中找到line,则为True; 否则为false</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.ContainsLine(System.String)">
-            <summary>
-            确定某Line(名字定位)是否在Assemblage中
-            </summary>
-            <param name="value">Line的名字</param>
-            <returns>如果在Assemblage中找到相同的名字,则为True; 否则为false</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.ContainsSub(System.String)">
-            <summary>
-            确定某sub(名字定位)是否在Assemblage中
-            </summary>
-            <param name="value">sub的名字</param>
-            <returns>如果在Assemblage的sub中找到相同的名字,则为True; 否则为false</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.FindAllLine(System.String)">
-            <summary>
-            匹配拥有相同名称的Line的所有元素
-            </summary>
-            <param name="lineName">用于定义匹配的名称</param>
-            <returns>如果找到相同名称的Line,其中所有元素均与指定谓词定义的条件匹配,则为该数组; 否则为一个空的Array</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.FindAllLine(System.String,System.String)">
-            <summary>
-            匹配拥有相同名称和信息的Line的所有元素
-            </summary>
-            <param name="lineName">用于定义匹配的名称</param>
-            <param name="lineinfo">用于定义匹配的信息 (去除关键字的文本)</param>
-            <returns>如果找到相同名称和信息的Line,其中所有元素均与指定谓词定义的条件匹配,则为该数组; 否则为一个空的Array</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.FindAllLineInfo(System.String)">
-            <summary>
-            匹配拥有相同信息的Line的所有元素
-            </summary>
-            <param name="lineinfo">用于定义匹配的信息 (去除关键字的文本)</param>
-            <returns>如果找到相同信息的Line,其中所有元素均与指定谓词定义的条件匹配,则为该数组; 否则为一个空的Array</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.FindLine(System.String)">
-            <summary>
-            搜索与指定名称,并返回整个Assemblage中的第一个匹配元素
-            </summary>
-            <param name="lineName">用于定义匹配的名称</param>
-            <returns>如果找到相同名称的第一个Line,则为该Line; 否则为null</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.FindLine(System.String,System.String)">
-            <summary>
-            搜索与指定名称和信息,并返回整个Assemblage中的第一个匹配元素
-            </summary>
-            <param name="lineName">用于定义匹配的名称</param>
-            <param name="lineinfo">用于定义匹配的信息 (去除关键字的文本)</param>
-            <returns>如果找到相同名称和信息的第一个Line,则为该Line; 否则为null</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.FindLineInfo(System.String)">
-            <summary>
-            搜索与指定信息,并返回整个Assemblage中的第一个匹配元素
-            </summary>
-            <param name="lineinfo">用于定义匹配的信息 (去除关键字的文本)</param>
-            <returns>如果找到相同信息的第一个Line,则为该Line; 否则为null</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.FindorAddLine``1(System.String)">
-            <summary>
-            搜索与指定名称,并返回整个Assemblage中的第一个匹配元素; 若未找到,则新建并添加相同名称的Line,并且返回这个Line
-            </summary>
-            <param name="lineName">用于定义匹配的名称</param>
-            <returns>如果找到相同名称的第一个Line,则为该Line; 否则为新建的相同名称Line</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.FindorAddLine(System.String)">
-            <summary>
-            搜索与指定名称,并返回整个Assemblage中的第一个匹配元素; 若未找到,则新建并添加相同名称的Line,并且返回这个Line
-            </summary>
-            <param name="lineName">用于定义匹配的名称</param>
-            <returns>如果找到相同名称的第一个Line,则为该Line; 否则为新建的相同名称Line</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.FindAllSub(System.String)">
-            <summary>
-            匹配拥有相同名称的Sub的所有元素
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <returns>如果找到相同名称的Sub,其中所有元素均与指定谓词定义的条件匹配,则为该数组; 否则为一个空的Array</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.FindAllSub(System.String,System.String)">
-            <summary>
-            匹配拥有相同名称和信息的Sub的所有元素
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <param name="subinfo">用于定义匹配的信息 (去除关键字的文本)</param>
-            <returns>如果找到相同名称和信息的Sub,其中所有元素均与指定谓词定义的条件匹配,则为该数组; 否则为一个空的Array</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.FindAllSubInfo(System.String)">
-            <summary>
-            匹配拥有相同信息的Sub的所有元素
-            </summary>
-            <param name="subinfo">用于定义匹配的信息 (去除关键字的文本)</param>
-            <returns>如果找到相同信息的Sub,其中所有元素均与指定谓词定义的条件匹配,则为该数组; 否则为一个空的Array</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.FindSub(System.String)">
-            <summary>
-            搜索与指定名称,并返回整个Assemblage中的第一个匹配元素
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <returns>如果找到相同名称的第一个Sub,则为该Line; 否则为null</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.FindSub(System.String,System.String)">
-            <summary>
-            搜索与指定名称和信息,并返回整个Assemblage中的第一个匹配元素
-            </summary>
-            <param name="subName">用于定义匹配的名称</param>
-            <param name="subinfo">用于定义匹配的信息 (去除关键字的文本)</param>
-            <returns>如果找到相同名称和信息的第一个Sub,则为该Line; 否则为null</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.FindSubInfo(System.String)">
-            <summary>
-            搜索与指定信息,并返回整个Assemblage中的第一个匹配元素
-            </summary>
-            <param name="subinfo">用于定义匹配的信息 (去除关键字的文本)</param>
-            <returns>如果找到相同信息的第一个Sub,则为该Line; 否则为null</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.SearchAllLine(System.String)">
-            <summary>
-            搜索全部相似名称的Line的所有元素
-            </summary>
-            <param name="value">%字段%</param>
-            <returns>如果找到相似名称的Line,则为数组; 否则为一个空的Array</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.SearchLine(System.String)">
-            <summary>
-            搜索字段是否出现在Line名称,并返回整个Assemblage中的第一个匹配元素
-            </summary>
-            <param name="value">%字段%</param>
-            <returns>如果找到相似名称的第一个Line,则为该Line; 否则为null</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.SearchAllSub(System.String)">
-            <summary>
-            搜索全部相似名称的Sub的所有元素
-            </summary>
-            <param name="value">%字段%</param>
-            <returns>如果找到相似名称的Line,则为该数组; 否则为一个空的Array</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.SearchSub(System.String)">
-            <summary>
-            搜索字段是否出现在Sub名称,并返回整个Assemblage中的第一个匹配元素
-            </summary>
-            <param name="value">%字段%</param>
-            <returns>如果找到相同名称的第一个Sub,则为该Sub; 否则为null</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.IndexOf(System.String)">
-            <summary>
-            搜索相同名称的Line,并返回整个Assemblage中第一个匹配的Line从零开始的索引
-            </summary>
-            <param name="lineName">用于定义匹配的名称</param>
-            <returns>如果找到相同名称的Line的第一个元素,则为该元素的从零开始的索引; 否则为 -1</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.IndexsOf(System.String)">
-            <summary>
-            搜索相同名称的Line,并返回整个Assemblage中全部匹配的Line从零开始的索引
-            </summary>
-            <param name="lineName">用于定义匹配的名称</param>
-            <returns>如果找到相同名称的Line的元素,则为该元素的从零开始的索引组; 否则为空的Array</returns>
-        </member>
-        <member name="P:LinePutScript.LpsDocument.Count">
-            <summary>
-            获得Assemblage目前储存的Line数量
-            </summary>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.Load``1(System.String)">
-            <summary>
-            从指定的字符串加载LPS文档
-            </summary>
-            <param name="lps">包含要加载的LPS文档的字符串</param>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.Load(System.String)">
-            <summary>
-            从指定的字符串加载LPS文档
-            </summary>
-            <param name="lps">包含要加载的LPS文档的字符串</param>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.Load(LinePutScript.ILine[])">
-            <summary>
-            从指定行加载LPS文档
-            </summary>
-            <param name="lines">多个行</param>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.First">
-            <summary>
-            返回一个Assemblage的第一个元素。
-            </summary>
-            <returns>要返回的第一个元素</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.Last">
-            <summary>
-            返回一个Assemblage的最后一个元素。
-            </summary>
-            <returns>要返回的最后一个元素</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.GetEnumerator">
-            <summary>
-            返回循环访问 Assemblage 的枚举数。
-            </summary>
-            <returns>用于 Assemblage 的枚举数</returns>
-        </member>
-        <member name="P:LinePutScript.LpsDocument.Item(System.String)">
-            <summary>
-            搜索与指定名称,并返回整个Assemblage中的第一个匹配元素; 若未找到,则新建并添加相同名称的Line,并且返回这个Line
-            </summary>
-            <param name="lineName">用于定义匹配的名称</param>
-            <returns>如果找到相同名称的第一个Line,则为该Line; 否则为新建的相同名称Line</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.ToString">
-            <summary>
-            将当前Documents转换成文本格式
-            </summary>
-            <returns>LinePutScript的文本格式</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.GetLongHashCode">
-            <summary>
-            获得该LPS文档的长哈希代码
-            </summary>
-            <returns>64位哈希代码</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.GetHashCode">
-            <summary>
-            获得该LPS文档的哈希代码
-            </summary>
-            <returns>32位哈希代码</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.Equals(System.Object)">
-            <summary>
-            确认对象是否等于当前对象
-            </summary>
-            <param name="obj">Subs</param>
-            <returns></returns>
-        </member>
-        <member name="P:LinePutScript.LpsDocument.Length">
-            <summary>
-            获得当前文档大小 单位:字符
-            </summary>
-        </member>
-        <member name="P:LinePutScript.LpsDocument.IsReadOnly">
-            <summary>
-            是否只读
-            </summary>
-        </member>
-        <member name="P:LinePutScript.LpsDocument.Item(System.Int32)">
-            <summary>
-            通过引索修改lps中Line内容
-            </summary>
-            <param name="index">要获得或设置的引索</param>
-            <returns>引索指定的Line</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.GetBool(System.String)">
-            <summary>
-            获得bool属性的line
-            </summary>
-            <param name="lineName">用于定义匹配的名称</param>
-            <returns>如果找到相同名称的line,则为True; 否则为false</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.SetBool(System.String,System.Boolean)">
-            <summary>
-            设置bool属性的line
-            </summary>
-            <param name="lineName">用于定义匹配的名称</param>
-            <param name="value">
-            如果为ture,则在没有相同name为lineName的line时候添加新的line
-            如果为false,则删除所有name为lineName的line
-            </param>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.GetInt(System.String,System.Int32)">
-            <summary>
-            获得int属性的line
-            </summary>
-            <param name="lineName">用于定义匹配的名称</param>
-            <param name="defaultvalue">如果没找到返回的默认值</param>
-            <returns>
-            如果找到相同名称的line,返回line中储存的int值
-            如果没找到,则返回默认值
-            </returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.SetInt(System.String,System.Int32)">
-            <summary>
-            设置int属性的line
-            </summary>
-            <param name="lineName">用于定义匹配的名称</param>
-            <param name="value">储存进line的int值</param>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.GetInt64(System.String,System.Int64)">
-            <summary>
-            获得long属性的line
-            </summary>
-            <param name="lineName">用于定义匹配的名称</param>
-            <param name="defaultvalue">如果没找到返回的默认值</param>
-            <returns>
-            如果找到相同名称的line,返回line中储存的long值
-            如果没找到,则返回默认值
-            </returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.SetInt64(System.String,System.Int64)">
-            <summary>
-            设置long属性的line
-            </summary>
-            <param name="lineName">用于定义匹配的名称</param>
-            <param name="value">储存进line的long值</param>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.GetString(System.String,System.String)">
-            <summary>
-            获得String属性的line
-            </summary>
-            <param name="lineName">用于定义匹配的名称</param>
-            <param name="defaultvalue">如果没找到返回的默认值</param>
-            <returns>
-            如果找到相同名称的line,返回line中储存的string值
-            如果没找到,则返回默认值
-            </returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.SetString(System.String,System.String)">
-            <summary>
-            设置String属性的line
-            </summary>
-            <param name="lineName">用于定义匹配的名称</param>
-            <param name="value">储存进line的String值</param>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.GetDouble(System.String,System.Double)">
-            <summary>
-            获得double属性的line
-            </summary>
-            <param name="lineName">用于定义匹配的名称</param>
-            <param name="defaultvalue">如果没找到返回的默认值</param>
-            <returns>
-            如果找到相同名称的line,返回line中储存的double值
-            如果没找到,则返回默认值
-            </returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.SetDouble(System.String,System.Double)">
-            <summary>
-            设置double属性的line
-            </summary>
-            <param name="lineName">用于定义匹配的名称</param>
-            <param name="value">储存进line的double值</param>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.GetFloat(System.String,System.Double)">
-            <summary>
-            获得double(long)属性的line 通过转换long获得更精确的小数,小数位最大保留9位
-            </summary>
-            <param name="lineName">用于定义匹配的名称</param>
-            <param name="defaultvalue">如果没找到返回的默认值</param>
-            <returns>
-            如果找到相同名称的line,返回line中储存的double(long)值
-            如果没找到,则返回默认值
-            </returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.SetFloat(System.String,System.Double)">
-            <summary>
-            设置double(long)属性的line 通过转换long获得更精确的小数,小数位最大保留9位
-            </summary>
-            <param name="lineName">用于定义匹配的名称</param>
-            <param name="value">储存进line的double(long)值</param>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.GetDateTime(System.String,System.DateTime)">
-            <summary>
-            获得DateTime属性的line
-            </summary>
-            <param name="lineName">用于定义匹配的名称</param>
-            <param name="defaultvalue">如果没找到返回的默认值</param>
-            <returns>
-            如果找到相同名称的line,返回line中储存的DateTime值
-            如果没找到,则返回默认值
-            </returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.SetDateTime(System.String,System.DateTime)">
-            <summary>
-            设置DateTime属性的line
-            </summary>
-            <param name="lineName">用于定义匹配的名称</param>
-            <param name="value">储存进line的DateTime值</param>
-        </member>
-        <member name="P:LinePutScript.LpsDocument.Item(LinePutScript.gstr)">
-            <summary>
-            获取或设置 String 属性的line
-            </summary>
-            <param name="lineName">(gstr)用于定义匹配的名称</param>
-            <returns>获取或设置对 String 属性的Line</returns>
-        </member>
-        <member name="P:LinePutScript.LpsDocument.Item(LinePutScript.gbol)">
-            <summary>
-            获取或设置 Bool 属性的line
-            </summary>
-            <param name="lineName">(gbol)用于定义匹配的名称</param>
-            <returns>获取或设置对 bool 属性的Line</returns>
-        </member>
-        <member name="P:LinePutScript.LpsDocument.Item(LinePutScript.gint)">
-            <summary>
-            获取或设置 Int 属性的line
-            </summary>
-            <param name="lineName">(gint)用于定义匹配的名称</param>
-            <returns>获取或设置对 int 属性的Line</returns>
-        </member>
-        <member name="P:LinePutScript.LpsDocument.Item(LinePutScript.gi64)">
-            <summary>
-            获取或设置 Long 属性的line
-            </summary>
-            <param name="lineName">(gi64)用于定义匹配的名称</param>
-            <returns>获取或设置对 long 属性的Line</returns>
-        </member>
-        <member name="P:LinePutScript.LpsDocument.Item(LinePutScript.gdbe)">
-            <summary>
-            获取或设置 Double 属性的line
-            </summary>
-            <param name="lineName">(gdbe)用于定义匹配的名称</param>
-            <returns>获取或设置对 double 属性的Line</returns>
-        </member>
-        <member name="P:LinePutScript.LpsDocument.Item(LinePutScript.gflt)">
-            <summary>
-            获取或设置 Double(long) 属性的line  通过转换long获得更精确的小数,小数位最大保留9位
-            </summary>
-            <param name="lineName">(gflt)用于定义匹配的名称</param>
-            <returns>获取或设置对 double 属性的line</returns>
-        </member>
-        <member name="P:LinePutScript.LpsDocument.Item(LinePutScript.gdat)">
-            <summary>
-            获取或设置 DateTime 属性的line
-            </summary>
-            <param name="lineName">(gdbe)用于定义匹配的名称</param>
-            <returns>获取或设置对 double 属性的line</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.IndexOf(LinePutScript.ILine)">
-            <summary>
-            搜索相同Line,并返回整个Assemblage中第一个匹配的Line从零开始的索引
-            </summary>
-            <param name="line">用于定义匹配的Line</param>
-            <returns>如果找到相同名称的Line的第一个元素,则为该元素的从零开始的索引; 否则为 -1</returns>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.Insert(System.Int32,LinePutScript.ILine)">
-            <summary>
-            将指定的Line添加到指定索引处
-            </summary>
-            <param name="index">应插入 Line 的从零开始的索引</param>
-            <param name="newLine">要添加的Line</param>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.Add(LinePutScript.ILine)">
-            <summary>
-            将指定的Line添加到Assemblage列表的末尾
-            </summary>
-            <param name="newLine">要添加的Line</param>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.Clear">
-            <summary>
-            移除Assemblage中所有的Line
-            </summary>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.CopyTo(LinePutScript.ILine[],System.Int32)">
-            <summary>
-            将整个array复制到Assemblage
-            </summary>
-            <param name="array">复制到Assemblage的Line列表</param>
-            <param name="arrayIndex">从零开始的引索,从引索处开始复制</param>
-        </member>
-        <member name="M:LinePutScript.LpsDocument.ToList">
-            <summary>
-            返回一个新List,包含所有Line
-            </summary>
-            <returns>所有储存的Line</returns>
         </member>
         <member name="P:LinePutScript.LpsDocument.LineNode">
             <summary>
@@ -3718,6 +3912,41 @@
             判断是否能够继续读取数据
             </summary>
             <returns>如果还有下一行,返回True,否则False</returns>
+        </member>
+        <member name="T:LinePutScript.LPS">
+            <summary>
+            文件 包括文件读写等一系列操作 (更纯净,不包含行操作)
+            </summary>
+        </member>
+        <member name="M:LinePutScript.LPS.#ctor">
+            <summary>
+            创建一个 空的LpsDocument
+            </summary>
+        </member>
+        <member name="M:LinePutScript.LPS.#ctor(System.String)">
+            <summary>
+            从指定的字符串创建 LpsDocument
+            </summary>
+            <param name="lps">包含要加载的LPS文档的字符串</param>
+        </member>
+        <member name="M:LinePutScript.LPS.#ctor(LinePutScript.ILine,LinePutScript.ILine[])">
+            <summary>
+            从指定行创建 LpsDocument
+            </summary>
+            <param name="line">多个行</param>
+            <param name="lines">多个行</param>
+        </member>
+        <member name="M:LinePutScript.LPS.#ctor(System.Collections.Generic.IEnumerable{LinePutScript.ILine})">
+            <summary>
+            从指定行创建 LpsDocument
+            </summary>
+            <param name="lines">多个行</param>
+        </member>
+        <member name="M:LinePutScript.LPS.#ctor(LinePutScript.ILPS)">
+            <summary>
+            从另一个LPS文件创建该LPS
+            </summary>
+            <param name="lps"></param>
         </member>
         <member name="T:LinePutScript.SetObject">
             <summary>
@@ -4381,6 +4610,13 @@
             </summary>
             <param name="name">名称</param>
             <param name="info">信息 (正常版本)</param>
+        </member>
+        <member name="M:LinePutScript.Sub.#ctor(System.String,LinePutScript.SetObject)">
+            <summary>
+            通过名字和信息创建新的Sub
+            </summary>
+            <param name="name">名称</param>
+            <param name="info">信息 (SetObject)</param>
         </member>
         <member name="M:LinePutScript.Sub.Load(System.String,System.String)">
             <summary>

@@ -11,6 +11,7 @@ using System.IO;
 using VPet_Simulator.Core;
 using System.Windows.Controls;
 using System.Windows;
+using LinePutScript.Localization.WPF;
 
 namespace VPet.Plugin.VPetTTS
 {
@@ -38,8 +39,14 @@ namespace VPet.Plugin.VPetTTS
             if (Set.Enable)
                 MW.Main.OnSay += Main_OnSay;
 
-            //这是个临时举措,未来会支持直接调用
-            MenuItem modset = ((MenuItem)MW.Main.ToolBar.MenuSetting.Items[0]);
+            //根据当前语言选择合适的默认发音人
+            if (string.IsNullOrEmpty(Set.Speaker))
+                if ("EdgeTTSSpeaker".Translate() == "EdgeTTSSpeaker")
+                    Set.Speaker = "en-US-AnaNeural";
+                else
+                    Set.Speaker = "EdgeTTSSpeaker".Translate();
+
+            MenuItem modset = MW.Main.ToolBar.MenuMODConfig;
             modset.Visibility = Visibility.Visible;
             var menuItem = new MenuItem()
             {

@@ -90,11 +90,37 @@
             加载DIY内容
             </summary>
         </member>
-        <member name="M:VPet_Simulator.Windows.Interface.IMainWindow.RunAction(System.String)">
+        <member name="M:VPet_Simulator.Windows.Interface.IMainWindow.ShowSetting(System.Int32)">
             <summary>
-            运行动作
+            显示设置页面
             </summary>
-            <param name="action">动作名称</param>
+            <param name="page">设置页</param>
+        </member>
+        <member name="M:VPet_Simulator.Windows.Interface.IMainWindow.ShowBetterBuy(VPet_Simulator.Windows.Interface.Food.FoodType)">
+            <summary>
+            显示更好买页面
+            </summary>
+            <param name="type">食物类型</param>
+        </member>
+        <member name="M:VPet_Simulator.Windows.Interface.IMainWindow.Close">
+            <summary>
+            关闭桌宠
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Windows.Interface.IMainWindow.Restart">
+            <summary>
+            重启桌宠
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.IMainWindow.MouseHitThrough">
+            <summary>
+            鼠标穿透
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.IMainWindow.HashCheck">
+            <summary>
+            存档 Hash检查 是否通过
+            </summary>
         </member>
         <member name="T:VPet_Simulator.Windows.Interface.LowText">
             <summary>
@@ -224,6 +250,11 @@
         <member name="F:VPet_Simulator.Windows.Interface.Food.FoodType.Drug">
             <summary>
             药品
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Windows.Interface.Food.FoodType.Gift">
+            <summary>
+            礼品 (没做)
             </summary>
         </member>
         <member name="P:VPet_Simulator.Windows.Interface.Food.Type">
@@ -423,7 +454,7 @@
         </member>
         <member name="P:VPet_Simulator.Windows.Interface.Setting.LogicInterval">
             <summary>
-            计算间隔
+            计算间隔 (秒)
             </summary>
         </member>
         <member name="P:VPet_Simulator.Windows.Interface.Setting.PetHelpLeft">
@@ -582,6 +613,29 @@
         <member name="F:VPet_Simulator.Windows.Interface.ImageResources.ImageSetting">
             <summary>
             图片设置 (eg:定位锚点等)
+            </summary>
+        </member>
+        <member name="T:VPet_Simulator.Windows.Interface.Statistics">
+            <summary>
+            统计
+            </summary>
+        </member>
+        <member name="T:VPet_Simulator.Windows.Interface.Statistics.StatisticChangedEventHandler">
+            <summary>
+            统计变化通知事件
+            </summary>
+            <param name="sender">发送的统计(this)</param>
+            <param name="name">变动的名称</param>
+            <param name="value">变动的值</param>
+        </member>
+        <member name="F:VPet_Simulator.Windows.Interface.Statistics.Data">
+            <summary>
+            统计数据字典
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Windows.Interface.Statistics.ToSubs">
+            <summary>
+            输出统计数据
             </summary>
         </member>
     </members>

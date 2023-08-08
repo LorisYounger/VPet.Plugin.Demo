@@ -2,8 +2,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:System="clr-namespace:System;assembly=mscorlib"
+        xmlns:ll="clr-namespace:LinePutScript.Localization.WPF;assembly=LinePutScript.Localization.WPF"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="clr-namespace:VPet.Plugin.VPetTTS"
-        mc:Ignorable="d" xmlns:pu="clr-namespace:Panuon.WPF.UI;assembly=Panuon.WPF.UI" Title="EdgeTTS 设置" Width="450"
+        mc:Ignorable="d" xmlns:pu="clr-namespace:Panuon.WPF.UI;assembly=Panuon.WPF.UI" Title="{ll:Str EdgeTTS 设置}" Width="450"
         FontSize="16" Height="Auto" ResizeMode="NoResize" WindowState="Normal" SizeToContent="Height"
         Background="{DynamicResource PrimaryLighter}" Closed="Window_Closed">
     <Window.Resources>
@@ -24,16 +25,16 @@
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="启用" VerticalAlignment="Center" />
-        <TextBlock Grid.Row="1" Text="音量" VerticalAlignment="Center" />
-        <TextBlock Grid.Row="2" Text="音调" VerticalAlignment="Center" />
-        <TextBlock Grid.Row="3" Text="语速" VerticalAlignment="Center" />
-        <TextBlock Grid.Row="4" Text="讲述人" VerticalAlignment="Center" />
+        <TextBlock Grid.Row="0" Text="{ll:Str 启用}" VerticalAlignment="Center" />
+        <TextBlock Grid.Row="1" Text="{ll:Str 音量}" VerticalAlignment="Center" />
+        <TextBlock Grid.Row="2" Text="{ll:Str 音调}" VerticalAlignment="Center" />
+        <TextBlock Grid.Row="3" Text="{ll:Str 语速}" VerticalAlignment="Center" />
+        <TextBlock Grid.Row="4" Text="{ll:Str 讲述人}" VerticalAlignment="Center" />
 
         <pu:Switch x:Name="SwitchOn" BorderBrush="{DynamicResource DARKPrimaryDark}"
                 CheckedBackground="{DynamicResource DARKPrimary}" CheckedBorderBrush="{DynamicResource DARKPrimary}"
                 Background="Transparent" BoxWidth="35" BoxHeight="18" ToggleSize="14" ToggleShadowColor="{x:Null}"
-                ToggleBrush="{DynamicResource DARKPrimaryDark}" Content="启用 EdgeTTS"
+                ToggleBrush="{DynamicResource DARKPrimaryDark}" Content="{ll:Str 启用 EdgeTTS}"
                 CheckedToggleBrush="{DynamicResource DARKPrimaryText}" Grid.Column="2" />
         <pu:NumberInput Grid.Row="1" Grid.Column="3" Minimum="0" MaxHeight="350" Margin="5"
                 Value="{Binding Value, ElementName=VolumeSilder}" CornerRadius="3" Maximum="100" />
@@ -51,7 +52,292 @@
                 Background="{DynamicResource DARKPrimaryLighter}" LargeChange="5" SmallChange="1"
                 pu:SliderHelper.CoveredBackground="{DynamicResource DARKPrimaryDarker}" />
         <ComboBox x:Name="CombSpeaker" Grid.Row="4" Grid.Column="2" Style="{DynamicResource StandardComboBoxStyle}"
-                FontSize="16" Margin="5" SelectedIndex="1">
+                FontSize="16" Margin="5">
+            <System:String>af-ZA-AdriNeural</System:String>
+            <System:String>af-ZA-WillemNeural</System:String>
+            <System:String>am-ET-AmehaNeural</System:String>
+            <System:String>am-ET-MekdesNeural</System:String>
+            <System:String>ar-AE-FatimaNeural</System:String>
+            <System:String>ar-AE-HamdanNeural</System:String>
+            <System:String>ar-BH-AliNeural</System:String>
+            <System:String>ar-BH-LailaNeural</System:String>
+            <System:String>ar-DZ-AminaNeural</System:String>
+            <System:String>ar-DZ-IsmaelNeural</System:String>
+            <System:String>ar-EG-SalmaNeural</System:String>
+            <System:String>ar-EG-ShakirNeural</System:String>
+            <System:String>ar-IQ-BasselNeural</System:String>
+            <System:String>ar-IQ-RanaNeural</System:String>
+            <System:String>ar-JO-SanaNeural</System:String>
+            <System:String>ar-JO-TaimNeural</System:String>
+            <System:String>ar-KW-FahedNeural</System:String>
+            <System:String>ar-KW-NouraNeural</System:String>
+            <System:String>ar-LB-LaylaNeural</System:String>
+            <System:String>ar-LB-RamiNeural</System:String>
+            <System:String>ar-LY-ImanNeural</System:String>
+            <System:String>ar-LY-OmarNeural</System:String>
+            <System:String>ar-MA-JamalNeural</System:String>
+            <System:String>ar-MA-MounaNeural</System:String>
+            <System:String>ar-OM-AbdullahNeural</System:String>
+            <System:String>ar-OM-AyshaNeural</System:String>
+            <System:String>ar-QA-AmalNeural</System:String>
+            <System:String>ar-QA-MoazNeural</System:String>
+            <System:String>ar-SA-HamedNeural</System:String>
+            <System:String>ar-SA-ZariyahNeural</System:String>
+            <System:String>ar-SY-AmanyNeural</System:String>
+            <System:String>ar-SY-LaithNeural</System:String>
+            <System:String>ar-TN-HediNeural</System:String>
+            <System:String>ar-TN-ReemNeural</System:String>
+            <System:String>ar-YE-MaryamNeural</System:String>
+            <System:String>ar-YE-SalehNeural</System:String>
+            <System:String>az-AZ-BabekNeural</System:String>
+            <System:String>az-AZ-BanuNeural</System:String>
+            <System:String>bg-BG-BorislavNeural</System:String>
+            <System:String>bg-BG-KalinaNeural</System:String>
+            <System:String>bn-BD-NabanitaNeural</System:String>
+            <System:String>bn-BD-PradeepNeural</System:String>
+            <System:String>bn-IN-BashkarNeural</System:String>
+            <System:String>bn-IN-TanishaaNeural</System:String>
+            <System:String>bs-BA-GoranNeural</System:String>
+            <System:String>bs-BA-VesnaNeural</System:String>
+            <System:String>ca-ES-EnricNeural</System:String>
+            <System:String>ca-ES-JoanaNeural</System:String>
+            <System:String>cs-CZ-AntoninNeural</System:String>
+            <System:String>cs-CZ-VlastaNeural</System:String>
+            <System:String>cy-GB-AledNeural</System:String>
+            <System:String>cy-GB-NiaNeural</System:String>
+            <System:String>da-DK-ChristelNeural</System:String>
+            <System:String>da-DK-JeppeNeural</System:String>
+            <System:String>de-AT-IngridNeural</System:String>
+            <System:String>de-AT-JonasNeural</System:String>
+            <System:String>de-CH-JanNeural</System:String>
+            <System:String>de-CH-LeniNeural</System:String>
+            <System:String>de-DE-AmalaNeural</System:String>
+            <System:String>de-DE-ConradNeural</System:String>
+            <System:String>de-DE-KatjaNeural</System:String>
+            <System:String>de-DE-KillianNeural</System:String>
+            <System:String>el-GR-AthinaNeural</System:String>
+            <System:String>el-GR-NestorasNeural</System:String>
+            <System:String>en-AU-NatashaNeural</System:String>
+            <System:String>en-AU-WilliamNeural</System:String>
+            <System:String>en-CA-ClaraNeural</System:String>
+            <System:String>en-CA-LiamNeural</System:String>
+            <System:String>en-GB-LibbyNeural</System:String>
+            <System:String>en-GB-MaisieNeural</System:String>
+            <System:String>en-GB-RyanNeural</System:String>
+            <System:String>en-GB-SoniaNeural</System:String>
+            <System:String>en-GB-ThomasNeural</System:String>
+            <System:String>en-HK-SamNeural</System:String>
+            <System:String>en-HK-YanNeural</System:String>
+            <System:String>en-IE-ConnorNeural</System:String>
+            <System:String>en-IE-EmilyNeural</System:String>
+            <System:String>en-IN-NeerjaExpressiveNeural</System:String>
+            <System:String>en-IN-NeerjaNeural</System:String>
+            <System:String>en-IN-PrabhatNeural</System:String>
+            <System:String>en-KE-AsiliaNeural</System:String>
+            <System:String>en-KE-ChilembaNeural</System:String>
+            <System:String>en-NG-AbeoNeural</System:String>
+            <System:String>en-NG-EzinneNeural</System:String>
+            <System:String>en-NZ-MitchellNeural</System:String>
+            <System:String>en-NZ-MollyNeural</System:String>
+            <System:String>en-PH-JamesNeural</System:String>
+            <System:String>en-PH-RosaNeural</System:String>
+            <System:String>en-SG-LunaNeural</System:String>
+            <System:String>en-SG-WayneNeural</System:String>
+            <System:String>en-TZ-ElimuNeural</System:String>
+            <System:String>en-TZ-ImaniNeural</System:String>
+            <System:String>en-US-AnaNeural</System:String>
+            <System:String>en-US-AriaNeural</System:String>
+            <System:String>en-US-ChristopherNeural</System:String>
+            <System:String>en-US-EricNeural</System:String>
+            <System:String>en-US-GuyNeural</System:String>
+            <System:String>en-US-JennyNeural</System:String>
+            <System:String>en-US-MichelleNeural</System:String>
+            <System:String>en-US-RogerNeural</System:String>
+            <System:String>en-US-SteffanNeural</System:String>
+            <System:String>en-ZA-LeahNeural</System:String>
+            <System:String>en-ZA-LukeNeural</System:String>
+            <System:String>es-AR-ElenaNeural</System:String>
+            <System:String>es-AR-TomasNeural</System:String>
+            <System:String>es-BO-MarceloNeural</System:String>
+            <System:String>es-BO-SofiaNeural</System:String>
+            <System:String>es-CL-CatalinaNeural</System:String>
+            <System:String>es-CL-LorenzoNeural</System:String>
+            <System:String>es-CO-GonzaloNeural</System:String>
+            <System:String>es-CO-SalomeNeural</System:String>
+            <System:String>es-CR-JuanNeural</System:String>
+            <System:String>es-CR-MariaNeural</System:String>
+            <System:String>es-CU-BelkysNeural</System:String>
+            <System:String>es-CU-ManuelNeural</System:String>
+            <System:String>es-DO-EmilioNeural</System:String>
+            <System:String>es-DO-RamonaNeural</System:String>
+            <System:String>es-EC-AndreaNeural</System:String>
+            <System:String>es-EC-LuisNeural</System:String>
+            <System:String>es-ES-AlvaroNeural</System:String>
+            <System:String>es-ES-ElviraNeural</System:String>
+            <System:String>es-GQ-JavierNeural</System:String>
+            <System:String>es-GQ-TeresaNeural</System:String>
+            <System:String>es-GT-AndresNeural</System:String>
+            <System:String>es-GT-MartaNeural</System:String>
+            <System:String>es-HN-CarlosNeural</System:String>
+            <System:String>es-HN-KarlaNeural</System:String>
+            <System:String>es-MX-DaliaNeural</System:String>
+            <System:String>es-MX-JorgeNeural</System:String>
+            <System:String>es-NI-FedericoNeural</System:String>
+            <System:String>es-NI-YolandaNeural</System:String>
+            <System:String>es-PA-MargaritaNeural</System:String>
+            <System:String>es-PA-RobertoNeural</System:String>
+            <System:String>es-PE-AlexNeural</System:String>
+            <System:String>es-PE-CamilaNeural</System:String>
+            <System:String>es-PR-KarinaNeural</System:String>
+            <System:String>es-PR-VictorNeural</System:String>
+            <System:String>es-PY-MarioNeural</System:String>
+            <System:String>es-PY-TaniaNeural</System:String>
+            <System:String>es-SV-LorenaNeural</System:String>
+            <System:String>es-SV-RodrigoNeural</System:String>
+            <System:String>es-US-AlonsoNeural</System:String>
+            <System:String>es-US-PalomaNeural</System:String>
+            <System:String>es-UY-MateoNeural</System:String>
+            <System:String>es-UY-ValentinaNeural</System:String>
+            <System:String>es-VE-PaolaNeural</System:String>
+            <System:String>es-VE-SebastianNeural</System:String>
+            <System:String>et-EE-AnuNeural</System:String>
+            <System:String>et-EE-KertNeural</System:String>
+            <System:String>fa-IR-DilaraNeural</System:String>
+            <System:String>fa-IR-FaridNeural</System:String>
+            <System:String>fi-FI-HarriNeural</System:String>
+            <System:String>fi-FI-NooraNeural</System:String>
+            <System:String>fil-PH-AngeloNeural</System:String>
+            <System:String>fil-PH-BlessicaNeural</System:String>
+            <System:String>fr-BE-CharlineNeural</System:String>
+            <System:String>fr-BE-GerardNeural</System:String>
+            <System:String>fr-CA-AntoineNeural</System:String>
+            <System:String>fr-CA-JeanNeural</System:String>
+            <System:String>fr-CA-SylvieNeural</System:String>
+            <System:String>fr-CH-ArianeNeural</System:String>
+            <System:String>fr-CH-FabriceNeural</System:String>
+            <System:String>fr-FR-DeniseNeural</System:String>
+            <System:String>fr-FR-EloiseNeural</System:String>
+            <System:String>fr-FR-HenriNeural</System:String>
+            <System:String>ga-IE-ColmNeural</System:String>
+            <System:String>ga-IE-OrlaNeural</System:String>
+            <System:String>gl-ES-RoiNeural</System:String>
+            <System:String>gl-ES-SabelaNeural</System:String>
+            <System:String>gu-IN-DhwaniNeural</System:String>
+            <System:String>gu-IN-NiranjanNeural</System:String>
+            <System:String>he-IL-AvriNeural</System:String>
+            <System:String>he-IL-HilaNeural</System:String>
+            <System:String>hi-IN-MadhurNeural</System:String>
+            <System:String>hi-IN-SwaraNeural</System:String>
+            <System:String>hr-HR-GabrijelaNeural</System:String>
+            <System:String>hr-HR-SreckoNeural</System:String>
+            <System:String>hu-HU-NoemiNeural</System:String>
+            <System:String>hu-HU-TamasNeural</System:String>
+            <System:String>id-ID-ArdiNeural</System:String>
+            <System:String>id-ID-GadisNeural</System:String>
+            <System:String>is-IS-GudrunNeural</System:String>
+            <System:String>is-IS-GunnarNeural</System:String>
+            <System:String>it-IT-DiegoNeural</System:String>
+            <System:String>it-IT-ElsaNeural</System:String>
+            <System:String>it-IT-IsabellaNeural</System:String>
+            <System:String>ja-JP-KeitaNeural</System:String>
+            <System:String>ja-JP-NanamiNeural</System:String>
+            <System:String>jv-ID-DimasNeural</System:String>
+            <System:String>jv-ID-SitiNeural</System:String>
+            <System:String>ka-GE-EkaNeural</System:String>
+            <System:String>ka-GE-GiorgiNeural</System:String>
+            <System:String>kk-KZ-AigulNeural</System:String>
+            <System:String>kk-KZ-DauletNeural</System:String>
+            <System:String>km-KH-PisethNeural</System:String>
+            <System:String>km-KH-SreymomNeural</System:String>
+            <System:String>kn-IN-GaganNeural</System:String>
+            <System:String>kn-IN-SapnaNeural</System:String>
+            <System:String>ko-KR-InJoonNeural</System:String>
+            <System:String>ko-KR-SunHiNeural</System:String>
+            <System:String>lo-LA-ChanthavongNeural</System:String>
+            <System:String>lo-LA-KeomanyNeural</System:String>
+            <System:String>lt-LT-LeonasNeural</System:String>
+            <System:String>lt-LT-OnaNeural</System:String>
+            <System:String>lv-LV-EveritaNeural</System:String>
+            <System:String>lv-LV-NilsNeural</System:String>
+            <System:String>mk-MK-AleksandarNeural</System:String>
+            <System:String>mk-MK-MarijaNeural</System:String>
+            <System:String>ml-IN-MidhunNeural</System:String>
+            <System:String>ml-IN-SobhanaNeural</System:String>
+            <System:String>mn-MN-BataaNeural</System:String>
+            <System:String>mn-MN-YesuiNeural</System:String>
+            <System:String>mr-IN-AarohiNeural</System:String>
+            <System:String>mr-IN-ManoharNeural</System:String>
+            <System:String>ms-MY-OsmanNeural</System:String>
+            <System:String>ms-MY-YasminNeural</System:String>
+            <System:String>mt-MT-GraceNeural</System:String>
+            <System:String>mt-MT-JosephNeural</System:String>
+            <System:String>my-MM-NilarNeural</System:String>
+            <System:String>my-MM-ThihaNeural</System:String>
+            <System:String>nb-NO-FinnNeural</System:String>
+            <System:String>nb-NO-PernilleNeural</System:String>
+            <System:String>ne-NP-HemkalaNeural</System:String>
+            <System:String>ne-NP-SagarNeural</System:String>
+            <System:String>nl-BE-ArnaudNeural</System:String>
+            <System:String>nl-BE-DenaNeural</System:String>
+            <System:String>nl-NL-ColetteNeural</System:String>
+            <System:String>nl-NL-FennaNeural</System:String>
+            <System:String>nl-NL-MaartenNeural</System:String>
+            <System:String>pl-PL-MarekNeural</System:String>
+            <System:String>pl-PL-ZofiaNeural</System:String>
+            <System:String>ps-AF-GulNawazNeural</System:String>
+            <System:String>ps-AF-LatifaNeural</System:String>
+            <System:String>pt-BR-AntonioNeural</System:String>
+            <System:String>pt-BR-FranciscaNeural</System:String>
+            <System:String>pt-PT-DuarteNeural</System:String>
+            <System:String>pt-PT-RaquelNeural</System:String>
+            <System:String>ro-RO-AlinaNeural</System:String>
+            <System:String>ro-RO-EmilNeural</System:String>
+            <System:String>ru-RU-DmitryNeural</System:String>
+            <System:String>ru-RU-SvetlanaNeural</System:String>
+            <System:String>si-LK-SameeraNeural</System:String>
+            <System:String>si-LK-ThiliniNeural</System:String>
+            <System:String>sk-SK-LukasNeural</System:String>
+            <System:String>sk-SK-ViktoriaNeural</System:String>
+            <System:String>sl-SI-PetraNeural</System:String>
+            <System:String>sl-SI-RokNeural</System:String>
+            <System:String>so-SO-MuuseNeural</System:String>
+            <System:String>so-SO-UbaxNeural</System:String>
+            <System:String>sq-AL-AnilaNeural</System:String>
+            <System:String>sq-AL-IlirNeural</System:String>
+            <System:String>sr-RS-NicholasNeural</System:String>
+            <System:String>sr-RS-SophieNeural</System:String>
+            <System:String>su-ID-JajangNeural</System:String>
+            <System:String>su-ID-TutiNeural</System:String>
+            <System:String>sv-SE-MattiasNeural</System:String>
+            <System:String>sv-SE-SofieNeural</System:String>
+            <System:String>sw-KE-RafikiNeural</System:String>
+            <System:String>sw-KE-ZuriNeural</System:String>
+            <System:String>sw-TZ-DaudiNeural</System:String>
+            <System:String>sw-TZ-RehemaNeural</System:String>
+            <System:String>ta-IN-PallaviNeural</System:String>
+            <System:String>ta-IN-ValluvarNeural</System:String>
+            <System:String>ta-LK-KumarNeural</System:String>
+            <System:String>ta-LK-SaranyaNeural</System:String>
+            <System:String>ta-MY-KaniNeural</System:String>
+            <System:String>ta-MY-SuryaNeural</System:String>
+            <System:String>ta-SG-AnbuNeural</System:String>
+            <System:String>ta-SG-VenbaNeural</System:String>
+            <System:String>te-IN-MohanNeural</System:String>
+            <System:String>te-IN-ShrutiNeural</System:String>
+            <System:String>th-TH-NiwatNeural</System:String>
+            <System:String>th-TH-PremwadeeNeural</System:String>
+            <System:String>tr-TR-AhmetNeural</System:String>
+            <System:String>tr-TR-EmelNeural</System:String>
+            <System:String>uk-UA-OstapNeural</System:String>
+            <System:String>uk-UA-PolinaNeural</System:String>
+            <System:String>ur-IN-GulNeural</System:String>
+            <System:String>ur-IN-SalmanNeural</System:String>
+            <System:String>ur-PK-AsadNeural</System:String>
+            <System:String>ur-PK-UzmaNeural</System:String>
+            <System:String>uz-UZ-MadinaNeural</System:String>
+            <System:String>uz-UZ-SardorNeural</System:String>
+            <System:String>vi-VN-HoaiMyNeural</System:String>
+            <System:String>vi-VN-NamMinhNeural</System:String>
             <System:String>zh-CN-XiaoxiaoNeural</System:String>
             <System:String>zh-CN-XiaoyiNeural</System:String>
             <System:String>zh-CN-YunjianNeural</System:String>
@@ -66,12 +352,14 @@
             <System:String>zh-TW-HsiaoChenNeural</System:String>
             <System:String>zh-TW-HsiaoYuNeural</System:String>
             <System:String>zh-TW-YunJheNeural</System:String>
+            <System:String>zu-ZA-ThandoNeural</System:String>
+            <System:String>zu-ZA-ThembaNeural</System:String>
         </ComboBox>
-        <Button pu:ButtonHelper.CornerRadius="4" Content="保存设置" Background="{DynamicResource SecondaryLight}"
+        <Button pu:ButtonHelper.CornerRadius="4" Content="{ll:Str 保存设置}" Background="{DynamicResource SecondaryLight}"
                 BorderBrush="{DynamicResource SecondaryDark}" BorderThickness="2" Grid.Row="5" Margin="5,5,5,5"
                 Grid.ColumnSpan="3" Click="Save_Click" />
-        <Button x:Name="Test" pu:ButtonHelper.CornerRadius="4" Content="测试" Background="{DynamicResource SecondaryLight}"
-                BorderBrush="{DynamicResource SecondaryDark}" BorderThickness="2" Grid.Row="5" Margin="5,5,5,5"
-                Grid.ColumnSpan="1" Click="Test_Click" Grid.Column="3" />
+        <Button x:Name="Test" pu:ButtonHelper.CornerRadius="4" Content="{ll:Str 测试}"
+                Background="{DynamicResource SecondaryLight}" BorderBrush="{DynamicResource SecondaryDark}"
+                BorderThickness="2" Grid.Row="5" Margin="5,5,5,5" Grid.ColumnSpan="1" Click="Test_Click" Grid.Column="3" />
     </Grid>
 </Window>

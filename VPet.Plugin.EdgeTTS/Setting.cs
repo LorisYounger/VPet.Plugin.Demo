@@ -47,7 +47,7 @@ namespace VPet.Plugin.VPetTTS
         /// 讲述人
         /// </summary>
         [Line]
-        public string Speaker { get; set; } = "zh-CN-XiaoyiNeural";
+        public string Speaker { get; set; }
         /// <summary>
         /// 启用EdgeTTS
         /// </summary>

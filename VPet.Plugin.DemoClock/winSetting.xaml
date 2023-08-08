@@ -2,8 +2,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ll="clr-namespace:LinePutScript.Localization.WPF;assembly=LinePutScript.Localization.WPF"
         xmlns:local="clr-namespace:VPet.Plugin.DemoClock" mc:Ignorable="d"
-        xmlns:pu="clr-namespace:Panuon.WPF.UI;assembly=Panuon.WPF.UI" Title="Demo Clock 设置" Width="450" FontSize="16"
+        xmlns:pu="clr-namespace:Panuon.WPF.UI;assembly=Panuon.WPF.UI" Title="{ll:Str Demo Clock 设置}" Width="{ll:Dbe 'setwidth', DefValue=450}" FontSize="16"
         Height="Auto" ResizeMode="NoResize" WindowState="Normal" SizeToContent="Height"
         Background="{DynamicResource PrimaryLighter}" Closed="Window_Closed">
     <Window.Resources>
@@ -12,7 +13,7 @@
     <TabControl Background="{DynamicResource PrimaryLight}"
             pu:TabControlHelper.HeaderPanelBackground="{DynamicResource PrimaryLighter}"
             pu:TabControlHelper.ItemsSelectedBackground="{DynamicResource PrimaryLight}">
-        <TabItem Header="基本时间设置">
+        <TabItem Header="{ll:Str 基本时间设置}">
             <Grid Margin="8" Background="{DynamicResource PrimaryLighter}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -30,20 +31,20 @@
                     <RowDefinition Height="40" />
                     <RowDefinition Height="40" />
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="24小时制" VerticalAlignment="Center" />
-                <TextBlock Grid.Row="1" Text="时钟位置" VerticalAlignment="Center" />
-                <TextBlock Grid.Row="2" Text="闲置透明度" VerticalAlignment="Center" />
-                <TextBlock Grid.Row="3" Text="显示层次" VerticalAlignment="Center" />
-                <TextBlock Grid.Row="4" Text="时间偏移" VerticalAlignment="Center" />
-                <TextBlock Grid.Row="5" Text="默认倒计时" VerticalAlignment="Center" />
-                <TextBlock Grid.Row="6" Text="倒计时语音" VerticalAlignment="Center" />
-                <TextBlock Grid.Row="7" Text="关闭时钟" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="0" Text="{ll:Str 24小时制}" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="1" Text="{ll:Str 时钟位置}" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="2" Text="{ll:Str 闲置透明度}" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="3" Text="{ll:Str 显示层次}" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="4" Text="{ll:Str 时间偏移}" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="5" Text="{ll:Str 默认倒计时}" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="6" Text="{ll:Str 倒计时语音}" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="7" Text="{ll:Str 关闭时钟}" VerticalAlignment="Center" />
 
                 <pu:Switch x:Name="Switch24h" BorderBrush="{DynamicResource DARKPrimaryDark}"
                         CheckedBackground="{DynamicResource DARKPrimary}"
                         CheckedBorderBrush="{DynamicResource DARKPrimary}" Background="Transparent" BoxWidth="35"
                         BoxHeight="18" ToggleSize="14" ToggleShadowColor="{x:Null}"
-                        ToggleBrush="{DynamicResource DARKPrimaryDark}" Content="显示时间时启用24小时制"
+                        ToggleBrush="{DynamicResource DARKPrimaryDark}" Content="{ll:Str 显示时间时启用24小时制}"
                         CheckedToggleBrush="{DynamicResource DARKPrimaryText}" Grid.Column="2"
                         Checked="Switch24h_Checked" Unchecked="Switch24h_Checked" />
                 <pu:NumberInput Grid.Row="1" Grid.Column="3" Minimum="-100" Maximum="600" Margin="5"
@@ -62,20 +63,20 @@
                         CheckedBackground="{DynamicResource DARKPrimary}" IsChecked="True"
                         CheckedBorderBrush="{DynamicResource DARKPrimary}" Background="Transparent" BoxWidth="35"
                         BoxHeight="18" ToggleSize="14" ToggleShadowColor="{x:Null}"
-                        ToggleBrush="{DynamicResource DARKPrimaryDark}" Content="闲置时置于桌宠后方"
+                        ToggleBrush="{DynamicResource DARKPrimaryDark}" Content="{ll:Str 闲置时置于桌宠后方}"
                         CheckedToggleBrush="{DynamicResource DARKPrimaryText}" Grid.Column="2" Grid.Row="3"
                         Checked="SwitchAutoLayer_Checked" Unchecked="SwitchAutoLayer_Checked" />
                 <pu:NumberInput x:Name="NumTimeDiff" Minimum="-2400" Maximum="2400" Margin="5,5,5,5" Value="0"
                         CornerRadius="3" Grid.Row="4" Grid.Column="2" ValueChanged="NumTimeDiff_ValueChanged" />
-                <TextBlock Text="分钟" VerticalAlignment="Center" Margin="5,0,0,0" Grid.Row="4" Grid.Column="3" />
+                <TextBlock Text="{ll:Str 分钟}" VerticalAlignment="Center" Margin="5,0,0,0" Grid.Row="4" Grid.Column="3" />
                 <pu:NumberInput x:Name="NumDefCountDown" Minimum="0" Maximum="2400" Margin="5,5,5,5" Value="5"
                         CornerRadius="3" Grid.Row="5" Grid.Column="2" ValueChanged="NumDefCountDown_ValueChanged" />
-                <TextBlock Text="分钟" VerticalAlignment="Center" Margin="5,0,0,0" Grid.Row="5" Grid.Column="3" />
+                <TextBlock Text="{ll:Str 分钟}" VerticalAlignment="Center" Margin="5,0,0,0" Grid.Row="5" Grid.Column="3" />
                 <TextBox x:Name="TextCountDown" Grid.Row="6" Grid.Column="2"
                         Style="{DynamicResource StandardTextBoxStyle}" FontSize="16" Margin="5"
                         Text="pack://application:,,,/Res/CountDown.mp3" TextChanged="TextCountDown_TextChanged"
                         IsEnabled="False" />
-                <Button pu:ButtonHelper.CornerRadius="4" Content="选择位置" Grid.Column="3" Tag="CountDown"
+                <Button pu:ButtonHelper.CornerRadius="4" Content="{ll:Str 选择位置}" Grid.Column="3" Tag="CountDown"
                         Background="{DynamicResource SecondaryLight}" HorizontalAlignment="Center" IsEnabled="False"
                         VerticalAlignment="Center" Height="30" BorderBrush="{DynamicResource SecondaryDark}"
                         BorderThickness="2" Grid.Row="6" />
@@ -86,12 +87,12 @@
                         ToggleBrush="{DynamicResource DARKPrimaryDark}" Content="启用或关闭显示时钟"
                         CheckedToggleBrush="{DynamicResource DARKPrimaryText}" Grid.Column="2" Grid.Row="7"
                         Checked="SwitchOn_Checked" />-->
-                <TextBlock Grid.Column="2" Grid.Row="7" Text="前往 设置-MOD设置 启用/停用MOD" HorizontalAlignment="Center"
+                <TextBlock Grid.Column="2" Grid.Row="7" Text="{ll:Str '前往 设置-MOD设置 启用/停用MOD'}" HorizontalAlignment="Center"
                         VerticalAlignment="Center" Grid.ColumnSpan="2" TextDecorations="Underline" Cursor="Hand"
                         Foreground="{DynamicResource DARKPrimaryDark}" MouseDown="TextBlock_MouseDown" />
             </Grid>
         </TabItem>
-        <TabItem Header="番茄钟相关设置">
+        <TabItem Header="{ll:Str 番茄钟相关设置}">
             <Grid Margin="8" Background="{DynamicResource PrimaryLighter}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -108,28 +109,28 @@
                     <RowDefinition Height="40" />
                     <RowDefinition Height="40" />
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="工作时长" VerticalAlignment="Center" />
-                <TextBlock Grid.Row="1" Text="休息时长" VerticalAlignment="Center" />
-                <TextBlock Grid.Row="2" Text="长休息时长" VerticalAlignment="Center" />
-                <TextBlock Grid.Row="3" Text="工作语音" VerticalAlignment="Center" />
-                <TextBlock Grid.Row="4" Text="休息语音" VerticalAlignment="Center" />
-                <TextBlock Grid.Row="5" Text="结束语音" VerticalAlignment="Center" />
-                <TextBlock Grid.Row="6" Text="语音预设" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="0" Text="{ll:Str 工作时长}" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="1" Text="{ll:Str 休息时长}" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="2" Text="{ll:Str 长休息时长}" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="3" Text="{ll:Str 工作语音}" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="4" Text="{ll:Str 休息语音}" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="5" Text="{ll:Str 结束语音}" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="6" Text="{ll:Str 语音预设}" VerticalAlignment="Center" />
 
-                <TextBlock Text="分钟" VerticalAlignment="Center" Grid.Column="3" HorizontalAlignment="Center" />
-                <TextBlock Grid.Row="1" Text="分钟" VerticalAlignment="Center" Grid.Column="3"
+                <TextBlock Text="{ll:Str 分钟}" VerticalAlignment="Center" Grid.Column="3" HorizontalAlignment="Center" />
+                <TextBlock Grid.Row="1" Text="{ll:Str 分钟}" VerticalAlignment="Center" Grid.Column="3"
                         HorizontalAlignment="Center" />
-                <TextBlock Grid.Row="2" Text="分钟" VerticalAlignment="Center" Grid.Column="3"
+                <TextBlock Grid.Row="2" Text="{ll:Str 分钟}" VerticalAlignment="Center" Grid.Column="3"
                         HorizontalAlignment="Center" />
-                <Button pu:ButtonHelper.CornerRadius="4" Content="选择位置" Grid.Column="3" Tag="TomatoWork"
+                <Button pu:ButtonHelper.CornerRadius="4" Content="{ll:Str 选择位置}" Grid.Column="3" Tag="TomatoWork"
                         IsEnabled="False" Background="{DynamicResource SecondaryLight}" HorizontalAlignment="Center"
                         VerticalAlignment="Center" Height="30" BorderBrush="{DynamicResource SecondaryDark}"
                         BorderThickness="2" Grid.Row="3" Click="btn_path_Click" />
-                <Button pu:ButtonHelper.CornerRadius="4" Content="选择位置" Grid.Column="3" Tag="TomatoRest"
+                <Button pu:ButtonHelper.CornerRadius="4" Content="{ll:Str 选择位置}" Grid.Column="3" Tag="TomatoRest"
                         Background="{DynamicResource SecondaryLight}" HorizontalAlignment="Center" IsEnabled="False"
                         VerticalAlignment="Center" Height="30" BorderBrush="{DynamicResource SecondaryDark}"
                         BorderThickness="2" Grid.Row="4" />
-                <Button pu:ButtonHelper.CornerRadius="4" Content="选择位置" Grid.Column="3" Tag="TomatoEnd"
+                <Button pu:ButtonHelper.CornerRadius="4" Content="{ll:Str 选择位置}" Grid.Column="3" Tag="TomatoEnd"
                         Background="{DynamicResource SecondaryLight}" HorizontalAlignment="Center" IsEnabled="False"
                         VerticalAlignment="Center" Height="30" BorderBrush="{DynamicResource SecondaryDark}"
                         BorderThickness="2" Grid.Row="5" />

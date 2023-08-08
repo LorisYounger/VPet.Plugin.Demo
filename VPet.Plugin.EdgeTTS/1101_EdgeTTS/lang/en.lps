@@ -1,0 +1,12 @@
+EdgeTTSSpeaker#en-US-AnaNeural:|
+你好,主人\n现在是#Hello, master \n is now:|
+生成失败#Generation Failed:|
+错误代码: {0}\n消息: {1}#Error Code: {0}\n Message: {1}:|
+EdgeTTS 设置#EdgeTTS Settings:|
+启用#Enable:|
+音量#Volume:|
+音调#Tone:|
+语速#Speed of speech:|
+讲述人#Narrator:|
+启用 EdgeTTS#Enable EdgeTTS:|
+测试#Test:|
