@@ -132,7 +132,6 @@ namespace VPet.Plugin.DemoClock
             mTotmatoRest.Click += WPFTimeClock.RestMenuItem_Click;
             menuItem.Items.Add(mTotmatoRest);
 
-            //这是个临时举措,未来会支持直接调用
             MenuItem modset = MW.Main.ToolBar.MenuMODConfig;
             modset.Visibility = Visibility.Visible;
             var menuset = new MenuItem()
