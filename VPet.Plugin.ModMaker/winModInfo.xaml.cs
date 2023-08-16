@@ -17,9 +17,9 @@ namespace VPet.Plugin.ModMaker
     /// <summary>
     /// winModInfo.xaml 的交互逻辑
     /// </summary>
-    public partial class winModInfo : Window
+    public partial class WinModInfo : Window
     {
-        public winModInfo()
+        public WinModInfo()
         {
             InitializeComponent();
         }

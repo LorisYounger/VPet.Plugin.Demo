@@ -18,13 +18,13 @@ namespace VPet.Plugin.ModMaker
     /// <summary>
     /// winModMaker.xaml 的交互逻辑
     /// </summary>
-    public partial class winModMaker : Window
+    public partial class WinModMaker : Window
     {
-        ModMaker mm;
-        public winModMaker(ModMaker mm)
+        public ModMaker ModMaker { get; set; }
+
+        public WinModMaker()
         {
             InitializeComponent();
-            this.mm = mm;
         }
     }
 }

@@ -13,10 +13,11 @@ namespace VPet.Plugin.ModMaker
 {
     public class ModMaker : MainPlugin
     {
-        public ModMaker(IMainWindow mainwin) : base(mainwin)
-        {
-        }
+        public ModMaker(IMainWindow mainwin)
+            : base(mainwin) { }
+
         public ILine Set;
+
         public override void LoadPlugin()
         {
             Set = MW.Set.FindLine("ModMaker");
@@ -27,17 +28,22 @@ namespace VPet.Plugin.ModMaker
                 Header = "Mod制作器".Translate(),
                 HorizontalContentAlignment = HorizontalAlignment.Center,
             };
-            menuset.Click += (s, e) => { Setting(); };
+            menuset.Click += (s, e) =>
+            {
+                Setting();
+            };
             modset.Items.Add(menuset);
         }
+
         public override string PluginName => "ModMaker";
-        public winModMaker Maker;
+        public WinModMaker Maker;
 
         public override void Setting()
         {
             if (Maker == null)
             {
-                Maker = new winModMaker(this);
+                Maker = new WinModMaker();
+                Maker.ModMaker = this;
                 Maker.Show();
             }
             else
