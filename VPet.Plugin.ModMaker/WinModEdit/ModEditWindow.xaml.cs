@@ -121,7 +121,7 @@ public partial class ModEditWindow : Window
         window.TextBox_Likability.Text = oldFood.Likability.ToString();
         window.TextBox_Price.Text = oldFood.Price.ToString();
         window.TextBox_Exp.Text = oldFood.Exp.ToString();
-        window.Button_AddFoodImage.Visibility = Visibility.Visible;
+        window.Button_AddFoodImage.Visibility = Visibility.Hidden;
         window.Closed += (s, e) =>
         {
             if (s is not AddFoodWindow addFoodWindow)
