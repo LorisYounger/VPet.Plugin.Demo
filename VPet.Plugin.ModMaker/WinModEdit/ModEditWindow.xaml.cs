@@ -36,11 +36,7 @@ public partial class ModEditWindow : Window
         Closed += WinModInfo_Closed;
     }
 
-    private void WinModInfo_Closed(object sender, EventArgs e)
-    {
-        if (Image_ModImage.Source is BitmapImage bitmapImage)
-            bitmapImage.StreamSource.Close();
-    }
+    private void WinModInfo_Closed(object sender, EventArgs e) { }
 
     private void Button_AddModImage_Click(object sender, RoutedEventArgs e)
     {
