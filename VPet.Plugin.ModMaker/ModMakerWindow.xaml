@@ -1,5 +1,5 @@
 ﻿<Window
-  x:Class="VPet.Plugin.ModMaker.WinModMaker"
+  x:Class="VPet.Plugin.ModMaker.ModMakerWindow"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -24,14 +24,7 @@
         <RowDefinition />
       </Grid.RowDefinitions>
       <Label Background="{x:Null}" Content="打开最近的内容" />
-      <Grid Grid.Row="1">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition />
-          <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-        <TextBox pu:TextBoxHelper.Watermark="最近的内容" />
-        <Button Grid.Column="1" Content="🔍" />
-      </Grid>
+      <TextBox Grid.Row="1" pu:TextBoxHelper.Watermark="最近的内容" />
       <ListBox
         Grid.Row="2"
         d:ItemsSource="{d:SampleData ItemCount=5}"
@@ -44,8 +37,10 @@
       </Grid.RowDefinitions>
       <Label Background="{x:Null}" Content="开始使用" />
       <StackPanel Grid.Row="1">
-
-        <Button Content="创建新的模组" />
+        <Button
+          x:Name="Button_CreateNewMod"
+          Click="Button_CreateNewMod_Click"
+          Content="创建新的模组" />
       </StackPanel>
     </Grid>
   </Grid>

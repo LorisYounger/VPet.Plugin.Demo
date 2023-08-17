@@ -12,7 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>6</LangVersion>
+    <LangVersion>latest</LangVersion>
     <Deterministic>true</Deterministic>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -75,10 +75,10 @@
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="VPet-Simulator.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\VPet-Simulator.Core.0.5.0\lib\net462\VPet-Simulator.Core.dll</HintPath>
+      <HintPath>..\packages\VPet-Simulator.Core.1.0.0\lib\net462\VPet-Simulator.Core.dll</HintPath>
     </Reference>
     <Reference Include="VPet-Simulator.Windows.Interface, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\VPet-Simulator.Windows.Interface.0.5.0\lib\net462\VPet-Simulator.Windows.Interface.dll</HintPath>
+      <HintPath>..\packages\VPet-Simulator.Windows.Interface.1.0.0\lib\net462\VPet-Simulator.Windows.Interface.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -88,6 +88,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ModInfo.cs" />
     <Compile Include="ModMaker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -102,11 +103,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="WinModInfo.xaml.cs">
-      <DependentUpon>WinModInfo.xaml</DependentUpon>
+    <Compile Include="Utils.cs" />
+    <Compile Include="WinModEdit\AddFoodWindow.xaml.cs">
+      <DependentUpon>AddFoodWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WinModMaker.xaml.cs">
-      <DependentUpon>WinModMaker.xaml</DependentUpon>
+    <Compile Include="WinModEdit\ModEditWindow.cs" />
+    <Compile Include="WinModEdit\ModEditWindow.xaml.cs">
+      <DependentUpon>ModEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModMakerWindow.xaml.cs">
+      <DependentUpon>ModMakerWindow.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -123,11 +129,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Page Include="WinModInfo.xaml">
+    <Page Include="WinModEdit\AddFoodWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WinModMaker.xaml">
+    <Page Include="WinModEdit\ModEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModMakerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

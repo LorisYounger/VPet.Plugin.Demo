@@ -36,13 +36,13 @@ namespace VPet.Plugin.ModMaker
         }
 
         public override string PluginName => "ModMaker";
-        public WinModMaker Maker;
+        public ModMakerWindow Maker;
 
         public override void Setting()
         {
             if (Maker == null)
             {
-                Maker = new WinModMaker();
+                Maker = new ModMakerWindow();
                 Maker.ModMaker = this;
                 Maker.Show();
             }
