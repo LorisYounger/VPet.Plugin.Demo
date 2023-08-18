@@ -1,0 +1,195 @@
+﻿<Page
+  x:Class="VPet.Plugin.ModMaker.ModEdit.FoodEdit.Page_Food"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="clr-namespace:VPet.Plugin.ModMaker.ModEdit"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:pu="https://opensource.panuon.com/wpf-ui"
+  Title="Page_Food"
+  d:DesignHeight="450"
+  d:DesignWidth="800"
+  mc:Ignorable="d">
+  <Page.Resources>
+    <ResourceDictionary>
+      <ContextMenu x:Key="ContextMenu_DataGridRow">
+        <MenuItem
+          x:Name="MenuItem_ChangeFood"
+          Click="MenuItem_ChangeFood_Click"
+          Header="修改食物"
+          Tag="{Binding Tag, RelativeSource={RelativeSource AncestorType=DataGridRow, Mode=FindAncestor}}" />
+        <MenuItem
+          x:Name="MenuItem_RemoveFood"
+          Click="MenuItem_RemoveFood_Click"
+          Header="删除食物"
+          Tag="{Binding Tag, RelativeSource={RelativeSource AncestorType=DataGridRow, Mode=FindAncestor}}" />
+      </ContextMenu>
+    </ResourceDictionary>
+  </Page.Resources>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition />
+    </Grid.RowDefinitions>
+    <TextBox
+      x:Name="TextBox_SearchFood"
+      pu:TextBoxHelper.Watermark="搜索食物"
+      TextChanged="TextBox_SearchFood_TextChanged" />
+    <DataGrid
+      x:Name="DataGrid_Food"
+      Grid.Row="1"
+      d:ItemsSource="{d:SampleData ItemCount=5}"
+      pu:DataGridHelper.ColumnHeaderHorizontalContentAlignment="Center"
+      AutoGenerateColumns="False"
+      CanUserAddRows="False"
+      GridLinesVisibility="Horizontal"
+      MouseDoubleClick="DataGrid_Food_MouseDoubleClick"
+      RowDetailsVisibilityMode="Visible"
+      RowHeight="64"
+      VirtualizingStackPanel.IsVirtualizing="True"
+      VirtualizingStackPanel.VirtualizationMode="Recycling">
+      <DataGrid.RowStyle>
+        <Style BasedOn="{StaticResource {x:Type DataGridRow}}" TargetType="DataGridRow">
+          <Setter Property="Height" Value="64" />
+          <Setter Property="Tag" Value="{Binding}" />
+          <Setter Property="ContextMenu" Value="{StaticResource ContextMenu_DataGridRow}" />
+        </Style>
+      </DataGrid.RowStyle>
+      <DataGrid.Columns>
+        <DataGridTextColumn
+          Binding="{Binding Name}"
+          CanUserSort="True"
+          IsReadOnly="True"
+          SortMemberPath="Name">
+          <DataGridTextColumn.Header>
+            <Label Content="食物名称" />
+          </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+        <DataGridTemplateColumn IsReadOnly="True">
+          <DataGridTemplateColumn.Header>
+            <Label Content="食物图片" />
+          </DataGridTemplateColumn.Header>
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <Image
+                Width="64"
+                Height="64"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Source="{Binding ImageSource, IsAsync=True}"
+                Stretch="Uniform">
+                <Image.ToolTip>
+                  <Image
+                    Width="256"
+                    Height="256"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Source="{Binding ImageSource, IsAsync=True}"
+                    Stretch="Uniform" />
+                </Image.ToolTip>
+              </Image>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+        <DataGridTextColumn
+          Binding="{Binding Type}"
+          CanUserSort="True"
+          IsReadOnly="True"
+          SortMemberPath="Type">
+          <DataGridTextColumn.Header>
+            <Label Content="食物类型" />
+          </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+        <DataGridTextColumn
+          Binding="{Binding StrengthFood}"
+          CanUserSort="True"
+          IsReadOnly="True"
+          SortMemberPath="StrengthFood">
+          <DataGridTextColumn.Header>
+            <Label Content="饱腹值" />
+          </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+        <DataGridTextColumn
+          Binding="{Binding StrengthDrink}"
+          CanUserSort="True"
+          IsReadOnly="True"
+          SortMemberPath="StrengthDrink">
+          <DataGridTextColumn.Header>
+            <Label Content="口渴值" />
+          </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+        <DataGridTextColumn
+          Binding="{Binding Health}"
+          CanUserSort="True"
+          IsReadOnly="True"
+          SortMemberPath="Health">
+          <DataGridTextColumn.Header>
+            <Label Content="健康值" />
+          </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+        <DataGridTextColumn
+          Binding="{Binding Strength}"
+          CanUserSort="True"
+          IsReadOnly="True"
+          SortMemberPath="Strength">
+          <DataGridTextColumn.Header>
+            <Label Content="体力值" />
+          </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+        <DataGridTextColumn
+          Binding="{Binding Feeling}"
+          CanUserSort="True"
+          IsReadOnly="True"
+          SortMemberPath="Feeling">
+          <DataGridTextColumn.Header>
+            <Label Content="心情值" />
+          </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+        <DataGridTextColumn
+          Binding="{Binding Likability}"
+          CanUserSort="True"
+          IsReadOnly="True"
+          SortMemberPath="Likability">
+          <DataGridTextColumn.Header>
+            <Label Content="好感值" />
+          </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+        <DataGridTextColumn
+          Binding="{Binding Exp}"
+          CanUserSort="True"
+          IsReadOnly="True"
+          SortMemberPath="Exp">
+          <DataGridTextColumn.Header>
+            <Label Content="经验值" />
+          </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+        <DataGridTextColumn
+          Binding="{Binding Price}"
+          CanUserSort="True"
+          IsReadOnly="True"
+          SortMemberPath="Price">
+          <DataGridTextColumn.Header>
+            <Label Content="价格" />
+          </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+        <DataGridTextColumn
+          Binding="{Binding Desc}"
+          CanUserSort="True"
+          IsReadOnly="True"
+          SortMemberPath="Desc">
+          <DataGridTextColumn.Header>
+            <Label Content="描述" />
+          </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+      </DataGrid.Columns>
+    </DataGrid>
+    <Button
+      x:Name="Button_AddFood"
+      Grid.Row="1"
+      HorizontalAlignment="Right"
+      VerticalAlignment="Bottom"
+      Click="Button_AddFood_Click"
+      Content="➕"
+      Style="{StaticResource AddButton}" />
+  </Grid>
+</Page>

@@ -1,9 +1,9 @@
 ﻿<Window
-  x:Class="VPet.Plugin.ModMaker.WinModEdit.AddFoodWindow"
+  x:Class="VPet.Plugin.ModMaker.ModEdit.FoodEdit.Window_AddFood"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-  xmlns:local="clr-namespace:VPet.Plugin.ModMaker.WinModEdit"
+  xmlns:local="clr-namespace:VPet.Plugin.ModMaker.ModEdit.FoodEdit"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:pu="https://opensource.panuon.com/wpf-ui"
   Title="AddFoodWindow"
@@ -106,52 +106,42 @@
             <RowDefinition Height="Auto" />
           </Grid.RowDefinitions>
           <Label Content="饱腹值:" />
-          <TextBox
-            x:Name="TextBox_StrengthFood"
-            Grid.Column="1"
-            pu:TextBoxHelper.Watermark="饱腹值" />
+          <pu:NumberInput x:Name="NumberInput_StrengthFood" Grid.Column="1" />
           <Label Grid.Row="2" Content="口渴值:" />
-          <TextBox
-            x:Name="TextBox_StrengthDrink"
+          <pu:NumberInput
+            x:Name="NumberInput_StrengthDrink"
             Grid.Row="2"
-            Grid.Column="1"
-            pu:TextBoxHelper.Watermark="口渴值" />
+            Grid.Column="1" />
           <Label Grid.Row="3" Content="健康值:" />
-          <TextBox
-            x:Name="TextBox_Health"
+          <pu:NumberInput
+            x:Name="NumberInput_Health"
             Grid.Row="3"
-            Grid.Column="1"
-            pu:TextBoxHelper.Watermark="健康值" />
+            Grid.Column="1" />
           <Label Grid.Row="4" Content="体力值:" />
-          <TextBox
-            x:Name="TextBox_Strength"
+          <pu:NumberInput
+            x:Name="NumberInput_Strength"
             Grid.Row="4"
-            Grid.Column="1"
-            pu:TextBoxHelper.Watermark="体力值" />
+            Grid.Column="1" />
           <Label Grid.Row="5" Content="心情值:" />
-          <TextBox
-            x:Name="TextBox_Feeling"
+          <pu:NumberInput
+            x:Name="NumberInput_Feeling"
             Grid.Row="5"
-            Grid.Column="1"
-            pu:TextBoxHelper.Watermark="心情值" />
+            Grid.Column="1" />
           <Label Grid.Row="6" Content="好感值:" />
-          <TextBox
-            x:Name="TextBox_Likability"
+          <pu:NumberInput
+            x:Name="NumberInput_Likability"
             Grid.Row="6"
-            Grid.Column="1"
-            pu:TextBoxHelper.Watermark="好感值" />
+            Grid.Column="1" />
           <Label Grid.Row="7" Content="经验值:" />
-          <TextBox
-            x:Name="TextBox_Exp"
+          <pu:NumberInput
+            x:Name="NumberInput_Exp"
             Grid.Row="7"
-            Grid.Column="1"
-            pu:TextBoxHelper.Watermark="经验值" />
+            Grid.Column="1" />
           <Label Grid.Row="8" Content="价格:" />
-          <TextBox
-            x:Name="TextBox_Price"
+          <pu:NumberInput
+            x:Name="NumberInput_Price"
             Grid.Row="8"
-            Grid.Column="1"
-            pu:TextBoxHelper.Watermark="价格" />
+            Grid.Column="1" />
         </Grid>
       </ScrollViewer>
       <Grid Grid.Row="2">

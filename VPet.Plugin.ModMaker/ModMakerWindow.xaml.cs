@@ -12,7 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using VPet.Plugin.ModMaker.WinModEdit;
+using VPet.Plugin.ModMaker.ModEdit;
 
 namespace VPet.Plugin.ModMaker;
 
@@ -22,7 +22,7 @@ namespace VPet.Plugin.ModMaker;
 public partial class ModMakerWindow : Window
 {
     public ModMaker ModMaker { get; set; }
-    public ModEditWindow WinModEdit { get; set; }
+    public Window_ModEdit ModEditWindow { get; set; }
 
     public ModMakerWindow()
     {
@@ -31,10 +31,10 @@ public partial class ModMakerWindow : Window
 
     private void Button_CreateNewMod_Click(object sender, RoutedEventArgs e)
     {
-        WinModEdit = new();
-        WinModEdit.Show();
+        ModEditWindow = new();
+        ModEditWindow.Show();
         this.Hide();
-        WinModEdit.Closed += (s, e) =>
+        ModEditWindow.Closed += (s, e) =>
         {
             this.Close();
         };

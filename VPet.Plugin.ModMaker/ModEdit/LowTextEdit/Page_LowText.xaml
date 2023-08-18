@@ -1,0 +1,107 @@
+﻿<Page
+  x:Class="VPet.Plugin.ModMaker.ModEdit.LowTextEdit.Page_LowText"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="clr-namespace:VPet.Plugin.ModMaker.ModEdit.LowTextEdit"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:pu="https://opensource.panuon.com/wpf-ui"
+  Title="Page_LowText"
+  d:DesignHeight="450"
+  d:DesignWidth="800"
+  mc:Ignorable="d">
+
+  <Page.Resources>
+    <ResourceDictionary>
+      <ContextMenu x:Key="ContextMenu_DataGridRow">
+        <MenuItem
+          x:Name="MenuItem_ChangeLowText"
+          Click="MenuItem_ChangeLowText_Click"
+          Header="修改低状态文本"
+          Tag="{Binding Tag, RelativeSource={RelativeSource AncestorType=DataGridRow, Mode=FindAncestor}}" />
+        <MenuItem
+          x:Name="MenuItem_RemoveLowText"
+          Click="MenuItem_RemoveLowText_Click"
+          Header="删除低状态文本"
+          Tag="{Binding Tag, RelativeSource={RelativeSource AncestorType=DataGridRow, Mode=FindAncestor}}" />
+      </ContextMenu>
+    </ResourceDictionary>
+  </Page.Resources>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition />
+    </Grid.RowDefinitions>
+    <TextBox
+      x:Name="TextBox_SearchFood"
+      pu:TextBoxHelper.Watermark="搜索文本"
+      TextChanged="TextBox_SearchFood_TextChanged" />
+    <DataGrid
+      x:Name="DataGrid_LowText"
+      Grid.Row="1"
+      d:ItemsSource="{d:SampleData ItemCount=5}"
+      pu:DataGridHelper.ColumnHeaderHorizontalContentAlignment="Center"
+      AutoGenerateColumns="False"
+      CanUserAddRows="False"
+      GridLinesVisibility="Horizontal"
+      MouseDoubleClick="DataGrid_Food_MouseDoubleClick"
+      RowDetailsVisibilityMode="Visible"
+      RowHeight="64"
+      VirtualizingStackPanel.IsVirtualizing="True"
+      VirtualizingStackPanel.VirtualizationMode="Recycling">
+      <DataGrid.RowStyle>
+        <Style BasedOn="{StaticResource {x:Type DataGridRow}}" TargetType="DataGridRow">
+          <Setter Property="Height" Value="64" />
+          <Setter Property="Tag" Value="{Binding}" />
+          <Setter Property="ContextMenu" Value="{StaticResource ContextMenu_DataGridRow}" />
+        </Style>
+      </DataGrid.RowStyle>
+      <DataGrid.Columns>
+        <DataGridTextColumn
+          Binding="{Binding Text}"
+          CanUserSort="True"
+          IsReadOnly="True"
+          SortMemberPath="Name">
+          <DataGridTextColumn.Header>
+            <Label Content="文本" />
+          </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+        <DataGridTextColumn
+          Binding="{Binding Mode}"
+          CanUserSort="True"
+          IsReadOnly="True"
+          SortMemberPath="Type">
+          <DataGridTextColumn.Header>
+            <Label Content="状态" />
+          </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+        <DataGridTextColumn
+          Binding="{Binding Strength}"
+          CanUserSort="True"
+          IsReadOnly="True"
+          SortMemberPath="StrengthFood">
+          <DataGridTextColumn.Header>
+            <Label Content="口渴/饥饿需求" />
+          </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+        <DataGridTextColumn
+          Binding="{Binding Like}"
+          CanUserSort="True"
+          IsReadOnly="True"
+          SortMemberPath="StrengthDrink">
+          <DataGridTextColumn.Header>
+            <Label Content="好感需求" />
+          </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+      </DataGrid.Columns>
+    </DataGrid>
+    <Button
+      x:Name="Button_AddLowText"
+      Grid.Row="1"
+      HorizontalAlignment="Right"
+      VerticalAlignment="Bottom"
+      Click="Button_AddLowText_Click"
+      Content="➕"
+      Style="{StaticResource AddButton}" />
+  </Grid>
+</Page>

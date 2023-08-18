@@ -1,0 +1,188 @@
+﻿<Window
+  x:Class="VPet.Plugin.ModMaker.ModEdit.Window_ModEdit"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="clr-namespace:VPet.Plugin.ModMaker.ModEdit"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:pu="https://opensource.panuon.com/wpf-ui"
+  Title="WinModInfo"
+  Width="800"
+  Height="450"
+  mc:Ignorable="d">
+  <Window.Resources>
+    <ResourceDictionary />
+  </Window.Resources>
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="1*" />
+      <ColumnDefinition Width="2*" />
+    </Grid.ColumnDefinitions>
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition />
+      </Grid.RowDefinitions>
+      <Image
+        x:Name="Image_ModImage"
+        Width="256"
+        Height="256"
+        Stretch="Uniform">
+        <Image.ContextMenu>
+          <ContextMenu>
+            <MenuItem
+              x:Name="MenuItem_ChangeModImage"
+              Click="MenuItem_ChangeModImage_Click"
+              Header="修改图片" />
+          </ContextMenu>
+        </Image.ContextMenu>
+      </Image>
+      <Button
+        x:Name="Button_AddModImage"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Click="Button_AddModImage_Click"
+        Content="添加图片" />
+      <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+          </Grid.ColumnDefinitions>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+          </Grid.RowDefinitions>
+          <Label Content="模组名称:" />
+          <Label Grid.Row="1" Content="作者:" />
+          <Label Grid.Row="2" Content="游戏版本:" />
+          <Label Grid.Row="3" Content="模组版本:" />
+          <Label Grid.Row="4" Content="模组介绍:" />
+          <TextBox
+            x:Name="TextBox_ModName"
+            Grid.Column="1"
+            pu:TextBoxHelper.Watermark="模组名称" />
+          <TextBox
+            x:Name="TextBox_Author"
+            Grid.Row="1"
+            Grid.Column="1"
+            pu:TextBoxHelper.Watermark="作者" />
+          <TextBox
+            x:Name="TextBox_GameVersion"
+            Grid.Row="2"
+            Grid.Column="1"
+            pu:TextBoxHelper.Watermark="游戏版本" />
+          <TextBox
+            x:Name="TextBox_ModVersion"
+            Grid.Row="3"
+            Grid.Column="1"
+            pu:TextBoxHelper.Watermark="模组版本" />
+          <TextBox
+            x:Name="TextBox_Description"
+            Grid.Row="4"
+            Grid.Column="1"
+            pu:TextBoxHelper.Watermark="模组介绍" />
+        </Grid>
+      </ScrollViewer>
+    </Grid>
+    <Grid Grid.Column="1">
+      <TabControl>
+        <TabItem
+          x:Name="TabItem_Food"
+          Header="食物 (0)"
+          Tag="食物">
+          <Frame x:Name="Frame_Food" />
+        </TabItem>
+        <TabItem Header="物品 (0)" Tag="物品">
+          <Grid>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto" />
+              <RowDefinition />
+            </Grid.RowDefinitions>
+            <TextBox x:Name="TextBox_SearchItem" />
+            <ListBox x:Name="ListBox_Item" />
+            <Button
+              x:Name="Button_AddItem"
+              Grid.Row="1"
+              HorizontalAlignment="Right"
+              VerticalAlignment="Bottom"
+              Click="Button_AddItem_Click"
+              Content="➕"
+              Style="{StaticResource AddButton}" />
+          </Grid>
+        </TabItem>
+        <TabItem Header="动画 (0)">
+          <Grid>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto" />
+              <RowDefinition />
+            </Grid.RowDefinitions>
+            <TextBox x:Name="TextBox_SearchAnime" />
+            <ListBox x:Name="ListBox_Anime" />
+            <Button
+              x:Name="Button_AddAnime"
+              Grid.Row="1"
+              HorizontalAlignment="Right"
+              VerticalAlignment="Bottom"
+              Click="Button_AddAnime_Click"
+              Content="➕"
+              Style="{StaticResource AddButton}" />
+          </Grid>
+        </TabItem>
+        <TabItem Header="语音 (0)">
+          <Grid>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto" />
+              <RowDefinition />
+            </Grid.RowDefinitions>
+            <TextBox x:Name="TextBox_SearchAudio" />
+            <ListBox x:Name="ListBox_Audio" />
+            <Button
+              x:Name="Button_AddAudio"
+              Grid.Row="1"
+              HorizontalAlignment="Right"
+              VerticalAlignment="Bottom"
+              Click="Button_AddAudio_Click"
+              Content="➕"
+              Style="{StaticResource AddButton}" />
+          </Grid>
+        </TabItem>
+        <TabItem Header="点击文本 (0)">
+          <Grid>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto" />
+              <RowDefinition />
+            </Grid.RowDefinitions>
+            <TextBox x:Name="TextBox_SearchClickText" />
+            <ListBox x:Name="ListBox_ClickText" />
+            <Button
+              x:Name="Button_AddClickText"
+              Grid.Row="1"
+              HorizontalAlignment="Right"
+              VerticalAlignment="Bottom"
+              Click="Button_AddClickText_Click"
+              Content="➕"
+              Style="{StaticResource AddButton}" />
+          </Grid>
+        </TabItem>
+        <TabItem
+          x:Name="TabItem_LowText"
+          Header="低状态文本 (0)"
+          Tag="低状态文本">
+          <Frame x:Name="Frame_LowText" />
+        </TabItem>
+      </TabControl>
+      <!--<Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition />
+      </Grid.RowDefinitions>
+      <Label Content="当前功能" />
+      <TextBox Grid.Row="1" pu:TextBoxHelper.Watermark="搜索功能" />
+      <ListBox Grid.Row="2" d:ItemsSource="{d:SampleData ItemCount=5}" />-->
+    </Grid>
+  </Grid>
+</Window>

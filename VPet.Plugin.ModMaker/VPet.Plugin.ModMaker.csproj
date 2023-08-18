@@ -88,6 +88,17 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ModEdit\FoodEdit\Page_Food.xaml.cs">
+      <DependentUpon>Page_Food.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModEdit\FoodEdit\Page_Food.cs" />
+    <Compile Include="ModEdit\LowTextEdit\Page_LowText.cs" />
+    <Compile Include="ModEdit\LowTextEdit\Page_LowText.xaml.cs">
+      <DependentUpon>Page_LowText.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModEdit\LowTextEdit\Window_AddLowText.xaml.cs">
+      <DependentUpon>Window_AddLowText.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ModInfo.cs" />
     <Compile Include="ModMaker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -104,12 +115,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Utils.cs" />
-    <Compile Include="WinModEdit\AddFoodWindow.xaml.cs">
-      <DependentUpon>AddFoodWindow.xaml</DependentUpon>
+    <Compile Include="ModEdit\FoodEdit\Window_AddFood.xaml.cs">
+      <DependentUpon>Window_AddFood.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WinModEdit\ModEditWindow.cs" />
-    <Compile Include="WinModEdit\ModEditWindow.xaml.cs">
-      <DependentUpon>ModEditWindow.xaml</DependentUpon>
+    <Compile Include="ModEdit\Window_ModEdit.cs" />
+    <Compile Include="ModEdit\Window_ModEdit.xaml.cs">
+      <DependentUpon>Window_ModEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="ModMakerWindow.xaml.cs">
       <DependentUpon>ModMakerWindow.xaml</DependentUpon>
@@ -129,15 +140,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Page Include="WinModEdit\AddFoodWindow.xaml">
+    <Page Include="ModEdit\FoodEdit\Page_Food.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WinModEdit\ModEditWindow.xaml">
+    <Page Include="ModEdit\FoodEdit\Window_AddFood.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModEdit\LowTextEdit\Page_LowText.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModEdit\LowTextEdit\Window_AddLowText.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModEdit\Window_ModEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ModMakerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

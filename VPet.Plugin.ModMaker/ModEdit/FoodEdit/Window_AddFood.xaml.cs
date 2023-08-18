@@ -12,20 +12,26 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using VPet_Simulator.Windows.Interface;
 
-namespace VPet.Plugin.ModMaker.WinModEdit;
+namespace VPet.Plugin.ModMaker.ModEdit.FoodEdit;
 
 /// <summary>
 /// AddFoodWindow.xaml 的交互逻辑
 /// </summary>
-public partial class AddFoodWindow : Window
+public partial class Window_AddFood : Window
 {
     public bool IsCancel { get; internal set; } = true;
-    public BitmapImage FoodImage { get; internal set; }
 
-    public AddFoodWindow()
+    public Window_AddFood()
     {
         InitializeComponent();
+        Closed += (s, e) =>
+        {
+            if (IsCancel)
+                if (Image_FoodImage.Source is BitmapImage image)
+                    image.StreamSource.Close();
+        };
     }
 
     private void Button_AddFoodImage_Click(object sender, RoutedEventArgs e)
@@ -34,9 +40,7 @@ public partial class AddFoodWindow : Window
             new() { Title = "选择图片", Filter = $"图片|*.jpg;*.jpeg;*.png;*.bmp" };
         if (openFileDialog.ShowDialog() is true)
         {
-            Image_FoodImage.Source = FoodImage = Utils.LoadImageToMemoryStream(
-                openFileDialog.FileName
-            );
+            Image_FoodImage.Source = Utils.LoadImageToStream(openFileDialog.FileName);
             Button_AddFoodImage.Visibility = Visibility.Hidden;
         }
     }
@@ -47,17 +51,14 @@ public partial class AddFoodWindow : Window
             new() { Title = "选择图片", Filter = $"图片|*.jpg;*.jpeg;*.png;*.bmp" };
         if (openFileDialog.ShowDialog() is true)
         {
-            if (Image_FoodImage.Source is BitmapImage bitmapImage)
-                bitmapImage.StreamSource.Close();
-            Image_FoodImage.Source = FoodImage = Utils.LoadImageToMemoryStream(
-                openFileDialog.FileName
-            );
+            if (Image_FoodImage.Source is BitmapImage image)
+                image.StreamSource.Close();
+            Image_FoodImage.Source = Utils.LoadImageToStream(openFileDialog.FileName);
         }
     }
 
     private void Button_Cancel_Click(object sender, RoutedEventArgs e)
     {
-        FoodImage?.StreamSource.Close();
         Close();
     }
 

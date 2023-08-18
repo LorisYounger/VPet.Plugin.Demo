@@ -1,0 +1,16 @@
+﻿<ResourceDictionary
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:pu="https://opensource.panuon.com/wpf-ui">
+  <Style
+    x:Key="AddButton"
+    BasedOn="{StaticResource {x:Type Button}}"
+    TargetType="Button">
+    <Setter Property="Background" Value="{StaticResource DARKPrimary}" />
+    <Setter Property="pu:ButtonHelper.ShadowColor" Value="{StaticResource ShadowColor}" />
+    <Setter Property="FontSize" Value="24" />
+    <Setter Property="Padding" Value="10" />
+    <Setter Property="Margin" Value="10" />
+    <Setter Property="pu:ButtonHelper.CornerRadius" Value="24" />
+  </Style>
+</ResourceDictionary>
