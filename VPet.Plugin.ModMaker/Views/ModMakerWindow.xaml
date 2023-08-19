@@ -1,17 +1,21 @@
 ﻿<Window
-  x:Class="VPet.Plugin.ModMaker.ModMakerWindow"
+  x:Class="VPet.Plugin.ModMaker.Views.ModMakerWindow"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:ll="clr-namespace:LinePutScript.Localization.WPF;assembly=LinePutScript.Localization.WPF"
-  xmlns:local="clr-namespace:VPet.Plugin.ModMaker"
+  xmlns:local="clr-namespace:VPet.Plugin.ModMaker.Views"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:pu="clr-namespace:Panuon.WPF.UI;assembly=Panuon.WPF.UI"
+  xmlns:vm="clr-namespace:VPet.Plugin.ModMaker.ViewModels"
   Title="{ll:Str Mod制作器}"
   Width="600"
   Height="450"
   FontSize="16"
   mc:Ignorable="d">
+  <d:Window.DataContext>
+    <vm:WindowVM_ModMaker />
+  </d:Window.DataContext>
   <Grid>
     <Grid.ColumnDefinitions>
       <ColumnDefinition />
@@ -39,7 +43,7 @@
       <StackPanel Grid.Row="1">
         <Button
           x:Name="Button_CreateNewMod"
-          Click="Button_CreateNewMod_Click"
+          Command="{Binding CreateNewModCommand}"
           Content="创建新的模组" />
       </StackPanel>
     </Grid>

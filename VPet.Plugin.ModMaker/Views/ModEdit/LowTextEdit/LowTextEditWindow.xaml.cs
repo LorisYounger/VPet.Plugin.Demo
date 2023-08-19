@@ -12,19 +12,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VPet.Plugin.ModMaker.ViewModels.ModEdit.LowTextEdit;
 
-namespace VPet.Plugin.ModMaker.ModEdit.LowTextEdit;
+namespace VPet.Plugin.ModMaker.Views.ModEdit.LowTextEdit;
 
 /// <summary>
 /// Window_AddLowText.xaml 的交互逻辑
 /// </summary>
-public partial class Window_AddLowText : Window
+public partial class LowTextEditWindow : Window
 {
-    public bool IsCancel { get; internal set; } = true;
+    public LowTextEditWindowVM ViewModel => (LowTextEditWindowVM)DataContext;
+    public bool IsCancel { get; private set; } = true;
 
-    public Window_AddLowText()
+    public LowTextEditWindow()
     {
         InitializeComponent();
+        DataContext = new LowTextEditWindowVM();
     }
 
     private void Button_Cancel_Click(object sender, RoutedEventArgs e)

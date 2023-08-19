@@ -1,29 +1,30 @@
 ﻿<Page
-  x:Class="VPet.Plugin.ModMaker.ModEdit.LowTextEdit.Page_LowText"
+  x:Class="VPet.Plugin.ModMaker.Views.ModEdit.LowTextEdit.LowTextPage"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-  xmlns:local="clr-namespace:VPet.Plugin.ModMaker.ModEdit.LowTextEdit"
+  xmlns:local="clr-namespace:VPet.Plugin.ModMaker.Views.ModEdit.LowTextEdit"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:pu="https://opensource.panuon.com/wpf-ui"
+  xmlns:vm="clr-namespace:VPet.Plugin.ModMaker.ViewModels.ModEdit.LowTextEdit"
   Title="Page_LowText"
   d:DesignHeight="450"
   d:DesignWidth="800"
   mc:Ignorable="d">
-
+  <d:Page.DataContext>
+    <vm:LowTextPageVM />
+  </d:Page.DataContext>
   <Page.Resources>
     <ResourceDictionary>
-      <ContextMenu x:Key="ContextMenu_DataGridRow">
+      <ContextMenu x:Key="ContextMenu_DataGridRow" x:Shared="false">
         <MenuItem
-          x:Name="MenuItem_ChangeLowText"
-          Click="MenuItem_ChangeLowText_Click"
-          Header="修改低状态文本"
-          Tag="{Binding Tag, RelativeSource={RelativeSource AncestorType=DataGridRow, Mode=FindAncestor}}" />
+          Command="{Binding DataContext.EditLowTextCommand, RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}}"
+          CommandParameter="{Binding DataContext, RelativeSource={RelativeSource AncestorType=DataGridRow, Mode=FindAncestor}}"
+          Header="修改低状态文本" />
         <MenuItem
-          x:Name="MenuItem_RemoveLowText"
-          Click="MenuItem_RemoveLowText_Click"
-          Header="删除低状态文本"
-          Tag="{Binding Tag, RelativeSource={RelativeSource AncestorType=DataGridRow, Mode=FindAncestor}}" />
+          Command="{Binding DataContext.RemoveLowTextCommand, RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}}"
+          CommandParameter="{Binding DataContext, RelativeSource={RelativeSource AncestorType=DataGridRow, Mode=FindAncestor}}"
+          Header="删除低状态文本" />
       </ContextMenu>
     </ResourceDictionary>
   </Page.Resources>
@@ -35,7 +36,7 @@
     <TextBox
       x:Name="TextBox_SearchFood"
       pu:TextBoxHelper.Watermark="搜索文本"
-      TextChanged="TextBox_SearchFood_TextChanged" />
+      Text="{Binding FilterLowText.Value, UpdateSourceTrigger=PropertyChanged}" />
     <DataGrid
       x:Name="DataGrid_LowText"
       Grid.Row="1"
@@ -44,6 +45,7 @@
       AutoGenerateColumns="False"
       CanUserAddRows="False"
       GridLinesVisibility="Horizontal"
+      ItemsSource="{Binding ShowLowTexts.Value}"
       MouseDoubleClick="DataGrid_Food_MouseDoubleClick"
       RowDetailsVisibilityMode="Visible"
       RowHeight="64"
@@ -58,7 +60,7 @@
       </DataGrid.RowStyle>
       <DataGrid.Columns>
         <DataGridTextColumn
-          Binding="{Binding Text}"
+          Binding="{Binding CurrentI18nData.Value.Text.Value}"
           CanUserSort="True"
           IsReadOnly="True"
           SortMemberPath="Name">
@@ -67,7 +69,7 @@
           </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <DataGridTextColumn
-          Binding="{Binding Mode}"
+          Binding="{Binding Mode.Value}"
           CanUserSort="True"
           IsReadOnly="True"
           SortMemberPath="Type">
@@ -76,7 +78,7 @@
           </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <DataGridTextColumn
-          Binding="{Binding Strength}"
+          Binding="{Binding Strength.Value}"
           CanUserSort="True"
           IsReadOnly="True"
           SortMemberPath="StrengthFood">
@@ -85,7 +87,7 @@
           </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <DataGridTextColumn
-          Binding="{Binding Like}"
+          Binding="{Binding Like.Value}"
           CanUserSort="True"
           IsReadOnly="True"
           SortMemberPath="StrengthDrink">
@@ -100,7 +102,7 @@
       Grid.Row="1"
       HorizontalAlignment="Right"
       VerticalAlignment="Bottom"
-      Click="Button_AddLowText_Click"
+      Command="{Binding AddLowTextCommand}"
       Content="➕"
       Style="{StaticResource AddButton}" />
   </Grid>

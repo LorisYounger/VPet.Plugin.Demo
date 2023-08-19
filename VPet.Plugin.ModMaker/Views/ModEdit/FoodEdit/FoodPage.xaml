@@ -1,28 +1,30 @@
 ﻿<Page
-  x:Class="VPet.Plugin.ModMaker.ModEdit.FoodEdit.Page_Food"
+  x:Class="VPet.Plugin.ModMaker.Views.ModEdit.FoodEdit.FoodPage"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-  xmlns:local="clr-namespace:VPet.Plugin.ModMaker.ModEdit"
+  xmlns:local="clr-namespace:VPet.Plugin.ModMaker.Views.ModEdit.FoodEdit"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:pu="https://opensource.panuon.com/wpf-ui"
+  xmlns:vm="clr-namespace:VPet.Plugin.ModMaker.ViewModels.ModEdit.FoodEdit"
   Title="Page_Food"
   d:DesignHeight="450"
   d:DesignWidth="800"
   mc:Ignorable="d">
+  <d:Page.DataContext>
+    <vm:FoodPageVM />
+  </d:Page.DataContext>
   <Page.Resources>
     <ResourceDictionary>
-      <ContextMenu x:Key="ContextMenu_DataGridRow">
+      <ContextMenu x:Key="ContextMenu_DataGridRow" x:Shared="false">
         <MenuItem
-          x:Name="MenuItem_ChangeFood"
-          Click="MenuItem_ChangeFood_Click"
-          Header="修改食物"
-          Tag="{Binding Tag, RelativeSource={RelativeSource AncestorType=DataGridRow, Mode=FindAncestor}}" />
+          Command="{Binding DataContext.EditFoodCommand, RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}}"
+          CommandParameter="{Binding DataContext, RelativeSource={RelativeSource AncestorType=DataGridRow, Mode=FindAncestor}}"
+          Header="修改食物" />
         <MenuItem
-          x:Name="MenuItem_RemoveFood"
-          Click="MenuItem_RemoveFood_Click"
-          Header="删除食物"
-          Tag="{Binding Tag, RelativeSource={RelativeSource AncestorType=DataGridRow, Mode=FindAncestor}}" />
+          Command="{Binding DataContext.RemoveFoodCommand, RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}}"
+          CommandParameter="{Binding DataContext, RelativeSource={RelativeSource AncestorType=DataGridRow, Mode=FindAncestor}}"
+          Header="删除食物" />
       </ContextMenu>
     </ResourceDictionary>
   </Page.Resources>
@@ -31,10 +33,7 @@
       <RowDefinition Height="Auto" />
       <RowDefinition />
     </Grid.RowDefinitions>
-    <TextBox
-      x:Name="TextBox_SearchFood"
-      pu:TextBoxHelper.Watermark="搜索食物"
-      TextChanged="TextBox_SearchFood_TextChanged" />
+    <TextBox pu:TextBoxHelper.Watermark="搜索食物" Text="{Binding FilterFoodText.Value, UpdateSourceTrigger=PropertyChanged}" />
     <DataGrid
       x:Name="DataGrid_Food"
       Grid.Row="1"
@@ -43,6 +42,7 @@
       AutoGenerateColumns="False"
       CanUserAddRows="False"
       GridLinesVisibility="Horizontal"
+      ItemsSource="{Binding Foods}"
       MouseDoubleClick="DataGrid_Food_MouseDoubleClick"
       RowDetailsVisibilityMode="Visible"
       RowHeight="64"
@@ -57,12 +57,12 @@
       </DataGrid.RowStyle>
       <DataGrid.Columns>
         <DataGridTextColumn
-          Binding="{Binding Name}"
+          Binding="{Binding Id.Value}"
           CanUserSort="True"
           IsReadOnly="True"
           SortMemberPath="Name">
           <DataGridTextColumn.Header>
-            <Label Content="食物名称" />
+            <Label Content="食物ID" />
           </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <DataGridTemplateColumn IsReadOnly="True">
@@ -76,7 +76,7 @@
                 Height="64"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Source="{Binding ImageSource, IsAsync=True}"
+                Source="{Binding Image.Value, IsAsync=True}"
                 Stretch="Uniform">
                 <Image.ToolTip>
                   <Image
@@ -84,7 +84,7 @@
                     Height="256"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Source="{Binding ImageSource, IsAsync=True}"
+                    Source="{Binding Image.Value, IsAsync=True}"
                     Stretch="Uniform" />
                 </Image.ToolTip>
               </Image>
@@ -92,7 +92,16 @@
           </DataGridTemplateColumn.CellTemplate>
         </DataGridTemplateColumn>
         <DataGridTextColumn
-          Binding="{Binding Type}"
+          Binding="{Binding CurrentI18nData.Value.Name.Value}"
+          CanUserSort="True"
+          IsReadOnly="True"
+          SortMemberPath="Name">
+          <DataGridTextColumn.Header>
+            <Label Content="食物名称" />
+          </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+        <DataGridTextColumn
+          Binding="{Binding Type.Value}"
           CanUserSort="True"
           IsReadOnly="True"
           SortMemberPath="Type">
@@ -101,7 +110,7 @@
           </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <DataGridTextColumn
-          Binding="{Binding StrengthFood}"
+          Binding="{Binding StrengthFood.Value}"
           CanUserSort="True"
           IsReadOnly="True"
           SortMemberPath="StrengthFood">
@@ -110,7 +119,7 @@
           </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <DataGridTextColumn
-          Binding="{Binding StrengthDrink}"
+          Binding="{Binding StrengthDrink.Value}"
           CanUserSort="True"
           IsReadOnly="True"
           SortMemberPath="StrengthDrink">
@@ -119,7 +128,7 @@
           </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <DataGridTextColumn
-          Binding="{Binding Health}"
+          Binding="{Binding Health.Value}"
           CanUserSort="True"
           IsReadOnly="True"
           SortMemberPath="Health">
@@ -128,7 +137,7 @@
           </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <DataGridTextColumn
-          Binding="{Binding Strength}"
+          Binding="{Binding Strength.Value}"
           CanUserSort="True"
           IsReadOnly="True"
           SortMemberPath="Strength">
@@ -137,7 +146,7 @@
           </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <DataGridTextColumn
-          Binding="{Binding Feeling}"
+          Binding="{Binding Feeling.Value}"
           CanUserSort="True"
           IsReadOnly="True"
           SortMemberPath="Feeling">
@@ -146,7 +155,7 @@
           </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <DataGridTextColumn
-          Binding="{Binding Likability}"
+          Binding="{Binding Likability.Value}"
           CanUserSort="True"
           IsReadOnly="True"
           SortMemberPath="Likability">
@@ -155,7 +164,7 @@
           </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <DataGridTextColumn
-          Binding="{Binding Exp}"
+          Binding="{Binding Exp.Value}"
           CanUserSort="True"
           IsReadOnly="True"
           SortMemberPath="Exp">
@@ -164,7 +173,7 @@
           </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <DataGridTextColumn
-          Binding="{Binding Price}"
+          Binding="{Binding Price.Value}"
           CanUserSort="True"
           IsReadOnly="True"
           SortMemberPath="Price">
@@ -173,10 +182,10 @@
           </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <DataGridTextColumn
-          Binding="{Binding Desc}"
+          Binding="{Binding CurrentI18nData.Value.Description.Value}"
           CanUserSort="True"
           IsReadOnly="True"
-          SortMemberPath="Desc">
+          SortMemberPath="Description">
           <DataGridTextColumn.Header>
             <Label Content="描述" />
           </DataGridTextColumn.Header>
@@ -188,7 +197,7 @@
       Grid.Row="1"
       HorizontalAlignment="Right"
       VerticalAlignment="Bottom"
-      Click="Button_AddFood_Click"
+      Command="{Binding AddFoodCommand}"
       Content="➕"
       Style="{StaticResource AddButton}" />
   </Grid>

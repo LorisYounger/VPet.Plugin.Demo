@@ -12,31 +12,24 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using VPet.Plugin.ModMaker.ModEdit;
+using VPet.Plugin.ModMaker.Models;
+using VPet.Plugin.ModMaker.ViewModels;
+using VPet.Plugin.ModMaker.Views.ModEdit;
 
-namespace VPet.Plugin.ModMaker;
+namespace VPet.Plugin.ModMaker.Views;
 
 /// <summary>
 /// winModMaker.xaml 的交互逻辑
 /// </summary>
 public partial class ModMakerWindow : Window
 {
-    public ModMaker ModMaker { get; set; }
-    public Window_ModEdit ModEditWindow { get; set; }
+    public WindowVM_ModMaker ViewModel => (WindowVM_ModMaker)this.DataContext;
+    public Models.ModMaker ModMaker { get; set; }
+    public ModEditWindow ModEditWindow { get; set; }
 
     public ModMakerWindow()
     {
         InitializeComponent();
-    }
-
-    private void Button_CreateNewMod_Click(object sender, RoutedEventArgs e)
-    {
-        ModEditWindow = new();
-        ModEditWindow.Show();
-        this.Hide();
-        ModEditWindow.Closed += (s, e) =>
-        {
-            this.Close();
-        };
+        DataContext = new WindowVM_ModMaker(this);
     }
 }
