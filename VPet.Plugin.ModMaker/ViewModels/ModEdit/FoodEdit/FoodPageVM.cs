@@ -34,10 +34,10 @@ public class FoodPageVM
         EditFoodCommand.ExecuteAction = EditFood;
         RemoveFoodCommand.ExecuteAction = RemoveFood;
 
-        I18nHelper.Instance.CurrentLang.ValueChanged += CurrentLang_ValueChanged;
-        I18nHelper.Instance.AddLang += Instance_AddLang;
-        I18nHelper.Instance.RemoveLang += Instance_RemoveLang;
-        I18nHelper.Instance.ReplaceLang += Instance_ReplaceLang;
+        I18nHelper.Current.CultureName.ValueChanged += CurrentLang_ValueChanged;
+        I18nHelper.Current.AddLang += Instance_AddLang;
+        I18nHelper.Current.RemoveLang += Instance_RemoveLang;
+        I18nHelper.Current.ReplaceLang += Instance_ReplaceLang;
     }
 
     private void CurrentLang_ValueChanged(string value)
@@ -104,9 +104,20 @@ public class FoodPageVM
     {
         var window = CreateAddFoodWindow();
         var vm = window.ViewModel;
-        vm.Food.Value = food;
+        var newFood = vm.Food.Value = new(food);
         window.ShowDialog();
-        // TODO: 需要实现深拷贝
+        if (window.IsCancel)
+            return;
+        if (ShowFoods.Value.Count == Foods.Count)
+        {
+            Foods[Foods.IndexOf(food)] = newFood;
+        }
+        else
+        {
+            Foods[Foods.IndexOf(food)] = newFood;
+            ShowFoods.Value[ShowFoods.Value.IndexOf(food)] = newFood;
+        }
+        food.Close();
     }
 
     private void RemoveFood(FoodModel food)

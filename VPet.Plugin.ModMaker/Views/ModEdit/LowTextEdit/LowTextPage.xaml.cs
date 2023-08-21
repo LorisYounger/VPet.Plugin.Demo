@@ -33,65 +33,10 @@ public partial class LowTextPage : Page
         DataContext = new LowTextPageVM();
     }
 
-    //private void Button_AddLowText_Click(object sender, RoutedEventArgs e)
-    //{
-    //    var window = new LowTextEditWindow();
-    //    window.Closed += (s, e) =>
-    //    {
-    //        if (s is not LowTextEditWindow addLowTextWindow || addLowTextWindow.IsCancel)
-    //            return;
-    //        var lowText = CreateLowTextFromWindow(addLowTextWindow);
-    //        if (LowTextDict.TryGetValue(lowText.Text, out var oldText))
-    //        {
-    //            LowTextDict[lowText.Text] = LowTexts[LowTexts.IndexOf(oldText)] = lowText;
-    //        }
-    //        else
-    //        {
-    //            LowTexts.Add(lowText);
-    //            LowTextDict.Add(lowText.Text, lowText);
-    //        }
-    //    };
-    //    ShowDialogX(window);
-    //}
-
-    private void DataGrid_Food_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+    private void DataGrid_LowText_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
         if (sender is not DataGrid dataGrid || dataGrid.SelectedItem is not LowTextModel lowText)
             return;
         ViewModel.EditLowText(lowText);
     }
-
-    //private void TextBox_SearchFood_TextChanged(object sender, TextChangedEventArgs e)
-    //{
-    //    if (sender is not TextBox textBox)
-    //        return;
-    //    if (textBox.Text.Length > 0)
-    //    {
-    //        var newList = new ObservableCollection<LowText>(
-    //            LowTexts.Where(i => i.Text.Contains(textBox.Text))
-    //        );
-    //        if (newList.Count != LowTexts.Count)
-    //            DataGrid_LowText.ItemsSource = newList;
-    //    }
-    //    else
-    //        DataGrid_LowText.ItemsSource = LowTexts;
-    //}
-
-    //private void MenuItem_ChangeLowText_Click(object sender, RoutedEventArgs e)
-    //{
-    //    if (sender is not MenuItem menuItem || menuItem.Tag is not LowText lowText)
-    //        return;
-    //    ChangeLowText(lowText);
-    //}
-
-    //private void MenuItem_RemoveLowText_Click(object sender, RoutedEventArgs e)
-    //{
-    //    if (sender is not MenuItem menuItem || menuItem.Tag is not LowText lowText)
-    //        return;
-    //    if (DataGrid_LowText.ItemsSource is IList list && list.Count != LowTexts.Count)
-    //        list.Remove(lowText);
-    //    else
-    //        LowTexts.Remove(lowText);
-    //    LowTextDict.Remove(lowText.Text);
-    //}
 }

@@ -1,6 +1,7 @@
 ﻿using HKW.HKWViewModels.SimpleObservable;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,13 +28,33 @@ public class FoodModel : II18nData<I18nFoodModel>
 
     public FoodModel()
     {
-        foreach (var lang in I18nHelper.Instance.Langs)
+        foreach (var lang in I18nHelper.Current.CultureNames)
             I18nDatas.Add(lang, new());
-        CurrentI18nData.Value = I18nDatas[I18nHelper.Instance.CurrentLang.Value];
+        CurrentI18nData.Value = I18nDatas[I18nHelper.Current.CultureName.Value];
+    }
+
+    public FoodModel(FoodModel food)
+        : this()
+    {
+        Id.Value = food.Id.Value;
+        Type.Value = food.Type.Value;
+        Strength.Value = food.Strength.Value;
+        StrengthFood.Value = food.StrengthFood.Value;
+        StrengthDrink.Value = food.StrengthDrink.Value;
+        Feeling.Value = food.Feeling.Value;
+        Health.Value = food.Health.Value;
+        Likability.Value = food.Likability.Value;
+        Price.Value = food.Price.Value;
+        Exp.Value = food.Exp.Value;
+        Image.Value = Utils.LoadImageToStream(food.Image.Value);
+        foreach (var item in food.I18nDatas)
+            I18nDatas[item.Key] = item.Value;
+        CurrentI18nData.Value = I18nDatas[I18nHelper.Current.CultureName.Value];
     }
 
     public Food ToFood()
     {
+        // 没有 Name 和 Description
         return new Food()
         {
             Type = Type.Value,
@@ -45,13 +66,12 @@ public class FoodModel : II18nData<I18nFoodModel>
             Likability = Likability.Value,
             Price = Price.Value,
             ImageSource = Image.Value,
-            Name = CurrentI18nData is null
-                ? I18nDatas.First().Value.Name.Value
-                : CurrentI18nData.Value.Name.Value,
-            Desc = CurrentI18nData is null
-                ? I18nDatas.First().Value.Description.Value
-                : CurrentI18nData.Value.Description.Value,
         };
+    }
+
+    public void Close()
+    {
+        Image.Value?.StreamSource?.Close();
     }
 }
 

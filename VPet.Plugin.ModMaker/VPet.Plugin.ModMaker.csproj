@@ -89,16 +89,24 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClickTextModel.cs" />
     <Compile Include="Models\FoodModel.cs" />
     <Compile Include="Models\I18nHelper.cs" />
     <Compile Include="Models\II18nData.cs" />
     <Compile Include="Models\LowTextModel.cs" />
+    <Compile Include="ViewModels\ModEdit\ClickTextEdit\ClickTextEditWindowVM.cs" />
+    <Compile Include="ViewModels\ModEdit\ClickTextEdit\ClickTextPageVM.cs" />
     <Compile Include="ViewModels\ModEdit\FoodEdit\FoodPageVM.cs" />
     <Compile Include="ViewModels\ModEdit\FoodEdit\FoodEditWindowVM.cs" />
     <Compile Include="ViewModels\ModEdit\LowTextEdit\LowTextEditWindowVM.cs" />
     <Compile Include="ViewModels\ModEdit\LowTextEdit\LowTextPageVM.cs" />
-    <Compile Include="ViewModels\ModEdit\LowTextEdit\MapperConfiguration.cs" />
     <Compile Include="ViewModels\ModEdit\ModEditWindowVM.cs" />
+    <Compile Include="Views\ModEdit\ClickTextEdit\ClickTextPage.xaml.cs">
+      <DependentUpon>ClickTextPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ModEdit\ClickTextEdit\ClickTextEditWindow.xaml.cs">
+      <DependentUpon>ClickTextEditWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ModEdit\FoodEdit\FoodPage.xaml.cs">
       <DependentUpon>FoodPage.xaml</DependentUpon>
     </Compile>
@@ -155,6 +163,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Views\ModEdit\ClickTextEdit\ClickTextPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ModEdit\ClickTextEdit\ClickTextEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ModEdit\FoodEdit\FoodPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

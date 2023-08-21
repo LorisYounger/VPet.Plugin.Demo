@@ -1,18 +1,18 @@
 ﻿<Window
-  x:Class="VPet.Plugin.ModMaker.Views.ModEdit.LowTextEdit.LowTextEditWindow"
+  x:Class="VPet.Plugin.ModMaker.Views.ModEdit.ClickTextEdit.ClickTextEditWindow"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-  xmlns:local="clr-namespace:VPet.Plugin.ModMaker.Views.ModEdit.LowTextEdit"
+  xmlns:local="clr-namespace:VPet.Plugin.ModMaker.Views.ModEdit.ClickTextEdit"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:pu="https://opensource.panuon.com/wpf-ui"
-  xmlns:vm="clr-namespace:VPet.Plugin.ModMaker.ViewModels.ModEdit.LowTextEdit"
-  Title="Page_LowText"
+  xmlns:vm="clr-namespace:VPet.Plugin.ModMaker.ViewModels.ModEdit.ClickTextEdit"
+  Title="ClickTextWindow"
   Width="800"
   Height="450"
   mc:Ignorable="d">
   <d:Window.DataContext>
-    <vm:LowTextEditWindowVM />
+    <vm:ClickTextEditWindowVM />
   </d:Window.DataContext>
   <Grid>
     <Grid.ColumnDefinitions>
@@ -25,7 +25,7 @@
         VerticalContentAlignment="Top"
         d:Text="这是一个测试文本,这是一个测试文本,这是一个测试文本,这是一个测试文本,这是一个测试文本,这是一个测试文本,这是一个测试文本,"
         pu:TextBoxHelper.Watermark="文本"
-        Text="{Binding LowText.Value.CurrentI18nData.Value.Text.Value, UpdateSourceTrigger=PropertyChanged}"
+        Text="{Binding ClickText.Value.CurrentI18nData.Value.Text.Value, UpdateSourceTrigger=PropertyChanged}"
         TextWrapping="Wrap" />
     </Grid>
     <Grid Grid.Column="1">
@@ -43,28 +43,45 @@
           <RowDefinition Height="Auto" />
           <RowDefinition Height="Auto" />
           <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Label Content="Id" />
-        <TextBox Grid.Column="1" Text="{Binding LowText.Value.Id.Value, UpdateSourceTrigger=PropertyChanged}" />
-        <Label Grid.Row="1" Content="口渴/饥饿状态" />
-        <Label Grid.Row="1" Content="状态" />
-        <ComboBox
+        <TextBox Grid.Column="1" Text="{Binding ClickText.Value.Id.Value, UpdateSourceTrigger=PropertyChanged}" />
+        <Label Grid.Row="1" Content="指定工作" />
+        <TextBox
           Grid.Row="1"
           Grid.Column="1"
-          ItemsSource="{Binding ModeTypes}"
-          SelectedItem="{Binding LowText.Value.Mode.Value}" />
-        <Label Grid.Row="2" Content="口渴/饥饿状态" />
-        <ComboBox
+          Text="{Binding ClickText.Value.Working.Value, UpdateSourceTrigger=PropertyChanged}" />
+        <Label Grid.Row="2" Content="最小好感度" />
+        <pu:NumberInput
           Grid.Row="2"
           Grid.Column="1"
-          ItemsSource="{Binding StrengthTypes}"
-          SelectedItem="{Binding LowText.Value.Strength.Value}" />
-        <Label Grid.Row="3" Content="好感度需求" />
-        <ComboBox
+          Value="{Binding ClickText.Value.LikeMin.Value}" />
+        <Label Grid.Row="3" Content="最大好感度" />
+        <pu:NumberInput
           Grid.Row="3"
           Grid.Column="1"
-          ItemsSource="{Binding LikeTypes}"
-          SelectedItem="{Binding LowText.Value.Like.Value}" />
+          Value="{Binding ClickText.Value.LikeMax.Value}" />
+        <Label Grid.Row="4" Content="模式" />
+        <ComboBox
+          Grid.Row="4"
+          Grid.Column="1"
+          ItemsSource="{Binding ModeTypes}"
+          SelectedItem="{Binding ClickText.Value.Mode.Value}" />
+        <Label Grid.Row="5" Content="工作状态" />
+        <ComboBox
+          Grid.Row="5"
+          Grid.Column="1"
+          ItemsSource="{Binding WorkingStates}"
+          SelectedItem="{Binding ClickText.Value.WorkingState.Value}" />
+        <Label Grid.Row="6" Content="日期区间" />
+        <ComboBox
+          Grid.Row="6"
+          Grid.Column="1"
+          ItemsSource="{Binding DayTimes}"
+          SelectedItem="{Binding ClickText.Value.DayTime.Value}" />
       </Grid>
       <Grid Grid.Row="1">
         <Grid.ColumnDefinitions>

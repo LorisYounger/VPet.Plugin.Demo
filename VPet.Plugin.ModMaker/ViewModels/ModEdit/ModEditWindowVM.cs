@@ -23,7 +23,7 @@ public class ModEditWindowVM
     public ObservableValue<BitmapImage> ModImage { get; } = new();
     public ObservableValue<ModInfoModel> ModInfo { get; } = new(new());
     public ObservableValue<string> CurrentLang { get; } = new();
-    public I18nHelper I18nData => I18nHelper.Instance;
+    public I18nHelper I18nData => I18nHelper.Current;
     #endregion
 
     #region Command
@@ -39,11 +39,15 @@ public class ModEditWindowVM
 
     public ModEditWindowVM(ModEditWindow window)
     {
+#if DEBUG
+        I18nHelper.Current.CultureNames.Add("zh-CN");
+        I18nHelper.Current.CultureName.Value = I18nHelper.Current.CultureNames.First();
+#endif
         ModEditWindow = window;
 
-        I18nHelper.Instance.AddLang += I18nData_AddLang;
-        I18nHelper.Instance.RemoveLang += I18nData_RemoveLang;
-        I18nHelper.Instance.ReplaceLang += I18nData_ReplaceLang;
+        I18nHelper.Current.AddLang += I18nData_AddLang;
+        I18nHelper.Current.RemoveLang += I18nData_RemoveLang;
+        I18nHelper.Current.ReplaceLang += I18nData_ReplaceLang;
         CurrentLang.ValueChanged += CurrentLang_ValueChanged;
 
         AddImageCommand.ExecuteAction = AddImage;
@@ -105,21 +109,23 @@ public class ModEditWindowVM
 
     private void AddLang()
     {
-        var window = CreateAddLangWindow();
+        var window = new Window_AddLang();
         window.ShowDialog();
         if (window.IsCancel)
             return;
-        I18nHelper.Instance.Langs.Add(window.Lang.Value);
+        I18nHelper.Current.CultureNames.Add(window.Lang.Value);
     }
 
     private void EditLang(string oldLang)
     {
-        var window = CreateAddLangWindow();
+        var window = new Window_AddLang();
         window.Lang.Value = oldLang;
         window.ShowDialog();
         if (window.IsCancel)
             return;
-        I18nHelper.Instance.Langs[I18nHelper.Instance.Langs.IndexOf(oldLang)] = window.Lang.Value;
+        I18nHelper.Current.CultureNames[I18nHelper.Current.CultureNames.IndexOf(oldLang)] = window
+            .Lang
+            .Value;
         CurrentLang.Value = window.Lang.Value;
     }
 
@@ -127,13 +133,6 @@ public class ModEditWindowVM
     {
         if (MessageBox.Show("确定删除吗", "", MessageBoxButton.YesNo) is MessageBoxResult.No)
             return;
-        I18nHelper.Instance.Langs.Remove(oldLang);
-    }
-
-    private Window_AddLang CreateAddLangWindow()
-    {
-        var window = new Window_AddLang();
-        window.Langs = I18nHelper.Instance.Langs;
-        return window;
+        I18nHelper.Current.CultureNames.Remove(oldLang);
     }
 }

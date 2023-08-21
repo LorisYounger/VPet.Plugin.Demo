@@ -20,6 +20,11 @@ internal static class Utils
         return bitmapImage;
     }
 
+    public static BitmapImage LoadImageToStream(BitmapImage image)
+    {
+        return LoadImageToStream(((FileStream)image.StreamSource).Name);
+    }
+
     public static BitmapImage LoadImageToMemoryStream(string imagePath)
     {
         BitmapImage bitmapImage = new();
@@ -31,6 +36,11 @@ internal static class Utils
         bitmapImage.StreamSource = ms;
         bitmapImage.EndInit();
         return bitmapImage;
+    }
+
+    public static BitmapImage LoadImageToMemoryStream(BitmapImage image)
+    {
+        return LoadImageToMemoryStream(((FileStream)image.StreamSource).Name);
     }
 
     public static void ShowDialogX(this Window window, Window owner)

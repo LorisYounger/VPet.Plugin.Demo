@@ -10,24 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using VPet.Plugin.ModMaker.ViewModels.ModEdit.LowTextEdit;
+using VPet.Plugin.ModMaker.ViewModels.ModEdit.ClickTextEdit;
 
-namespace VPet.Plugin.ModMaker.Views.ModEdit.LowTextEdit;
+namespace VPet.Plugin.ModMaker.Views.ModEdit.ClickTextEdit;
 
 /// <summary>
-/// Window_AddLowText.xaml 的交互逻辑
+/// ClickTextWindow.xaml 的交互逻辑
 /// </summary>
-public partial class LowTextEditWindow : Window
+public partial class ClickTextEditWindow : Window
 {
-    public LowTextEditWindowVM ViewModel => (LowTextEditWindowVM)DataContext;
     public bool IsCancel { get; private set; } = true;
+    public ClickTextEditWindowVM ViewModel => (ClickTextEditWindowVM)DataContext;
 
-    public LowTextEditWindow()
+    public ClickTextEditWindow()
     {
         InitializeComponent();
-        DataContext = new LowTextEditWindowVM();
+        DataContext = new ClickTextEditWindowVM();
     }
 
     private void Button_Cancel_Click(object sender, RoutedEventArgs e)
@@ -37,12 +36,12 @@ public partial class LowTextEditWindow : Window
 
     private void Button_Yes_Click(object sender, RoutedEventArgs e)
     {
-        if (string.IsNullOrEmpty(ViewModel.LowText.Value.Id.Value))
+        if (string.IsNullOrEmpty(ViewModel.ClickText.Value.Id.Value))
         {
             MessageBox.Show("Id不可为空", "", MessageBoxButton.OK, MessageBoxImage.Warning);
             return;
         }
-        if (ViewModel.LowTexts.Any(i => i.Id.Value == ViewModel.LowText.Value.Id.Value))
+        if (ViewModel.ClickTexts.Any(i => i.Id.Value == ViewModel.ClickText.Value.Id.Value))
         {
             MessageBox.Show("此Id已存在", "", MessageBoxButton.OK, MessageBoxImage.Warning);
             return;

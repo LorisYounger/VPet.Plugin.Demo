@@ -29,7 +29,7 @@ public class WindowVM_ModMaker
 
     private void CreateNewMod()
     {
-        I18nHelper.Instance = new();
+        I18nHelper.Current = new();
         ModEditWindow = new();
         ModEditWindow.Show();
         ModMakerWindow.Hide();

@@ -12,22 +12,23 @@ namespace VPet.Plugin.ModMaker.ViewModels.ModEdit.LowTextEdit;
 
 public class LowTextEditWindowVM
 {
-    #region Value
     public ObservableCollection<LowTextModel> LowTexts { get; set; }
+
+    #region Value
     public ObservableValue<LowTextModel> LowText { get; } = new(new());
 
-    public ObservableCollection<LowText.ModeType> LowTextModeTypes { get; } = new();
-    public ObservableCollection<LowText.LikeType> LowTextLikeTypes { get; } = new();
-    public ObservableCollection<LowText.StrengthType> LowTextStrengthTypes { get; } = new();
+    public ObservableCollection<LowText.ModeType> ModeTypes { get; } = new();
+    public ObservableCollection<LowText.LikeType> LikeTypes { get; } = new();
+    public ObservableCollection<LowText.StrengthType> StrengthTypes { get; } = new();
     #endregion
 
     public LowTextEditWindowVM()
     {
         foreach (LowText.ModeType mode in Enum.GetValues(typeof(LowText.ModeType)))
-            LowTextModeTypes.Add(mode);
+            ModeTypes.Add(mode);
         foreach (LowText.LikeType mode in Enum.GetValues(typeof(LowText.LikeType)))
-            LowTextLikeTypes.Add(mode);
+            LikeTypes.Add(mode);
         foreach (LowText.StrengthType mode in Enum.GetValues(typeof(LowText.StrengthType)))
-            LowTextStrengthTypes.Add(mode);
+            StrengthTypes.Add(mode);
     }
 }

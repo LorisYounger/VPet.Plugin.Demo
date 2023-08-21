@@ -10,13 +10,13 @@ namespace VPet.Plugin.ModMaker.Models;
 
 public class I18nHelper
 {
-    public static I18nHelper Instance { get; set; } = new();
-    public ObservableValue<string> CurrentLang { get; } = new();
-    public ObservableCollection<string> Langs { get; } = new();
+    public static I18nHelper Current { get; set; } = new();
+    public ObservableValue<string> CultureName { get; } = new();
+    public ObservableCollection<string> CultureNames { get; } = new();
 
     public I18nHelper()
     {
-        Langs.CollectionChanged += Langs_CollectionChanged;
+        CultureNames.CollectionChanged += Langs_CollectionChanged;
     }
 
     private void Langs_CollectionChanged(

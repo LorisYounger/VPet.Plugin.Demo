@@ -197,23 +197,11 @@
                 Style="{StaticResource AddButton}" />
             </Grid>
           </TabItem>
-          <TabItem Header="点击文本 (0)">
-            <Grid>
-              <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition />
-              </Grid.RowDefinitions>
-              <TextBox x:Name="TextBox_SearchClickText" />
-              <ListBox x:Name="ListBox_ClickText" />
-              <Button
-                x:Name="Button_AddClickText"
-                Grid.Row="1"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
-                Click="Button_AddClickText_Click"
-                Content="➕"
-                Style="{StaticResource AddButton}" />
-            </Grid>
+          <TabItem
+            x:Name="TabItem_ClickText"
+            Header="点击文本 (0)"
+            Tag="点击文本">
+            <Frame Content="{Binding ModEditWindow.ClickTextPage}" />
           </TabItem>
           <TabItem
             x:Name="TabItem_LowText"
@@ -237,9 +225,9 @@
         x:Name="ListBox_Langs"
         Grid.Row="1"
         d:ItemsSource="{d:SampleData ItemCount=5}"
-        ItemsSource="{Binding I18nData.Langs}"
+        ItemsSource="{Binding I18nData.CultureNames}"
         ScrollViewer.VerticalScrollBarVisibility="Auto"
-        SelectedItem="{Binding I18nData.CurrentLang.Value}">
+        SelectedItem="{Binding I18nData.CultureName.Value}">
         <ListBox.ItemContainerStyle>
           <Style BasedOn="{StaticResource {x:Type ListBoxItem}}" TargetType="ListBoxItem">
             <Setter Property="Content" Value="{Binding}" />

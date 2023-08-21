@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using VPet.Plugin.ModMaker.Models;
 using VPet.Plugin.ModMaker.ViewModels.ModEdit;
 
 namespace VPet.Plugin.ModMaker.Views.ModEdit;
@@ -24,8 +25,6 @@ namespace VPet.Plugin.ModMaker.Views.ModEdit;
 public partial class Window_AddLang : Window
 {
     public bool IsCancel { get; internal set; } = true;
-
-    public ObservableCollection<string> Langs { get; internal set; }
 
     public ObservableValue<string> Lang { get; } = new();
 
@@ -48,7 +47,7 @@ public partial class Window_AddLang : Window
             MessageBox.Show("Lang不可为空", "", MessageBoxButton.OK, MessageBoxImage.Warning);
             return;
         }
-        if (Langs.Contains(Lang.Value))
+        if (I18nHelper.Current.CultureNames.Contains(Lang.Value))
         {
             MessageBox.Show("此语言已存在", "", MessageBoxButton.OK, MessageBoxImage.Warning);
             return;

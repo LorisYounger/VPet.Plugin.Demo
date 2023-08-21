@@ -67,7 +67,7 @@
           <Label Content="食物Id:" />
           <TextBox
             Grid.Column="1"
-            pu:TextBoxHelper.Watermark="食物Id"
+            pu:TextBoxHelper.Watermark="Id"
             Text="{Binding Food.Value.Id.Value}" />
           <Label Grid.Row="1" Content="食物类型:" />
           <ComboBox
@@ -82,7 +82,6 @@
             Grid.Column="1"
             pu:TextBoxHelper.Watermark="食物名称"
             Text="{Binding Food.Value.CurrentI18nData.Value.Name.Value}" />
-          <Label Content="食物名称:" />
           <Label Grid.Row="3" Content="食物描述:" />
           <TextBox
             Grid.Row="3"

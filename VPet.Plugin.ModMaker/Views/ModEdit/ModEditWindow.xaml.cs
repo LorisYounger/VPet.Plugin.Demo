@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using VPet.Plugin.ModMaker.ViewModels.ModEdit;
+using VPet.Plugin.ModMaker.Views.ModEdit.ClickTextEdit;
 using VPet.Plugin.ModMaker.Views.ModEdit.FoodEdit;
 using VPet.Plugin.ModMaker.Views.ModEdit.LowTextEdit;
 using VPet_Simulator.Windows.Interface;
@@ -29,8 +30,9 @@ namespace VPet.Plugin.ModMaker.Views.ModEdit;
 public partial class ModEditWindow : Window
 {
     public ModEditWindowVM ViewModel => (ModEditWindowVM)this.DataContext;
-    public FoodPage FoodPage { get; } = new FoodPage();
-    public LowTextPage LowTextPage { get; } = new LowTextPage();
+    public FoodPage FoodPage { get; } = new();
+    public LowTextPage LowTextPage { get; } = new();
+    public ClickTextPage ClickTextPage { get; } = new();
 
     public ModEditWindow()
     {
@@ -39,6 +41,16 @@ public partial class ModEditWindow : Window
         Closed += Window_ModEdit_Closed;
         FoodPage.ViewModel.Foods.CollectionChanged += Foods_CollectionChanged;
         LowTextPage.ViewModel.LowTexts.CollectionChanged += LowTexts_CollectionChanged;
+        ClickTextPage.ViewModel.ClickTexts.CollectionChanged += ClickTexts_CollectionChanged;
+    }
+
+    private void ClickTexts_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    {
+        ClickTextPage.ViewModel.ClickTexts.CollectionChanged += (s, e) =>
+        {
+            TabItem_ClickText.Header =
+                $"{TabItem_ClickText.Tag} ({ClickTextPage.ViewModel.ClickTexts.Count})";
+        };
     }
 
     private void LowTexts_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

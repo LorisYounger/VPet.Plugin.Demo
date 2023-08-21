@@ -35,10 +35,10 @@ public class LowTextPageVM
         EditLowTextCommand.ExecuteAction = EditLowText;
         RemoveLowTextCommand.ExecuteAction = RemoveLowText;
 
-        I18nHelper.Instance.CurrentLang.ValueChanged += CurrentLang_ValueChanged;
-        I18nHelper.Instance.AddLang += Instance_AddLang;
-        I18nHelper.Instance.RemoveLang += Instance_RemoveLang;
-        I18nHelper.Instance.ReplaceLang += Instance_ReplaceLang;
+        I18nHelper.Current.CultureName.ValueChanged += CurrentLang_ValueChanged;
+        I18nHelper.Current.AddLang += Instance_AddLang;
+        I18nHelper.Current.RemoveLang += Instance_RemoveLang;
+        I18nHelper.Current.ReplaceLang += Instance_ReplaceLang;
     }
 
     private void FilterLowText_ValueChanged(string value)
@@ -69,20 +69,19 @@ public class LowTextPageVM
     {
         var window = CreateLowTextEditWindow();
         var vm = window.ViewModel;
-        vm.LowText.Value = lowText;
+        var newLowTest = vm.LowText.Value = new(lowText);
         window.ShowDialog();
-        // TODO: 需要实现深拷贝
-        //if (window.IsCancel)
-        //    return;
-        //if (ShowLowTexts.Value.Count == LowTexts.Count)
-        //{
-        //    LowTexts[LowTexts.IndexOf(lowText)] = lowText;
-        //}
-        //else
-        //{
-        //    LowTexts[LowTexts.IndexOf(lowText)] = lowText;
-        //    ShowLowTexts.Value[ShowLowTexts.Value.IndexOf(lowText)] = lowText;
-        //}
+        if (window.IsCancel)
+            return;
+        if (ShowLowTexts.Value.Count == LowTexts.Count)
+        {
+            LowTexts[LowTexts.IndexOf(lowText)] = newLowTest;
+        }
+        else
+        {
+            LowTexts[LowTexts.IndexOf(lowText)] = newLowTest;
+            ShowLowTexts.Value[ShowLowTexts.Value.IndexOf(lowText)] = newLowTest;
+        }
     }
 
     private void RemoveLowText(LowTextModel lowText)
