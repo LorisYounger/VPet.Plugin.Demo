@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using VPet.Plugin.ModMaker.Models;
 using VPet.Plugin.ModMaker.ViewModels;
 using VPet.Plugin.ModMaker.Views.ModEdit;
+using VPet.Plugin.ModMaker.Views.ModEdit.PetEdit;
 
 namespace VPet.Plugin.ModMaker.Views;
 
@@ -23,7 +24,7 @@ namespace VPet.Plugin.ModMaker.Views;
 /// </summary>
 public partial class ModMakerWindow : Window
 {
-    public WindowVM_ModMaker ViewModel => (WindowVM_ModMaker)this.DataContext;
+    public WindowVM_ModMaker ViewModel => (WindowVM_ModMaker)DataContext;
     public Models.ModMaker ModMaker { get; set; }
     public ModEditWindow ModEditWindow { get; set; }
 
@@ -31,5 +32,6 @@ public partial class ModMakerWindow : Window
     {
         InitializeComponent();
         DataContext = new WindowVM_ModMaker(this);
+        new PetEditWindow().Show();
     }
 }

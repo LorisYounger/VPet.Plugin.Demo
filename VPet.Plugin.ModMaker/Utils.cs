@@ -30,9 +30,8 @@ internal static class Utils
         BitmapImage bitmapImage = new();
         bitmapImage.BeginInit();
         var ms = new MemoryStream();
-        var sr = new StreamReader(imagePath);
+        using var sr = new StreamReader(imagePath);
         sr.BaseStream.CopyTo(ms);
-        sr.Close();
         bitmapImage.StreamSource = ms;
         bitmapImage.EndInit();
         return bitmapImage;

@@ -89,11 +89,14 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\MaxConverter.cs" />
+    <Compile Include="Converters\MarginConverter.cs" />
     <Compile Include="Models\ClickTextModel.cs" />
     <Compile Include="Models\FoodModel.cs" />
     <Compile Include="Models\I18nHelper.cs" />
     <Compile Include="Models\II18nData.cs" />
     <Compile Include="Models\LowTextModel.cs" />
+    <Compile Include="Models\PetModel.cs" />
     <Compile Include="ViewModels\ModEdit\ClickTextEdit\ClickTextEditWindowVM.cs" />
     <Compile Include="ViewModels\ModEdit\ClickTextEdit\ClickTextPageVM.cs" />
     <Compile Include="ViewModels\ModEdit\FoodEdit\FoodPageVM.cs" />
@@ -101,6 +104,8 @@
     <Compile Include="ViewModels\ModEdit\LowTextEdit\LowTextEditWindowVM.cs" />
     <Compile Include="ViewModels\ModEdit\LowTextEdit\LowTextPageVM.cs" />
     <Compile Include="ViewModels\ModEdit\ModEditWindowVM.cs" />
+    <Compile Include="ViewModels\ModEdit\PetEdit\PetEditWindowVM.cs" />
+    <Compile Include="ViewModels\ModEdit\PetEdit\PetPageVM.cs" />
     <Compile Include="Views\ModEdit\ClickTextEdit\ClickTextPage.xaml.cs">
       <DependentUpon>ClickTextPage.xaml</DependentUpon>
     </Compile>
@@ -145,6 +150,12 @@
       <DependentUpon>ModEditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ModMakerWindowVM.cs" />
+    <Compile Include="Views\ModEdit\PetEdit\PetEditWindow.xaml.cs">
+      <DependentUpon>PetEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ModEdit\PetEdit\PetPage.xaml.cs">
+      <DependentUpon>PetPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ModMakerWindow.xaml.cs">
       <DependentUpon>ModMakerWindow.xaml</DependentUpon>
     </Compile>
@@ -163,6 +174,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Converters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ModEdit\ClickTextEdit\ClickTextPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -192,6 +207,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ModEdit\ModEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ModEdit\PetEdit\PetEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ModEdit\PetEdit\PetPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
