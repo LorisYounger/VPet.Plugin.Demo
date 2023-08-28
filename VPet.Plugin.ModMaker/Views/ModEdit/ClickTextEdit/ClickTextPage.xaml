@@ -1,0 +1,144 @@
+﻿<Page
+  x:Class="VPet.Plugin.ModMaker.Views.ModEdit.ClickTextEdit.ClickTextPage"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="clr-namespace:VPet.Plugin.ModMaker.Views.ModEdit.ClickTextEdit"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:pu="https://opensource.panuon.com/wpf-ui"
+  xmlns:vm="clr-namespace:VPet.Plugin.ModMaker.ViewModels.ModEdit.ClickTextEdit"
+  Title="ClickTextPage"
+  d:DesignHeight="450"
+  d:DesignWidth="800"
+  mc:Ignorable="d">
+  <d:Page.DataContext>
+    <vm:ClickTextPageVM />
+  </d:Page.DataContext>
+  <Page.Resources>
+    <ResourceDictionary>
+      <ContextMenu x:Key="ContextMenu_DataGridRow" x:Shared="false">
+        <MenuItem
+          Command="{Binding DataContext.EditLowTextCommand, RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}}"
+          CommandParameter="{Binding DataContext, RelativeSource={RelativeSource AncestorType=DataGridRow, Mode=FindAncestor}}"
+          Header="修改点击文本" />
+        <MenuItem
+          Command="{Binding DataContext.RemoveLowTextCommand, RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}}"
+          CommandParameter="{Binding DataContext, RelativeSource={RelativeSource AncestorType=DataGridRow, Mode=FindAncestor}}"
+          Header="删除点击文本" />
+      </ContextMenu>
+    </ResourceDictionary>
+  </Page.Resources>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition />
+    </Grid.RowDefinitions>
+    <TextBox
+      x:Name="TextBox_SearchFood"
+      pu:TextBoxHelper.Watermark="搜索文本"
+      Text="{Binding FilterClickText.Value, UpdateSourceTrigger=PropertyChanged}" />
+    <DataGrid
+      x:Name="DataGrid_ClickText"
+      Grid.Row="1"
+      d:ItemsSource="{d:SampleData ItemCount=5}"
+      pu:DataGridHelper.ColumnHeaderHorizontalContentAlignment="Center"
+      AutoGenerateColumns="False"
+      CanUserAddRows="False"
+      GridLinesVisibility="Horizontal"
+      ItemsSource="{Binding ShowClickTexts.Value}"
+      MouseDoubleClick="DataGrid_ClickText_MouseDoubleClick"
+      RowDetailsVisibilityMode="Visible"
+      RowHeight="64"
+      VirtualizingStackPanel.IsVirtualizing="True"
+      VirtualizingStackPanel.VirtualizationMode="Recycling">
+      <DataGrid.RowStyle>
+        <Style BasedOn="{StaticResource {x:Type DataGridRow}}" TargetType="DataGridRow">
+          <Setter Property="Height" Value="64" />
+          <Setter Property="Tag" Value="{Binding}" />
+          <Setter Property="ContextMenu" Value="{StaticResource ContextMenu_DataGridRow}" />
+        </Style>
+      </DataGrid.RowStyle>
+      <DataGrid.Columns>
+        <DataGridTextColumn
+          Binding="{Binding Id.Value}"
+          CanUserSort="True"
+          IsReadOnly="True"
+          SortMemberPath="Id">
+          <DataGridTextColumn.Header>
+            <Label Content="Id" />
+          </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+        <DataGridTextColumn
+          Binding="{Binding CurrentI18nData.Value.Text.Value}"
+          CanUserSort="True"
+          IsReadOnly="True"
+          SortMemberPath="Text">
+          <DataGridTextColumn.Header>
+            <Label Content="文本" />
+          </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+        <DataGridTextColumn
+          Binding="{Binding Mode.Value}"
+          CanUserSort="True"
+          IsReadOnly="True"
+          SortMemberPath="Mode">
+          <DataGridTextColumn.Header>
+            <Label Content="状态" />
+          </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+        <DataGridTextColumn
+          Binding="{Binding Working.Value}"
+          CanUserSort="True"
+          IsReadOnly="True"
+          SortMemberPath="Working">
+          <DataGridTextColumn.Header>
+            <Label Content="指定工作" />
+          </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+        <DataGridTextColumn
+          Binding="{Binding WorkingState.Value}"
+          CanUserSort="True"
+          IsReadOnly="True"
+          SortMemberPath="WorkingState">
+          <DataGridTextColumn.Header>
+            <Label Content="工作状态" />
+          </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+        <DataGridTextColumn
+          Binding="{Binding LikeMin.Value}"
+          CanUserSort="True"
+          IsReadOnly="True"
+          SortMemberPath="LikeMin">
+          <DataGridTextColumn.Header>
+            <Label Content="最小好感" />
+          </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+        <DataGridTextColumn
+          Binding="{Binding LikeMax.Value}"
+          CanUserSort="True"
+          IsReadOnly="True"
+          SortMemberPath="LikeMax">
+          <DataGridTextColumn.Header>
+            <Label Content="最大好感" />
+          </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+        <DataGridTextColumn
+          Binding="{Binding DayTime.Value}"
+          CanUserSort="True"
+          IsReadOnly="True"
+          SortMemberPath="DayTime">
+          <DataGridTextColumn.Header>
+            <Label Content="时间" />
+          </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+      </DataGrid.Columns>
+    </DataGrid>
+    <Button
+      Grid.Row="1"
+      HorizontalAlignment="Right"
+      VerticalAlignment="Bottom"
+      Command="{Binding AddClickTextCommand}"
+      Content="➕"
+      Style="{StaticResource AddButton}" />
+  </Grid>
+</Page>
