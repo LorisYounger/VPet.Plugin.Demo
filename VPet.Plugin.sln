@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VPet.Plugin.DemoClock", "VP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VPet.Plugin.VPetTTS", "VPet.Plugin.EdgeTTS\VPet.Plugin.VPetTTS.csproj", "{A826A8D4-A741-49BF-B857-E2EA9A462DB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VPet.Plugin.ModMaker", "VPet.Plugin.ModMaker\VPet.Plugin.ModMaker.csproj", "{8F804A27-A57E-4799-801C-4DE96BA153BC}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{A826A8D4-A741-49BF-B857-E2EA9A462DB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A826A8D4-A741-49BF-B857-E2EA9A462DB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A826A8D4-A741-49BF-B857-E2EA9A462DB7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8F804A27-A57E-4799-801C-4DE96BA153BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8F804A27-A57E-4799-801C-4DE96BA153BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8F804A27-A57E-4799-801C-4DE96BA153BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8F804A27-A57E-4799-801C-4DE96BA153BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
