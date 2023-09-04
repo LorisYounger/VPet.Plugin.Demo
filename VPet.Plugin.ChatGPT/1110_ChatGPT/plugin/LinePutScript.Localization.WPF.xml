@@ -1,0 +1,564 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LinePutScript.Localization.WPF</name>
+    </assembly>
+    <members>
+        <member name="T:LinePutScript.Localization.WPF.BoolExtension">
+            <summary>
+            WPF绑定转换成Bool
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.BoolExtension.Key">
+            <summary>
+            查找值
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.BoolExtension.KeySource">
+            <summary>
+            查找值
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.BoolExtension.DefValue">
+            <summary>
+            默认值
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.BoolExtension.DefValueSource">
+            <summary>
+            默认值
+            </summary>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.BoolExtension.#ctor(System.String)">
+            <summary>
+            WPF绑定转换Bool
+            </summary>
+            <param name="key">查找值</param>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.BoolExtension.#ctor(System.Windows.Data.Binding,System.Windows.Data.Binding)">
+            <summary>
+            WPF绑定转换Bool
+            </summary>
+            <param name="keySource">查找值</param>
+            <param name="defvalueSource">默认值</param>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.BoolExtension.#ctor(System.Windows.Data.Binding,System.Boolean)">
+            <summary>
+            WPF绑定转换Bool
+            </summary>
+            <param name="keySource">查找值</param>
+            <param name="defvalue">默认值</param>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.BoolExtension.#ctor(System.String,System.Boolean)">
+            <summary>
+            WPF绑定转换Bool
+            </summary>
+            <param name="key">查找值</param>
+            <param name="defvalue">默认值</param>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.BoolExtension.#ctor(System.String,System.Windows.Data.Binding)">
+            <summary>
+            WPF绑定转换Bool
+            </summary>
+            <param name="key">查找值</param>
+            <param name="defvalueSource">默认值</param>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.BoolExtension.ProvideValue(System.IServiceProvider)">
+            <summary>
+            
+            </summary>
+            <param name="serviceProvider"></param>
+            <returns></returns>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.BoolExtension.LocalConverter.Key">
+            <summary>
+            查找值
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.BoolExtension.LocalConverter.DefValue">
+            <summary>
+            替换词
+            </summary>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.BoolExtension.LocalConverter.#ctor(System.String,System.Boolean)">
+            <summary>
+            生成一个WPF绑定转换成字符串, 开发者无需使用这个
+            </summary>
+        </member>
+        <member name="T:LinePutScript.Localization.WPF.Int64Extension">
+            <summary>
+            WPF绑定转换成Int64
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.Int64Extension.Key">
+            <summary>
+            查找值
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.Int64Extension.KeySource">
+            <summary>
+            查找值
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.Int64Extension.DefValue">
+            <summary>
+            默认值
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.Int64Extension.DefValueSource">
+            <summary>
+            默认值
+            </summary>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.Int64Extension.#ctor(System.String)">
+            <summary>
+            WPF绑定转换Int64
+            </summary>
+            <param name="key">查找值</param>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.Int64Extension.#ctor(System.Windows.Data.Binding,System.Windows.Data.Binding)">
+            <summary>
+            WPF绑定转换Int64
+            </summary>
+            <param name="keySource">查找值</param>
+            <param name="defvalueSource">默认值</param>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.Int64Extension.#ctor(System.Windows.Data.Binding,System.Int64)">
+            <summary>
+            WPF绑定转换Int64
+            </summary>
+            <param name="keySource">查找值</param>
+            <param name="defvalue">默认值</param>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.Int64Extension.#ctor(System.String,System.Int64)">
+            <summary>
+            WPF绑定转换Int64
+            </summary>
+            <param name="key">查找值</param>
+            <param name="defvalue">默认值</param>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.Int64Extension.#ctor(System.String,System.Windows.Data.Binding)">
+            <summary>
+            WPF绑定转换Int64
+            </summary>
+            <param name="key">查找值</param>
+            <param name="defvalueSource">默认值</param>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.Int64Extension.ProvideValue(System.IServiceProvider)">
+            <summary>
+            
+            </summary>
+            <param name="serviceProvider"></param>
+            <returns></returns>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.Int64Extension.LocalConverter.Key">
+            <summary>
+            查找值
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.Int64Extension.LocalConverter.DefValue">
+            <summary>
+            替换词
+            </summary>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.Int64Extension.LocalConverter.#ctor(System.String,System.Int64)">
+            <summary>
+            生成一个WPF绑定转换成字符串, 开发者无需使用这个
+            </summary>
+        </member>
+        <member name="T:LinePutScript.Localization.WPF.DbeExtension">
+            <summary>
+            WPF绑定转换成Dbe
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.DbeExtension.Key">
+            <summary>
+            查找值
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.DbeExtension.KeySource">
+            <summary>
+            查找值
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.DbeExtension.DefValue">
+            <summary>
+            默认值
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.DbeExtension.DefValueSource">
+            <summary>
+            默认值
+            </summary>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.DbeExtension.#ctor(System.String)">
+            <summary>
+            WPF绑定转换Dbe
+            </summary>
+            <param name="key">查找值</param>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.DbeExtension.#ctor(System.Windows.Data.Binding,System.Windows.Data.Binding)">
+            <summary>
+            WPF绑定转换Dbe
+            </summary>
+            <param name="keySource">查找值</param>
+            <param name="defvalueSource">默认值</param>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.DbeExtension.#ctor(System.Windows.Data.Binding,System.Double)">
+            <summary>
+            WPF绑定转换Dbe
+            </summary>
+            <param name="keySource">查找值</param>
+            <param name="defvalue">默认值</param>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.DbeExtension.#ctor(System.String,System.Double)">
+            <summary>
+            WPF绑定转换Dbe
+            </summary>
+            <param name="key">查找值</param>
+            <param name="defvalue">默认值</param>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.DbeExtension.#ctor(System.String,System.Windows.Data.Binding)">
+            <summary>
+            WPF绑定转换Dbe
+            </summary>
+            <param name="key">查找值</param>
+            <param name="defvalueSource">默认值</param>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.DbeExtension.ProvideValue(System.IServiceProvider)">
+            <summary>
+            
+            </summary>
+            <param name="serviceProvider"></param>
+            <returns></returns>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.DbeExtension.LocalConverter.Key">
+            <summary>
+            查找值
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.DbeExtension.LocalConverter.DefValue">
+            <summary>
+            替换词
+            </summary>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.DbeExtension.LocalConverter.#ctor(System.String,System.Double)">
+            <summary>
+            生成一个WPF绑定转换成字符串, 开发者无需使用这个
+            </summary>
+        </member>
+        <member name="T:LinePutScript.Localization.WPF.IntExtension">
+            <summary>
+            WPF绑定转换成Int
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.IntExtension.Key">
+            <summary>
+            查找值
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.IntExtension.KeySource">
+            <summary>
+            查找值
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.IntExtension.DefValue">
+            <summary>
+            默认值
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.IntExtension.DefValueSource">
+            <summary>
+            默认值
+            </summary>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.IntExtension.#ctor(System.String)">
+            <summary>
+            WPF绑定转换Int
+            </summary>
+            <param name="key">查找值</param>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.IntExtension.#ctor(System.Windows.Data.Binding,System.Windows.Data.Binding)">
+            <summary>
+            WPF绑定转换Int
+            </summary>
+            <param name="keySource">查找值</param>
+            <param name="defvalueSource">默认值</param>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.IntExtension.#ctor(System.Windows.Data.Binding,System.Int32)">
+            <summary>
+            WPF绑定转换Int
+            </summary>
+            <param name="keySource">查找值</param>
+            <param name="defvalue">默认值</param>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.IntExtension.#ctor(System.String,System.Int32)">
+            <summary>
+            WPF绑定转换Int
+            </summary>
+            <param name="key">查找值</param>
+            <param name="defvalue">默认值</param>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.IntExtension.#ctor(System.String,System.Windows.Data.Binding)">
+            <summary>
+            WPF绑定转换Int
+            </summary>
+            <param name="key">查找值</param>
+            <param name="defvalueSource">默认值</param>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.IntExtension.ProvideValue(System.IServiceProvider)">
+            <summary>
+            
+            </summary>
+            <param name="serviceProvider"></param>
+            <returns></returns>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.IntExtension.LocalConverter.Key">
+            <summary>
+            查找值
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.IntExtension.LocalConverter.DefValue">
+            <summary>
+            替换词
+            </summary>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.IntExtension.LocalConverter.#ctor(System.String,System.Int32)">
+            <summary>
+            生成一个WPF绑定转换成字符串, 开发者无需使用这个
+            </summary>
+        </member>
+        <member name="T:LinePutScript.Localization.WPF.LocalizeCore">
+            <summary>
+            本地化核心
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.LocalizeCore.StoreTranslation">
+            <summary>
+            开启此项目以自动收集未翻译文本
+            </summary>
+        </member>
+        <member name="F:LinePutScript.Localization.WPF.LocalizeCore.StoreTranslationList">
+            <summary>
+            储存的需要/未翻译的文本
+            </summary>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.LocalizeCore.StoreTranslationListToLPS">
+            <summary>
+            将未翻译的文本导出成LPS格式,可以直接储存
+            </summary>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.LocalizeCore.StoreTranslationListToList">
+            <summary>
+            将未翻译的文本导出成List string格式, 方便查看
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.LocalizeCore.CurrentCulture">
+            <summary>
+            当前本地化语言
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.LocalizeCore.TranslateFunc">
+            <summary>
+            手动代码实现的本地化语言
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.LocalizeCore.AvailableCultures">
+            <summary>
+            当前有的本地化语言
+            </summary>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.LocalizeCore.LoadDefaultCulture">
+            <summary>
+            加载当前电脑的默认本地化语言
+            </summary>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.LocalizeCore.LoadCulture(System.Globalization.CultureInfo)">
+            <summary>
+            加载指定的本地化语言
+            </summary>
+            <param name="culture">区域性信息</param>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.LocalizeCore.LoadCulture(System.String)">
+            <summary>
+            加载指定的本地化语言
+            </summary>
+            <param name="culture">区域性文本</param>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.LocalizeCore.Find(System.String)">
+            <summary>
+            查找指定的数据
+            </summary>
+            <param name="key">查找值</param>
+            <returns>返回的数据</returns>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.LocalizeCore.Translate(System.String)">
+            <summary>
+            翻译文本
+            </summary>
+            <param name="key">翻译内容</param>
+            <returns>翻译后的文本</returns>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.LocalizeCore.Translate(System.String,System.Object[])">
+            <summary>
+            翻译文本
+            </summary>
+            <param name="key">翻译内容</param>
+            <param name="replace">替换内容 {0:f2}{1}..</param>
+            <returns>翻译后的文本</returns>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.LocalizeCore.GetDouble(System.String,System.Double)">
+            <summary>
+            获得Double数据
+            </summary>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.LocalizeCore.GetInt(System.String,System.Int32)">
+            <summary>
+            获得Int数据
+            </summary>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.LocalizeCore.GetBool(System.String,System.Boolean)">
+            <summary>
+            获得Bool数据
+            </summary>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.LocalizeCore.GetInt64(System.String,System.Int64)">
+            <summary>
+            获得Int64数据
+            </summary>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.LocalizeCore.AddCulture(System.String,System.Collections.Generic.IEnumerable{LinePutScript.ILine})">
+            <summary>
+            添加本地化语言
+            </summary>
+            <param name="culture">区域性文本</param>
+            <param name="file">本地化文件</param>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.LocalizeCore.AddCulture(System.String,LinePutScript.ILine)">
+            <summary>
+            添加本地化语言
+            </summary>
+            <param name="culture">区域性文本</param>
+            <param name="line">单行</param>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.LocalizeCore.AddCulture(System.String,System.String,System.String)">
+            <summary>
+            添加本地化语言
+            </summary>
+            <param name="culture">区域性文本</param>
+            <param name="key">匹配名称</param>
+            <param name="value">储存值</param>
+        </member>
+        <member name="T:LinePutScript.Localization.WPF.LocalizeCore.NotifyChanged">
+            <summary>
+            通知更改
+            </summary>
+        </member>
+        <member name="E:LinePutScript.Localization.WPF.LocalizeCore.NotifyChanged.PropertyChanged">
+            <summary>
+            PropertyChanged
+            </summary>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.LocalizeCore.NotifyChanged.Notify">
+            <summary>
+            通知更改
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.LocalizeCore.NotifyChanged.TmpString">
+            <summary>
+            没啥用的文本,用于检测绑定
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.LocalizeCore.NotifyChanged.Localizations">
+            <summary>
+            获取隐藏的 localizations
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.LocalizeCore.BindingNotify">
+            <summary>
+            绑定通知更改 PropertyChanged
+            </summary>
+        </member>
+        <member name="T:LinePutScript.Localization.WPF.StrExtension">
+            <summary>
+            WPF绑定转换成字符串
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.StrExtension.Key">
+            <summary>
+            查找值
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.StrExtension.KeySource">
+            <summary>
+            查找值
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.StrExtension.Value">
+            <summary>
+            替换词
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.StrExtension.ValueSource">
+            <summary>
+            替换词
+            </summary>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.StrExtension.#ctor(System.String)">
+            <summary>
+            WPF绑定转换字符串
+            </summary>
+            <param name="key">查找值</param>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.StrExtension.#ctor(System.Windows.Data.Binding,System.Windows.Data.Binding)">
+            <summary>
+            WPF绑定转换字符串
+            </summary>
+            <param name="keySource">查找值</param>
+            <param name="valueSource">默认值</param>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.StrExtension.#ctor(System.Windows.Data.Binding,System.Object)">
+            <summary>
+            WPF绑定转换字符串
+            </summary>
+            <param name="keySource">查找值</param>
+            <param name="value">默认值</param>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.StrExtension.#ctor(System.String,System.Object)">
+            <summary>
+            WPF绑定转换字符串
+            </summary>
+            <param name="key">查找值</param>
+            <param name="value">默认值</param>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.StrExtension.#ctor(System.String,System.Windows.Data.Binding)">
+            <summary>
+            WPF绑定转换字符串
+            </summary>
+            <param name="key">查找值</param>
+            <param name="valueSource">默认值</param>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.StrExtension.ProvideValue(System.IServiceProvider)">
+            <summary>
+            
+            </summary>
+            <param name="serviceProvider"></param>
+            <returns></returns>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.StrExtension.LocalConverter.Key">
+            <summary>
+            查找值
+            </summary>
+        </member>
+        <member name="P:LinePutScript.Localization.WPF.StrExtension.LocalConverter.Value">
+            <summary>
+            替换词
+            </summary>
+        </member>
+        <member name="M:LinePutScript.Localization.WPF.StrExtension.LocalConverter.#ctor(System.String,System.Object)">
+            <summary>
+            生成一个WPF绑定转换成字符串, 开发者无需使用这个
+            </summary>
+        </member>
+    </members>
+</doc>

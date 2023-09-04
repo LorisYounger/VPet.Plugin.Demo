@@ -41,8 +41,8 @@
     <Reference Include="Panuon.WPF, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Panuon.WPF.1.0.2\lib\net462\Panuon.WPF.dll</HintPath>
     </Reference>
-    <Reference Include="Panuon.WPF.UI, Version=1.1.15.6, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Panuon.WPF.UI.1.1.15.6\lib\net462\Panuon.WPF.UI.dll</HintPath>
+    <Reference Include="Panuon.WPF.UI, Version=1.1.15.8, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Panuon.WPF.UI.1.1.15.8\lib\net462\Panuon.WPF.UI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -56,10 +56,10 @@
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="VPet-Simulator.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\VPet-Simulator.Core.1.0.0\lib\net462\VPet-Simulator.Core.dll</HintPath>
+      <HintPath>..\packages\VPet-Simulator.Core.1.0.5.1\lib\net462\VPet-Simulator.Core.dll</HintPath>
     </Reference>
     <Reference Include="VPet-Simulator.Windows.Interface, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\VPet-Simulator.Windows.Interface.1.0.0\lib\net462\VPet-Simulator.Windows.Interface.dll</HintPath>
+      <HintPath>..\packages\VPet-Simulator.Windows.Interface.1.0.5.2\lib\net462\VPet-Simulator.Windows.Interface.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
