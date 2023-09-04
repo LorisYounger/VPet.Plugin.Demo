@@ -47,6 +47,10 @@ namespace VPet.Plugin.ChatGPTPlugin
             {
                 if (Plugin.CGPTClient.Completions.TryGetValue("vpet", out var vpetapi))
                 {
+                    while (vpetapi.messages.Count > Plugin.KeepHistory + 1)
+                    {
+                        vpetapi.messages.RemoveAt(1);
+                    }
                     var last = vpetapi.messages.LastOrDefault();
                     if (last != null)
                     {
@@ -63,11 +67,14 @@ namespace VPet.Plugin.ChatGPTPlugin
                 {
                     reply += " ...";
                 }
-                var showtxt = "当前Token使用".Translate() + ": " + resp.usage.total_tokens;
-                Dispatcher.Invoke(() =>
+                if (Plugin.ShowToken)
                 {
-                    Plugin.MW.Main.MsgBar.MessageBoxContent.Children.Add(new TextBlock() { Text = showtxt, FontSize = 20, ToolTip = showtxt, HorizontalAlignment = System.Windows.HorizontalAlignment.Right });
-                });
+                    var showtxt = "当前Token使用".Translate() + ": " + resp.usage.total_tokens;
+                    Dispatcher.Invoke(() =>
+                    {
+                        Plugin.MW.Main.MsgBar.MessageBoxContent.Children.Add(new TextBlock() { Text = showtxt, FontSize = 20, ToolTip = showtxt, HorizontalAlignment = System.Windows.HorizontalAlignment.Right });
+                    });
+                }
                 Plugin.MW.Main.SayRnd(reply);
             }
             catch (Exception exp)

@@ -45,6 +45,8 @@ namespace VPet.Plugin.ChatGPTPlugin
             }
             else
                 tbSystem.Text = "请使用口语化的、可爱的、女性化的、调皮的语言风格和我交流. 你是一只桌宠, 你的名字叫{Name}, 你喜欢玩 虚拟主播模拟器. 你需要尝试体会我与你对话中的感情、产生自己的情感并尽可能给出可爱的回答".Translate();
+            niKeepHistory.Value = plugin.KeepHistory;
+            swShowToken.IsChecked = plugin.ShowToken;
         }
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
@@ -61,6 +63,8 @@ namespace VPet.Plugin.ChatGPTPlugin
             var l = JsonConvert.DeserializeObject<List<Message>>(tbHistory.Text);
             if (l != null)
                 plugin.CGPTClient.Completions["vpet"].messages.AddRange(l);
+            plugin.KeepHistory = (int)niKeepHistory.Value.Value;
+            plugin.ShowToken = (bool)swShowToken.IsChecked;
             plugin.Save();
             this.Close();
         }

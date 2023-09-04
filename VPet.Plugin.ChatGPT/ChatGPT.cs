@@ -1,4 +1,5 @@
 ﻿using ChatGPT.API.Framework;
+using LinePutScript;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -29,5 +30,21 @@ namespace VPet.Plugin.ChatGPTPlugin
             new winSetting(this).ShowDialog();
         }
         public override string PluginName => "ChatGPT";
+        /// <summary>
+        /// 是否在聊天位置显示Token数量
+        /// </summary>
+        public bool ShowToken
+        {
+            get => !MW.Set["CGPT"][(gbol)"noshowtoken"];
+            set => MW.Set["CGPT"][(gbol)"noshowtoken"] = !value;
+        }
+        /// <summary>
+        /// 保留的历史数量
+        /// </summary>
+        public int KeepHistory
+        {
+            get => MW.Set["CGPT"].GetInt("keephistory", 20);
+            set => MW.Set["CGPT"][(gint)"keephistory"] = value;
+        }
     }
 }
