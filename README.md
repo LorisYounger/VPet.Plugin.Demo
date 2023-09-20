@@ -1,6 +1,6 @@
 # VPet.Plugin.Demo
 
-简体中文 | [English](./README_en.md) )
+简体中文 | [English](./README_en.md) | [Spanish](./README_es.md)
 
 由开发者制作的桌宠插件案例
 * DemoClock: 给桌宠添加一个时钟显示的功能
