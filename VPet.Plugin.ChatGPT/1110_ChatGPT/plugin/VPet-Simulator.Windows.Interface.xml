@@ -11,6 +11,14 @@
             <param name="work">工作</param>
             <returns>是否超模</returns>
         </member>
+        <member name="M:VPet_Simulator.Windows.Interface.ExtensionFunction.ValueToPlusPlus(System.Double,System.Double,System.Int32)">
+            <summary>
+            把值变成++
+            </summary>
+            <param name="value">值</param>
+            <param name="magnification">倍率</param>
+            <returns></returns>
+        </member>
         <member name="F:VPet_Simulator.Windows.Interface.ExtensionValue.BaseDirectory">
             <summary>
             当前运行目录
@@ -21,7 +29,7 @@
             游戏存档 最新版
             </summary>
         </member>
-        <member name="M:VPet_Simulator.Windows.Interface.GameSave_v2.#ctor">
+        <member name="M:VPet_Simulator.Windows.Interface.GameSave_v2.#ctor(System.String)">
             <summary>
             新存档
             </summary>
@@ -358,11 +366,6 @@
             礼品 (没做)
             </summary>
         </member>
-        <member name="F:VPet_Simulator.Windows.Interface.Food.FoodType.NoOverLoad">
-            <summary>
-            不超模的好食物
-            </summary>
-        </member>
         <member name="P:VPet_Simulator.Windows.Interface.Food.Type">
             <summary>
             食物类型
@@ -557,6 +560,11 @@
             <summary>
             说话的内容 (翻译)
             </summary>
+        </member>
+        <member name="M:VPet_Simulator.Windows.Interface.ICheckText.CheckState(VPet_Simulator.Core.GameSave)">
+            <summary>
+            检查部分状态是否满足需求
+            </summary>之所以不是全部的,是因为挨个取效率太差了
         </member>
         <member name="M:VPet_Simulator.Windows.Interface.ICheckText.CheckState(VPet_Simulator.Core.Main)">
             <summary>

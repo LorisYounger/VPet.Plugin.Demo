@@ -301,12 +301,12 @@
             事件Timer
             </summary>
         </member>
-        <member name="M:VPet_Simulator.Core.Main.SayRnd(System.String,System.Boolean)">
+        <member name="M:VPet_Simulator.Core.Main.SayRnd(System.String,System.Boolean,System.String)">
             <summary>
             说话,使用随机表情
             </summary>
         </member>
-        <member name="M:VPet_Simulator.Core.Main.Say(System.String,System.String,System.Boolean)">
+        <member name="M:VPet_Simulator.Core.Main.Say(System.String,System.String,System.Boolean,System.String)">
             <summary>
             说话
             </summary>
@@ -614,6 +614,38 @@
             <summary>
             开始时间
             </summary>
+        </member>
+        <member name="E:VPet_Simulator.Core.WorkTimer.E_FinishWork">
+            <summary>
+            任务完成时调用该参数
+            </summary>
+        </member>
+        <member name="T:VPet_Simulator.Core.WorkTimer.FinishWorkInfo">
+            <summary>
+            完成工作信息
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.WorkTimer.FinishWorkInfo.work">
+            <summary>
+            当前完成工作
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.WorkTimer.FinishWorkInfo.count">
+            <summary>
+            当前完成工作收入
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.WorkTimer.FinishWorkInfo.spendtime">
+            <summary>
+            当前完成工作花费时间
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Core.WorkTimer.FinishWorkInfo.#ctor(VPet_Simulator.Core.GraphHelper.Work,System.Double)">
+            <summary>
+            完成工作信息
+            </summary>
+            <param name="work">当前工作</param>
+            <param name="count">当前盈利(自动计算附加)</param>
         </member>
         <member name="M:VPet_Simulator.Core.WorkTimer.M_TimeUIHandle(VPet_Simulator.Core.Main)">
             <summary>

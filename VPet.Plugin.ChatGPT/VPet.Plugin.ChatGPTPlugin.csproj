@@ -62,10 +62,10 @@
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="VPet-Simulator.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\VPet-Simulator.Core.1.0.7\lib\net462\VPet-Simulator.Core.dll</HintPath>
+      <HintPath>..\packages\VPet-Simulator.Core.1.0.8\lib\net462\VPet-Simulator.Core.dll</HintPath>
     </Reference>
     <Reference Include="VPet-Simulator.Windows.Interface, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\VPet-Simulator.Windows.Interface.1.0.7\lib\net462\VPet-Simulator.Windows.Interface.dll</HintPath>
+      <HintPath>..\packages\VPet-Simulator.Windows.Interface.1.0.8\lib\net462\VPet-Simulator.Windows.Interface.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />

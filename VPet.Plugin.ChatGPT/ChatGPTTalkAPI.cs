@@ -67,15 +67,8 @@ namespace VPet.Plugin.ChatGPTPlugin
                 {
                     reply += " ...";
                 }
-                if (Plugin.ShowToken)
-                {
-                    var showtxt = "当前Token使用".Translate() + ": " + resp.usage.total_tokens;
-                    Dispatcher.Invoke(() =>
-                    {
-                        Plugin.MW.Main.MsgBar.MessageBoxContent.Children.Add(new TextBlock() { Text = showtxt, FontSize = 20, ToolTip = showtxt, HorizontalAlignment = System.Windows.HorizontalAlignment.Right });
-                    });
-                }
-                Plugin.MW.Main.SayRnd(reply);
+                var showtxt = Plugin.ShowToken ? null : "当前Token使用".Translate() + ": " + resp.usage.total_tokens;
+                Plugin.MW.Main.SayRnd(reply, desc: showtxt);
             }
             catch (Exception exp)
             {
