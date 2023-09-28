@@ -44,11 +44,11 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Panuon.WPF, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Panuon.WPF.1.0.2\lib\net462\Panuon.WPF.dll</HintPath>
+    <Reference Include="Panuon.WPF, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Panuon.WPF.1.0.3\lib\net462\Panuon.WPF.dll</HintPath>
     </Reference>
-    <Reference Include="Panuon.WPF.UI, Version=1.1.15.8, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Panuon.WPF.UI.1.1.15.8\lib\net462\Panuon.WPF.UI.dll</HintPath>
+    <Reference Include="Panuon.WPF.UI, Version=1.1.16.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Panuon.WPF.UI.1.1.16.2\lib\net462\Panuon.WPF.UI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -62,10 +62,10 @@
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="VPet-Simulator.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\VPet-Simulator.Core.1.0.5.1\lib\net462\VPet-Simulator.Core.dll</HintPath>
+      <HintPath>..\packages\VPet-Simulator.Core.1.0.7\lib\net462\VPet-Simulator.Core.dll</HintPath>
     </Reference>
     <Reference Include="VPet-Simulator.Windows.Interface, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\VPet-Simulator.Windows.Interface.1.0.5.2\lib\net462\VPet-Simulator.Windows.Interface.dll</HintPath>
+      <HintPath>..\packages\VPet-Simulator.Windows.Interface.1.0.7\lib\net462\VPet-Simulator.Windows.Interface.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />

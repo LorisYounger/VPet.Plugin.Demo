@@ -11,6 +11,63 @@
             <param name="work">工作</param>
             <returns>是否超模</returns>
         </member>
+        <member name="F:VPet_Simulator.Windows.Interface.ExtensionValue.BaseDirectory">
+            <summary>
+            当前运行目录
+            </summary>
+        </member>
+        <member name="T:VPet_Simulator.Windows.Interface.GameSave_v2">
+            <summary>
+            游戏存档 最新版
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Windows.Interface.GameSave_v2.#ctor">
+            <summary>
+            新存档
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Windows.Interface.GameSave_v2.#ctor(LinePutScript.ILPS,VPet_Simulator.Windows.Interface.Statistics,VPet_Simulator.Core.GameSave,LinePutScript.ILPS)">
+            <summary>
+            读存档, 带入老数据
+            </summary>
+            <param name="lps">数据</param>
+            <param name="oldStatistics">老统计</param>
+            <param name="oldGameSave">老存档</param>
+            <param name="olddata">老数据</param>
+        </member>
+        <member name="M:VPet_Simulator.Windows.Interface.GameSave_v2.#ctor(LinePutScript.ILPS,VPet_Simulator.Windows.Interface.GameSave_v2)">
+            <summary>
+            读存档, 带入老存档
+            </summary>
+            <param name="lps"></param>
+            <param name="oldSave"></param>
+        </member>
+        <member name="F:VPet_Simulator.Windows.Interface.GameSave_v2.Data">
+            <summary>
+            游戏相关数据
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Windows.Interface.GameSave_v2.GameSave">
+            <summary>
+            游戏存档
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Windows.Interface.GameSave_v2.Statistics">
+            <summary>
+            统计
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.GameSave_v2.HashCheck">
+            <summary>
+            Hash检查
+            </summary>
+        </member>
+        <member name="M:VPet_Simulator.Windows.Interface.GameSave_v2.HashCheckOff">
+            <summary>
+            关闭该玩家的HashCheck检查
+            请使用imw中的HashCheckOff
+            </summary>
+        </member>
         <member name="T:VPet_Simulator.Windows.Interface.IMainWindow">
             <summary>
             游戏主窗体
@@ -647,9 +704,9 @@
             游戏设置
             </summary>
         </member>
-        <member name="F:VPet_Simulator.Windows.Interface.Setting.Statistics">
+        <member name="F:VPet_Simulator.Windows.Interface.Setting.Statistics_OLD">
             <summary>
-            统计数据信息
+            统计数据信息(旧)
             </summary>
         </member>
         <member name="P:VPet_Simulator.Windows.Interface.Setting.ZoomLevel">
@@ -722,9 +779,19 @@
             语言
             </summary>
         </member>
-        <member name="P:VPet_Simulator.Windows.Interface.Setting.PetData">
+        <member name="P:VPet_Simulator.Windows.Interface.Setting.PetData_OLD">
             <summary>
             当前宠物的储存数据
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.Setting.SaveTimesPP">
+            <summary>
+            储存顺序次数++
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.Setting.SaveTimes">
+            <summary>
+            储存顺序次数
             </summary>
         </member>
         <member name="P:VPet_Simulator.Windows.Interface.Setting.PressLength">
@@ -825,6 +892,16 @@
         <member name="P:VPet_Simulator.Windows.Interface.Setting.AutoBuy">
             <summary>
             允许桌宠自动购买食品
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.Setting.AutoGift">
+            <summary>
+            允许桌宠自动购买礼物
+            </summary>
+        </member>
+        <member name="P:VPet_Simulator.Windows.Interface.Setting.HideFromTaskControl">
+            <summary>
+            在任务切换器(Alt+Tab)中隐藏窗口
             </summary>
         </member>
         <member name="T:VPet_Simulator.Windows.Interface.Resources">

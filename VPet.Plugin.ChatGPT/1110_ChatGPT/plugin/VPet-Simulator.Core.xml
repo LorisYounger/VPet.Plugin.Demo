@@ -554,6 +554,21 @@
             MenuFeed Name Field
             </summary>
         </member>
+        <member name="F:VPet_Simulator.Core.ToolBar.MenuStudy">
+            <summary>
+            MenuStudy Name Field
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.ToolBar.MenuPlay">
+            <summary>
+            MenuPlay Name Field
+            </summary>
+        </member>
+        <member name="F:VPet_Simulator.Core.ToolBar.MenuWork">
+            <summary>
+            MenuWork Name Field
+            </summary>
+        </member>
         <member name="F:VPet_Simulator.Core.ToolBar.MenuDIY">
             <summary>
             MenuDIY Name Field
