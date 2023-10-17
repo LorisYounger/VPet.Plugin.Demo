@@ -40,8 +40,8 @@ namespace VPet.Plugin.VPetTTS
             vts.Set.Rate = RateSilder.Value;
             vts.Set.Speaker = CombSpeaker.Text;
             vts.MW.Main.PlayVoiceVolume = VolumeSilder.Value / 100;
-            vts.MW.Set.Remove("DemoClock");
-            vts.MW.Set.Add(LPSConvert.SerializeObject(vts.Set, "DemoClock"));
+            vts.MW.Set.Remove("EdgeTTS");
+            vts.MW.Set.Add(LPSConvert.SerializeObject(vts.Set, "EdgeTTS"));
             foreach (var tmpfile in Directory.GetFiles(GraphCore.CachePath + @"\voice"))
             {
                 try
