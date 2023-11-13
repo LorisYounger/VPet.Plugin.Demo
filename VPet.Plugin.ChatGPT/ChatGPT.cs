@@ -16,14 +16,14 @@ namespace VPet.Plugin.ChatGPTPlugin
         public ChatGPTClient CGPTClient;
         public override void LoadPlugin()
         {
-            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\ChatGPTSetting.json"))
-                CGPTClient = ChatGPTClient.Load(File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + @"\ChatGPTSetting.json"));
+            if (File.Exists(ExtensionValue.BaseDirectory + @"\ChatGPTSetting.json"))
+                CGPTClient = ChatGPTClient.Load(File.ReadAllText(ExtensionValue.BaseDirectory + @"\ChatGPTSetting.json"));
             MW.TalkAPI.Add(new ChatGPTTalkAPI(this));
         }
         public override void Save()
         {
             if (CGPTClient != null)
-                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + @"\ChatGPTSetting.json", CGPTClient.Save());
+                File.WriteAllText(ExtensionValue.BaseDirectory + @"\ChatGPTSetting.json", CGPTClient.Save());
         }
         public override void Setting()
         {

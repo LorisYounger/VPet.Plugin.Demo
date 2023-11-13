@@ -50,6 +50,10 @@ namespace VPet.Plugin.ChatGPTPlugin
         }
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            if (tbAPIURL.Text.Split('/').Length <= 2 && !tbAPIURL.Text.Contains("completions"))
+            {
+                tbAPIURL.Text += "/v1/chat/completions";
+            }
             plugin.CGPTClient = new ChatGPTClient(tbAPIKey.Text, tbAPIURL.Text)
             {
                 TotalTokensUsage = totalused
