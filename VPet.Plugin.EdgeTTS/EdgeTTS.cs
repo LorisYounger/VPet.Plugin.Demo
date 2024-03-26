@@ -25,15 +25,8 @@ namespace VPet.Plugin.VPetTTS
         }
         public override void LoadPlugin()
         {
-            var line = MW.Set.FindLine("EdgeTTS");
-            if (line == null)
-            {
-                Set = new Setting();
-            }
-            else
-            {
-                Set = LPSConvert.DeserializeObject<Setting>(line);
-            }
+            Set = LPSConvert.DeserializeObject<Setting>(MW.Set["EdgeTTS"]);
+
             if (!Directory.Exists(GraphCore.CachePath + @"\voice"))
                 Directory.CreateDirectory(GraphCore.CachePath + @"\voice");
             if (Set.Enable)

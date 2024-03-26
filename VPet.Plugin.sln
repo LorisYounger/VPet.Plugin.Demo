@@ -1,13 +1,13 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VPet.Plugin.DemoClock", "VPet.Plugin.DemoClock\VPet.Plugin.DemoClock.csproj", "{D23F1150-999F-4698-800C-4E60FF853A3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VPet.Plugin.DemoClock", "VPet.Plugin.DemoClock\VPet.Plugin.DemoClock.csproj", "{D23F1150-999F-4698-800C-4E60FF853A3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VPet.Plugin.VPetTTS", "VPet.Plugin.EdgeTTS\VPet.Plugin.VPetTTS.csproj", "{A826A8D4-A741-49BF-B857-E2EA9A462DB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VPet.Plugin.VPetTTS", "VPet.Plugin.EdgeTTS\VPet.Plugin.VPetTTS.csproj", "{A826A8D4-A741-49BF-B857-E2EA9A462DB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VPet.Plugin.ChatGPTPlugin", "VPet.Plugin.ChatGPT\VPet.Plugin.ChatGPTPlugin.csproj", "{4BD5C237-19E8-4B57-A139-3EE448A56F2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VPet.Plugin.ChatGPTPlugin", "VPet.Plugin.ChatGPT\VPet.Plugin.ChatGPTPlugin.csproj", "{4BD5C237-19E8-4B57-A139-3EE448A56F2C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

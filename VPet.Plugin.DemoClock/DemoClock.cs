@@ -70,17 +70,7 @@ namespace VPet.Plugin.DemoClock
 
         public override void LoadPlugin()
         {
-            var line = MW.Set.FindLine("DemoClock");
-            if (line == null)
-            {
-                Set = new Setting();
-            }
-            else
-            {
-                Set = new Setting(line);
-                MW.Set.Remove(line);
-            }
-            MW.Set.Add(Set);
+            Set = new Setting(MW.Set["DemoClock"]);
 
             WPFTimeClock = new TimeClock(this);
 
