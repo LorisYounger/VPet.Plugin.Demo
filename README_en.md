@@ -1,6 +1,6 @@
 # VPet.Plugin.Demo
 
-[简体中文](./README.md) | English | [Spanish](./README_es.md)
+[简体中文](./README.md) | [繁體中文](./README_zht.md) | English | [Spanish](./README_es.md)
 
 A desktop pet plugin example created by developers.
 * DemoClock: Adds a clock display function to the desktop pet.

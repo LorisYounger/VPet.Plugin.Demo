@@ -1,7 +1,6 @@
-
 # VPet.Plugin.Demo
 
-[简体中文](./README.md) | [English](./README_en.md) | Spanish
+[简体中文](./README.md) | [繁體中文](./README_zht.md) | [English](./README_en.md) | Spanish
 
 Un ejemplo de plugin para mascotas de escritorio creado por desarrolladores.
 * DemoClock: Agrega una función de visualización de reloj a la mascota de escritorio.
