@@ -36,6 +36,8 @@ namespace VPet.Plugin.DemoClock
         public TimeClock(DemoClock master)
         {
             InitializeComponent();
+            Resources = Application.Current.Resources;
+
             Master = master;
             Master.MW.Main.UIGrid.Children.Insert(0, this);
 

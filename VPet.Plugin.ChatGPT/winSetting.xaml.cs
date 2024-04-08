@@ -28,6 +28,8 @@ namespace VPet.Plugin.ChatGPTPlugin
         public winSetting(ChatGPTPlugin plugin)
         {
             InitializeComponent();
+            Resources = Application.Current.Resources;
+
             this.plugin = plugin;
             if (plugin.CGPTClient != null)
             {

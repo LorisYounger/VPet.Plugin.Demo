@@ -18,6 +18,8 @@ namespace VPet.Plugin.VPetTTS
         public winSetting(EdgeTTS vts)
         {
             InitializeComponent();
+            Resources = Application.Current.Resources;
+
             this.vts = vts;
             SwitchOn.IsChecked = vts.Set.Enable;
             VolumeSilder.Value = vts.MW.Main.PlayVoiceVolume * 100;

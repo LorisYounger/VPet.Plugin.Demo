@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>$(MSBuildProjectName).x64</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="1110_ChatGPT\**" />
+    <EmbeddedResource Remove="1110_ChatGPT\**" />
+    <None Remove="1110_ChatGPT\**" />
+    <Page Remove="1110_ChatGPT\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Facepunch.Steamworks" Version="2.3.3" />
+    <PackageReference Include="ToolGood.Words" Version="3.1.0" />
+    <PackageReference Include="VPet-Simulator.Windows.Interface" Version="1.1.0.4" />
+  </ItemGroup>
+
+</Project>

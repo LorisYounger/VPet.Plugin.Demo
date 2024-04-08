@@ -5,9 +5,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="clr-namespace:VPet.Plugin.DemoClock"
         mc:Ignorable="d" xmlns:pu="clr-namespace:Panuon.WPF.UI;assembly=Panuon.WPF.UI" MinHeight="100" Height="Auto"
         Width="450" VerticalAlignment="Top" HorizontalAlignment="Center">
-    <UserControl.Resources>
+    <d:UserControl.Resources>
         <ResourceDictionary Source="/VPet-Simulator.Windows.Interface;component/ResourceStyle.xaml" />
-    </UserControl.Resources>
+    </d:UserControl.Resources>
     <UserControl.ContextMenu>
         <ContextMenu x:Name="CM" x:FieldModifier="public">
             <MenuItem x:Name="CountDownMenuItem" Header="{ll:Str 开始倒计时}" Click="CountDownMenuItem_Click" />

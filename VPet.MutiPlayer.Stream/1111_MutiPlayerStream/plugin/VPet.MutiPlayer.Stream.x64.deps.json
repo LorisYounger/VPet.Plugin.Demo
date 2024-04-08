@@ -1,0 +1,162 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "VPet.MutiPlayer.Stream.x64/1.0.0": {
+        "dependencies": {
+          "Facepunch.Steamworks": "2.3.3",
+          "ToolGood.Words": "3.1.0",
+          "VPet-Simulator.Windows.Interface": "1.1.0.4"
+        },
+        "runtime": {
+          "VPet.MutiPlayer.Stream.x64.dll": {}
+        }
+      },
+      "Facepunch.Steamworks/2.3.3": {
+        "runtime": {
+          "lib/netstandard2.0/Facepunch.Steamworks.Win64.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "LinePutScript/1.11.6": {
+        "runtime": {
+          "lib/net8.0/LinePutScript.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "LinePutScript.Localization.WPF/1.0.6": {
+        "dependencies": {
+          "LinePutScript": "1.11.6"
+        },
+        "runtime": {
+          "lib/net6.0/LinePutScript.Localization.WPF.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Panuon.WPF/1.1.0": {
+        "runtime": {
+          "lib/net8.0-windows/Panuon.WPF.dll": {
+            "assemblyVersion": "1.1.0.0",
+            "fileVersion": "1.1.0.0"
+          }
+        }
+      },
+      "Panuon.WPF.UI/1.2.1.2": {
+        "dependencies": {
+          "Panuon.WPF": "1.1.0"
+        },
+        "runtime": {
+          "lib/net8.0-windows/Panuon.WPF.UI.dll": {
+            "assemblyVersion": "1.2.1.2",
+            "fileVersion": "1.2.1.2"
+          }
+        }
+      },
+      "ToolGood.Words/3.1.0": {
+        "runtime": {
+          "lib/net7.0/ToolGood.Words.dll": {
+            "assemblyVersion": "3.1.0.0",
+            "fileVersion": "3.1.0.0"
+          }
+        }
+      },
+      "VPet-Simulator.Core/1.1.0.4": {
+        "dependencies": {
+          "LinePutScript": "1.11.6",
+          "LinePutScript.Localization.WPF": "1.0.6",
+          "Panuon.WPF.UI": "1.2.1.2"
+        },
+        "runtime": {
+          "lib/net8.0/VPet-Simulator.Core.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "VPet-Simulator.Windows.Interface/1.1.0.4": {
+        "dependencies": {
+          "VPet-Simulator.Core": "1.1.0.4"
+        },
+        "runtime": {
+          "lib/net8.0/VPet-Simulator.Windows.Interface.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "VPet.MutiPlayer.Stream.x64/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Facepunch.Steamworks/2.3.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7nUjWX/uy6JbDX7Q3n8ij7vrpWjTM0S8hXO24R3ZwQ0QgY0sXVlxzh3unmYoLvKGi31rzDHqGX68I169hnHNxQ==",
+      "path": "facepunch.steamworks/2.3.3",
+      "hashPath": "facepunch.steamworks.2.3.3.nupkg.sha512"
+    },
+    "LinePutScript/1.11.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-2m1AsVxPKKK6Ey/mFt0yEGdrS2LjDX0hKZrKK4LzxNRXePmyWrkiRCUXJK5mSNNZw0OENRAn58jdX9+00jFL+A==",
+      "path": "lineputscript/1.11.6",
+      "hashPath": "lineputscript.1.11.6.nupkg.sha512"
+    },
+    "LinePutScript.Localization.WPF/1.0.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-jCS0dDlCtz4FnyvQKPnfanOknF2ftQlDklTmSXi5NH8fi7Rj9QLY9TnufpopTX3DFDF08t72MF8YdjjYAfxDrA==",
+      "path": "lineputscript.localization.wpf/1.0.6",
+      "hashPath": "lineputscript.localization.wpf.1.0.6.nupkg.sha512"
+    },
+    "Panuon.WPF/1.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-NmA0O5qDwVmc1mh97XNL6HBuD0mqeZhbq0uW+R9pZ0AlP0DuR/0bZP/xvDYXfeHx7p8ww4/ZwHK/LRdyCcip+A==",
+      "path": "panuon.wpf/1.1.0",
+      "hashPath": "panuon.wpf.1.1.0.nupkg.sha512"
+    },
+    "Panuon.WPF.UI/1.2.1.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Lup+CVZ1ubM1jdbjtb/eJMcFMvLRg6BqvRjMJJwDzGBp1dACC1L5RNS6OuS8mm6N1QbF2q7KaULnAkYH+uzQXg==",
+      "path": "panuon.wpf.ui/1.2.1.2",
+      "hashPath": "panuon.wpf.ui.1.2.1.2.nupkg.sha512"
+    },
+    "ToolGood.Words/3.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-VN3BfQ8x5BkZPtQKk1mfuOjTbTnP3bSR8BljSr0V6GnggAKG2A7BVLJyxEwRzCKyyr7zOwAtxb3c8kcQG+L9ZQ==",
+      "path": "toolgood.words/3.1.0",
+      "hashPath": "toolgood.words.3.1.0.nupkg.sha512"
+    },
+    "VPet-Simulator.Core/1.1.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-VL2YsybEDA6HOefLT9DNqrURhrromo6jTu5ddGUELWa0JtsBSXgosYLEV1lWLwhMDK6zu4pbkC2xBx+ftL3EfA==",
+      "path": "vpet-simulator.core/1.1.0.4",
+      "hashPath": "vpet-simulator.core.1.1.0.4.nupkg.sha512"
+    },
+    "VPet-Simulator.Windows.Interface/1.1.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kQ/EyJasFIVUxeWJis/ihApkb6RVXUls1s07f0Zdl4JDafEbtds+5g8f8OG1MmcsJHkoFoNF6uqGe0Lq9uD9WA==",
+      "path": "vpet-simulator.windows.interface/1.1.0.4",
+      "hashPath": "vpet-simulator.windows.interface.1.1.0.4.nupkg.sha512"
+    }
+  }
+}

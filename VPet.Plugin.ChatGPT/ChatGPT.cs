@@ -6,6 +6,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows;
 using VPet_Simulator.Windows.Interface;
 
 namespace VPet.Plugin.ChatGPTPlugin
@@ -19,6 +21,13 @@ namespace VPet.Plugin.ChatGPTPlugin
             if (File.Exists(ExtensionValue.BaseDirectory + @"\ChatGPTSetting.json"))
                 CGPTClient = ChatGPTClient.Load(File.ReadAllText(ExtensionValue.BaseDirectory + @"\ChatGPTSetting.json"));
             MW.TalkAPI.Add(new ChatGPTTalkAPI(this));
+            var menuItem = new MenuItem()
+            {
+                Header = "ChatGPTAPI",
+                HorizontalContentAlignment = HorizontalAlignment.Center
+            };
+            menuItem.Click += (s, e) => { Setting(); };
+            MW.Main.ToolBar.MenuMODConfig.Items.Add(menuItem);
         }
         public override void Save()
         {
