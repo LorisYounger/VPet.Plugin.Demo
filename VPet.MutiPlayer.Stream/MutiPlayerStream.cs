@@ -3,6 +3,7 @@ using LinePutScript;
 using LinePutScript.Localization.WPF;
 using Panuon.WPF.UI;
 using Steamworks;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Xml.Linq;
@@ -88,32 +89,31 @@ namespace VPet.MutiPlayer.Stream
                     };
                     menuItem.Items.Add(menuCreate);
 
-                    //TODO: 加入访客表
-                    //var menuJoin = new MenuItem()
-                    //{
-                    //    Header = "加入".Translate(),
-                    //    HorizontalContentAlignment = HorizontalAlignment.Center
-                    //};
-                    //menuJoin.Click += (_, _) =>
-                    //{
-                    //    if (winMutiPlayer == null)
-                    //    {
-                    //        winInputBox.Show(this, "请输入访客表ID".Translate(), "[主播]加入访客表".Translate(), "", (id) =>
-                    //        {
-                    //            if (ulong.TryParse(id, NumberStyles.HexNumber, null, out ulong lid))
-                    //            {
-                    //                winMutiPlayer = new winMutiPlayer(this, lid);
-                    //                winMutiPlayer.Show();
-                    //            }
-                    //        });
-                    //    }
-                    //    else
-                    //    {
-                    //        MessageBoxX.Show("已经有加入了一个访客表,无法再创建更多".Translate());
-                    //        winMutiPlayer.Focus();
-                    //    }
-                    //};
-                    //menuItem.Items.Add(menuJoin);
+                    var menuJoin = new MenuItem()
+                    {
+                        Header = "[主播]加入".Translate(),
+                        HorizontalContentAlignment = HorizontalAlignment.Center
+                    };
+                    menuJoin.Click += (_, _) =>
+                    {
+                        if (winMutiPlayer == null)
+                        {
+                            MW.Show("请输入访客表ID".Translate(), "[主播]加入访客表".Translate(), "", (id) =>
+                            {
+                                if (ulong.TryParse(id, NumberStyles.HexNumber, null, out ulong lid))
+                                {
+                                    winMutiPlayer = new winMutiPlayer(this, lid);
+                                    winMutiPlayer.Show();
+                                }
+                            });
+                        }
+                        else
+                        {
+                            MessageBoxX.Show("已经有加入了一个访客表,无法再创建更多".Translate());
+                            winMutiPlayer.Focus();
+                        }
+                    };
+                    menuItem.Items.Add(menuJoin);
                 });
             });
         }

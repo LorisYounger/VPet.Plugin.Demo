@@ -92,7 +92,7 @@
                 <TextBlock TextWrapping="WrapWithOverflow" Text="{ll:Str '自定义敏感词, 逗号分割. 不填写过滤无效'}" Background="{x:Null}" />
                 <PasswordBox x:Name="tbDIYSensitive" pu:PasswordBoxHelper.PasswordHook="True"
                         pu:IconHelper.FontFamily="{StaticResource PanuonIconFont}"
-                        pu:PasswordBoxHelper.Watermark="请在下播后再编辑这些内容"
+                        pu:PasswordBoxHelper.Watermark="{ll:Str '请在下播后再编辑这些内容'}"
                         pu:PasswordBoxHelper.PlainButtonVisibility="VisibleOnFocused"
                         PasswordChanged="tbDIYSensitive_PasswordChanged" />
                 <pu:Switch x:Name="swWhiteListJoin" Content="{ll:Str '启用 允许玩家加入 白名单'}"

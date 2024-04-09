@@ -10,7 +10,7 @@
         "dependencies": {
           "Facepunch.Steamworks": "2.3.3",
           "ToolGood.Words": "3.1.0",
-          "VPet-Simulator.Windows.Interface": "1.1.0.4"
+          "VPet-Simulator.Windows.Interface": "1.1.0.5"
         },
         "runtime": {
           "VPet.MutiPlayer.Stream.x64.dll": {}
@@ -83,7 +83,7 @@
           }
         }
       },
-      "VPet-Simulator.Windows.Interface/1.1.0.4": {
+      "VPet-Simulator.Windows.Interface/1.1.0.5": {
         "dependencies": {
           "VPet-Simulator.Core": "1.1.0.4"
         },
@@ -151,12 +151,12 @@
       "path": "vpet-simulator.core/1.1.0.4",
       "hashPath": "vpet-simulator.core.1.1.0.4.nupkg.sha512"
     },
-    "VPet-Simulator.Windows.Interface/1.1.0.4": {
+    "VPet-Simulator.Windows.Interface/1.1.0.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-kQ/EyJasFIVUxeWJis/ihApkb6RVXUls1s07f0Zdl4JDafEbtds+5g8f8OG1MmcsJHkoFoNF6uqGe0Lq9uD9WA==",
-      "path": "vpet-simulator.windows.interface/1.1.0.4",
-      "hashPath": "vpet-simulator.windows.interface.1.1.0.4.nupkg.sha512"
+      "sha512": "sha512-eoFHHKYSZEhNMf9eQqslCpTc8HZsSEvWAUgslXnWUDTUcK7dzdUfZeZzzBi5C8sbXf6GN37Zt9i5xHhZgFKSbg==",
+      "path": "vpet-simulator.windows.interface/1.1.0.5",
+      "hashPath": "vpet-simulator.windows.interface.1.1.0.5.nupkg.sha512"
     }
   }
 }
