@@ -47,8 +47,9 @@
                 FontSize="16" pu:TextBoxHelper.Watermark="{ll:Str '从 OpenAI 获得的 APIKEY 一般`sk-`开头'}"
                 ToolTip="{ll:Str '从 OpenAI 获得的 APIKEY 一般`sk-`开头'}" VerticalAlignment="Center" />
         <ComboBox x:Name="cbModel" Style="{DynamicResource StandardComboBoxStyle}" Grid.Row="2" Grid.Column="2"
-                SelectedIndex="0">
+                SelectedIndex="0" IsEditable="True">
             <ComboBoxItem Content="gpt-3.5-turbo" />
+            <ComboBoxItem Content="gpt-4-turbo-preview" />
             <ComboBoxItem Content="gpt-4" />
         </ComboBox>
         <TextBox x:Name="tbSystem" Grid.Row="3" Grid.Column="2" Style="{DynamicResource StandardTextBoxStyle}"
