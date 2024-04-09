@@ -24,6 +24,8 @@ namespace VPet.Plugin.DemoClock
         public CountDownInput(TimeSpan ret)
         {
             InitializeComponent();
+            Resources = Application.Current.Resources;
+
             if (ret < TimeSpan.Zero)
             {
                 ret = -ret;

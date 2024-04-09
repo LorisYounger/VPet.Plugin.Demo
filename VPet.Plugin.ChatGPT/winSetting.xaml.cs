@@ -38,7 +38,7 @@ namespace VPet.Plugin.ChatGPTPlugin
                 tbMaxToken.Text = plugin.CGPTClient.Completions["vpet"].max_tokens.ToString();
                 tbSystem.Text = plugin.CGPTClient.Completions["vpet"].messages[0].content;
                 tbTemp.Text = plugin.CGPTClient.Completions["vpet"].temperature.ToString();
-                cbModel.SelectedIndex = plugin.CGPTClient.Completions["vpet"].model == "gpt-3.5-turbo" ? 0 : 1;
+                cbModel.Text = plugin.CGPTClient.Completions["vpet"].model;
                 var msgs = plugin.CGPTClient.Completions["vpet"].messages.ToList();
                 msgs.RemoveAt(0);
                 tbHistory.Text = JsonConvert.SerializeObject(msgs);
@@ -61,7 +61,7 @@ namespace VPet.Plugin.ChatGPTPlugin
                 TotalTokensUsage = totalused
             };
             plugin.CGPTClient.CreateCompletions("vpet", tbSystem.Text.Replace("{Name}", plugin.MW.Core.Save.Name));
-            plugin.CGPTClient.Completions["vpet"].model = (string)((ComboBoxItem)cbModel.SelectedItem).Content;
+            plugin.CGPTClient.Completions["vpet"].model = cbModel.Text;
             plugin.CGPTClient.Completions["vpet"].frequency_penalty = 0.2;
             plugin.CGPTClient.Completions["vpet"].presence_penalty = 1;
             plugin.CGPTClient.Completions["vpet"].max_tokens = Math.Min(Math.Max(int.Parse(tbMaxToken.Text), 10), 4000);

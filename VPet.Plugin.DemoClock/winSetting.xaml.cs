@@ -26,6 +26,8 @@ namespace VPet.Plugin.DemoClock
         public winSetting(DemoClock master)
         {
             InitializeComponent();
+            Resources = Application.Current.Resources;
+
             Master = master;
             Set = Master.Set;
             Switch24h.IsChecked = Set.Hour24;
