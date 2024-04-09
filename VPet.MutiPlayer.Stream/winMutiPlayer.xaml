@@ -81,19 +81,28 @@
         </TabItem>
         <TabItem Header="{ll:Str 主播设置}">
             <StackPanel>
-                <pu:Switch x:Name="swAllowName" Content="{ll:Str '显示加入玩家名称'}" />
-                <pu:Switch x:Name="swAllowTalk" Content="{ll:Str '允许加入玩家说话'}" />
-                <pu:Switch x:Name="swWordsCheck" Content="{ll:Str '全局敏感词检查'}" />
-                <pu:Switch x:Name="swWorkReplace" Content="{ll:Str '使用 * 替换敏感词'}" />
+                <pu:Switch x:Name="swAllowName" Content="{ll:Str '显示加入玩家名称'}"
+                        IsChecked="{Binding mps.Set.AllowName, Mode=TwoWay}" />
+                <pu:Switch x:Name="swAllowTalk" Content="{ll:Str '允许加入玩家说话'}"
+                        IsChecked="{Binding mps.Set.AllowTalk, Mode=TwoWay}" />
+                <pu:Switch x:Name="swWordsCheck" Content="{ll:Str '全局敏感词检查'}"
+                        IsChecked="{Binding mps.Set.WordsCheck, Mode=TwoWay}" />
+                <pu:Switch x:Name="swWorkReplace" Content="{ll:Str '使用 * 替换敏感词'}"
+                        IsChecked="{Binding mps.Set.WorkReplace, Mode=TwoWay}" />
                 <TextBlock TextWrapping="WrapWithOverflow" Text="{ll:Str '自定义敏感词, 逗号分割. 不填写过滤无效'}" Background="{x:Null}" />
                 <PasswordBox x:Name="tbDIYSensitive" pu:PasswordBoxHelper.PasswordHook="True"
                         pu:IconHelper.FontFamily="{StaticResource PanuonIconFont}"
                         pu:PasswordBoxHelper.Watermark="请在下播后再编辑这些内容"
-                        pu:PasswordBoxHelper.PlainButtonVisibility="VisibleOnFocused" />
-                <pu:Switch x:Name="swWhiteListJoin" Content="{ll:Str '启用 允许玩家加入 白名单'}" />
-                <TextBox x:Name="tbWhiteJoinList" pu:TextBoxHelper.Watermark="{ll:Str '请输入白名单SteamID64, 逗号分割'}" />
-                <pu:Switch x:Name="swWhiteListTalk" Content="{ll:Str '启用 允许玩家说话 白名单'}" />
-                <TextBox x:Name="tbWhiteTalkList" pu:TextBoxHelper.Watermark="{ll:Str '请输入白名单SteamID64, 逗号分割'}" />
+                        pu:PasswordBoxHelper.PlainButtonVisibility="VisibleOnFocused"
+                        PasswordChanged="tbDIYSensitive_PasswordChanged" />
+                <pu:Switch x:Name="swWhiteListJoin" Content="{ll:Str '启用 允许玩家加入 白名单'}"
+                        IsChecked="{Binding mps.Set.WhiteListJoin, Mode=TwoWay}" />
+                <TextBox x:Name="tbWhiteJoinList" pu:TextBoxHelper.Watermark="{ll:Str '请输入白名单SteamID64, 逗号分割'}"
+                        TextChanged="tbWhiteJoinList_TextChanged" />
+                <pu:Switch x:Name="swWhiteListTalk" Content="{ll:Str '启用 允许玩家说话 白名单'}"
+                        IsChecked="{Binding mps.Set.WhiteListTalk, Mode=TwoWay}" />
+                <TextBox x:Name="tbWhiteTalkList" pu:TextBoxHelper.Watermark="{ll:Str '请输入白名单SteamID64, 逗号分割'}"
+                        TextChanged="tbWhiteTalkList_TextChanged" />
             </StackPanel>
         </TabItem>
     </TabControl>

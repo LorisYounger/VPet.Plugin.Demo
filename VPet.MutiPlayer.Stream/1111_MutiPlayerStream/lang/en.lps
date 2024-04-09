@@ -1,0 +1,12 @@
+[主播]创建#[Streamer] Create:|
+[主播]加入#[Streamer] Join:|
+主播设置#Anchor settings:|
+显示加入玩家名称#Display the name of the player joining:|
+允许加入玩家说话#Allow players to join in and speak:|
+全局敏感词检查#Global sensitive word check:|
+使用 * 替换敏感词#Replace sensitive words with *:|
+自定义敏感词, 逗号分割. 不填写过滤无效#Customize sensitive words, separated by commas. Filtering is invalid without filling in:|
+启用 允许玩家加入 白名单#Enable  to allow players to join the whitelist:|
+请输入白名单SteamID64, 逗号分割#Please enter the whitelist SteamID64, separated by commas:|
+启用 允许玩家说话 白名单#Enable allow players to speak whitelist:|
+双击显示房间ID#Double click to display room ID:|

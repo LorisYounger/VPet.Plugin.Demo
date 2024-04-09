@@ -5,6 +5,8 @@
 由开发者制作的桌宠插件案例
 * DemoClock: 给桌宠添加一个时钟显示的功能
 * EdgeTTS: 桌宠说话的时候附带语音,使用EdgeTTS
+* ChatGPT: 使用 ChatGPT(格式)API 让桌宠能够说话
+* MutiPlayerStream: 针对主播开发的桌宠联机系统
 
 ## VPet.Plugin.DemoClock
 给桌宠添加一个时钟显示的功能,这算是代码嵌入类型MOD的DEMO

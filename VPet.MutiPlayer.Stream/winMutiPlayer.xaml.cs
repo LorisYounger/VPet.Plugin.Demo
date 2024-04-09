@@ -28,7 +28,7 @@ public partial class winMutiPlayer : WindowX, IMPWindows
 {
     public Lobby lb;
     IMainWindow? mw;
-    public MutiPlayerStream? mps;
+    public MutiPlayerStream mps;
     /// <summary>
     /// 好友宠物模块
     /// </summary>
@@ -38,6 +38,8 @@ public partial class winMutiPlayer : WindowX, IMPWindows
         Resources = Application.Current.Resources;
         this.mps = mps;
         this.mw = mps.MW;
+        this.DataContext = this;
+
         InitializeComponent();
 
 
@@ -140,10 +142,12 @@ public partial class winMutiPlayer : WindowX, IMPWindows
     {
         _ = Task.Run(async () =>
         {
+#pragma warning disable CS8602 // 解引用可能出现空引用。
             lb.SetMemberData("save", mw.GameSavesData.GameSave.ToLine().ToString());
             lb.SetMemberData("onmod", ((ILPS)mw.Set).FindLine("onmod")?.ToString() ?? "onmod");
             lb.SetMemberData("petgraph", ((ILPS)mw.Set)["gameconfig"].GetString("petgraph", "vup"));
             lb.SetMemberData("notouch", mw.Set.MPNOTouch.ToString());
+#pragma warning restore CS8602 // 解引用可能出现空引用。
 
             SteamMatchmaking.OnLobbyMemberJoined += SteamMatchmaking_OnLobbyMemberJoined;
             SteamMatchmaking.OnLobbyMemberLeave += SteamMatchmaking_OnLobbyMemberLeave;
@@ -440,6 +444,7 @@ public partial class winMutiPlayer : WindowX, IMPWindows
         SteamMatchmaking.OnLobbyMemberLeave -= SteamMatchmaking_OnLobbyMemberLeave;
         SteamMatchmaking.OnLobbyDataChanged -= SteamMatchmaking_OnLobbyDataChanged;
         lb.Leave();
+        mps.winMutiPlayer = null;
     }
     bool isOPEN = true;
     /// <summary>
@@ -570,5 +575,23 @@ public partial class winMutiPlayer : WindowX, IMPWindows
         else
             lbLid.Text = "双击显示房间ID".Translate();
         e.Handled = true;
+    }
+
+    private void tbWhiteJoinList_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (mw == null) return;
+        mps.Set.WhiteJoinList = tbWhiteJoinList.Text;
+    }
+
+    private void tbWhiteTalkList_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (mw == null) return;
+        mps.Set.WhiteTalkList = tbWhiteTalkList.Text;
+    }
+
+    private void tbDIYSensitive_PasswordChanged(object sender, RoutedEventArgs e)
+    {
+        if (mw == null) return;
+        mps.Set.DIYSensitive = tbDIYSensitive.Password;
     }
 }

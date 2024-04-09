@@ -117,7 +117,7 @@ namespace VPet.MutiPlayer.Stream
                 });
             });
         }
-        winMutiPlayer winMutiPlayer;
+        internal winMutiPlayer? winMutiPlayer;
 
         private MenuItem? FindMenuInteract()
         {
