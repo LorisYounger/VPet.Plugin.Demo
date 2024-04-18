@@ -358,8 +358,8 @@ public partial class winMutiPlayer : WindowX, IMPWindows
                                         Log("{0} 悄悄地对你说: {1}".Translate(byname, content));
                                         break;
                                     case Chat.Type.Internal:
-                                        mw.Main.Say("{0} 对你说: {1}".Translate(byname, content));
-                                        Log("{0} 对你说: {1}".Translate(byname, content));
+                                        Say("{0} 对 {2} 说: {1}".Translate(msg.SendName, msg.Content, msg.ToName));
+                                        Log("{0} 对 {2} 说: {1}".Translate(msg.SendName, msg.Content, msg.ToName));
                                         break;
                                     case Chat.Type.Public:
                                         mw.Main.Say("{0} 对大家说: {1}".Translate(byname, content));

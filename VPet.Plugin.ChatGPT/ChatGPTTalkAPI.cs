@@ -37,9 +37,10 @@ namespace VPet.Plugin.ChatGPTPlugin
             {
                 return;
             }
+            DisplayThink();
             if (Plugin.CGPTClient == null)
             {
-                Plugin.MW.Main.SayRnd("请先前往设置中设置 ChatGPT API".Translate());
+                DisplayThinkToSayRnd("请先前往设置中设置 ChatGPT API".Translate());
                 return;
             }
             Dispatcher.Invoke(() => this.IsEnabled = false);
@@ -68,7 +69,7 @@ namespace VPet.Plugin.ChatGPTPlugin
                     reply += " ...";
                 }
                 var showtxt = Plugin.ShowToken ? null : "当前Token使用".Translate() + ": " + resp.usage.total_tokens;
-                Plugin.MW.Main.SayRnd(reply, desc: showtxt);
+                DisplayThinkToSayRnd(reply, desc: showtxt);
             }
             catch (Exception exp)
             {
@@ -78,7 +79,7 @@ namespace VPet.Plugin.ChatGPTPlugin
                 {
                     str = "请检查API token设置".Translate();
                 }
-                Plugin.MW.Main.SayRnd("API调用失败".Translate() + $",{str}\n{e}");//, GraphCore.Helper.SayType.Serious);
+                DisplayThinkToSayRnd("API调用失败".Translate() + $",{str}\n{e}");//, GraphCore.Helper.SayType.Serious);
             }
             Dispatcher.Invoke(() => this.IsEnabled = true);
         }
