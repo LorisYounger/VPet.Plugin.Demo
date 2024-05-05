@@ -30,7 +30,7 @@ namespace VPet.MutiPlayer.Stream
             }
             else
             {
-                MessageBoxX.Show("ÒÑ¾­ÓĞ¼ÓÈëÁËÒ»¸ö·Ã¿Í±í,ÎŞ·¨ÔÙ´´½¨¸ü¶à".Translate());
+                MessageBoxX.Show("å·²ç»æœ‰åŠ å…¥äº†ä¸€ä¸ªè®¿å®¢è¡¨,æ— æ³•å†åˆ›å»ºæ›´å¤š".Translate());
                 winMutiPlayer.Focus();
             }
         }
@@ -38,7 +38,7 @@ namespace VPet.MutiPlayer.Stream
         {
             if (!MW.IsSteamUser)
                 return;
-            //×îĞÂ°æ±¾LPS×Ô¶¯×ªÒåÉèÖÃ¹¦ÄÜ, Èç¹û²»»áÓÃ, ¿ÉÒÔ²Î¿¼±ğµÄÏîÄ¿µÄ¾É°æ±¾¼ÓÔØ·½Ê½
+            //æœ€æ–°ç‰ˆæœ¬LPSè‡ªåŠ¨è½¬ä¹‰è®¾ç½®åŠŸèƒ½, å¦‚æœä¸ä¼šç”¨, å¯ä»¥å‚è€ƒåˆ«çš„é¡¹ç›®çš„æ—§ç‰ˆæœ¬åŠ è½½æ–¹å¼
             var line = new Line_C<Setting>(MW.Set["MutiPlayerStream"]);
             if (line.Value == null)
             {
@@ -70,7 +70,7 @@ namespace VPet.MutiPlayer.Stream
 
                     var menuCreate = new MenuItem()
                     {
-                        Header = "[Ö÷²¥]´´½¨".Translate(),
+                        Header = "[ä¸»æ’­]åˆ›å»º".Translate(),
                         HorizontalContentAlignment = HorizontalAlignment.Center
                     };
 
@@ -83,7 +83,7 @@ namespace VPet.MutiPlayer.Stream
                         }
                         else
                         {
-                            MessageBoxX.Show("ÒÑ¾­ÓĞ¼ÓÈëÁËÒ»¸ö·Ã¿Í±í,ÎŞ·¨ÔÙ´´½¨¸ü¶à".Translate());
+                            MessageBoxX.Show("å·²ç»æœ‰åŠ å…¥äº†ä¸€ä¸ªè®¿å®¢è¡¨,æ— æ³•å†åˆ›å»ºæ›´å¤š".Translate());
                             winMutiPlayer.Focus();
                         }
                     };
@@ -91,14 +91,14 @@ namespace VPet.MutiPlayer.Stream
 
                     var menuJoin = new MenuItem()
                     {
-                        Header = "[Ö÷²¥]¼ÓÈë".Translate(),
+                        Header = "[ä¸»æ’­]åŠ å…¥".Translate(),
                         HorizontalContentAlignment = HorizontalAlignment.Center
                     };
                     menuJoin.Click += (_, _) =>
                     {
                         if (winMutiPlayer == null)
                         {
-                            MW.Show("ÇëÊäÈë·Ã¿Í±íID".Translate(), "[Ö÷²¥]¼ÓÈë·Ã¿Í±í".Translate(), "", (id) =>
+                            MW.ShowInputBox("è¯·è¾“å…¥è®¿å®¢è¡¨ID".Translate(), "[ä¸»æ’­]åŠ å…¥è®¿å®¢è¡¨".Translate(), "", (id) =>
                             {
                                 if (ulong.TryParse(id, NumberStyles.HexNumber, null, out ulong lid))
                                 {
@@ -109,7 +109,7 @@ namespace VPet.MutiPlayer.Stream
                         }
                         else
                         {
-                            MessageBoxX.Show("ÒÑ¾­ÓĞ¼ÓÈëÁËÒ»¸ö·Ã¿Í±í,ÎŞ·¨ÔÙ´´½¨¸ü¶à".Translate());
+                            MessageBoxX.Show("å·²ç»æœ‰åŠ å…¥äº†ä¸€ä¸ªè®¿å®¢è¡¨,æ— æ³•å†åˆ›å»ºæ›´å¤š".Translate());
                             winMutiPlayer.Focus();
                         }
                     };
@@ -125,7 +125,7 @@ namespace VPet.MutiPlayer.Stream
                {
                    foreach (var item in MW.Main.ToolBar.MenuInteract.Items)
                    {
-                       if (item is MenuItem menu && menu.Header is string hd && hd == "·Ã¿Í±í".Translate())
+                       if (item is MenuItem menu && menu.Header is string hd && hd == "è®¿å®¢è¡¨".Translate())
                        {
                            return menu;
                        }
@@ -134,7 +134,7 @@ namespace VPet.MutiPlayer.Stream
                });
         }
 
-#pragma warning disable CS0618 // ÀàĞÍ»ò³ÉÔ±ÒÑ¹ıÊ±
+#pragma warning disable CS0618 // ç±»å‹æˆ–æˆå‘˜å·²è¿‡æ—¶
         IllegalWordsSearch wordsSearch = new IllegalWordsSearch();
 
         public string Filter(string text)
@@ -150,7 +150,7 @@ namespace VPet.MutiPlayer.Stream
         public string FilterName(string name, long steamid)
         {
             if (!Set.AllowName && Set.WhiteListJoin && Set.WhiteJoinList.Contains(steamid.ToString()))
-                return "×À³èºÃÓÑ".Translate() + (steamid % 256).ToString("x");
+                return "æ¡Œå® å¥½å‹".Translate() + (steamid % 256).ToString("x");
             return Filter(name);
         }
         public string FilterTalk(string talk, Friend friend) => FilterTalk(talk, (long)friend.Id.Value);
@@ -167,7 +167,7 @@ namespace VPet.MutiPlayer.Stream
                 return "";
             return Filter(talk);
         }
-#pragma warning restore CS0618 // ÀàĞÍ»ò³ÉÔ±ÒÑ¹ıÊ±
+#pragma warning restore CS0618 // ç±»å‹æˆ–æˆå‘˜å·²è¿‡æ—¶
 
         public override string PluginName => "MutiPlayerStream";
 

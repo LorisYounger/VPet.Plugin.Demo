@@ -358,8 +358,8 @@ public partial class winMutiPlayer : WindowX, IMPWindows
                                         Log("{0} 悄悄地对你说: {1}".Translate(byname, content));
                                         break;
                                     case Chat.Type.Internal:
-                                        Say("{0} 对 {2} 说: {1}".Translate(msg.SendName, msg.Content, msg.ToName));
-                                        Log("{0} 对 {2} 说: {1}".Translate(msg.SendName, msg.Content, msg.ToName));
+                                        mw.Main.Say("{0} 对 {2} 说: {1}".Translate(byname, content, mps.FilterName(msg.ToName, (long)MSG.To)));
+                                        Log("{0} 对 {2} 说: {1}".Translate(byname, content, mps.FilterName(msg.ToName, (long)MSG.To)));
                                         break;
                                     case Chat.Type.Public:
                                         mw.Main.Say("{0} 对大家说: {1}".Translate(byname, content));
@@ -487,12 +487,12 @@ public partial class winMutiPlayer : WindowX, IMPWindows
             else if (mw.Main.DisplayType.Animat == AnimatType.B_Loop)
                 if (Dispatcher.Invoke(() => mw.Main.PetGrid.Tag) is IGraph ig && ig.GraphInfo.Type == GraphType.Touch_Head && ig.GraphInfo.Animat == AnimatType.B_Loop)
                 {
-                    ig.IsContinue = true;
+                    ig.SetContinue();
                     return;
                 }
                 else if (Dispatcher.Invoke(() => mw.Main.PetGrid2.Tag) is IGraph ig2 && ig2.GraphInfo.Type == GraphType.Touch_Head && ig2.GraphInfo.Animat == AnimatType.B_Loop)
                 {
-                    ig2.IsContinue = true;
+                    ig2.SetContinue();
                     return;
                 }
         }
@@ -513,12 +513,12 @@ public partial class winMutiPlayer : WindowX, IMPWindows
             else if (mw.Main.DisplayType.Animat == AnimatType.B_Loop)
                 if (Dispatcher.Invoke(() => mw.Main.PetGrid.Tag) is IGraph ig && ig.GraphInfo.Type == GraphType.Touch_Body && ig.GraphInfo.Animat == AnimatType.B_Loop)
                 {
-                    ig.IsContinue = true;
+                    ig.SetContinue();
                     return;
                 }
                 else if (Dispatcher.Invoke(() => mw.Main.PetGrid2.Tag) is IGraph ig2 && ig2.GraphInfo.Type == GraphType.Touch_Body && ig2.GraphInfo.Animat == AnimatType.B_Loop)
                 {
-                    ig2.IsContinue = true;
+                    ig2.SetContinue();
                     return;
                 }
         }
@@ -539,12 +539,12 @@ public partial class winMutiPlayer : WindowX, IMPWindows
             else if (mw.Main.DisplayType.Animat == AnimatType.B_Loop)
                 if (Dispatcher.Invoke(() => mw.Main.PetGrid.Tag) is IGraph ig && ig.GraphInfo.Type == GraphType.Touch_Head && ig.GraphInfo.Animat == AnimatType.B_Loop)
                 {
-                    ig.IsContinue = true;
+                    ig.SetContinue();
                     return;
                 }
                 else if (Dispatcher.Invoke(() => mw.Main.PetGrid2.Tag) is IGraph ig2 && ig2.GraphInfo.Type == GraphType.Touch_Head && ig2.GraphInfo.Animat == AnimatType.B_Loop)
                 {
-                    ig2.IsContinue = true;
+                    ig2.SetContinue();
                     return;
                 }
         }
