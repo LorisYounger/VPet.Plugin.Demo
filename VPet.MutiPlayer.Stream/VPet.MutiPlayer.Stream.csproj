@@ -10,15 +10,19 @@
 
   <ItemGroup>
     <Compile Remove="1110_ChatGPT\**" />
+    <Compile Remove="1111_MutiPlayerStream\**" />
     <EmbeddedResource Remove="1110_ChatGPT\**" />
+    <EmbeddedResource Remove="1111_MutiPlayerStream\**" />
     <None Remove="1110_ChatGPT\**" />
+    <None Remove="1111_MutiPlayerStream\**" />
     <Page Remove="1110_ChatGPT\**" />
+    <Page Remove="1111_MutiPlayerStream\**" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Facepunch.Steamworks" Version="2.3.3" />
     <PackageReference Include="ToolGood.Words" Version="3.1.0" />
-    <PackageReference Include="VPet-Simulator.Windows.Interface" Version="1.1.0.14-beta" />
+    <PackageReference Include="VPet-Simulator.Windows.Interface" Version="1.1.0.15" />
   </ItemGroup>
 
 </Project>

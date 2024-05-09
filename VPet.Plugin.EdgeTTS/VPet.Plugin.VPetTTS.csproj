@@ -21,8 +21,8 @@
     <PackageReference Include="Panuon.WPF.UI" Version="1.2.1.2" />
     <PackageReference Include="Serilog" Version="4.0.0-dev-02163" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.6.0-preview3.19128.7" />
-    <PackageReference Include="VPet-Simulator.Core" Version="1.1.0.14-beta" />
-    <PackageReference Include="VPet-Simulator.Windows.Interface" Version="1.1.0.14-beta" />
+    <PackageReference Include="VPet-Simulator.Core" Version="1.1.0.15" />
+    <PackageReference Include="VPet-Simulator.Windows.Interface" Version="1.1.0.15" />
     <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="9.0.0-preview.3.24172.9" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
   </ItemGroup>
