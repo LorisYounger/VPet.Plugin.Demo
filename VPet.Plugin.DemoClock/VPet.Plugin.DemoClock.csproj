@@ -13,13 +13,13 @@
     <Page Remove="1100_DemoClock\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="LinePutScript" Version="1.11.6" />
+    <PackageReference Include="LinePutScript" Version="1.11.7" />
     <PackageReference Include="LinePutScript.Localization.WPF" Version="1.0.7" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Panuon.WPF" Version="1.1.0" />
-    <PackageReference Include="Panuon.WPF.UI" Version="1.2.1.2" />
+    <PackageReference Include="Panuon.WPF" Version="1.1.2.1" />
+    <PackageReference Include="Panuon.WPF.UI" Version="1.2.2.1" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.6.0-preview3.19128.7" />
-    <PackageReference Include="VPet-Simulator.Core" Version="1.1.0.15" />
-    <PackageReference Include="VPet-Simulator.Windows.Interface" Version="1.1.0.15" />
+    <PackageReference Include="VPet-Simulator.Core" Version="1.1.0.20" />
+    <PackageReference Include="VPet-Simulator.Windows.Interface" Version="1.1.0.20" />
   </ItemGroup>
 </Project>

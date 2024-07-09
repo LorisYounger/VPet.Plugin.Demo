@@ -4,6 +4,8 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -61,6 +63,15 @@ namespace VPet.Plugin.ChatGPTPlugin
                 TotalTokensUsage = totalused
             };
             plugin.CGPTClient.CreateCompletions("vpet", tbSystem.Text.Replace("{Name}", plugin.MW.Core.Save.Name));
+            if (!string.IsNullOrWhiteSpace(tbWebProxy.Text))
+            {
+                plugin.CGPTClient.WebProxy = tbWebProxy.Text;
+                plugin.CGPTClient.Proxy = new HttpClientHandler()
+                {
+                    Proxy = new WebProxy(plugin.CGPTClient.WebProxy),
+                    UseProxy = true
+                };
+            }
             plugin.CGPTClient.Completions["vpet"].model = cbModel.Text;
             plugin.CGPTClient.Completions["vpet"].frequency_penalty = 0.2;
             plugin.CGPTClient.Completions["vpet"].presence_penalty = 1;
