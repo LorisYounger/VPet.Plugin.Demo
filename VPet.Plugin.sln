@@ -10,6 +10,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VPet.Plugin.ChatGPTPlugin",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VPet.MutiPlayer.Stream", "VPet.MutiPlayer.Stream\VPet.MutiPlayer.Stream.csproj", "{FEE7377E-9DB3-4D68-B962-C6F7291C1897}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VPet.Plugin.CloudSaves", "VPet.Plugin.CloudSaves\VPet.Plugin.CloudSaves.csproj", "{37E30075-7CE6-4B2F-A188-AAE4242BF765}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{FEE7377E-9DB3-4D68-B962-C6F7291C1897}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEE7377E-9DB3-4D68-B962-C6F7291C1897}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEE7377E-9DB3-4D68-B962-C6F7291C1897}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37E30075-7CE6-4B2F-A188-AAE4242BF765}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37E30075-7CE6-4B2F-A188-AAE4242BF765}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37E30075-7CE6-4B2F-A188-AAE4242BF765}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37E30075-7CE6-4B2F-A188-AAE4242BF765}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

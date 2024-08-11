@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+		<UseWPF>true</UseWPF>
+		<ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CloudSaves.Client" Version="1.0.0" />
+		<PackageReference Include="VPet-Simulator.Windows.Interface" Version="1.1.0.24" />
+	</ItemGroup>
+
+</Project>

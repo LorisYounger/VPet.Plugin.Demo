@@ -1,0 +1,73 @@
+﻿<Window x:Class="VPet.Plugin.CloudSaves.winSetting" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:System="clr-namespace:System;assembly=mscorlib"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:pu="clr-namespace:Panuon.WPF.UI;assembly=Panuon.WPF.UI" FontSize="16"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VPet.Plugin.CloudSaves" Background="{DynamicResource PrimaryLighter}"
+        xmlns:ll="clr-namespace:LinePutScript.Localization.WPF;assembly=LinePutScript.Localization.WPF" mc:Ignorable="d"
+        Title="{ll:Str 云存档设置}" Height="Auto" Width="500">
+    <Window.Resources>
+        <ResourceDictionary Source="/VPet-Simulator.Windows.Interface;component/ResourceStyle.xaml" />
+    </Window.Resources>
+    <Grid>
+        <Grid Margin="8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="15" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Grid.ColumnSpan="4" TextWrapping="WrapWithOverflow">
+                <Run Text="{ll:Str 云存档}" FontSize="20" FontWeight="Bold" /> <LineBreak />
+                <Run Text="{ll:Str '游戏云存档系统, 支持将自动将存档备份到服务器上, 并可以随时查看和加载'}" /><LineBreak />
+                <Run Text="{ll:Str '支持使用官方或搭建自己的云存档服务器'}" />                
+                <Hyperlink NavigateUri="https://github.com/LorisYounger/CloudSavesServer">
+                     <Run Text="{ll:Str '项目地址'}" /> 
+                </Hyperlink>
+            </TextBlock>
+            <TextBlock Grid.Row="1" Text="{ll:Str 服务器链接}" VerticalAlignment="Center" />
+            <TextBlock Grid.Row="2" Text="{ll:Str 可以选择官方维护的服务器或填入自己或他人的服务器链接}" VerticalAlignment="Center"
+                    Grid.ColumnSpan="4" FontSize="12" Margin="0,0,0,5" />
+            <TextBlock Grid.Row="3" Text="{ll:Str 服务器信息}" VerticalAlignment="Top" Margin="0,5,0,0" />
+            <TextBlock Grid.Row="4" Text="{ll:Str 账号秘钥}" VerticalAlignment="Center" />
+            <TextBlock Grid.Row="5" Text="{ll:Str '用于确保账号唯一性的密钥,可以随便填个幸运数字.注意记住这个数字,如果丢失设置或更换电脑,需要通过该密钥读取存档'}"
+                    VerticalAlignment="Center" Grid.ColumnSpan="4" FontSize="12" TextWrapping="WrapWithOverflow"
+                    Margin="0,0,0,5" />
+            <TextBlock Grid.Row="6" Text="{ll:Str 备份间隔}" VerticalAlignment="Center" />
+            <TextBlock Grid.Row="7" Text="{ll:Str '自动备份游戏存档时间间隔,单位:分钟'}" VerticalAlignment="Center" Grid.ColumnSpan="4"
+                    FontSize="12" />
+            <Button Content="{ll:Str '连接并查看存档列表'}" Background="{DynamicResource SecondaryLight}"
+                    pu:ButtonHelper.CornerRadius="4" BorderBrush="{DynamicResource SecondaryDark}" BorderThickness="2"
+                    Grid.Row="8" Grid.ColumnSpan="4" Margin="5" />
+
+            <ComboBox x:Name="CombSpeaker" Grid.Row="1" Grid.Column="2" Style="{DynamicResource StandardComboBoxStyle}"
+                    FontSize="16" Margin="5" IsEditable="True">
+                <System:String>https://cn.css.exlb.net</System:String>
+                <System:String>https://hkcss.exlb.net:6655</System:String>
+            </ComboBox>
+            <Button Content="{ll:Str '测试连接'}" Background="{DynamicResource SecondaryLight}"
+                    pu:ButtonHelper.CornerRadius="4" BorderBrush="{DynamicResource SecondaryDark}" BorderThickness="2"
+                    Grid.Row="1" Margin="5" Grid.Column="3" />
+            <TextBlock Grid.Row="3" Text="{ll:Str 点击测试连接查看服务器信息}" Grid.Column="2" TextWrapping="WrapWithOverflow"
+                    Background="{DynamicResource PrimaryLight}" Padding="5" />
+            <TextBox Grid.Row="4" Grid.Column="2" Style="{DynamicResource StandardTextBoxStyle}" FontSize="16"
+                    Margin="5" pu:TextBoxHelper.InputLimit="Digit" />
+            <Button Content="{ll:Str '随机生成'}" Background="{DynamicResource SecondaryLight}"
+                    pu:ButtonHelper.CornerRadius="4" BorderBrush="{DynamicResource SecondaryDark}" BorderThickness="2"
+                    Grid.Row="4" Margin="5" Grid.Column="3" />
+            <pu:NumberInput CornerRadius="3" Grid.Row="6" Grid.Column="2" Minimum="5" Maximum="1440"
+                    Style="{DynamicResource StandardNumberInputStyle}" FontSize="16" Margin="5" Value="20" />
+        </Grid>
+    </Grid>
+</Window>
