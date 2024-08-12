@@ -10,8 +10,21 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="1122_CloudSaves\**" />
+	  <EmbeddedResource Remove="1122_CloudSaves\**" />
+	  <None Remove="1122_CloudSaves\**" />
+	  <Page Remove="1122_CloudSaves\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="CloudSaves.Client" Version="1.0.0" />
 		<PackageReference Include="VPet-Simulator.Windows.Interface" Version="1.1.0.24" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="winSave.xaml.cs">
+	    <SubType>Code</SubType>
+	  </Compile>
 	</ItemGroup>
 
 </Project>

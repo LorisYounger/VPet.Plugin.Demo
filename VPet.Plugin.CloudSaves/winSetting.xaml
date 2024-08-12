@@ -2,10 +2,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:System="clr-namespace:System;assembly=mscorlib"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:pu="clr-namespace:Panuon.WPF.UI;assembly=Panuon.WPF.UI" FontSize="16"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" SizeToContent="Height"
         xmlns:local="clr-namespace:VPet.Plugin.CloudSaves" Background="{DynamicResource PrimaryLighter}"
         xmlns:ll="clr-namespace:LinePutScript.Localization.WPF;assembly=LinePutScript.Localization.WPF" mc:Ignorable="d"
-        Title="{ll:Str 云存档设置}" Height="Auto" Width="500">
+        Title="{ll:Str 云存档设置}" Height="Auto" Width="500" Closing="Window_Closing">
     <Window.Resources>
         <ResourceDictionary Source="/VPet-Simulator.Windows.Interface;component/ResourceStyle.xaml" />
     </Window.Resources>
@@ -45,27 +45,33 @@
                     VerticalAlignment="Center" Grid.ColumnSpan="4" FontSize="12" TextWrapping="WrapWithOverflow"
                     Margin="0,0,0,5" />
             <TextBlock Grid.Row="6" Text="{ll:Str 备份间隔}" VerticalAlignment="Center" />
+            <TextBlock Grid.Row="6" Text="{ll:Str 分钟}" VerticalAlignment="Center" Grid.Column="3" />
             <TextBlock Grid.Row="7" Text="{ll:Str '自动备份游戏存档时间间隔,单位:分钟'}" VerticalAlignment="Center" Grid.ColumnSpan="4"
                     FontSize="12" />
-            <Button Content="{ll:Str '连接并查看存档列表'}" Background="{DynamicResource SecondaryLight}"
+            <Button Content="{ll:Str '保存设置并查看存档列表'}" Background="{DynamicResource SecondaryLight}"
                     pu:ButtonHelper.CornerRadius="4" BorderBrush="{DynamicResource SecondaryDark}" BorderThickness="2"
-                    Grid.Row="8" Grid.ColumnSpan="4" Margin="5" />
+                    Grid.Row="8" Grid.ColumnSpan="4" Margin="5" Click="save_connect" />
 
-            <ComboBox x:Name="CombSpeaker" Grid.Row="1" Grid.Column="2" Style="{DynamicResource StandardComboBoxStyle}"
-                    FontSize="16" Margin="5" IsEditable="True">
+            <ComboBox x:Name="tb_serverurl" Grid.Row="1" Grid.Column="2" Style="{DynamicResource StandardComboBoxStyle}"
+                    FontSize="16" Margin="5" IsEditable="True" pu:ComboBoxHelper.Watermark="{ll:Str '输入或选择服务器'}">
                 <System:String>https://cn.css.exlb.net</System:String>
                 <System:String>https://hkcss.exlb.net:6655</System:String>
             </ComboBox>
             <Button Content="{ll:Str '测试连接'}" Background="{DynamicResource SecondaryLight}"
                     pu:ButtonHelper.CornerRadius="4" BorderBrush="{DynamicResource SecondaryDark}" BorderThickness="2"
-                    Grid.Row="1" Margin="5" Grid.Column="3" />
-            <TextBlock Grid.Row="3" Text="{ll:Str 点击测试连接查看服务器信息}" Grid.Column="2" TextWrapping="WrapWithOverflow"
-                    Background="{DynamicResource PrimaryLight}" Padding="5" />
-            <TextBox Grid.Row="4" Grid.Column="2" Style="{DynamicResource StandardTextBoxStyle}" FontSize="16"
-                    Margin="5" pu:TextBoxHelper.InputLimit="Digit" />
+                    Grid.Row="1" Margin="5" Grid.Column="3" Click="test_connect" />
+            <TextBlock Grid.Row="3" Grid.Column="2" TextWrapping="WrapWithOverflow" FontSize="12"
+                    Background="{DynamicResource PrimaryLight}" Padding="5">
+                <Run Text="点击测试连接查看服务器信息" x:Name="textservermsg" FontSize="14" /><LineBreak />
+                <Run Text="{ll:Str '版本'}" />: v<Run Text="-" FontStyle="Oblique" x:Name="textserverver" />
+                <Run Text="{ll:Str '用户数'}" />: <Run Text="-" FontStyle="Oblique" x:Name="textserverusr" />
+                <Run Text="{ll:Str '存档数'}" />: <Run Text="-" FontStyle="Oblique" x:Name="textserversave" />
+            </TextBlock>
+            <TextBox x:Name="tb_passkey" Grid.Row="4" Grid.Column="2" Style="{DynamicResource StandardTextBoxStyle}"
+                    FontSize="16" Margin="5" pu:TextBoxHelper.InputLimit="Digit" TextChanged="tb_passkey_TextChanged" />
             <Button Content="{ll:Str '随机生成'}" Background="{DynamicResource SecondaryLight}"
                     pu:ButtonHelper.CornerRadius="4" BorderBrush="{DynamicResource SecondaryDark}" BorderThickness="2"
-                    Grid.Row="4" Margin="5" Grid.Column="3" />
+                    Grid.Row="4" Margin="5" Grid.Column="3" Click="rnd_gen" />
             <pu:NumberInput CornerRadius="3" Grid.Row="6" Grid.Column="2" Minimum="5" Maximum="1440"
                     Style="{DynamicResource StandardNumberInputStyle}" FontSize="16" Margin="5" Value="20" />
         </Grid>

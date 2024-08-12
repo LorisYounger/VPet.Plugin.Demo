@@ -1,0 +1,40 @@
+CloudSave#Cloud Archive:|
+第一次使用需要设置服务器参数#The server parameters need to be set for the first use:|
+自动存档#Automatic archiving:|
+自动存档失败啦,主人记得检查下自动存档设置#Automatic save failed, please remember to check the automatic save settings, master:|
+是否确认读取存档#Are you sure to read the archive:|
+存档读取失败#Failed to read from the archive:|
+找不到存档#Can't find the save file:|
+存档读取成功#Archive read successful:|
+操作失败,请检查存档服务器设置#Operation failed, please check the archive server settings:|
+是否确认删除所有存档#Are you sure to delete all saved files:|
+手动存档#Manual archiving:|
+存档成功#Archive successful:|
+存档失败#Archive failed:|
+点击测试连接查看服务器信息#Click to test the connection and view server information:|
+是否保存设置?#Do you want to save the settings?:|
+Passkey只能是数字,且不能大于#The passkey can only be numbers and cannot exceed:|
+服务器连接失败,请检查服务器地址#Server connection failed, please check the server address:|
+云存档设置#Cloud Save Settings:|
+云存档#Cloud Archive:|
+支持使用官方或搭建自己的云存档服务器#Support the use of official or self-built cloud save servers:|
+服务器链接#Server Link:|
+可以选择官方维护的服务器或填入自己或他人的服务器链接#You can choose the server maintained by the official or fill in your own or others' server link:|
+服务器信息#Server Information:|
+账号秘钥#Account key:|
+用于确保账号唯一性的密钥,可以随便填个幸运数字.注意记住这个数字,如果丢失设置或更换电脑,需要通过该密钥读取存档#The key used to ensure the uniqueness of the account can be any lucky number. Remember this number carefully, as if you lose your settings or change computers, you will need to use this key to access your save files:|
+备份间隔#Backup interval:|
+自动备份游戏存档时间间隔,单位:分钟#Automatic backup game save interval, unit: minutes:|
+保存设置并查看存档列表#Save settings and view the list of archives:|
+输入或选择服务器#Enter or select a server:|
+测试连接#Test connection:|
+用户数#Number of users:|
+存档数#Number of archives:|
+随机生成#Randomly generated:|
+云存档列表#Cloud Save List:|
+存档名称#Archive Name:|
+存档时间#Archive time:|
+Hash检查#Hash Check:|
+手动保存#Manually save:|
+删除存档#Delete Archive:|
+删除所有存档#Delete all saved files:|

@@ -1,8 +1,8 @@
-﻿<Window x:Class="VPet.Plugin.DemoClock.winSave" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<Window x:Class="VPet.Plugin.CloudSaves.winSave" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:VPet.Plugin.DemoClock" Background="{DynamicResource PrimaryLighter}"
+        xmlns:local="clr-namespace:VPet.Plugin.CloudSaves" Background="{DynamicResource PrimaryLighter}"
         xmlns:ll="clr-namespace:LinePutScript.Localization.WPF;assembly=LinePutScript.Localization.WPF" mc:Ignorable="d"
         Title="{ll:Str 云存档列表}" Height="450" Width="600" xmlns:pu="clr-namespace:Panuon.WPF.UI;assembly=Panuon.WPF.UI"
         FontSize="16">
@@ -21,30 +21,38 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TextBox Grid.Column="0" Style="{DynamicResource StandardTextBoxStyle}" FontSize="16" Margin="5"
-                pu:TextBoxHelper.Watermark="{ll:Str 搜索存档}" Grid.ColumnSpan="3" />
-        <DataGrid Grid.Row="1" Grid.ColumnSpan="3" AutoGenerateColumns="False" SelectionMode="Single">
+        <TextBox x:Name="search" Grid.Column="0" Style="{DynamicResource StandardTextBoxStyle}" FontSize="16"
+                Margin="5,5,42,5" pu:TextBoxHelper.Watermark="{ll:Str 搜索存档}" Grid.ColumnSpan="3"
+                TextChanged="search_text" />
+        <DataGrid x:Name="dgsavelist" Grid.Row="1" Grid.ColumnSpan="3" AutoGenerateColumns="False"
+                SelectionMode="Single" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="{ll:Str 存档名称}" Binding="{Binding Name}" Width="200" />
+                <DataGridTextColumn Header="{ll:Str 存档名称}" Binding="{Binding Name}" Width="180" />
                 <DataGridTextColumn Header="{ll:Str 存档时间}" Binding="{Binding Time}" Width="150" />
-                <DataGridTextColumn Header="{ll:Str 等级}" Binding="{Binding Price}" Width="70" />
+                <DataGridTextColumn Header="{ll:Str 等级}" Binding="{Binding Level}" Width="70" />
                 <DataGridTextColumn Header="{ll:Str 金钱}" Binding="{Binding Money}" Width="70" />
-                <DataGridTextColumn Header="{ll:Str Hash检查}" Binding="{Binding Hash}"  />
+                <DataGridTextColumn Header="{ll:Str Hash检查}" Binding="{Binding Hash}" />
             </DataGrid.Columns>
         </DataGrid>
+        <Button Grid.Row="0" Grid.Column="2" Background="{DynamicResource SecondaryLight}"
+                pu:ButtonHelper.CornerRadius="4" BorderBrush="{DynamicResource SecondaryDark}" BorderThickness="2"
+                Margin="5,5,5,5" HorizontalAlignment="Right" Padding="3,1,4,2" Click="rels_click">
+            <Path Fill="{DynamicResource SecondaryDark}"
+                    Data="M5.46257 4.43262C7.21556 2.91688 9.5007 2 12 2C17.5228 2 22 6.47715 22 12C22 14.1361 21.3302 16.1158 20.1892 17.7406L17 12H20C20 7.58172 16.4183 4 12 4C9.84982 4 7.89777 4.84827 6.46023 6.22842L5.46257 4.43262ZM18.5374 19.5674C16.7844 21.0831 14.4993 22 12 22C6.47715 22 2 17.5228 2 12C2 9.86386 2.66979 7.88416 3.8108 6.25944L7 12H4C4 16.4183 7.58172 20 12 20C14.1502 20 16.1022 19.1517 17.5398 17.7716L18.5374 19.5674Z" />
+        </Button>
         <Button Grid.Row="2" Grid.Column="0" Content="{ll:Str '加载存档'}" Background="{DynamicResource SecondaryLight}"
                 pu:ButtonHelper.CornerRadius="4" BorderBrush="{DynamicResource SecondaryDark}" BorderThickness="2"
-                Margin="5" />
-        <TextBox Grid.Row="3" Grid.Column="0" Style="{DynamicResource StandardTextBoxStyle}" FontSize="16" Margin="5"
-                pu:TextBoxHelper.Watermark="{ll:Str '存档名称'}" Grid.ColumnSpan="2" />
+                Margin="5" Click="load_click" />
+        <TextBox x:Name="savename" Grid.Row="3" Grid.Column="0" Style="{DynamicResource StandardTextBoxStyle}"
+                FontSize="16" Margin="5" pu:TextBoxHelper.Watermark="{ll:Str '存档名称'}" Grid.ColumnSpan="2" />
         <Button Grid.Row="3" Grid.Column="2" Content="{ll:Str '手动保存'}" Background="{DynamicResource SecondaryLight}"
                 pu:ButtonHelper.CornerRadius="4" BorderBrush="{DynamicResource SecondaryDark}" BorderThickness="2"
-                Margin="5" />
+                Margin="5" Click="save_click" />
         <Button Grid.Row="2" Grid.Column="1" Content="{ll:Str '删除存档'}" Background="{DynamicResource Secondary}"
                 pu:ButtonHelper.CornerRadius="4" BorderBrush="{DynamicResource SecondaryDark}" BorderThickness="2"
-                Margin="5" />
+                Margin="5" Click="remove_click" />
         <Button Content="{ll:Str '删除所有存档'}" Grid.Column="2" Grid.Row="2" Background="{DynamicResource Secondary}"
                 pu:ButtonHelper.CornerRadius="4" BorderBrush="{DynamicResource SecondaryDark}" BorderThickness="2"
-                Margin="5" />
+                Margin="5" Click="delall_click" />
     </Grid>
 </Window>
