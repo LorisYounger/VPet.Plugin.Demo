@@ -29,7 +29,7 @@ namespace VPet.Plugin.CloudSaves
             InitializeComponent();
             this.CS = CS;
             textservermsg.Text = "点击测试连接查看服务器信息".Translate();
-            tb_serverurl.Text = CS.Set.ServerURL;
+            tb_serverurl.Text = CS.Set.ServerURL ?? "";
             if (CS.Set.Passkey != 0)
                 tb_passkey.Text = CS.Set.Passkey.ToString();
         }
@@ -57,14 +57,18 @@ namespace VPet.Plugin.CloudSaves
         }
 
         bool forclose = false;
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (forclose)
                 return;
             switch (MessageBoxX.Show("是否保存设置?".Translate(), "CloudSaves", MessageBoxButton.YesNoCancel))
             {
                 case MessageBoxResult.Yes:
-                    SaveSetting();
+                    if (!await SaveSetting())
+                    {
+                        e.Cancel = true;
+                        return;
+                    }
                     break;
                 case MessageBoxResult.Cancel:
                     e.Cancel = true;
@@ -72,7 +76,7 @@ namespace VPet.Plugin.CloudSaves
             }
         }
 
-        private async void SaveSetting()
+        private async Task<bool> SaveSetting()
         {
             if (ulong.TryParse(tb_passkey.Text, out ulong passkey))
             {
@@ -82,7 +86,7 @@ namespace VPet.Plugin.CloudSaves
             else
             {
                 MessageBoxX.Show("Passkey只能是数字,且不能大于".Translate() + ulong.MaxValue);
-                return;
+                return false;
             }
             try
             {
@@ -95,9 +99,12 @@ namespace VPet.Plugin.CloudSaves
                 textservermsg.Text = ex.Message;
                 textserversave.Text = textserversave.Text = textserverusr.Text = textserverver.Text = "-";
                 MessageBoxX.Show("服务器连接失败,请检查服务器地址".Translate());
-                return;
+                return false;
             }
+            CS.Set.BackupTime = (int)numbtime.Value;
+            CS.BackupTimer.Interval = CS.Set.BackupTime * 60 * 1000;
             CS.MW.Set["CloudSave"] = LPSConvert.SerializeObject(CS.Set, "CloudSave");
+            return true;
         }
 
         private void tb_passkey_TextChanged(object sender, TextChangedEventArgs e)
@@ -106,9 +113,10 @@ namespace VPet.Plugin.CloudSaves
                 tb_passkey.Text = CS.SavesClient.PassKey.ToString();
         }
 
-        private void save_connect(object sender, RoutedEventArgs e)
+        private async void save_connect(object sender, RoutedEventArgs e)
         {
-            SaveSetting();
+            if (!await SaveSetting())
+                return;
             CS.ShowSave();
             forclose = true;
             Close();

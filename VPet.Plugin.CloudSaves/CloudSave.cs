@@ -26,6 +26,8 @@ namespace VPet.Plugin.CloudSaves
             SavesClient = new SavesClient(Set.ServerURL, MW.SteamID, Set.Passkey);
             BackupTimer = new Timer(Set.BackupTime * 60 * 1000);
             BackupTimer.Elapsed += BackupTimer_Elapsed;
+            BackupTimer.AutoReset = true;
+            BackupTimer.Start();
             if (string.IsNullOrEmpty(Set.ServerURL))
             {
                 Task.Run(() =>
