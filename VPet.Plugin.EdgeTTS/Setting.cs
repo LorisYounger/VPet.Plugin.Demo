@@ -53,5 +53,11 @@ namespace VPet.Plugin.VPetTTS
         /// </summary>
         [Line]
         public bool Enable { get; set; } = true;
+        /// <summary>
+        /// 加密秘钥
+        /// </summary>
+        /// 一个空格为默认值空,这时候可以根据语言自动使用默认值
+        [Line]
+        public string Sec_MS_GEC_URL { get; set; } = " ";
     }
 }

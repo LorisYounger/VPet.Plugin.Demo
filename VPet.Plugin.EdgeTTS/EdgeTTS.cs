@@ -39,6 +39,14 @@ namespace VPet.Plugin.VPetTTS
                 else
                     Set.Speaker = "EdgeTTSSpeaker".Translate();
 
+
+            if (Set.Sec_MS_GEC_URL == " ")
+                if (LocalizeCore.CurrentCulture == "zh-Hans")
+                    Set.Sec_MS_GEC_URL = "http://123.207.46.66:8086/api/getGec";
+                else
+                    Set.Sec_MS_GEC_URL = "";
+            etts.Sec_MS_GEC_UpDate_Url = Set.Sec_MS_GEC_URL;
+
             MenuItem modset = MW.Main.ToolBar.MenuMODConfig;
             modset.Visibility = Visibility.Visible;
             var menuItem = new MenuItem()

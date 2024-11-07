@@ -4,8 +4,8 @@
         xmlns:System="clr-namespace:System;assembly=mscorlib"
         xmlns:ll="clr-namespace:LinePutScript.Localization.WPF;assembly=LinePutScript.Localization.WPF"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="clr-namespace:VPet.Plugin.VPetTTS"
-        mc:Ignorable="d" xmlns:pu="clr-namespace:Panuon.WPF.UI;assembly=Panuon.WPF.UI" Title="{ll:Str EdgeTTS 设置}" Width="450"
-        FontSize="16" Height="Auto" ResizeMode="NoResize" WindowState="Normal" SizeToContent="Height"
+        mc:Ignorable="d" xmlns:pu="clr-namespace:Panuon.WPF.UI;assembly=Panuon.WPF.UI" Title="{ll:Str EdgeTTS 设置}"
+        Width="450" FontSize="16" Height="Auto" ResizeMode="NoResize" WindowState="Normal" SizeToContent="Height"
         Background="{DynamicResource PrimaryLighter}" Closed="Window_Closed">
     <Window.Resources>
         <ResourceDictionary Source="/VPet-Simulator.Windows.Interface;component/ResourceStyle.xaml" />
@@ -24,12 +24,14 @@
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="{ll:Str 启用}" VerticalAlignment="Center" />
         <TextBlock Grid.Row="1" Text="{ll:Str 音量}" VerticalAlignment="Center" />
         <TextBlock Grid.Row="2" Text="{ll:Str 音调}" VerticalAlignment="Center" />
         <TextBlock Grid.Row="3" Text="{ll:Str 语速}" VerticalAlignment="Center" />
         <TextBlock Grid.Row="4" Text="{ll:Str 讲述人}" VerticalAlignment="Center" />
+        <TextBlock Grid.Row="5" Text="{ll:Str 参数URL}" VerticalAlignment="Center" />
 
         <pu:Switch x:Name="SwitchOn" BorderBrush="{DynamicResource DARKPrimaryDark}"
                 CheckedBackground="{DynamicResource DARKPrimary}" CheckedBorderBrush="{DynamicResource DARKPrimary}"
@@ -355,11 +357,18 @@
             <System:String>zu-ZA-ThandoNeural</System:String>
             <System:String>zu-ZA-ThembaNeural</System:String>
         </ComboBox>
+        <ComboBox x:Name="CombCodeURL" Grid.Row="5" Grid.Column="2" Style="{DynamicResource StandardComboBoxStyle}"
+                FontSize="16" Margin="5" IsEditable="True"
+                ToolTip="{ll:Str '目前EdgeTTS在中国大陆需要额外的验证秘钥(Sec-MS-GEC)\&#13;目前只能通过抓包Edge来获得该参数, 而且每600秒过期.\&#13;有许多大佬制作了API免费给大家用, 谢谢他们\&#13;如果你不在中国大陆,保持为空即可'}"
+                Grid.ColumnSpan="2">
+            <System:String>http://123.207.46.66:8086/api/getGec</System:String>
+            <System:String>https://edge-sec.myaitool.top/?key=edge</System:String>
+        </ComboBox>
         <Button pu:ButtonHelper.CornerRadius="4" Content="{ll:Str 保存设置}" Background="{DynamicResource SecondaryLight}"
-                BorderBrush="{DynamicResource SecondaryDark}" BorderThickness="2" Grid.Row="5" Margin="5,5,5,5"
+                BorderBrush="{DynamicResource SecondaryDark}" BorderThickness="2" Grid.Row="6" Margin="5,5,5,5"
                 Grid.ColumnSpan="3" Click="Save_Click" />
         <Button x:Name="Test" pu:ButtonHelper.CornerRadius="4" Content="{ll:Str 测试}"
                 Background="{DynamicResource SecondaryLight}" BorderBrush="{DynamicResource SecondaryDark}"
-                BorderThickness="2" Grid.Row="5" Margin="5,5,5,5" Grid.ColumnSpan="1" Click="Test_Click" Grid.Column="3" />
+                BorderThickness="2" Grid.Row="6" Margin="5,5,5,5" Grid.ColumnSpan="1" Click="Test_Click" Grid.Column="3" />
     </Grid>
 </Window>
