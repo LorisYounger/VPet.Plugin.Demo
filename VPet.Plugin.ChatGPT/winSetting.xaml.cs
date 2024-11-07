@@ -37,15 +37,18 @@ namespace VPet.Plugin.ChatGPTPlugin
             {
                 tbAPIKey.Text = plugin.CGPTClient.APIKey;
                 tbAPIURL.Text = plugin.CGPTClient.APIUrl;
-                tbMaxToken.Text = plugin.CGPTClient.Completions["vpet"].max_tokens.ToString();
-                tbSystem.Text = plugin.CGPTClient.Completions["vpet"].messages[0].content;
-                tbTemp.Text = plugin.CGPTClient.Completions["vpet"].temperature.ToString();
-                cbModel.Text = plugin.CGPTClient.Completions["vpet"].model;
-                var msgs = plugin.CGPTClient.Completions["vpet"].messages.ToList();
-                msgs.RemoveAt(0);
-                tbHistory.Text = JsonConvert.SerializeObject(msgs);
-                lbSpend.Content = plugin.CGPTClient.TotalTokensUsage.ToString() + " Token";
-                totalused = plugin.CGPTClient.TotalTokensUsage;
+                if (plugin.CGPTClient.Completions["vpet"] != null)
+                {
+                    tbMaxToken.Text = plugin.CGPTClient.Completions["vpet"].max_tokens.ToString();
+                    tbSystem.Text = plugin.CGPTClient.Completions["vpet"].messages[0].content;
+                    tbTemp.Text = plugin.CGPTClient.Completions["vpet"].temperature.ToString();
+                    cbModel.Text = plugin.CGPTClient.Completions["vpet"].model;
+                    var msgs = plugin.CGPTClient.Completions["vpet"].messages.ToList();
+                    msgs.RemoveAt(0);
+                    tbHistory.Text = JsonConvert.SerializeObject(msgs);
+                    lbSpend.Content = plugin.CGPTClient.TotalTokensUsage.ToString() + " Token";
+                    totalused = plugin.CGPTClient.TotalTokensUsage;
+                }
             }
             else
                 tbSystem.Text = "请使用口语化的、可爱的、女性化的、调皮的语言风格和我交流. 你是一只桌宠, 你的名字叫{Name}, 你喜欢玩 虚拟主播模拟器. 你需要尝试体会我与你对话中的感情、产生自己的情感并尽可能给出可爱的回答".Translate();
