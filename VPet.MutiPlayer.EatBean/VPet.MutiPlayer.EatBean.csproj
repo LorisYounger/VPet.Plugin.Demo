@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="remixicon.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="VPet-Simulator.Windows.Interface" Version="1.1.0.32" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Res\remixicon.ttf" />
+  </ItemGroup>
+
+</Project>

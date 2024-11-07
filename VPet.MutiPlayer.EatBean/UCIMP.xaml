@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="VPet.MutiPlayer.EatBean.UCIMP" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="clr-namespace:VPet.MutiPlayer.EatBean"
+        mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="400" xmlns:pu="https://opensource.panuon.com/wpf-ui"
+        xmlns:ll="clr-namespace:LinePutScript.Localization.WPF;assembly=LinePutScript.Localization.WPF" FontSize="20">
+    <UserControl.Resources>
+        <ResourceDictionary Source="/VPet-Simulator.Windows.Interface;component/ResourceStyle.xaml" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Button Content="{ll:Str 加入等待名单}" Background="{DynamicResource DARKPrimaryLight}" FontSize="25"
+                Foreground="{DynamicResource DARKPrimaryText}" Margin="5" />
+        <ListBox Grid.Row="2" Margin="5" />
+        <TextBlock Text="{ll:Str 当前加入吃豆游戏等待名单}" Grid.Row="1" Margin="5" />
+        <Button Content="{ll:Str 开始游戏}" Background="{DynamicResource DARKPrimaryLight}" FontSize="25"
+                Foreground="{DynamicResource DARKPrimaryText}" Grid.Row="3" Margin="5" />
+    </Grid>
+</UserControl>

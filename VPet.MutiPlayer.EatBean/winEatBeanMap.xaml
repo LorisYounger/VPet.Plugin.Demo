@@ -1,0 +1,160 @@
+﻿<Window x:Class="VPet.MutiPlayer.EatBean.winEatBeanMap"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VPet.MutiPlayer.EatBean" mc:Ignorable="d"
+        xmlns:pu="https://opensource.panuon.com/wpf-ui"
+        xmlns:ll="clr-namespace:LinePutScript.Localization.WPF;assembly=LinePutScript.Localization.WPF"
+        Title="{ll:Str '吃豆大赛'}" Height="500" Width="800">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/VPet-Simulator.Windows.Interface;component/ResourceStyle.xaml" />
+                <ResourceDictionary>
+                    <Style x:Key="MoveButtonStyle" TargetType="Button">
+                        <Setter Property="Background" Value="{StaticResource SecondaryDark}" />
+                        <Setter Property="Foreground" Value="White" />
+                        <Setter Property="Margin" Value="2" />
+                        <Setter Property="BorderBrush" Value="{StaticResource SecondaryDarker}" />
+                        <Setter Property="BorderThickness" Value="2" />
+                        <Setter Property="Cursor" Value="Hand" />
+                        <Setter Property="pu:ButtonHelper.CornerRadius" Value="4" />
+                        <Setter Property="FontFamily" Value="pack://application:,,,/Res/#remixicon" />
+                        <Setter Property="FontSize" Value="22" />
+                        <Setter Property="FontWeight" Value="Bold" />
+                    </Style>
+                    <Style x:Key="ActioButtonStyle" TargetType="Button">
+                        <Setter Property="Background" Value="{StaticResource Secondary}" />
+                        <Setter Property="Foreground" Value="White" />
+                        <Setter Property="Margin" Value="2" />
+                        <Setter Property="BorderBrush" Value="{StaticResource SecondaryDark}" />
+                        <Setter Property="BorderThickness" Value="2" />
+                        <Setter Property="Cursor" Value="Hand" />
+                        <Setter Property="pu:ButtonHelper.CornerRadius" Value="4" />
+                        <Setter Property="FontSize" Value="16" />
+                    </Style>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid x:Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="cd1" Width="*" />
+            <ColumnDefinition Width="{Binding ActualHeight, ElementName=MainGrid}" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Margin="10">
+            <TextBlock>
+                <Run Text="{ll:Str 当前回合}" FontSize="15" />:  <Run Text="玩家A" FontSize="20" FontWeight="Bold" />
+                
+                <Run Text="{ll:Str 剩余步数}" FontSize="15" />:  <Run Text="3" FontSize="20" FontWeight="Bold" />
+            </TextBlock>
+            <ScrollViewer MaxHeight="80" Margin="5" FontSize="16">
+                <StackPanel>
+                    <RadioButton Content="玩家1" />
+                    <RadioButton Content="玩家2" />
+                    <RadioButton Content="玩家3" />
+                </StackPanel>
+            </ScrollViewer>
+            <TextBlock FontWeight="Bold" FontSize="20">
+             <Run Text="{ll:Str 你的}" /> <Run Text="萝莉斯" /> <Run Text="{ll:Str 当前状态}" />
+            </TextBlock>
+            <ProgressBar x:Name="pbStrength" Value="20" Maximum="100" Height="20" Margin="5,5,5,0" Foreground="HotPink"
+                    Background="LightPink" pu:ProgressBarHelper.CornerRadius="4"
+                    pu:ProgressBarHelper.IsPercentVisible="True" />
+            <TextBlock Margin="20,-7,5,0" FontSize="14" FontWeight="Bold">
+                <Run Text="{ll:Str 体力}" />:
+                <Run Text="{Binding Value,ElementName=pbStrength}" /> / <Run
+                        Text="{Binding Maximum,ElementName=pbStrength}" />
+            </TextBlock>
+            <ProgressBar x:Name="pbMaho" Value="16" Maximum="20" Height="20" Margin="5,5,5,0" Foreground="DeepSkyBlue"
+                    Background="LightBlue" pu:ProgressBarHelper.CornerRadius="4"
+                    pu:ProgressBarHelper.IsPercentVisible="True" />
+            <TextBlock Margin="20,-7,5,0" FontSize="14" FontWeight="Bold">
+                <Run Text="{ll:Str 魔法}" />:
+                <Run Text="{Binding Value,ElementName=pbMaho}" /> / <Run Text="{Binding Maximum,ElementName=pbMaho}" />
+            </TextBlock>
+            <ProgressBar x:Name="pbExp" Value="235" Maximum="400" Height="20" Margin="5,5,5,0" Foreground="Gold"
+                    Background="LightGoldenrodYellow" pu:ProgressBarHelper.CornerRadius="4"
+                    pu:ProgressBarHelper.IsPercentVisible="True" />
+            <TextBlock Margin="20,-7,5,0" FontSize="14" FontWeight="Bold">
+                <Run Text="{ll:Str 经验}" />:
+                <Run Text="{Binding Value,ElementName=pbExp}" /> / <Run Text="{Binding Maximum,ElementName=pbExp}" />
+            </TextBlock>
+            <TextBlock Margin="5" TextWrapping="WrapWithOverflow">
+                    <Run Text="{ll:Str 人物操作}" FontSize="20" FontWeight="Bold" /> <LineBreak />
+                    <Run Text="{ll:Str '可以通过在地图上右键其他玩家进行打架操作'}" />
+            </TextBlock>
+            <Grid x:Name="ConsoleGrid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid x:Name="GridMove" Grid.Column="2" Grid.RowSpan="3"
+                        Height="{Binding ActualWidth,ElementName=GridMove}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Button Grid.Column="0" Grid.Row="0" Content="&#xEA65;" Style="{StaticResource MoveButtonStyle}" />
+                    <Button Grid.Column="0" Grid.Row="1" Content="&#xEA5F;" Style="{StaticResource MoveButtonStyle}" />
+                    <Button Grid.Column="0" Grid.Row="2" Content="&#xEA5D;" Style="{StaticResource MoveButtonStyle}" />
+                    <Button Grid.Column="1" Grid.Row="0" Content="&#xEA75;" Style="{StaticResource MoveButtonStyle}" />
+                    <Button Grid.Column="1" Grid.Row="1" Content="&#xEC62;" Style="{StaticResource MoveButtonStyle}" />
+                    <Button Grid.Column="1" Grid.Row="2" Content="&#xEA4B;" Style="{StaticResource MoveButtonStyle}" />
+                    <Button Grid.Column="2" Grid.Row="0" Content="&#xEA6F;" Style="{StaticResource MoveButtonStyle}" />
+                    <Button Grid.Column="2" Grid.Row="1" Content="&#xEA6B;" Style="{StaticResource MoveButtonStyle}" />
+                    <Button Grid.Column="2" Grid.Row="2" Content="&#xEA69;" Style="{StaticResource MoveButtonStyle}" />
+                </Grid>
+                <Button Style="{StaticResource ActioButtonStyle}" Content="{ll:Str '攻击'}" />
+                <Button Style="{StaticResource ActioButtonStyle}" Grid.Row="1" Content="{ll:Str '必杀技'}" />
+                <Button Style="{StaticResource ActioButtonStyle}" Grid.Row="2" Content="{ll:Str '技能'}" />
+                <Button Style="{StaticResource ActioButtonStyle}" Content="{ll:Str '打坐'}" Grid.Column="1" />
+                <Button Style="{StaticResource ActioButtonStyle}" Grid.Row="1" Content="{ll:Str '调息'}" Grid.Column="1" />
+                <Button Style="{StaticResource ActioButtonStyle}" Grid.Row="2" Content="{ll:Str '锻炼'}" Grid.Column="1" />
+            </Grid>
+        </StackPanel>
+        <TextBox Grid.Row="1" Margin="10" VerticalScrollBarVisibility="Visible" Text="加载消息" AcceptsReturn="True"
+                IsReadOnly="True" IsUndoEnabled="False" VerticalContentAlignment="Top" HorizontalContentAlignment="Left"
+                FontSize="14" Background="{DynamicResource PrimaryLighter}" />
+        <Border Grid.Column="1" Margin="10,10,10,10" BorderBrush="{DynamicResource PrimaryDarker}" BorderThickness="3"
+                Grid.RowSpan="2">
+            <Grid ShowGridLines="True" Background="{DynamicResource SecondaryLighter}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

@@ -1,0 +1,14 @@
+﻿<Viewbox x:Class="VPet.MutiPlayer.EatBean.conPlayer" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="clr-namespace:VPet.MutiPlayer.EatBean"
+        xmlns:pu="https://opensource.panuon.com/wpf-ui"
+        xmlns:ll="clr-namespace:LinePutScript.Localization.WPF;assembly=LinePutScript.Localization.WPF" mc:Ignorable="d"
+        d:DesignHeight="100" d:DesignWidth="100">
+    <Grid Width="100" Height="100">
+        <ProgressBar x:Name="pbStrength" Value="20.22" Maximum="100" Height="16" Foreground="HotPink"
+                Background="LightPink" pu:ProgressBarHelper.CornerRadius="4"
+                pu:ProgressBarHelper.IsPercentVisible="True" VerticalAlignment="Top" />        
+        <Image x:Name="PlayerImage" />
+    </Grid>
+</Viewbox>
