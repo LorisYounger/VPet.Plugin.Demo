@@ -18,7 +18,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="CloudSaves.Client" Version="1.0.0" />
-		<PackageReference Include="VPet-Simulator.Windows.Interface" Version="1.1.0.24" />
+		<PackageReference Include="VPet-Simulator.Windows.Interface" Version="1.1.0.40" />
 	</ItemGroup>
 
 	<ItemGroup>

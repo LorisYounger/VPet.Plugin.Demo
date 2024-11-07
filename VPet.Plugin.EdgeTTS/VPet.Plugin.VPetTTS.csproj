@@ -13,16 +13,16 @@
     <Page Remove="1101_EdgeTTS\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="EdgeTTS.Framework" Version="1.0.1" />
+    <PackageReference Include="EdgeTTS.Framework" Version="1.0.3" />
     <PackageReference Include="LinePutScript" Version="1.11.8" />
     <PackageReference Include="LinePutScript.Localization.WPF" Version="1.0.7" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Panuon.WPF" Version="1.1.2.1" />
-    <PackageReference Include="Panuon.WPF.UI" Version="1.2.3.1" />
-    <PackageReference Include="Serilog" Version="4.0.1" />
+    <PackageReference Include="Panuon.WPF" Version="1.1.2.2" />
+    <PackageReference Include="Panuon.WPF.UI" Version="1.2.4.8" />
+    <PackageReference Include="Serilog" Version="4.1.0" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.6.0-preview3.19128.7" />
-    <PackageReference Include="VPet-Simulator.Core" Version="1.1.0.24" />
-    <PackageReference Include="VPet-Simulator.Windows.Interface" Version="1.1.0.24" />
+    <PackageReference Include="VPet-Simulator.Core" Version="1.1.0.40" />
+    <PackageReference Include="VPet-Simulator.Windows.Interface" Version="1.1.0.40" />
     <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="9.0.0-preview.3.24172.9" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
   </ItemGroup>

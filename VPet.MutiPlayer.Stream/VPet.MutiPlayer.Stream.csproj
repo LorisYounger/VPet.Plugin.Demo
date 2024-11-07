@@ -22,7 +22,7 @@
   <ItemGroup>
     <PackageReference Include="Facepunch.Steamworks" Version="2.3.3" />
     <PackageReference Include="ToolGood.Words" Version="3.1.0" />
-    <PackageReference Include="VPet-Simulator.Windows.Interface" Version="1.1.0.24" />
+    <PackageReference Include="VPet-Simulator.Windows.Interface" Version="1.1.0.40" />
   </ItemGroup>
 
 </Project>
