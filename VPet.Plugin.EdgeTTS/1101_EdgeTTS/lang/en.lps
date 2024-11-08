@@ -10,3 +10,5 @@ EdgeTTS 设置#EdgeTTS Settings:|
 讲述人#Narrator:|
 启用 EdgeTTS#Enable EdgeTTS:|
 测试#Test:|
+参数URL#Parameter URL:|
+目前EdgeTTS在中国大陆需要额外的验证秘钥(Sec-MS-GEC)\r目前只能通过抓包Edge来获得该参数, 而且每600秒过期.\r有许多大佬制作了API免费给大家用, 谢谢他们\r如果你不在中国大陆,保持为空即可#Currently, EdgeTTS requires an additional verification key (Sec-MS-GEC) in mainland China.\rCurrently, this parameter can only be obtained by capturing Edge, and it expires every 600 seconds.\rMany bigwigs have made API free for everyone to use, thank them.\rIf you are not in mainland China, keep it empty:|
