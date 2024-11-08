@@ -1,6 +1,7 @@
 ﻿using EdgeTTS;
 using LinePutScript.Converter;
 using LinePutScript.Localization.WPF;
+using Panuon.WPF.UI;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -73,7 +74,7 @@ namespace VPet.Plugin.VPetTTS
             var rat = $"{(RateSilder.Value >= 0 ? "+" : "")}{RateSilder.Value:f2}%";
             Task.Run(() =>
             {
-                vts.etts.Sec_MS_GEC_UpDate_Url = CombCodeURL.Text;
+                vts.etts.Sec_MS_GEC_UpDate_Url = Dispatcher.Invoke(() => CombCodeURL.Text);
                 var path = GraphCore.CachePath + $"\\voice\\{DateTime.Now.Ticks:X}.mp3";
                 if (File.Exists(path))
                 {
@@ -81,7 +82,6 @@ namespace VPet.Plugin.VPetTTS
                 }
 
                 var res = vts.etts.SynthesisAsync("你好,主人\n现在是".Translate() + DateTime.Now, cbt, pit, rat).Result;
-                vts.etts.Sec_MS_GEC_UpDate_Url = vts.Set.Sec_MS_GEC_URL;
                 if (res.Code == ResultCode.Success)
                 {
                     FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
@@ -90,14 +90,20 @@ namespace VPet.Plugin.VPetTTS
                     fs.Close();
                     fs.Dispose();
                     w.Dispose();
-                    vts.MW.Main.PlayVoice(new Uri(path));
+                    Dispatcher.Invoke(() => vts.MW.Main.PlayVoice(new Uri(path)));
                 }
                 else
                 {
-                    MessageBox.Show("错误代码: {0}\n消息: {1}".Translate(res.Code, res.Message), "生成失败".Translate());
+                    Dispatcher.Invoke(() => MessageBoxX.Show("错误代码: {0}\n消息: {1}".Translate(res.Code, res.Message), "生成失败".Translate()));
                 }
+                vts.etts.Sec_MS_GEC_UpDate_Url = vts.Set.Sec_MS_GEC_URL;
                 Dispatcher.Invoke(() => Test.IsEnabled = true);
             });
+        }
+
+        private void ToolTipShow(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            MessageBoxX.Show(CombCodeURL.ToolTip.ToString(), "参数URL".Translate());
         }
     }
 }

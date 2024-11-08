@@ -12,13 +12,10 @@
           "LinePutScript": "1.11.8",
           "LinePutScript.Localization.WPF": "1.0.7",
           "Microsoft.CSharp": "4.7.0",
-          "Panuon.WPF": "1.1.2.2",
-          "Panuon.WPF.UI": "1.2.4.8",
           "Serilog": "4.1.0",
           "System.Data.DataSetExtensions": "4.6.0-preview3.19128.7",
           "System.Diagnostics.DiagnosticSource": "9.0.0-preview.3.24172.9",
           "System.Runtime.CompilerServices.Unsafe": "6.0.0",
-          "VPet-Simulator.Core": "1.1.0.40",
           "VPet-Simulator.Windows.Interface": "1.1.0.40"
         },
         "runtime": {
@@ -65,22 +62,22 @@
           }
         }
       },
-      "Panuon.WPF/1.1.2.2": {
+      "Panuon.WPF/1.1.1": {
         "runtime": {
           "lib/net8.0-windows/Panuon.WPF.dll": {
-            "assemblyVersion": "1.1.2.2",
-            "fileVersion": "1.1.2.2"
+            "assemblyVersion": "1.1.1.0",
+            "fileVersion": "1.1.1.0"
           }
         }
       },
-      "Panuon.WPF.UI/1.2.4.8": {
+      "Panuon.WPF.UI/1.2.4.2": {
         "dependencies": {
-          "Panuon.WPF": "1.1.2.2"
+          "Panuon.WPF": "1.1.1"
         },
         "runtime": {
           "lib/net8.0-windows/Panuon.WPF.UI.dll": {
-            "assemblyVersion": "1.2.4.7",
-            "fileVersion": "1.2.4.7"
+            "assemblyVersion": "1.2.4.2",
+            "fileVersion": "1.2.4.2"
           }
         }
       },
@@ -106,7 +103,7 @@
         "dependencies": {
           "LinePutScript": "1.11.8",
           "LinePutScript.Localization.WPF": "1.0.7",
-          "Panuon.WPF.UI": "1.2.4.8"
+          "Panuon.WPF.UI": "1.2.4.2"
         },
         "runtime": {
           "lib/net8.0/VPet-Simulator.Core.dll": {
@@ -169,19 +166,19 @@
       "path": "newtonsoft.json/13.0.3",
       "hashPath": "newtonsoft.json.13.0.3.nupkg.sha512"
     },
-    "Panuon.WPF/1.1.2.2": {
+    "Panuon.WPF/1.1.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-GDoILU32uPeCl6O+Bk/zIMG+dWZ9TyHbTQi9MNyTwNm+BlzDhPzbHkmLFYQ7Q8GhUyAH2DRtYujU/NCAEecEtw==",
-      "path": "panuon.wpf/1.1.2.2",
-      "hashPath": "panuon.wpf.1.1.2.2.nupkg.sha512"
+      "sha512": "sha512-HwkMU3eqOU5NfNYRVqdxFwgBkUN1kBO8dPNPGch9IIhozgN/Vg8HNKnl3hzO/wTxyoec/lCZt1u8qO5DChLpRg==",
+      "path": "panuon.wpf/1.1.1",
+      "hashPath": "panuon.wpf.1.1.1.nupkg.sha512"
     },
-    "Panuon.WPF.UI/1.2.4.8": {
+    "Panuon.WPF.UI/1.2.4.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-7W0dyOpJMNBqHOvnbztuXCTMPInG9dR6ByKCKhPExc7j9fyj3IRPpEJCKB0VRilZvDdMU1VGOchTmOoBQRcvhQ==",
-      "path": "panuon.wpf.ui/1.2.4.8",
-      "hashPath": "panuon.wpf.ui.1.2.4.8.nupkg.sha512"
+      "sha512": "sha512-vUWAE0moyvQENh/dLSR7qiBoRVkMAEHR+SI5wWLm6BDQ+cNCR6BbNo17eFRKT+UVOMPSEUi8yClEAV0Hzn1vFQ==",
+      "path": "panuon.wpf.ui/1.2.4.2",
+      "hashPath": "panuon.wpf.ui.1.2.4.2.nupkg.sha512"
     },
     "Serilog/4.1.0": {
       "type": "package",

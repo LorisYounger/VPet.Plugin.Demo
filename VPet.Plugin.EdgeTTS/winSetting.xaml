@@ -31,7 +31,8 @@
         <TextBlock Grid.Row="2" Text="{ll:Str 音调}" VerticalAlignment="Center" />
         <TextBlock Grid.Row="3" Text="{ll:Str 语速}" VerticalAlignment="Center" />
         <TextBlock Grid.Row="4" Text="{ll:Str 讲述人}" VerticalAlignment="Center" />
-        <TextBlock Grid.Row="5" Text="{ll:Str 参数URL}" VerticalAlignment="Center" />
+        <TextBlock Grid.Row="5" Text="{ll:Str 参数URL}" VerticalAlignment="Center" TextDecorations="Underline"
+                Foreground="{DynamicResource DARKPrimaryDarker}" MouseLeftButtonDown="ToolTipShow" />
 
         <pu:Switch x:Name="SwitchOn" BorderBrush="{DynamicResource DARKPrimaryDark}"
                 CheckedBackground="{DynamicResource DARKPrimary}" CheckedBorderBrush="{DynamicResource DARKPrimary}"
