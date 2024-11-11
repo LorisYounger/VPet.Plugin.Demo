@@ -27,7 +27,7 @@ namespace VPet.Plugin.VPetTTS
             PitchSilder.Value = vts.Set.Pitch;
             RateSilder.Value = vts.Set.Rate;
             CombSpeaker.Text = vts.Set.Speaker;
-            CombCodeURL.Text = vts.Set.Sec_MS_GEC_URL;
+            //CombCodeURL.Text = vts.Set.Sec_MS_GEC_URL;
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
@@ -44,8 +44,6 @@ namespace VPet.Plugin.VPetTTS
             vts.Set.Rate = RateSilder.Value;
             vts.Set.Speaker = CombSpeaker.Text;
             vts.MW.Main.PlayVoiceVolume = VolumeSilder.Value / 100;
-            vts.Set.Sec_MS_GEC_URL = CombCodeURL.Text;
-            vts.etts.Sec_MS_GEC_UpDate_Url = CombCodeURL.Text;
             vts.MW.Set["EdgeTTS"] = LPSConvert.SerializeObject(vts.Set, "EdgeTTS");
             foreach (var tmpfile in Directory.GetFiles(GraphCore.CachePath + @"\voice"))
             {
@@ -74,7 +72,6 @@ namespace VPet.Plugin.VPetTTS
             var rat = $"{(RateSilder.Value >= 0 ? "+" : "")}{RateSilder.Value:f2}%";
             Task.Run(() =>
             {
-                vts.etts.Sec_MS_GEC_UpDate_Url = Dispatcher.Invoke(() => CombCodeURL.Text);
                 var path = GraphCore.CachePath + $"\\voice\\{DateTime.Now.Ticks:X}.mp3";
                 if (File.Exists(path))
                 {
@@ -96,14 +93,13 @@ namespace VPet.Plugin.VPetTTS
                 {
                     Dispatcher.Invoke(() => MessageBoxX.Show("错误代码: {0}\n消息: {1}".Translate(res.Code, res.Message), "生成失败".Translate()));
                 }
-                vts.etts.Sec_MS_GEC_UpDate_Url = vts.Set.Sec_MS_GEC_URL;
                 Dispatcher.Invoke(() => Test.IsEnabled = true);
             });
         }
 
-        private void ToolTipShow(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            MessageBoxX.Show(CombCodeURL.ToolTip.ToString(), "参数URL".Translate());
-        }
+        //private void ToolTipShow(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        //{
+        //    MessageBoxX.Show(CombCodeURL.ToolTip.ToString(), "参数URL".Translate());
+        //}
     }
 }
