@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="VPet.Plugin.Monitor.MonitorBlock"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:pu="clr-namespace:Panuon.WPF.UI;assembly=Panuon.WPF.UI"
+        xmlns:ll="clr-namespace:LinePutScript.Localization.WPF;assembly=LinePutScript.Localization.WPF"
+        xmlns:local="clr-namespace:VPet.Plugin.Monitor" mc:Ignorable="d" Height="Auto" VerticalAlignment="Top"
+        HorizontalAlignment="Center" MinHeight="100" Width="300">
+    <UserControl.Resources>
+        <ResourceDictionary Source="/VPet-Simulator.Windows.Interface;component/ResourceStyle.xaml" />
+    </UserControl.Resources>
+    <UserControl.ContextMenu>
+        <ContextMenu>
+            <MenuItem Name="Setting" Header="{ll:Str 设置}" Click="Setting_Click"></MenuItem>
+        </ContextMenu>
+    </UserControl.ContextMenu>
+    <Border Background="{DynamicResource DARKPrimaryLighter}" BorderBrush="{DynamicResource DARKPrimaryDark}"
+            BorderThickness="4" CornerRadius="4">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="3"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="5"></RowDefinition>
+                <RowDefinition Height="3"></RowDefinition>
+                <RowDefinition Name="plus_1"></RowDefinition>
+                <RowDefinition Name="plus_2" Height="5"></RowDefinition>
+                <RowDefinition Name="Plus_3" Height="3"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Name="Using_CPU" Text="CPU:O.o" Grid.Column="0" TextAlignment="Center" VerticalAlignment="Center"
+                    FontSize="22" Foreground="Snow" Height="26" />
+
+            <TextBlock Name="Using_GPU" Text="GPU:O.o" Grid.Row="3" Grid.Column="0" TextAlignment="Center"
+                    VerticalAlignment="Center" FontSize="22" Foreground="Snow" Height="26"></TextBlock>
+
+            <TextBlock Name="Using_RAM" Text="RAM:O.o" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center"
+                    FontSize="22" Foreground="Snow" Height="26" />
+
+            <TextBlock Name="Using_Net" Text="↑↓:O.o" Grid.Row="3" Grid.Column="2" TextAlignment="Center"
+                    VerticalAlignment="Center" FontSize="22" Foreground="Snow" Height="26"></TextBlock>
+
+            <Border Margin="5,0" Grid.Row="1" Grid.Column="0" CornerRadius="3"
+                    Background="{DynamicResource DARKPrimaryDarker}"></Border>
+            <Border Margin="5,0" Grid.Row="1" Grid.Column="2" CornerRadius="3"
+                    Background="{DynamicResource DARKPrimaryDarker}"></Border>
+            <Border Margin="5,0" Grid.Row="4" Grid.Column="2" CornerRadius="3"
+                    Background="{DynamicResource DARKPrimaryDarker}"></Border>
+            <Border Margin="5,0" Grid.Row="4" Grid.Column="0" CornerRadius="3"
+                    Background="{DynamicResource DARKPrimaryDarker}"></Border>
+
+            <Border Name="Bar_CPU" Width="67.25" HorizontalAlignment="Left" Margin="5,0" Grid.Row="1" Grid.Column="0"
+                    CornerRadius="3" Background="{DynamicResource SuccessProgressBarForeground}"></Border>
+            <Border Name="Bar_RAM" Width="67.25" HorizontalAlignment="Left" Margin="5,0" Grid.Row="1" Grid.Column="2"
+                    CornerRadius="3" Background="{DynamicResource SuccessProgressBarForeground}"></Border>
+            <Border Name="Bar_Net" Width="67.25" HorizontalAlignment="Left" Margin="5,0" Grid.Row="4" Grid.Column="2"
+                    CornerRadius="3" Background="{DynamicResource SuccessProgressBarForeground}"></Border>
+            <Border Name="Bar_GPU" Width="67.25" HorizontalAlignment="Left" Margin="5,0" Grid.Row="4" Grid.Column="0"
+                    CornerRadius="3" Background="{DynamicResource SuccessProgressBarForeground}"></Border>
+
+            <Border Name="Separator_horizonal" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" CornerRadius="0.5"
+                    Margin="3,0,3,-5" Background="{DynamicResource SecondaryLighter}" Height="1"></Border>
+            <Border Name="Separator_vertical" Grid.Row="0" Grid.Column="1" Grid.RowSpan="6" CornerRadius="0.5"
+                    Margin="0,3" Background="{DynamicResource SecondaryLighter}" Width="1"></Border>
+
+            <Rectangle Fill="Transparent" Grid.ColumnSpan="3" Grid.RowSpan="6" />
+        </Grid>
+
+    </Border>
+</UserControl>

@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <OutputType>Library</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWPF>true</UseWPF>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="1130_Performance Monitor\**" />
+    <EmbeddedResource Remove="1130_Performance Monitor\**" />
+    <None Remove="1130_Performance Monitor\**" />
+    <Page Remove="1130_Performance Monitor\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="LinePutScript">
+      <Version>1.11.8</Version>
+    </PackageReference>
+    <PackageReference Include="LinePutScript.Localization.WPF">
+      <Version>1.0.7</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Panuon.WPF">
+      <Version>1.1.2.2</Version>
+    </PackageReference>
+    <PackageReference Include="Panuon.WPF.UI">
+      <Version>1.2.4.8</Version>
+    </PackageReference>
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+    <PackageReference Include="VPet-Simulator.Core">
+      <Version>1.1.0.40</Version>
+    </PackageReference>
+    <PackageReference Include="VPet-Simulator.Windows.Interface">
+      <Version>1.1.0.40</Version>
+    </PackageReference>
+  </ItemGroup>
+</Project>

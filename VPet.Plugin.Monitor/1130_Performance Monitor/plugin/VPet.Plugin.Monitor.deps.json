@@ -6,29 +6,19 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v8.0": {
-      "VPet.Plugin.ChatGPTPlugin/1.0.0": {
+      "VPet.Plugin.Monitor/1.0.0": {
         "dependencies": {
-          "ChatGPT.API.Framework": "1.1.0",
           "LinePutScript": "1.11.8",
           "LinePutScript.Localization.WPF": "1.0.7",
           "Microsoft.CSharp": "4.7.0",
-          "Newtonsoft.Json": "13.0.3",
-          "System.Data.DataSetExtensions": "4.6.0-preview3.19128.7",
+          "Panuon.WPF": "1.1.2.2",
+          "Panuon.WPF.UI": "1.2.4.8",
+          "System.Data.DataSetExtensions": "4.5.0",
+          "VPet-Simulator.Core": "1.1.0.40",
           "VPet-Simulator.Windows.Interface": "1.1.0.40"
         },
         "runtime": {
-          "VPet.Plugin.ChatGPTPlugin.dll": {}
-        }
-      },
-      "ChatGPT.API.Framework/1.1.0": {
-        "dependencies": {
-          "Newtonsoft.Json": "13.0.3"
-        },
-        "runtime": {
-          "lib/net6.0/ChatGPT.API.Framework.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "VPet.Plugin.Monitor.dll": {}
         }
       },
       "LinePutScript/1.11.8": {
@@ -51,39 +41,31 @@
         }
       },
       "Microsoft.CSharp/4.7.0": {},
-      "Newtonsoft.Json/13.0.3": {
-        "runtime": {
-          "lib/net6.0/Newtonsoft.Json.dll": {
-            "assemblyVersion": "13.0.0.0",
-            "fileVersion": "13.0.3.27908"
-          }
-        }
-      },
-      "Panuon.WPF/1.1.1": {
+      "Panuon.WPF/1.1.2.2": {
         "runtime": {
           "lib/net8.0-windows/Panuon.WPF.dll": {
-            "assemblyVersion": "1.1.1.0",
-            "fileVersion": "1.1.1.0"
+            "assemblyVersion": "1.1.2.2",
+            "fileVersion": "1.1.2.2"
           }
         }
       },
-      "Panuon.WPF.UI/1.2.4.2": {
+      "Panuon.WPF.UI/1.2.4.8": {
         "dependencies": {
-          "Panuon.WPF": "1.1.1"
+          "Panuon.WPF": "1.1.2.2"
         },
         "runtime": {
           "lib/net8.0-windows/Panuon.WPF.UI.dll": {
-            "assemblyVersion": "1.2.4.2",
-            "fileVersion": "1.2.4.2"
+            "assemblyVersion": "1.2.4.7",
+            "fileVersion": "1.2.4.7"
           }
         }
       },
-      "System.Data.DataSetExtensions/4.6.0-preview3.19128.7": {},
+      "System.Data.DataSetExtensions/4.5.0": {},
       "VPet-Simulator.Core/1.1.0.40": {
         "dependencies": {
           "LinePutScript": "1.11.8",
           "LinePutScript.Localization.WPF": "1.0.7",
-          "Panuon.WPF.UI": "1.2.4.2"
+          "Panuon.WPF.UI": "1.2.4.8"
         },
         "runtime": {
           "lib/net8.0/VPet-Simulator.Core.dll": {
@@ -106,17 +88,10 @@
     }
   },
   "libraries": {
-    "VPet.Plugin.ChatGPTPlugin/1.0.0": {
+    "VPet.Plugin.Monitor/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
-    },
-    "ChatGPT.API.Framework/1.1.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-Fq8IsgMqSnQHU+sVPdotElCwicIRm9BvlWPtntjeZu1sYsWUAKVQiZ09i4pDrQGRrUcTVG0BWezBsaIU+IAgew==",
-      "path": "chatgpt.api.framework/1.1.0",
-      "hashPath": "chatgpt.api.framework.1.1.0.nupkg.sha512"
     },
     "LinePutScript/1.11.8": {
       "type": "package",
@@ -139,33 +114,26 @@
       "path": "microsoft.csharp/4.7.0",
       "hashPath": "microsoft.csharp.4.7.0.nupkg.sha512"
     },
-    "Newtonsoft.Json/13.0.3": {
+    "Panuon.WPF/1.1.2.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
-      "path": "newtonsoft.json/13.0.3",
-      "hashPath": "newtonsoft.json.13.0.3.nupkg.sha512"
+      "sha512": "sha512-GDoILU32uPeCl6O+Bk/zIMG+dWZ9TyHbTQi9MNyTwNm+BlzDhPzbHkmLFYQ7Q8GhUyAH2DRtYujU/NCAEecEtw==",
+      "path": "panuon.wpf/1.1.2.2",
+      "hashPath": "panuon.wpf.1.1.2.2.nupkg.sha512"
     },
-    "Panuon.WPF/1.1.1": {
+    "Panuon.WPF.UI/1.2.4.8": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-HwkMU3eqOU5NfNYRVqdxFwgBkUN1kBO8dPNPGch9IIhozgN/Vg8HNKnl3hzO/wTxyoec/lCZt1u8qO5DChLpRg==",
-      "path": "panuon.wpf/1.1.1",
-      "hashPath": "panuon.wpf.1.1.1.nupkg.sha512"
+      "sha512": "sha512-7W0dyOpJMNBqHOvnbztuXCTMPInG9dR6ByKCKhPExc7j9fyj3IRPpEJCKB0VRilZvDdMU1VGOchTmOoBQRcvhQ==",
+      "path": "panuon.wpf.ui/1.2.4.8",
+      "hashPath": "panuon.wpf.ui.1.2.4.8.nupkg.sha512"
     },
-    "Panuon.WPF.UI/1.2.4.2": {
+    "System.Data.DataSetExtensions/4.5.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-vUWAE0moyvQENh/dLSR7qiBoRVkMAEHR+SI5wWLm6BDQ+cNCR6BbNo17eFRKT+UVOMPSEUi8yClEAV0Hzn1vFQ==",
-      "path": "panuon.wpf.ui/1.2.4.2",
-      "hashPath": "panuon.wpf.ui.1.2.4.2.nupkg.sha512"
-    },
-    "System.Data.DataSetExtensions/4.6.0-preview3.19128.7": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-ZFJYYi41Wf4xlFKuuRUblw8yThgzBTYeZTs7eGU7sDiu+X+BmeIdT3pstCrmLpDyflDIBuKX1VYmBCGKo14h6w==",
-      "path": "system.data.datasetextensions/4.6.0-preview3.19128.7",
-      "hashPath": "system.data.datasetextensions.4.6.0-preview3.19128.7.nupkg.sha512"
+      "sha512": "sha512-221clPs1445HkTBZPL+K9sDBdJRB8UN8rgjO3ztB0CQ26z//fmJXtlsr6whGatscsKGBrhJl5bwJuKSA8mwFOw==",
+      "path": "system.data.datasetextensions/4.5.0",
+      "hashPath": "system.data.datasetextensions.4.5.0.nupkg.sha512"
     },
     "VPet-Simulator.Core/1.1.0.40": {
       "type": "package",

@@ -1,0 +1,21 @@
+监视器设置#Monitor Settings:|
+Performance Monitor#Performance Monitor:|
+这是个简易的性能监视器，基于Windows性能监视器的数据运行,本mod编写参考作者的DemoClock,感谢作者对整个项目的无私开源👈(ﾟヮﾟ👈)#This is a simple performance monitor, based on the Windows Performance Monitor data to run, this mod written with reference to the author's DemoClock, thanks to the author of the whole project of selfless open source 👈(ﾟヮﾟ👈):|
+性能监视器 设置#Performance Monitor Settings:|
+显示分割线#Show splitter line:|
+GPU监视#GPU monitor:|
+放在哪？#Where to put:|
+纵向位置#Vertical position:|
+透明度#Transparency:|
+多彩进度条#Colorful ProgressBar:|
+网卡目录#NIC Catalog:|
+显卡目录#Graphics Card:|
+说明#Description:|
+你好(👉ﾟヮﾟ)👉#Hello (👉ﾟヮﾟ)👉:|
+停用监视器#Disable Monitor:|
+纵向分割线#Vertical Split Line:|
+横向分割线#Horizontal Split Line:|
+GPU监视开关#GPU monitor switch:|
+进度条颜色匹配面板#Progress bar color matching panel:|
+程序数值均取自Windows性能监视器，与任务管理器有出入，GPU监视（相当高）和多彩进度条（极少）有CPU损耗。#The program values are taken from Windows Performance Monitor and differ from Task Manager, GPU Monitor (quite high) and Colorful Progress Bar (very low) have CPU loss.:|
+前往 设置-MOD设置 启用/停用MOD#Go to Settings - MOD Settings Enable/Disable MOD:|

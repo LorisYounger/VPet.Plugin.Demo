@@ -1,0 +1,130 @@
+﻿<Window x:Class="VPet.Plugin.Monitor.winSetting" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VPet.Plugin.Monitor" mc:Ignorable="d"
+        xmlns:pu="clr-namespace:Panuon.WPF.UI;assembly=Panuon.WPF.UI"
+        xmlns:ll="clr-namespace:LinePutScript.Localization.WPF;assembly=LinePutScript.Localization.WPF"
+        Title="{ll:Str 性能监视器 设置}" MinHeight="230" SizeToContent="Height" VerticalAlignment="Top" Height="Auto"
+        Width="450" ResizeMode="NoResize" Closed="Window_Closed" Background="{DynamicResource PrimaryDark}">
+    <Window.Resources>
+        <ResourceDictionary Source="/VPet-Simulator.Windows.Interface;component/ResourceStyle.xaml" />
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition Width="5"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="5"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border Background="{DynamicResource PrimaryLight}" Grid.Column="2" Grid.ColumnSpan="1" Grid.Row="1"
+                Grid.RowSpan="1" CornerRadius="6" Margin="5,0,0,0"></Border>
+        <Border Background="{DynamicResource PrimaryLight}" Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="1"
+                Grid.RowSpan="1" CornerRadius="6"></Border>
+        <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,10">
+            <Label Height="26" FontSize="12" Content="{ll:Str 显示分割线}" VerticalContentAlignment="Center"
+                    Background="{x:Null}" />
+            <Rectangle StrokeThickness="1" Height="2" Fill="{DynamicResource DARKPrimary}" />
+            <Label Height="26" VerticalContentAlignment="Center" Background="{x:Null}" Content="{ll:Str GPU监视}"></Label>
+            <Rectangle StrokeThickness="1" Height="2" Fill="{DynamicResource DARKPrimary}" />
+            <Label Height="26" VerticalContentAlignment="Center" Background="{x:Null}" Content="{ll:Str 放在哪？}"></Label>
+            <Rectangle StrokeThickness="1" Height="2" Fill="{DynamicResource DARKPrimary}" />
+            <Label Height="26" VerticalContentAlignment="Center" Background="{x:Null}" Content="{ll:Str 纵向位置}"></Label>
+            <Rectangle StrokeThickness="1" Height="2" Fill="{DynamicResource DARKPrimary}" />
+            <Label Height="26" VerticalContentAlignment="Center" Background="{x:Null}" Content="{ll:Str 透明度}"></Label>
+            <Rectangle StrokeThickness="1" Height="2" Fill="{DynamicResource DARKPrimary}" />
+            <Label Height="26" VerticalContentAlignment="Center" Background="{x:Null}" Content="{ll:Str 多彩进度条}"></Label>
+            <Rectangle StrokeThickness="1" Height="2" Fill="{DynamicResource DARKPrimary}" />
+            <Label Height="26" VerticalContentAlignment="Center" Background="{x:Null}" Content="{ll:Str 网卡目录}"></Label>
+            <Rectangle StrokeThickness="1" Height="2" Fill="{DynamicResource DARKPrimary}" />
+            <Label Height="26" VerticalContentAlignment="Center" Background="{x:Null}" Content="{ll:Str 显卡目录}"></Label>
+            <Rectangle StrokeThickness="1" Height="2" Fill="{DynamicResource DARKPrimary}" />
+            <Label Height="26" VerticalContentAlignment="Center" Background="{x:Null}" Content="{ll:Str 说明}"></Label>
+            <Rectangle StrokeThickness="1" Height="2" Fill="{DynamicResource DARKPrimary}" />
+            <Label Height="26" Margin="0,28,0,0" VerticalContentAlignment="Center" Background="{x:Null}"
+                    Content="{ll:Str 你好(👉ﾟヮﾟ)👉}"></Label>
+            <Rectangle StrokeThickness="1" Height="2" Fill="{DynamicResource DARKPrimary}" />
+            <Label Height="30" VerticalContentAlignment="Center" Background="{x:Null}" Content="{ll:Str 停用监视器}"></Label>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20,10">
+            <StackPanel Height="30" Orientation="Horizontal">
+                <pu:Switch x:Name="Switch_y" BorderBrush="{DynamicResource DARKPrimaryDark}" VerticalAlignment="Top"
+                        Margin="10,0" CheckedBackground="{DynamicResource DARKPrimary}"
+                        CheckedBorderBrush="{DynamicResource DARKPrimary}" Background="Transparent" BoxWidth="35"
+                        BoxHeight="18" ToggleSize="14" ToggleShadowColor="{x:Null}"
+                        ToggleBrush="{DynamicResource DARKPrimaryDark}" Content="{ll:Str 纵向分割线}"
+                        CheckedToggleBrush="{DynamicResource DARKPrimaryText}" Checked="Switch_y_Checked"
+                        Unchecked="Switch_y_Checked" />
+                <pu:Switch x:Name="Switch_x" BorderBrush="{DynamicResource DARKPrimaryDark}" VerticalAlignment="Top"
+                        Margin="10,0" CheckedBackground="{DynamicResource DARKPrimary}"
+                        CheckedBorderBrush="{DynamicResource DARKPrimary}" Background="Transparent" BoxWidth="35"
+                        BoxHeight="18" ToggleSize="14" ToggleShadowColor="{x:Null}"
+                        ToggleBrush="{DynamicResource DARKPrimaryDark}" Content="{ll:Str 横向分割线}"
+                        CheckedToggleBrush="{DynamicResource DARKPrimaryText}" Checked="Switch_x_Checked"
+                        Unchecked="Switch_x_Checked" />
+
+            </StackPanel>
+            <pu:Switch x:Name="Switch_Gpu" HorizontalAlignment="Center" BorderBrush="{DynamicResource DARKPrimaryDark}"
+                    Margin="10,0" Height="30" VerticalContentAlignment="Top"
+                    CheckedBackground="{DynamicResource DARKPrimary}" CheckedBorderBrush="{DynamicResource DARKPrimary}"
+                    Background="Transparent" BoxWidth="35" BoxHeight="18" ToggleSize="14" ToggleShadowColor="{x:Null}"
+                    ToggleBrush="{DynamicResource DARKPrimaryDark}" Content="{ll:Str GPU监视开关}"
+                    CheckedToggleBrush="{DynamicResource DARKPrimaryText}" Checked="Switch_Gpu_Checked"
+                    Unchecked="Switch_Gpu_Checked" />
+            <StackPanel Height="30" HorizontalAlignment="Center" Orientation="Horizontal" Margin="10,0">
+                <TextBlock>前面</TextBlock>
+                <pu:Switch x:Name="Switch_z" BorderBrush="{DynamicResource DARKPrimaryDark}" Margin="10,0,0,0"
+                        Height="30" VerticalContentAlignment="Top" CheckedBackground="{DynamicResource DARKPrimary}"
+                        CheckedBorderBrush="{DynamicResource DARKPrimary}" Background="Transparent" BoxWidth="70"
+                        BoxHeight="18" ToggleSize="14" ToggleShadowColor="{x:Null}"
+                        ToggleBrush="{DynamicResource DARKPrimaryDark}"
+                        CheckedToggleBrush="{DynamicResource DARKPrimaryText}" Checked="Switch_z_Checked"
+                        Unchecked="Switch_z_Checked" />
+                <TextBlock>后面</TextBlock>
+            </StackPanel>
+            <Slider x:Name="PlaceSilder_y" Minimum="-100" Maximum="600" Value="300" Height="30"
+                    VerticalContentAlignment="Top" VerticalAlignment="Center"
+                    Background="{DynamicResource DARKPrimaryLighter}"
+                    pu:SliderHelper.CoveredBackground="{DynamicResource DARKPrimaryDarker}"
+                    ValueChanged="PlaceSilder_y_ValueChanged" />
+
+            <Slider x:Name="Opacity" Minimum="0" Maximum="1" Value="1" Height="30" VerticalContentAlignment="Top"
+                    VerticalAlignment="Center" Background="{DynamicResource DARKPrimaryLighter}"
+                    pu:SliderHelper.CoveredBackground="{DynamicResource DARKPrimaryDarker}"
+                    ValueChanged="Opacity_ValueChanged" />
+            <pu:Switch x:Name="Switch_Color" HorizontalAlignment="Center"
+                    BorderBrush="{DynamicResource DARKPrimaryDark}" Margin="10,0" Height="30"
+                    VerticalContentAlignment="Top" CheckedBackground="{DynamicResource DARKPrimary}"
+                    CheckedBorderBrush="{DynamicResource DARKPrimary}" Background="Transparent" BoxWidth="35"
+                    BoxHeight="18" ToggleSize="14" ToggleShadowColor="{x:Null}"
+                    ToggleBrush="{DynamicResource DARKPrimaryDark}" Content="{ll:Str 进度条颜色匹配面板}"
+                    CheckedToggleBrush="{DynamicResource DARKPrimaryText}" Checked="Switch_Color_Checked"
+                    Unchecked="Switch_Color_Checked" />
+            <Border Height="15" Margin="0,0,0,15" CornerRadius="6" Background="{DynamicResource DARKPrimaryLighter}">
+                <ComboBox Name="List_Net" Background="Transparent" BorderThickness="0" Margin="5,0"
+                        SelectionChanged="List_Net_SelectionChanged">
+                </ComboBox>
+            </Border>
+            <Border Height="15" Margin="0,0,0,15" CornerRadius="6" Background="{DynamicResource DARKPrimaryLighter}">
+                <ComboBox Name="List_GPU" Background="Transparent" BorderThickness="0" Margin="5,0"
+                        SelectionChanged="List_GPU_SelectionChanged">
+                </ComboBox>
+            </Border>
+            <TextBlock Margin="10,0,10,15" VerticalAlignment="Top" TextWrapping="Wrap" TextAlignment="Center"
+                    Text="{ll:Str 程序数值均取自Windows性能监视器，与任务管理器有出入，GPU监视（相当高）和多彩进度条（极少）有CPU损耗。}">
+            </TextBlock>
+            <TextBlock Height="30" HorizontalAlignment="Center" FontWeight="Bold"
+                    Foreground="{DynamicResource DARKPrimaryDark}">Made by MeeKenLi</TextBlock>
+            <TextBlock Grid.Column="2" Grid.Row="7" Text="{ll:Str '前往 设置-MOD设置 启用/停用MOD'}" HorizontalAlignment="Center"
+                    VerticalAlignment="Center" Grid.ColumnSpan="2" TextDecorations="Underline" Cursor="Hand"
+                    Foreground="{DynamicResource DARKPrimaryDark}" MouseDown="TextBlock_MouseDown" />
+
+        </StackPanel>
+
+    </Grid>
+</Window>

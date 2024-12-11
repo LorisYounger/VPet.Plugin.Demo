@@ -12,7 +12,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VPet.MutiPlayer.Stream", "V
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VPet.Plugin.CloudSaves", "VPet.Plugin.CloudSaves\VPet.Plugin.CloudSaves.csproj", "{37E30075-7CE6-4B2F-A188-AAE4242BF765}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VPet.MutiPlayer.EatBean", "VPet.MutiPlayer.EatBean\VPet.MutiPlayer.EatBean.csproj", "{5CA06D16-21BA-4F83-9D3A-A9EA59F547F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VPet.MutiPlayer.EatBean", "VPet.MutiPlayer.EatBean\VPet.MutiPlayer.EatBean.csproj", "{5CA06D16-21BA-4F83-9D3A-A9EA59F547F0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VPet.Plugin.Monitor", "VPet.Plugin.Monitor\VPet.Plugin.Monitor.csproj", "{6A785352-8A35-49CC-B8AB-8948A7497FE9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,6 +46,10 @@ Global
 		{5CA06D16-21BA-4F83-9D3A-A9EA59F547F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5CA06D16-21BA-4F83-9D3A-A9EA59F547F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5CA06D16-21BA-4F83-9D3A-A9EA59F547F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A785352-8A35-49CC-B8AB-8948A7497FE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A785352-8A35-49CC-B8AB-8948A7497FE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A785352-8A35-49CC-B8AB-8948A7497FE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A785352-8A35-49CC-B8AB-8948A7497FE9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
