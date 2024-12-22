@@ -37,6 +37,7 @@ namespace VPet.Plugin.ChatGPTPlugin
             {
                 tbAPIKey.Text = plugin.CGPTClient.APIKey;
                 tbAPIURL.Text = plugin.CGPTClient.APIUrl;
+                tbWebProxy.Text = plugin.WebProxy;
                 if (plugin.CGPTClient.Completions["vpet"] != null)
                 {
                     tbMaxToken.Text = plugin.CGPTClient.Completions["vpet"].max_tokens.ToString();
@@ -68,12 +69,19 @@ namespace VPet.Plugin.ChatGPTPlugin
             plugin.CGPTClient.CreateCompletions("vpet", tbSystem.Text.Replace("{Name}", plugin.MW.Core.Save.Name));
             if (!string.IsNullOrWhiteSpace(tbWebProxy.Text))
             {
+                plugin.WebProxy = tbWebProxy.Text;
                 plugin.CGPTClient.WebProxy = tbWebProxy.Text;
                 plugin.CGPTClient.Proxy = new HttpClientHandler()
                 {
-                    Proxy = new WebProxy(plugin.CGPTClient.WebProxy),
+                    Proxy = new WebProxy(plugin.WebProxy),
                     UseProxy = true
                 };
+            }
+            else
+            {
+                plugin.WebProxy = "";
+                plugin.CGPTClient.WebProxy = "";
+                plugin.CGPTClient.Proxy = null;
             }
             plugin.CGPTClient.Completions["vpet"].model = cbModel.Text;
             plugin.CGPTClient.Completions["vpet"].frequency_penalty = 0.2;

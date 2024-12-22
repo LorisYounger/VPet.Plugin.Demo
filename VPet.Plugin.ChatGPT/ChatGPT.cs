@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
 using VPet_Simulator.Windows.Interface;
+using System.Net.Http;
+using System.Net;
 
 namespace VPet.Plugin.ChatGPTPlugin
 {
@@ -20,6 +22,15 @@ namespace VPet.Plugin.ChatGPTPlugin
         {
             if (File.Exists(ExtensionValue.BaseDirectory + @"\ChatGPTSetting.json"))
                 CGPTClient = ChatGPTClient.Load(File.ReadAllText(ExtensionValue.BaseDirectory + @"\ChatGPTSetting.json"));
+            CGPTClient.WebProxy = WebProxy;
+            if (!string.IsNullOrWhiteSpace(WebProxy))
+            {
+                CGPTClient.Proxy = new HttpClientHandler()
+                {
+                    Proxy = new WebProxy(WebProxy),
+                    UseProxy = true
+                };
+            }
             MW.TalkAPI.Add(new ChatGPTTalkAPI(this));
             var menuItem = new MenuItem()
             {
@@ -54,6 +65,14 @@ namespace VPet.Plugin.ChatGPTPlugin
         {
             get => MW.Set["CGPT"].GetInt("keephistory", 20);
             set => MW.Set["CGPT"][(gint)"keephistory"] = value;
+        }
+        /// <summary>
+        /// Web
+        /// </summary>
+        public string WebProxy
+        {
+            get => MW.Set["CGPT"].GetString("webproxy", "");
+            set => MW.Set["CGPT"][(gstr)"webproxy"] = value;
         }
     }
 }
