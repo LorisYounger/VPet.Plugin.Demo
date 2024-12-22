@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VPet.Plugin.CloudSaves" Background="{DynamicResource PrimaryLighter}"
         xmlns:ll="clr-namespace:LinePutScript.Localization.WPF;assembly=LinePutScript.Localization.WPF" mc:Ignorable="d"
-        Title="{ll:Str 云存档列表}" Height="450" Width="600" xmlns:pu="clr-namespace:Panuon.WPF.UI;assembly=Panuon.WPF.UI"
+        Title="{ll:Str 云存档列表}" Height="450" Width="650" xmlns:pu="clr-namespace:Panuon.WPF.UI;assembly=Panuon.WPF.UI"
         FontSize="16">
     <Window.Resources>
         <ResourceDictionary Source="/VPet-Simulator.Windows.Interface;component/ResourceStyle.xaml" />
@@ -31,6 +31,7 @@
                 <DataGridTextColumn Header="{ll:Str 存档时间}" Binding="{Binding Time}" Width="150" />
                 <DataGridTextColumn Header="{ll:Str 等级}" Binding="{Binding Level}" Width="70" />
                 <DataGridTextColumn Header="{ll:Str 金钱}" Binding="{Binding Money}" Width="70" />
+                <DataGridTextColumn Header="{ll:Str 自动}" Binding="{Binding IsAutoSave}" Width="50" />
                 <DataGridTextColumn Header="{ll:Str Hash检查}" Binding="{Binding Hash}" />
             </DataGrid.Columns>
         </DataGrid>

@@ -48,19 +48,23 @@ namespace VPet.Plugin.CloudSaves
             menuItem.Click += (s, e) => { Setting(); };
             MW.Main.ToolBar.MenuMODConfig.Items.Add(menuItem);
         }
-
+        int errortime = 0;
         private void BackupTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             if (string.IsNullOrEmpty(Set.ServerURL))
                 return;
             try
             {
-                SavesClient.AddGameSave("vpet", $"data:|lv#{MW.GameSavesData.GameSave.Level}:|money#{(int)MW.GameSavesData.GameSave.Money}:|hash#{MW.GameSavesData.HashCheck}:|"
+                SavesClient.AddAutoSave("vpet", $"data:|lv#{MW.GameSavesData.GameSave.Level}:|money#{(int)MW.GameSavesData.GameSave.Money}:|hash#{MW.GameSavesData.HashCheck}:|"
                     , "自动存档".Translate() + "-" + MW.GameSavesData.GameSave.Name, MW.GameSavesData.ToLPS().ToString());
             }
             catch
             {
-                MW.Main.SayRnd("自动存档失败啦,主人记得检查下自动存档设置".Translate());
+                if (errortime++ > 10)
+                {
+                    MW.Main.SayRnd("自动存档失败啦,主人记得检查下自动存档设置".Translate());
+                    errortime = 0;
+                }
             }
         }
         winSetting winSetting;

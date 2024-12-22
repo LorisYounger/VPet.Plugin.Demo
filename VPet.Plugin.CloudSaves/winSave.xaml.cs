@@ -51,21 +51,18 @@ namespace VPet.Plugin.CloudSaves
                         return;
                     }
 
-                    var tmp = new GameSave_v2(new LPS(save.First().SaveData));
-                    var propertyInfo = CS.MW.GetType().GetProperty("GameSavesData", BindingFlags.Public | BindingFlags.Instance);
-                    if (propertyInfo != null)
+                    ILPS tmp = new LPS(save.First().SaveData);
+                    if (CS.MW.Main.State != Main.WorkingState.Nomal)
                     {
-                        // 使用反射设置只读属性的值
-                        propertyInfo.SetValue(CS.MW, tmp);
+                        CS.MW.Main.WorkTimer.Visibility = Visibility.Collapsed;
+                        CS.MW.Main.State = Main.WorkingState.Nomal;
                     }
-                    CS.MW.Core.Save = CS.MW.GameSavesData.GameSave;
-                    propertyInfo = CS.MW.GetType().GetProperty("HashCheck", BindingFlags.Public | BindingFlags.Instance);
-                    if (propertyInfo != null)
-                    {
-                        // 使用反射设置只读属性的值
-                        propertyInfo.SetValue(CS.MW, CS.MW.HashCheck);
-                    }
-                    MessageBoxX.Show("存档读取成功".Translate());
+
+                    var mi = CS.MW.GetType().GetMethod("SavesLoad");
+                    if (mi != null && mi.Invoke(CS.MW, [tmp]) is bool success && success)
+                        MessageBoxX.Show("存档读取成功".Translate(), "CloudSaves");
+                    else
+                        MessageBoxX.Show("存档读取失败".Translate(), "CloudSaves");
                 }
                 catch (Exception ex)
                 {
@@ -108,7 +105,7 @@ namespace VPet.Plugin.CloudSaves
         {
             try
             {
-                var res = await CS.SavesClient.AddGameSave("vpet", $"data:|lv#{CS.MW.GameSavesData.GameSave.Level}:|money#{(int)CS.MW.GameSavesData.GameSave.Money}:|hash#{CS.MW.GameSavesData.HashCheck}:|"
+                var res = await CS.SavesClient.AddManualSave("vpet", $"data:|lv#{CS.MW.GameSavesData.GameSave.Level}:|money#{(int)CS.MW.GameSavesData.GameSave.Money}:|hash#{CS.MW.GameSavesData.HashCheck}:|"
                          , string.IsNullOrWhiteSpace(savename.Text) ? "手动存档".Translate() : savename.Text, CS.MW.GameSavesData.ToLPS().ToString());
                 if (res)
                 {
@@ -152,17 +149,19 @@ namespace VPet.Plugin.CloudSaves
             public SaveList()
             {
             }
-            public SaveList(ReturnStructure.GameSaveData data)
+            public SaveList(GameSaveData data)
             {
                 id = data.SaveID;
                 Name = data.SaveName;
-                Time = data.SaveTime;
+                Time = TimeZoneInfo.ConvertTimeFromUtc(data.SaveTime, TimeZoneInfo.Local);
+                IsAutoSave = data.IsAutoSave;
 
                 Line intor = new Line(data.Introduce);
 
                 Level = intor[(gint)"lv"];
                 Money = intor[(gint)"money"];
                 Hash = intor[(gbol)"hash"];
+
             }
             public long id { get; set; }
             public string Name { get; set; }
@@ -170,6 +169,7 @@ namespace VPet.Plugin.CloudSaves
             public int Level { get; set; }
             public int Money { get; set; }
             public bool Hash { get; set; }
+            public bool IsAutoSave { get; set; }
 
             public bool Search(string key)
             {
