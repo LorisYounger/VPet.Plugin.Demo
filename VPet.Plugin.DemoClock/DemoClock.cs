@@ -71,6 +71,7 @@ namespace VPet.Plugin.DemoClock
         public override void LoadPlugin()
         {
             Set = new Setting(MW.Set["DemoClock"]);
+            MW.Set["DemoClock"] = Set;
 
             WPFTimeClock = new TimeClock(this);
 
