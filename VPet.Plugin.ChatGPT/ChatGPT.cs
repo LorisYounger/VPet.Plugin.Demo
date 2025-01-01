@@ -22,7 +22,8 @@ namespace VPet.Plugin.ChatGPTPlugin
         {
             if (File.Exists(ExtensionValue.BaseDirectory + @"\ChatGPTSetting.json"))
                 CGPTClient = ChatGPTClient.Load(File.ReadAllText(ExtensionValue.BaseDirectory + @"\ChatGPTSetting.json"));
-            CGPTClient.WebProxy = WebProxy;
+            if (CGPTClient != null)
+                CGPTClient.WebProxy = WebProxy;
             if (!string.IsNullOrWhiteSpace(WebProxy))
             {
                 CGPTClient.Proxy = new HttpClientHandler()
