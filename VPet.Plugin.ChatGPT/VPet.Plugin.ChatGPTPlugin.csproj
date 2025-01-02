@@ -16,7 +16,7 @@
     <None Remove="icon.aseprite" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="ChatGPT.API.Framework" Version="1.1.0" />
+    <PackageReference Include="ChatGPT.API.Framework" Version="1.1.2" />
     <PackageReference Include="LinePutScript" Version="1.11.8" />
     <PackageReference Include="LinePutScript.Localization.WPF" Version="1.0.7" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
