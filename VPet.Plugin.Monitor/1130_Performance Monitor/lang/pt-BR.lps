@@ -1,0 +1,21 @@
+监视器设置#Configurações do Monitor:|
+Performance Monitor#Monitor de Desempenho
+这是个简易的性能监视器，基于Windows性能监视器的数据运行,本mod编写参考作者的DemoClock,感谢作者对整个项目的无私开源👈(ﾟヮﾟ👈)#Este é um monitor de desempenho simples, baseado nos dados do Monitor de Desempenho do Windows. Este mod foi criado com referência ao DemoClock do autor. Agradecemos ao autor por disponibilizar o projeto de forma gratuita e aberta 👈(ﾟヮﾟ👈):|
+性能监视器 设置#Configurações do Monitor de Desempenho:|
+显示分割线#Mostrar Linhas Divisórias:|
+GPU监视#Monitoramento da GPU:|
+放在哪？#Onde colocar?:|
+纵向位置#Posição Vertical:|
+透明度#Transparência:|
+多彩进度条#Barra de Progresso Colorida:|
+网卡目录#Diretório da Placa de Rede:|
+显卡目录#Diretório da Placa Gráfica:|
+说明#Descrição:|
+你好(👉ﾟヮﾟ)👉#Olá (👉ﾟヮﾟ)👉:|
+停用监视器#Desativar o Monitor:|
+纵向分割线#Linha Divisória Vertical:|
+横向分割线#Linha Divisória Horizontal:|
+GPU监视开关#Alternar Monitoramento da GPU:|
+进度条颜色匹配面板#Painel de Correspondência de Cores da Barra de Progresso:|
+程序数值均取自Windows性能监视器，与任务管理器有出入，GPU监视（相当高）和多彩进度条（极少）有CPU损耗。#Os valores do programa são retirados do Monitor de Desempenho do Windows e podem diferir do Gerenciador de Tarefas. O monitoramento da GPU (bastante elevado) e a barra de progresso colorida (muito pouco) consomem recursos da CPU.:|
+前往 设置-MOD设置 启用/停用MOD#Vá para Configurações - Configurações do MOD para ativar/desativar o MOD:|
