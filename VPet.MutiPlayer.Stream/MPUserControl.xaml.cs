@@ -56,9 +56,11 @@ public partial class MPUserControl : Border
         if (!wmp.mps.Set.WhiteTalkList.Contains(friend.Id.Value.ToString()))
         {
             wmp.tbWhiteTalkList.Text = wmp.mps.Set.WhiteJoinList + "," + friend.Id.Value.ToString();
+            wmp.mps.Set.WhiteTalkList = wmp.tbWhiteTalkList.Text;
             if (!wmp.mps.Set.WhiteJoinList.Contains(friend.Id.Value.ToString()))
             {
                 wmp.tbWhiteJoinList.Text = wmp.mps.Set.WhiteJoinList + "," + friend.Id.Value.ToString();
+                wmp.mps.Set.WhiteJoinList = wmp.tbWhiteJoinList.Text;
             }
             MessageBoxX.Show("已将{0}加入白名单".Translate(friend.Name));
         }
@@ -66,10 +68,12 @@ public partial class MPUserControl : Border
         {
             wmp.tbWhiteTalkList.Text = wmp.mps.Set.WhiteTalkList.Replace(friend.Id.Value.ToString(), "")
                 .Replace(",,", "");
+            wmp.mps.Set.WhiteTalkList = wmp.tbWhiteTalkList.Text;
             if (wmp.mps.Set.WhiteJoinList.Contains(friend.Id.Value.ToString()))
             {
                 wmp.tbWhiteJoinList.Text = wmp.mps.Set.WhiteJoinList.Replace(friend.Id.Value.ToString(), "")
                 .Replace(",,", "");
+                wmp.mps.Set.WhiteJoinList = wmp.tbWhiteJoinList.Text;
             }
             MessageBoxX.Show("已将{0}移出白名单".Translate(wmp.mps.FilterName(friend)));
         }
