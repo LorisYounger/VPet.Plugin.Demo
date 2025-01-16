@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,12 +40,30 @@ namespace VPet.Plugin.DemoClock
             NumTomatoWork.Value = Set.Tomato_WorkTime;
             NumTomatoRest.Value = Set.Tomato_RestTime;
             NumTomatoRestLong.Value = Set.Tomato_RestTimeLong;
-            TextCountDown.Text = Set.CountDownVoice;
-            TextTomatoWork.Text = Set.Tomato_WorkVoice;
-            TextTomatoRest.Text = Set.Tomato_RestVoice;
-            TextTomatoEnd.Text = Set.Tomato_EndVoice;
+            var TempText = "";
+            Tools.TryGetInputTypeAndValue(Set.CountDownVoice, out TempText);
+            TextCountDown.Text = TempText;
+            Tools.TryGetInputTypeAndValue(Set.Tomato_WorkVoice, out TempText);
+            TextTomatoWork.Text = TempText;
+            Tools.TryGetInputTypeAndValue(Set.Tomato_RestVoice, out TempText);
+            TextTomatoRest.Text = TempText;
+            Tools.TryGetInputTypeAndValue(Set.Tomato_EndVoice, out TempText);
+            TextTomatoEnd.Text = TempText;
 
-            AllowChange = true;
+            if (Master.mode != DemoClock.Mode.None)
+            {
+                NumTomatoWork.IsEnabled = false;
+                NumTomatoRest.IsEnabled = false;
+                NumTomatoRestLong.IsEnabled = false;
+                AllowChange = true;
+            }
+            else
+            {
+                NumTomatoWork.IsEnabled = true;
+                NumTomatoRest.IsEnabled = true;
+                NumTomatoRestLong.IsEnabled = true;
+                AllowChange = false;
+            }
         }
 
         private void Switch24h_Checked(object sender, RoutedEventArgs e)
@@ -97,13 +116,6 @@ namespace VPet.Plugin.DemoClock
             Set.DefaultCountDown = NumDefCountDown.Value.Value;
         }
 
-        private void TextCountDown_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (!AllowChange)
-                return;
-            Set.CountDownVoice = TextCountDown.Text;
-        }
-
         private void NumTomatoWork_ValueChanged(object sender, Panuon.WPF.SelectedValueChangedRoutedEventArgs<double?> e)
         {
             if (!AllowChange)
@@ -124,26 +136,6 @@ namespace VPet.Plugin.DemoClock
                 return;
             Set.Tomato_RestTimeLong = NumTomatoRestLong.Value.Value;
         }
-        private void TextTomatoWork_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (!AllowChange)
-                return;
-            Set.Tomato_WorkVoice = TextTomatoWork.Text;
-        }
-
-        private void TextTomatoRest_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (!AllowChange)
-                return;
-            Set.Tomato_RestVoice = TextTomatoRest.Text;
-        }
-
-        private void TextTomatoEnd_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (!AllowChange)
-                return;
-            Set.Tomato_EndVoice = TextTomatoEnd.Text;
-        }
 
         private void btn_path_Click(object sender, RoutedEventArgs e)
         {
@@ -159,15 +151,19 @@ namespace VPet.Plugin.DemoClock
             {
                 case "CountDown":
                     TextCountDown.Text = openFileDialog.FileName;
+                    Set.CountDownVoice = "file:" + TextCountDown.Text;
                     break;
                 case "TomatoWork":
                     TextTomatoWork.Text = openFileDialog.FileName;
+                    Set.Tomato_WorkVoice = "file:" + TextTomatoWork.Text;
                     break;
                 case "TomatoRest":
                     TextTomatoRest.Text = openFileDialog.FileName;
+                    Set.Tomato_RestVoice = "file:" + TextTomatoRest.Text;
                     break;
                 case "TomatoEnd":
                     TextTomatoEnd.Text = openFileDialog.FileName;
+                    Set.Tomato_EndVoice = "file:" + TextTomatoEnd.Text;
                     break;
             }
         }
@@ -180,6 +176,54 @@ namespace VPet.Plugin.DemoClock
         private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Master.MW.ShowSetting(5);
+        }
+
+        private void TextTomatoWork_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            if (File.Exists(TextTomatoWork.Text))
+            {
+                Set.Tomato_WorkVoice = "file:" + TextTomatoWork.Text;
+            }
+            else
+            {
+                Set.Tomato_WorkVoice = "text:" + TextTomatoWork.Text;
+            }
+        }
+
+        private void TextTomatoRest_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            if (File.Exists(TextTomatoRest.Text))
+            {
+                Set.Tomato_RestVoice = "file:" + TextTomatoRest.Text;
+            }
+            else
+            {
+                Set.Tomato_RestVoice = "text:" + TextTomatoRest.Text;
+            }
+        }
+
+        private void TextTomatoEnd_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            if (File.Exists(TextTomatoEnd.Text))
+            {
+                Set.Tomato_EndVoice = "file:" + TextTomatoEnd.Text;
+            }
+            else
+            {
+                Set.Tomato_EndVoice = "text:" + TextTomatoEnd.Text;
+            }
+        }
+
+        private void TextCountDown_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            if (File.Exists(TextCountDown.Text))
+            {
+                Set.CountDownVoice = "file:" + TextCountDown.Text;
+            }
+            else
+            {
+                Set.CountDownVoice = "text:" + TextCountDown.Text;
+            }
         }
 
         //private void SwitchOn_Checked(object sender, RoutedEventArgs e)
