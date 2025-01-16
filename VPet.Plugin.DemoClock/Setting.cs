@@ -123,7 +123,7 @@ namespace VPet.Plugin.DemoClock
             set { SetDouble("tomato_resttimelong", value); tomato_resttimelong = value; }
         }
         /// <summary>
-        /// 番茄钟工作语音
+        /// 番茄钟工作开始语音
         /// </summary>
         public string Tomato_WorkVoice
         {
@@ -131,7 +131,7 @@ namespace VPet.Plugin.DemoClock
             set => SetString("tomato_workvoice", value);
         }
         /// <summary>
-        /// 番茄钟休息语音
+        /// 番茄钟休息开始语音
         /// </summary>
         public string Tomato_RestVoice
         {
@@ -147,7 +147,7 @@ namespace VPet.Plugin.DemoClock
             set => SetString("tomato_endvoice", value);
         }
         /// <summary>
-        /// 番茄钟工作语音
+        /// 倒计时结束语音
         /// </summary>
         public string CountDownVoice
         {
