@@ -201,8 +201,8 @@ namespace VPet.Plugin.DemoClock
                         //**********在此处添加工作结束逻辑**********//
                         var replacements = new Dictionary<string, string>
                         {
-                            { "Mode", "Work" },
-                            { "模式", "工作" }
+                            { "Mode", "Work".Translate() },
+                            { "模式", "工作".Translate() }
                         };
                         var voicetext = "";
                         if (Tools.TryGetInputTypeAndValue(Master.Set.Tomato_EndVoice, out voicetext))
@@ -245,8 +245,8 @@ namespace VPet.Plugin.DemoClock
                         //**********在此处添加休息结束逻辑**********//
                         var replacements = new Dictionary<string, string>
                         {
-                            { "Mode", "Rest" },
-                            { "模式", "休息" }
+                            { "Mode", "Rest".Translate() },
+                            { "模式", "休息".Translate() }
                         };
                         var voicetext = "";
                         if (Tools.TryGetInputTypeAndValue(Master.Set.Tomato_EndVoice, out voicetext))
@@ -290,8 +290,8 @@ namespace VPet.Plugin.DemoClock
                         //**********在此处添加长休息结束逻辑**********//
                         var replacements = new Dictionary<string, string>
                         {
-                            { "Mode", "Long Rest" },
-                            { "模式", "长休息" }
+                            { "Mode", "Long Rest".Translate() },
+                            { "模式", "长休息".Translate() }
                         };
                         var voicetext = "";
                         if (Tools.TryGetInputTypeAndValue(Master.Set.Tomato_EndVoice, out voicetext))
