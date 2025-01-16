@@ -64,6 +64,7 @@ namespace VPet.Plugin.DemoClock
 
         public long CountDownLength;
         public winSetting winSetting;
+        public MusicPlayer musicPlayer;
         public DemoClock(IMainWindow mainwin) : base(mainwin)
         {
         }
@@ -74,7 +75,7 @@ namespace VPet.Plugin.DemoClock
             MW.Set["DemoClock"] = Set;
 
             WPFTimeClock = new TimeClock(this);
-
+            musicPlayer = new MusicPlayer();
             menuItem = new MenuItem()
             {
                 Header = "DM时钟".Translate(),

@@ -17,6 +17,9 @@ using System.Windows.Threading;
 using static VPet.Plugin.DemoClock.DemoClock;
 using System.Timers;
 using LinePutScript.Localization.WPF;
+using System.Threading.Tasks.Sources;
+using System.Text.RegularExpressions;
+using System.IO;
 
 namespace VPet.Plugin.DemoClock
 {
@@ -142,6 +145,18 @@ namespace VPet.Plugin.DemoClock
                         TOthers.Visibility = Visibility.Visible;
                         Master.mode = Mode.CountDown_End;
                         CountTimer.Stop();
+                        //**********在此处添加计时结束逻辑**********//
+                        var voicetext = "";
+                        if (Tools.TryGetInputTypeAndValue(Master.Set.CountDownVoice, out voicetext))
+                        {
+                            MessageBox.Show(voicetext);
+                            Master.musicPlayer.Play(voicetext);
+                        }
+                        else
+                        {
+                            Master.MW.Dispatcher.BeginInvoke(() => { Master.MW.Main.SayRnd(voicetext, true); });
+                        }
+                        //**********在此处添加计时结束逻辑**********//
                         return;
                     }
                     PBTimeLeft.Value = PBTimeLeft.Maximum - diff.TotalMinutes;
@@ -183,6 +198,23 @@ namespace VPet.Plugin.DemoClock
                         TOthers.Text = "点击此处开始休息".Translate();
                         Master.mode = Mode.CountDown_End;
                         CountTimer.Stop();
+                        //**********在此处添加工作结束逻辑**********//
+                        var replacements = new Dictionary<string, string>
+                        {
+                            { "Mode", "Work".Translate() },
+                            { "模式", "工作".Translate() }
+                        };
+                        var voicetext = "";
+                        if (Tools.TryGetInputTypeAndValue(Master.Set.Tomato_EndVoice, out voicetext))
+                        {
+                            Master.musicPlayer.Play(voicetext);
+                        }
+                        else
+                        {
+                            voicetext = Tools.ReplacePlaceholders(voicetext, replacements);
+                            Master.MW.Dispatcher.Invoke(() => { Master.MW.Main.SayRnd(voicetext, true); });
+                        }
+                        //**********在此处添加工作结束逻辑**********//
                         return;
                     }
                     TTimes.Text = diff.TotalMinutes.ToString("f1") + 'm';
@@ -210,6 +242,23 @@ namespace VPet.Plugin.DemoClock
                         TOthers.Text = "点击此处开始工作".Translate();
                         Master.mode = Mode.CountDown_End;
                         CountTimer.Stop();
+                        //**********在此处添加休息结束逻辑**********//
+                        var replacements = new Dictionary<string, string>
+                        {
+                            { "Mode", "Rest".Translate() },
+                            { "模式", "休息".Translate() }
+                        };
+                        var voicetext = "";
+                        if (Tools.TryGetInputTypeAndValue(Master.Set.Tomato_EndVoice, out voicetext))
+                        {
+                            Master.musicPlayer.Play(voicetext);
+                        }
+                        else
+                        {
+                            voicetext = Tools.ReplacePlaceholders(voicetext, replacements);
+                            Master.MW.Dispatcher.BeginInvoke(() => { Master.MW.Main.SayRnd(voicetext, true); });
+                        }
+                        //**********在此处添加休息结束逻辑**********//
                         return;
                     }
                     TTimes.Text = diff.TotalMinutes.ToString("f1") + 'm';
@@ -238,6 +287,23 @@ namespace VPet.Plugin.DemoClock
                         TOthers.Text = "点击此处开始工作".Translate();
                         Master.mode = Mode.CountDown_End;
                         CountTimer.Stop();
+                        //**********在此处添加长休息结束逻辑**********//
+                        var replacements = new Dictionary<string, string>
+                        {
+                            { "Mode", "Long Rest".Translate() },
+                            { "模式", "长休息".Translate() }
+                        };
+                        var voicetext = "";
+                        if (Tools.TryGetInputTypeAndValue(Master.Set.Tomato_EndVoice, out voicetext))
+                        {
+                            Master.musicPlayer.Play(voicetext);
+                        }
+                        else
+                        {
+                            voicetext = Tools.ReplacePlaceholders(voicetext, replacements);
+                            Master.MW.Dispatcher.BeginInvoke(() => { Master.MW.Main.SayRnd(voicetext, true); });
+                        }
+                        //**********在此处添加长休息结束逻辑**********//
                         return;
                     }
                     TTimes.Text = diff.TotalMinutes.ToString("f1") + 'm';
@@ -258,6 +324,9 @@ namespace VPet.Plugin.DemoClock
                     break;
             }
         }
+        /// <summary>
+        /// 开始计时模式
+        /// </summary>
         public void StartTiming()
         {
             StartTime = DateTime.Now;
@@ -269,6 +338,9 @@ namespace VPet.Plugin.DemoClock
             CountTimer.Start();
             Master.mode = Mode.Timing;
         }
+        /// <summary>
+        /// 暂停计时模式
+        /// </summary>
         public void PauseTiming()
         {
             IsPause = true;
@@ -276,6 +348,9 @@ namespace VPet.Plugin.DemoClock
             PauseTime += DateTime.Now - StartTime;
             TDates.Text = "计时暂停".Translate() + TDates.Text.Substring(3);
         }
+        /// <summary>
+        /// 继续计时模式
+        /// </summary>
         public void ContinueTiming()
         {
             StartTime = DateTime.Now;
@@ -283,6 +358,10 @@ namespace VPet.Plugin.DemoClock
             CountTimer.Start();
             CountTimer_Tick();
         }
+        /// <summary>
+        /// 开始倒计时模式
+        /// </summary>
+        /// <param name="time">倒计时时长</param>
         public void StartCountDown(TimeSpan time)
         {
             Master.mode = Mode.CountDown;
@@ -297,6 +376,9 @@ namespace VPet.Plugin.DemoClock
             CountTimer.Interval = TimeSpan.FromSeconds(1);
             CountTimer.Start();
         }
+        /// <summary>
+        /// 继续倒计时
+        /// </summary>
         public void ContinueCountDown()
         {
             StartTime = DateTime.Now + PauseTime;
@@ -304,12 +386,18 @@ namespace VPet.Plugin.DemoClock
             CountTimer.Start();
             CountTimer_Tick();
         }
+        /// <summary>
+        /// 暂停倒计时
+        /// </summary>
         public void PauseCountDown()
         {
             IsPause = true;
             CountTimer.IsEnabled = false;
             PauseTime = StartTime - DateTime.Now;
         }
+        /// <summary>
+        /// 开始工作
+        /// </summary>
         public void StartWork()
         {
             Master.mode = Mode.Tomato_Work;
@@ -323,7 +411,19 @@ namespace VPet.Plugin.DemoClock
             PBTimeLeft.Maximum = Master.Set.Tomato_WorkTime;
             CountTimer.Interval = TimeSpan.FromSeconds(1);
             CountTimer.Start();
+            var voicetext = "";
+            if (Tools.TryGetInputTypeAndValue(Master.Set.Tomato_WorkVoice, out voicetext))
+            {
+                Master.musicPlayer.Play(voicetext);
+            }
+            else
+            {
+                Master.MW.Dispatcher.BeginInvoke(() => { Master.MW.Main.SayRnd(voicetext, true); });
+            }
         }
+        /// <summary>
+        /// 开始休息
+        /// </summary>
         public void StartRest()
         {
             Master.mode = Mode.Tomato_Rest;
@@ -337,7 +437,19 @@ namespace VPet.Plugin.DemoClock
             PBTimeLeft.Maximum = Master.Set.Tomato_RestTime;
             CountTimer.Interval = TimeSpan.FromSeconds(1);
             CountTimer.Start();
+            var voicetext = "";
+            if (Tools.TryGetInputTypeAndValue(Master.Set.Tomato_RestVoice, out voicetext))
+            {
+                Master.musicPlayer.Play(voicetext);
+            }
+            else
+            {
+                Master.MW.Dispatcher.BeginInvoke(() => { Master.MW.Main.SayRnd(voicetext, true); });
+            }
         }
+        /// <summary>
+        /// 开始长休息
+        /// </summary>
         public void StartRestLong()
         {
             Master.mode = Mode.Tomato_Rest_Long;
@@ -351,8 +463,11 @@ namespace VPet.Plugin.DemoClock
             PBTimeLeft.Maximum = Master.Set.Tomato_RestTimeLong;
             CountTimer.Interval = TimeSpan.FromSeconds(1);
             CountTimer.Start();
+            var voicetext = "";
         }
-
+        /// <summary>
+        /// 时钟模式UI更新
+        /// </summary>
         private void TimeTimer_Tick(object sender = null, EventArgs e = null)
         {
             //相关UI更新
@@ -381,7 +496,9 @@ namespace VPet.Plugin.DemoClock
                 }
             }
         }
-
+        /// <summary>
+        /// 倒计时模式UI更新
+        /// </summary>
         public void CountDownMenuItem_Click(object sender, RoutedEventArgs e)
         {
             if (Master.mode == Mode.CountDown)
@@ -410,12 +527,16 @@ namespace VPet.Plugin.DemoClock
                 }
             }
         }
-
+        /// <summary>
+        /// 默认状态右键点击响应
+        /// </summary>
         private void SettingMenuItem_Click(object sender, RoutedEventArgs e)
         {
             Master.Setting();
         }
-
+        /// <summary>
+        /// 计时模式菜单右键点击响应
+        /// </summary>
         public void TimingMenuItem_Click(object sender, RoutedEventArgs e)
         {
             if (Master.mode == Mode.Timing)
@@ -440,7 +561,9 @@ namespace VPet.Plugin.DemoClock
                 Master.mTiming.Header = "暂停计时".Translate();
             }
         }
-
+        /// <summary>
+        /// 工作模式菜单右键点击响应
+        /// </summary>
         public void WorkMenuItem_Click(object sender, RoutedEventArgs e)
         {
             if (Master.mode == Mode.Tomato_Work)
@@ -474,7 +597,9 @@ namespace VPet.Plugin.DemoClock
                 Master.mTotmatoWork.Header = "停止工作".Translate();
             }
         }
-
+        /// <summary>
+        /// 长休息菜单右键点击响应
+        /// </summary>
         public void RestMenuItem_Click(object sender, RoutedEventArgs e)
         {
             if (Master.mode == Mode.Tomato_Rest || Master.mode == Mode.Tomato_Rest_Long)
@@ -508,7 +633,9 @@ namespace VPet.Plugin.DemoClock
                 }
             }
         }
-
+        /// <summary>
+        /// 左键点击响应函数
+        /// </summary>
         private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (TDates.Text == "计时结束".Translate())
@@ -522,8 +649,8 @@ namespace VPet.Plugin.DemoClock
             }
             else if (TDates.Text == "工作结束".Translate())
                 StartRest();
-            else if(TDates.Text == "休息结束".Translate() || TDates.Text == "长休息结束".Translate())
-                StartWork();        
+            else if (TDates.Text == "休息结束".Translate() || TDates.Text == "长休息结束".Translate())
+                StartWork();
         }
-    }
+    }        
 }
