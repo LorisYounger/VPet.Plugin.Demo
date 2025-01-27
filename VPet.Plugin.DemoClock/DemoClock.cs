@@ -9,6 +9,9 @@ using System.Windows;
 using VPet_Simulator.Windows.Interface;
 using System.Windows.Threading;
 using LinePutScript.Localization.WPF;
+using LinePutScript.Converter;
+using LinePutScript;
+using Panuon.WPF.UI;
 
 namespace VPet.Plugin.DemoClock
 {
@@ -65,6 +68,9 @@ namespace VPet.Plugin.DemoClock
         public long CountDownLength;
         public winSetting winSetting;
         public MusicPlayer musicPlayer;
+        public WeatherPage weatherWindow;
+        public ZoneInput Zoneinput;
+        public WeatherResponse weather; 
         public DemoClock(IMainWindow mainwin) : base(mainwin)
         {
         }
@@ -131,12 +137,116 @@ namespace VPet.Plugin.DemoClock
                 Header = "DM时钟".Translate(),
                 HorizontalContentAlignment = HorizontalAlignment.Center,
             };
-            menuset.Click += (s, e) => { Setting(); };
-            modset.Items.Add(menuset);
+            var menuweather = new MenuItem()
+            {
+                Header = "天气".Translate(),
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+            };
+            var menuweatherpage = new MenuItem()
+            {
+                Header = "天气页面".Translate(),
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+            };
+            menuweatherpage.Click += (s, e) => { weatherWindow = new WeatherPage(this); weatherWindow.Show(); };
+            var menuregionset = new MenuItem()
+            {
+                Header = "设置地区".Translate(),
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+            };
+            menuregionset.Click += (s, e) => { Zoneinput = new ZoneInput(this); Zoneinput.Show(); };
+            menuweather.Items.Add(menuweatherpage);
+            menuweather.Items.Add(menuregionset);
+
+            modset.Items.Add(menuweather);
+            ///***************** 设置天气 *****************///
+            HandleWeatherAsync();
+            Tools.StartRecurringTimer(3, HandleWeatherAsync);
+            //WPFTimeClock.WeatherControl.SetWeather();
+            ///***************** 设置天气 *****************///
         }
         public override void LoadDIY()
         {
             MW.Main.ToolBar.MenuDIY.Items.Add(menuItem);
+        }
+        /// <summary>
+        /// 用于测试
+        /// </summary>
+        /// <param name="param">adcode参数</param>
+        /// <returns></returns>
+        private async Task LoadWeatherAsync(string param)
+        {
+            try
+            {
+                // 使用异步方法发送请求并设置超时时间
+                var weatherResponse = await GetWeatherAsync("https://weather.exlb.net/Weather",param, timeoutSeconds: 5);
+
+                if (weatherResponse != null)
+                {
+                    MessageBox.Show(weatherResponse.Status.ToString());
+                }
+                else
+                {
+                    MessageBox.Show("获取天气信息失败");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"发生错误：{ex.Message}");
+            }
+        }
+
+        internal async Task HandleWeatherAsync()
+        {
+            // 获取天气信息
+            weather = await GetWeatherAsync("https://weather.exlb.net/Weather");
+
+            if (weather.Status != 200)
+            {
+                if (Set.AdCode == 0)
+                {
+                    // 如果没有 AdCode，弹出输入框
+                    Zoneinput = new ZoneInput(this);
+                    MW.Dispatcher.Invoke(() =>
+                    {
+                        Zoneinput.Show();
+                    });
+                }
+                else
+                {
+                    // 如果有 AdCode，使用 AdCode 请求天气
+                    weather = await GetWeatherAsync("https://weather.exlb.net/Weather", $"adcode={Set.AdCode}");
+                }
+            }
+            if(weather.Status.Equals(200))
+            {
+                WPFTimeClock.WeatherControl.SetWeather(weather.Lives.Last().City, "温度:" + weather.Lives.Last().TemperatureFloat.ToString("F0") + "℃"
+                    , weather.Lives.Last().Weather.ToString(), weather.Lives.Last().WindDirection.ToString() + "风 " + weather.Lives.Last().WindPower + "级"
+                    , "湿度:" + weather.Lives.Last().HumidityFloat.ToString("F0") + "%");
+            }
+        }
+
+        private async Task<WeatherResponse> GetWeatherAsync(string url,string param = "", int timeoutSeconds = 5)
+        {
+            try
+            {
+                // 创建一个带有超时的 Http 请求任务
+                using var cts = new System.Threading.CancellationTokenSource(TimeSpan.FromSeconds(timeoutSeconds));
+                string response = await HttpHelper.SendGetRequestAsync(url, param, cts.Token);
+
+                // 解析返回的天气数据
+                var lps = new LPS(response);
+                return LPSConvert.DeserializeObject<WeatherResponse>(lps, convertNoneLineAttribute: true);
+            }
+            catch (TaskCanceledException)
+            {
+                MessageBox.Show("请求超时，请稍后再试。");
+                return null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"请求失败：{ex.Message}");
+                return null;
+            }
         }
 
         public override string PluginName => "DemoClock";

@@ -102,6 +102,13 @@ namespace VPet.Plugin.DemoClock
         {
             if (IsPause)
                 return;
+            if(Master.mode != Mode.None)
+            {
+                WeatherControl.Visibility = Visibility.Collapsed;
+                TTimes.Visibility = Visibility.Visible;
+                TDates.Visibility = Visibility.Visible;
+                TDayofWeek.Visibility = Visibility.Visible;
+            }
             switch (Master.mode)
             {
                 default:
@@ -473,6 +480,31 @@ namespace VPet.Plugin.DemoClock
             //相关UI更新
             if (Master.mode == Mode.None)
             {
+                if (Master.Set.DefaultWeather == true)
+                {
+                    WeatherControl.Visibility = Visibility.Visible;
+                    if (Master.Set.WeatherPosition == true)
+                    {
+                        Grid.SetColumn(WeatherControl, 1);
+                        TTimes.Visibility = Visibility.Collapsed;
+                        TDates.Visibility = Visibility.Visible;
+                        TDayofWeek.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        Grid.SetColumn(WeatherControl, 3);
+                        TTimes.Visibility = Visibility.Visible;
+                        TDates.Visibility = Visibility.Collapsed;
+                        TDayofWeek.Visibility = Visibility.Collapsed;
+                    }
+                }
+                else
+                {
+                    WeatherControl.Visibility = Visibility.Collapsed;
+                    TTimes.Visibility = Visibility.Visible;
+                    TDates.Visibility = Visibility.Visible;
+                    TDayofWeek.Visibility = Visibility.Visible;
+                }
                 if (Master.Set.Hour24)
                 {
                     TTimes.Text = DateTime.Now.ToString("HH:mm");
@@ -651,6 +683,15 @@ namespace VPet.Plugin.DemoClock
                 StartRest();
             else if (TDates.Text == "休息结束".Translate() || TDates.Text == "长休息结束".Translate())
                 StartWork();
+        }
+
+        private void TimeClock_MouseEnter(object sender, MouseEventArgs e)
+        {
+        }
+
+        private void TimeClock_MouseLeave(object sender, MouseEventArgs e)
+        {
+            
         }
     }        
 }

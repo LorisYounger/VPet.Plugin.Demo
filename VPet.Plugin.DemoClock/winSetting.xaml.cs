@@ -1,6 +1,9 @@
-﻿using Microsoft.Win32;
+﻿using LinePutScript.Localization.WPF;
+using Microsoft.Win32;
+using Panuon.WPF.UI;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -49,6 +52,8 @@ namespace VPet.Plugin.DemoClock
             TextTomatoRest.Text = TempText;
             Tools.TryGetInputTypeAndValue(Set.Tomato_EndVoice, out TempText);
             TextTomatoEnd.Text = TempText;
+            WeatherPositionSet.SelectedIndex = Set.WeatherPosition ? 0 : 1;
+            DefaultWeather.IsChecked = Set.DefaultWeather;
 
             if (Master.mode != DemoClock.Mode.None)
             {
@@ -64,6 +69,7 @@ namespace VPet.Plugin.DemoClock
                 NumTomatoRestLong.IsEnabled = true;
                 AllowChange = false;
             }
+            DataContext = this;
         }
 
         private void Switch24h_Checked(object sender, RoutedEventArgs e)
@@ -226,10 +232,28 @@ namespace VPet.Plugin.DemoClock
             }
         }
 
-        //private void SwitchOn_Checked(object sender, RoutedEventArgs e)
-        //{
-        //    if (!AllowChange)
-        //        return;
-        //}
+        private void Position_DataContextChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(WeatherPositionSet.SelectedIndex == 0)
+            {
+                Set.WeatherPosition = true;
+            }
+            else
+            {
+                Set.WeatherPosition = false;
+            }
+        }
+
+        private void DefaultWeather_Checked(object sender, RoutedEventArgs e)
+        {
+            Set.DefaultWeather = DefaultWeather.IsChecked.Value;
+        }
+    }
+    public enum WeatherPosition
+    {
+        [Description("左侧")]
+        Left,
+        [Description("右侧")]
+        Right
     }
 }
