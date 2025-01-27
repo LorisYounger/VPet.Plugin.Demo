@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="clr-namespace:VPet.Plugin.DemoClock"
         mc:Ignorable="d" xmlns:pu="clr-namespace:Panuon.WPF.UI;assembly=Panuon.WPF.UI" MinHeight="100" Height="Auto"
-        Width="450" VerticalAlignment="Top" HorizontalAlignment="Center">
+        Width="450" VerticalAlignment="Top" HorizontalAlignment="Center" MouseEnter="TimeClock_MouseEnter" MouseLeave="TimeClock_MouseLeave">
     <d:UserControl.Resources>
         <ResourceDictionary Source="/VPet-Simulator.Windows.Interface;component/ResourceStyle.xaml" />
     </d:UserControl.Resources>
@@ -23,9 +23,9 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="8*" />
+                <ColumnDefinition Width="8.5*" />
                 <ColumnDefinition Width=".5*" />
-                <ColumnDefinition Width="8*" />
+                <ColumnDefinition Width="8.5*" />
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -38,8 +38,8 @@
             <ProgressBar x:Name="PBTimeLeft" Value="80" Foreground="{DynamicResource ProgressBarForeground}"
                     Background="Transparent" BorderBrush="{DynamicResource ProgressBarForeground}" BorderThickness="5"
                     Grid.ColumnSpan="5" Grid.RowSpan="5" Visibility="Collapsed" />
-
-            <TextBlock Grid.Row="1" Grid.RowSpan="2" x:Name="TTimes" Text="96.5m" FontSize="60"
+            <local:Weather x:Name="WeatherControl" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Width="180" />
+            <TextBlock Visibility="Visible" Grid.Row="1" Grid.RowSpan="2" x:Name="TTimes" Text="96.5m" FontSize="60"
                     HorizontalAlignment="Center" VerticalAlignment="Center"
                     Foreground="{DynamicResource DARKPrimaryText}" Grid.ColumnSpan="1" Grid.Column="1" />
             <TextBlock Grid.Row="1" Grid.Column="3" x:Name="TDayofWeek" Text="下午 星期五" FontSize="30"

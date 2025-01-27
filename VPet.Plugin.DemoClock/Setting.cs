@@ -178,5 +178,37 @@ namespace VPet.Plugin.DemoClock
             Tomato_Count += count;
             Tomato_Count_Total += count;
         }
+        /// <summary>
+        /// 天气控件位置(默认为左侧(true))
+        /// </summary>
+        public bool WeatherPosition
+        {
+            get => GetBool("weatherposition");
+            set => SetBool("weatherposition", value);
+        }
+        /// <summary>
+        /// 两控件重合时默认显示天气
+        /// </summary>
+        public bool DefaultWeather
+        {
+            get => GetBool("defaultweather");
+            set => SetBool("defaultweather", value);
+        }
+        /// <summary>
+        /// 上一次更新天气的日期
+        /// </summary>
+        public DateTime LastChangeDate
+        {
+            get => GetDateTime("lastchangedate");
+            set => SetDateTime("lastchangedate", value);
+        }
+        /// <summary>
+        /// 地区编码
+        /// </summary>
+        public int AdCode
+        {
+            get => GetInt("adcode");
+            set => SetInt("adcode", value);
+        }
     }
 }

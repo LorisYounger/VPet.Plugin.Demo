@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="VPet.Plugin.DemoClock.Weather"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:ll="clr-namespace:LinePutScript.Localization.WPF;assembly=LinePutScript.Localization.WPF"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:pu="clr-namespace:Panuon.WPF.UI;assembly=Panuon.WPF.UI"
+             mc:Ignorable="d"
+             >
+    <Control.Resources>
+        <ResourceDictionary Source="/VPet-Simulator.Windows.Interface;component/ResourceStyle.xaml" />
+    </Control.Resources>
+
+    <Grid Margin="5">
+        <!-- 行和列布局 -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- 左列：天气图标和地区 -->
+        <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,10,10,5">
+            <!-- 天气图标 -->
+            <TextBlock x:Name="WeatherIcon" 
+           Width="40" Height="40" 
+           FontFamily="pack://application:,,,/Res/#remixicon" 
+           Text="{Binding WeatherImage}" 
+           ToolTip="{Binding Description}"
+           FontSize="40"  
+           Foreground="White"/>
+
+            <!-- 城市名称 -->
+            <TextBlock x:Name="CityText" Text="{ll:Str 城市}" FontSize="16" FontWeight="Bold"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Margin="5" Foreground="White"/>
+        </StackPanel>
+
+        <!-- 右列：气温、风速、湿度 -->
+        <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,10,10,5">
+            <!-- 气温 -->
+            <TextBlock x:Name="TemperatureText" Text="{ll:Str 25℃}" FontSize="15" FontWeight="Bold"
+                       HorizontalAlignment="Center" Margin="2" Foreground="White"/>
+
+            <!-- 风向 -->
+            <TextBlock x:Name="WindText" Text="{ll:Str 北风4-6级}" FontSize="15" FontWeight="Bold"
+                       HorizontalAlignment="Center" Margin="2" Foreground="White"/>
+
+            <!-- 湿度 -->
+            <TextBlock x:Name="HumidityText" Text="{ll:Str 湿度: 65%}" FontSize="15" FontWeight="Bold"
+                       HorizontalAlignment="Center" Margin="2" Foreground="White"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

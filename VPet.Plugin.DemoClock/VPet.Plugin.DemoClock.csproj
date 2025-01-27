@@ -13,11 +13,35 @@
     <Page Remove="1100_DemoClock\**" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="qweather-icons.ttf" />
+    <None Remove="Resources\V3城市对应ADCODE.lps" />
+    <None Remove="V3城市对应ADCODE.lps" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\V3城市对应ADCODE.lps">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="LinePutScript" Version="1.11.8" />
     <PackageReference Include="LinePutScript.Localization.WPF" Version="1.0.7" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="NAudio" Version="2.2.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.6.0-preview3.19128.7" />
     <PackageReference Include="VPet-Simulator.Windows.Interface" Version="1.1.0.47" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Resource1.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resource1.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Resource1.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

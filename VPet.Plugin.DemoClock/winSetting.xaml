@@ -162,5 +162,35 @@
                 </ComboBox>-->
             </Grid>
         </TabItem>
+        <TabItem Header="天气设置">
+            <Grid Margin="8" Background="{DynamicResource PrimaryLighter}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="15" />
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="1.3*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="{ll:Str 默认显示位置}" VerticalAlignment="Center" Margin="10"/>
+                <ComboBox x:Name="WeatherPositionSet" pu:ComboBoxHelper.BindToEnum="{x:Static local:WeatherPosition.Left}" Grid.Column="2" Width="120" pu:ComboBoxHelper.CornerRadius="10" SelectionChanged="Position_DataContextChanged"/>
+                <TextBlock Text="{ll:Str 默认显示天气}" VerticalAlignment="Center" Grid.Row="1" Margin="10"/>
+                <pu:Switch x:Name="DefaultWeather" BorderBrush="{DynamicResource DARKPrimaryDark}"
+                        CheckedBackground="{DynamicResource DARKPrimary}"
+                        CheckedBorderBrush="{DynamicResource DARKPrimary}" Background="Transparent" BoxWidth="35"
+                        BoxHeight="18" ToggleSize="14" ToggleShadowColor="{x:Null}"
+                        ToggleBrush="{DynamicResource DARKPrimaryDark}"
+                        CheckedToggleBrush="{DynamicResource DARKPrimaryText}"
+                        Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" 
+                        Checked="DefaultWeather_Checked" Unchecked="DefaultWeather_Checked"/>
+            </Grid>
+        </TabItem>
     </TabControl>
 </Window>
