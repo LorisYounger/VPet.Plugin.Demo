@@ -183,16 +183,16 @@ namespace VPet.Plugin.DemoClock
         /// </summary>
         public bool WeatherPosition
         {
-            get => GetBool("weatherposition");
-            set => SetBool("weatherposition", value);
+            get => !GetBool("weatherposition");
+            set => SetBool("weatherposition", !value);
         }
         /// <summary>
         /// 两控件重合时默认显示天气
         /// </summary>
         public bool DefaultWeather
         {
-            get => GetBool("defaultweather");
-            set => SetBool("defaultweather", value);
+            get => !GetBool("defaultweather");
+            set => SetBool("defaultweather", !value);
         }
         /// <summary>
         /// 上一次更新天气的日期

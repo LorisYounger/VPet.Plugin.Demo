@@ -27,6 +27,7 @@ namespace VPet.Plugin.DemoClock
         private bool AllowChange = false;
         DemoClock Master;
         Setting Set;
+        bool Initial = false;
         public winSetting(DemoClock master)
         {
             InitializeComponent();
@@ -60,16 +61,17 @@ namespace VPet.Plugin.DemoClock
                 NumTomatoWork.IsEnabled = false;
                 NumTomatoRest.IsEnabled = false;
                 NumTomatoRestLong.IsEnabled = false;
-                AllowChange = true;
+                AllowChange = false;
             }
             else
             {
                 NumTomatoWork.IsEnabled = true;
                 NumTomatoRest.IsEnabled = true;
                 NumTomatoRestLong.IsEnabled = true;
-                AllowChange = false;
+                AllowChange = true;
             }
             DataContext = this;
+            Initial = true;
         }
 
         private void Switch24h_Checked(object sender, RoutedEventArgs e)
@@ -81,7 +83,7 @@ namespace VPet.Plugin.DemoClock
 
         private void PlaceSilder_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (!AllowChange)
+            if (!AllowChange || !Initial)
                 return;
             Set.PlaceTop = PlaceSilder.Value;
             Master.WPFTimeClock.Margin = new Thickness(0, Set.PlaceTop, 0, 0);
@@ -89,7 +91,7 @@ namespace VPet.Plugin.DemoClock
 
         private void OpacitySilder_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (!AllowChange)
+            if (!AllowChange || !Initial)
                 return;
             Set.Opacity = OpacitySilder.Value / 100;
             if(Master.WPFTimeClock.Opacity != 0.95)
@@ -110,35 +112,35 @@ namespace VPet.Plugin.DemoClock
 
         private void NumTimeDiff_ValueChanged(object sender, Panuon.WPF.SelectedValueChangedRoutedEventArgs<double?> e)
         {
-            if (!AllowChange)
+            if (!AllowChange || !Initial)
                 return;
             Set.TimeShifting = NumTimeDiff.Value.Value;
         }
 
         private void NumDefCountDown_ValueChanged(object sender, Panuon.WPF.SelectedValueChangedRoutedEventArgs<double?> e)
         {
-            if (!AllowChange)
+            if (!AllowChange || !Initial)
                 return;
             Set.DefaultCountDown = NumDefCountDown.Value.Value;
         }
 
         private void NumTomatoWork_ValueChanged(object sender, Panuon.WPF.SelectedValueChangedRoutedEventArgs<double?> e)
         {
-            if (!AllowChange)
+            if (!AllowChange || !Initial)
                 return;
             Set.Tomato_WorkTime = NumTomatoWork.Value.Value;
         }
 
         private void NumTomatoRest_ValueChanged(object sender, Panuon.WPF.SelectedValueChangedRoutedEventArgs<double?> e)
         {
-            if (!AllowChange)
+            if (!AllowChange || !Initial)
                 return;
             Set.Tomato_RestTime = NumTomatoRest.Value.Value;
         }
 
         private void NumTomatoRestLong_ValueChanged(object sender, Panuon.WPF.SelectedValueChangedRoutedEventArgs<double?> e)
         {
-            if (!AllowChange)
+            if (!AllowChange || !Initial)
                 return;
             Set.Tomato_RestTimeLong = NumTomatoRestLong.Value.Value;
         }
@@ -234,7 +236,9 @@ namespace VPet.Plugin.DemoClock
 
         private void Position_DataContextChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(WeatherPositionSet.SelectedIndex == 0)
+            if (!Initial)
+                return;
+            if (WeatherPositionSet.SelectedIndex == 0)
             {
                 Set.WeatherPosition = true;
             }

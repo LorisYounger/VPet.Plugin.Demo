@@ -23,7 +23,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="LinePutScript" Version="1.11.8" />
+    <PackageReference Include="LinePutScript" Version="1.11.9" />
     <PackageReference Include="LinePutScript.Localization.WPF" Version="1.0.7" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="NAudio" Version="2.2.1" />

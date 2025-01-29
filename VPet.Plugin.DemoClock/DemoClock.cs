@@ -79,13 +79,17 @@ namespace VPet.Plugin.DemoClock
         {
             Set = new Setting(MW.Set["DemoClock"]);
             MW.Set["DemoClock"] = Set;
-
+            if (Set == null)
+            {
+                MessageBox.Show("Error");
+            }
             WPFTimeClock = new TimeClock(this);
             musicPlayer = new MusicPlayer();
             menuItem = new MenuItem()
             {
                 Header = "DM时钟".Translate(),
-                HorizontalContentAlignment = HorizontalAlignment.Center
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+                Visibility = Visibility.Visible
             };
             //foreach (MenuItem mi in WPFTimeClock.CM.Items)
             //    menuItem.Items.Add(mi);
@@ -137,6 +141,9 @@ namespace VPet.Plugin.DemoClock
                 Header = "DM时钟".Translate(),
                 HorizontalContentAlignment = HorizontalAlignment.Center,
             };
+            menuset.Click += (s, e) => { Setting(); };
+            modset.Items.Add(menuset);
+
             var menuweather = new MenuItem()
             {
                 Header = "天气".Translate(),
@@ -167,32 +174,6 @@ namespace VPet.Plugin.DemoClock
         public override void LoadDIY()
         {
             MW.Main.ToolBar.MenuDIY.Items.Add(menuItem);
-        }
-        /// <summary>
-        /// 用于测试
-        /// </summary>
-        /// <param name="param">adcode参数</param>
-        /// <returns></returns>
-        private async Task LoadWeatherAsync(string param)
-        {
-            try
-            {
-                // 使用异步方法发送请求并设置超时时间
-                var weatherResponse = await GetWeatherAsync("https://weather.exlb.net/Weather",param, timeoutSeconds: 5);
-
-                if (weatherResponse != null)
-                {
-                    MessageBox.Show(weatherResponse.Status.ToString());
-                }
-                else
-                {
-                    MessageBox.Show("获取天气信息失败");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"发生错误：{ex.Message}");
-            }
         }
 
         internal async Task HandleWeatherAsync()
