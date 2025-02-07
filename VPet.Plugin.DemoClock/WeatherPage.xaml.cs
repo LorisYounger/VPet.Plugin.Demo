@@ -53,10 +53,9 @@ namespace VPet.Plugin.DemoClock
             try
             {
                 WeatherDataList = new List<WeatherCardViewModel>();
-                foreach (var weatherres in weatherResponse.Forecasts)
+                foreach (var weather in weatherResponse.Forecasts.Last().Casts)
                 {
-                    foreach(var weather in weatherres.Casts)
-                    {
+                    if (WeatherDataList.Find(x => x.Date.ToString().Equals(weather.Date.ToShortDateString())) == null)
                         WeatherDataList.Add(new WeatherCardViewModel
                         {
                             Date = weather.Date.ToShortDateString(),
@@ -69,7 +68,6 @@ namespace VPet.Plugin.DemoClock
                             NightTemperature = weather.NightTempFloat.ToString("F0") + "℃",
                             NightWind = weather.NightWind.ToString() + "风 " + weather.NightPower + "级",
                         });
-                    }
                 }
                 CityName.Text = weatherResponse.Forecasts.First().City;
                 
