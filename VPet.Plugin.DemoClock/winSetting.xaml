@@ -10,7 +10,7 @@
     <Window.Resources>
         <ResourceDictionary Source="/VPet-Simulator.Windows.Interface;component/ResourceStyle.xaml" />
     </Window.Resources>
-    <TabControl Background="{DynamicResource PrimaryLight}"
+    <TabControl x:Name="SetControl"  Background="{DynamicResource PrimaryLight}"
             pu:TabControlHelper.HeaderPanelBackground="{DynamicResource PrimaryLighter}"
             pu:TabControlHelper.ItemsSelectedBackground="{DynamicResource PrimaryLight}">
         <TabItem Header="{ll:Str 基本时间设置}">

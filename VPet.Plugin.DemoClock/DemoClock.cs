@@ -64,6 +64,7 @@ namespace VPet.Plugin.DemoClock
         public MenuItem mTotmatoRest;
         public MenuItem mCountDown;
         public MenuItem mTiming;
+        public MenuItem mWeather;
 
         public long CountDownLength;
         public winSetting winSetting;
@@ -157,12 +158,26 @@ namespace VPet.Plugin.DemoClock
             menuweatherpage.Click += (s, e) => { weatherWindow = new WeatherPage(this); weatherWindow.Show(); };
             var menuregionset = new MenuItem()
             {
-                Header = "设置地区".Translate(),
+                Header = "地区设置".Translate(),
                 HorizontalContentAlignment = HorizontalAlignment.Center,
             };
             menuregionset.Click += (s, e) => { Zoneinput = new ZoneInput(this); Zoneinput.Show(); };
-            menuweather.Items.Add(menuweatherpage);
+            var weatherset = new MenuItem()
+            {
+                Header = "UI设置".Translate(),
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+            };
+            weatherset.Click += (s, e) => { WeatherSetting(); };
             menuweather.Items.Add(menuregionset);
+            menuweather.Items.Add(weatherset);
+
+            mWeather = new MenuItem()
+            {
+                Header = "天气".Translate(),
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+                Visibility = Visibility.Visible
+            };
+            mWeather.Items.Add(menuweatherpage);
 
             modset.Items.Add(menuweather);
             ///***************** 设置天气 *****************///
@@ -174,6 +189,7 @@ namespace VPet.Plugin.DemoClock
         public override void LoadDIY()
         {
             MW.Main.ToolBar.MenuDIY.Items.Add(menuItem);
+            MW.Main.ToolBar.MenuDIY.Items.Add(mWeather);
         }
 
         internal async Task HandleWeatherAsync()
@@ -242,6 +258,22 @@ namespace VPet.Plugin.DemoClock
             else
             {
                 winSetting.Topmost = true;
+            }
+        }
+        public void WeatherSetting()
+        {
+            if(winSetting == null)
+            {
+                winSetting = new winSetting(this);
+                winSetting.SetControl.SelectedIndex = 2;
+                winSetting.Show();
+            }
+            else
+            {
+                winSetting.Close();
+                winSetting = new winSetting(this);
+                winSetting.SetControl.SelectedIndex = 2;
+                winSetting.Show();
             }
         }
     }
