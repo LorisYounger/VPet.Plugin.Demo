@@ -66,7 +66,24 @@ namespace VPet.Plugin.DemoClock
             Master.MW.Main.MouseEnter += UserControl_MouseEnter;
             Master.MW.Main.MouseLeave += UserControl_MouseLeave;
             TimeTimer_Tick();
+            WeatherControl.OnWeatherPageShow += WeatherControl_OnWeatherPageShow;
 
+        }
+
+        private void WeatherControl_OnWeatherPageShow()
+        {
+            if(Master.weatherWindow != null)
+            {
+                Master.MW.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    Master.weatherWindow.Close();
+                    Master.weatherWindow = new WeatherPage(Master);
+                    Master.weatherWindow.Show();
+                }));
+                return;
+            }
+            Master.weatherWindow = new WeatherPage(Master);
+            Master.MW.Dispatcher.BeginInvoke(new Action(() => {Master.weatherWindow.Show();}));
         }
 
         private void CloseTimer_Elapsed(object sender, ElapsedEventArgs e)

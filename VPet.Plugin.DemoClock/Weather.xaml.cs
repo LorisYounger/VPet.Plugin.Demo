@@ -15,12 +15,13 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace VPet.Plugin.DemoClock
-{
+{ 
     /// <summary>
     /// Weather.xaml 的交互逻辑
     /// </summary>
     public partial class Weather : System.Windows.Controls.UserControl
     {
+        public event Action OnWeatherPageShow;
         public Weather()
         {
             InitializeComponent();
@@ -86,6 +87,11 @@ namespace VPet.Plugin.DemoClock
                 return false;
             }
 
+        }
+
+        internal void UserControl_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            OnWeatherPageShow?.Invoke();
         }
     }
 }
