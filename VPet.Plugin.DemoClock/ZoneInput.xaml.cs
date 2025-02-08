@@ -35,7 +35,7 @@ namespace VPet.Plugin.DemoClock
             try
             {
                 // 异步加载LPS文件数据，避免阻塞UI线程
-                lps = await Task.Run(() => new LpsDocument(Tools.LoadEmbeddedResource("VPet.Plugin.DemoClock", "V3城市对应ADCODE.lps")));
+                lps = await Task.Run(() => new LpsDocument(Properties.Resources.V3CityADCODE_lps));
 
                 // 使用后台线程处理数据
                 _data = await Task.Run(() => lps.Select(x => (x.Name, x.InfoToInt, x.TextToInt)).ToList());

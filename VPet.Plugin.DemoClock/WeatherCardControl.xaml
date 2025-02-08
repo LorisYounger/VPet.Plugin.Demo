@@ -27,7 +27,7 @@
         <TextBlock Text="{Binding Date}" Grid.Row="0" Grid.Column="0"
                    FontSize="18" FontWeight="Bold" 
                    HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Foreground="White" Margin="5"/>
+                   Foreground="{DynamicResource DARKPrimaryText}" Margin="5"/>
         <Border Grid.Row="2" BorderThickness="2" CornerRadius="10" Padding="10" Margin="5" Panel.ZIndex="3">
             <Border.Background>
                 <RadialGradientBrush>
@@ -47,8 +47,7 @@
             </Border.Background>
         </Border>
         <!-- 白天天气卡片 -->
-        <Border Grid.Row="2" BorderThickness="2" CornerRadius="10" 
-                Background="DarkBlue" Padding="10" Margin="5" Panel.ZIndex="2">
+        <Border Grid.Row="2" BorderThickness="2" CornerRadius="10" Background="{DynamicResource DARKPrimaryTransA}" Padding="10" Margin="5" Panel.ZIndex="2">
             <Border.BorderBrush>
                 <RadialGradientBrush>
                     <GradientStop Color="#FF00008B" Offset="0"/>
@@ -58,11 +57,11 @@
                 </RadialGradientBrush>
             </Border.BorderBrush>
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                <TextBlock Text="白天天气" FontSize="18" FontWeight="Bold" Foreground="White" Margin="5"/>
-                <TextBlock Text="{Binding DayWeatherIcon}" FontFamily="pack://application:,,,/Res/#remixicon" FontSize="40" VerticalAlignment="Center" Foreground="White" Margin="10"/>
-                <TextBlock Text="{Binding DayWeather}" FontSize="20" Foreground="White"/>
-                <TextBlock Text="{Binding DayTemperature}" FontSize="16" Foreground="White"/>
-                <TextBlock Text="{Binding DayWind}" FontSize="14" Foreground="White"/>
+                <TextBlock Text="白天天气" FontSize="18" FontWeight="Bold" Foreground="{DynamicResource DARKPrimaryText}" Margin="5"/>
+                <TextBlock Text="{Binding DayWeatherIcon}" FontFamily="pack://application:,,,/Res/#remixicon" FontSize="40" VerticalAlignment="Center" Foreground="{DynamicResource DARKPrimaryText}" Margin="10"/>
+                <TextBlock Text="{Binding DayWeather}" FontSize="20" Foreground="{DynamicResource DARKPrimaryText}"/>
+                <TextBlock Text="{Binding DayTemperature}" FontSize="16" Foreground="{DynamicResource DARKPrimaryText}"/>
+                <TextBlock Text="{Binding DayWind}" FontSize="14" Foreground="{DynamicResource DARKPrimaryText}"/>
             </StackPanel>
         </Border>
         <Border Grid.Row="3" BorderThickness="2" CornerRadius="10" Padding="10" Margin="5" Panel.ZIndex="3">
@@ -84,8 +83,7 @@
             </Border.Background>
         </Border>
         <!-- 夜晚天气卡片 -->
-        <Border Grid.Row="3" BorderThickness="2" CornerRadius="10" 
-                Background="DarkBlue" Padding="10" Margin="5" Panel.ZIndex="2">
+        <Border Grid.Row="3" BorderThickness="2" CornerRadius="10" Background="{DynamicResource DARKPrimaryTransA}" Padding="10" Margin="5" Panel.ZIndex="2">
             <Border.BorderBrush>
                 <RadialGradientBrush>
                     <GradientStop Color="#FF00008B" Offset="0"/>
@@ -95,11 +93,12 @@
                 </RadialGradientBrush>
             </Border.BorderBrush>
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                <TextBlock Text="夜晚天气" FontSize="18" FontWeight="Bold" Foreground="White" Margin="5"/>
-                <TextBlock Text="{Binding NightWeatherIcon}" FontFamily="pack://application:,,,/Res/#remixicon" FontSize="40" VerticalAlignment="Center" Foreground="White" Margin="10"/>
-                <TextBlock Text="{Binding NightWeather}" FontSize="20" Foreground="White"/>
-                <TextBlock Text="{Binding NightTemperature}" FontSize="16" Foreground="White"/>
-                <TextBlock Text="{Binding NightWind}" FontSize="14" Foreground="White"/>
+                <TextBlock Text="夜晚天气" FontSize="18" FontWeight="Bold" Foreground="{DynamicResource DARKPrimaryText}" Margin="5"/>
+                <TextBlock Text="{Binding NightWeatherIcon}" FontFamily="pack://application:,,,/Res/#remixicon" FontSize="40" VerticalAlignment="Center" Foreground="{DynamicResource DARKPrimaryText}" Margin="10"/>
+                <TextBlock Text="{Binding NightWeather}" FontSize="20" Foreground="{DynamicResource DARKPrimaryText}"/>
+                <TextBlock Text="{Binding NightTemperature}" FontSize="16"
+                        Foreground="{DynamicResource DARKPrimaryText}"/>
+                <TextBlock Text="{Binding NightWind}" FontSize="14" Foreground="{DynamicResource DARKPrimaryText}"/>
             </StackPanel>
         </Border>
     </Grid>
