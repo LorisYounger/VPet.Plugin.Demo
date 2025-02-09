@@ -90,8 +90,7 @@ namespace VPet.Plugin.DemoClock.Properties {
         ///西青区#120111:|022
         ///津南区#120112:|022
         ///北辰区#120113:|022
-        ///武清区#120114:|022
-        /// [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///武清区#120114:|022        /// [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string V3CityADCODE_lps {
             get {

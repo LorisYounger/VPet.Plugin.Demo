@@ -80,10 +80,6 @@ namespace VPet.Plugin.DemoClock
         {
             Set = new Setting(MW.Set["DemoClock"]);
             MW.Set["DemoClock"] = Set;
-            if (Set == null)
-            {
-                MessageBox.Show("Error");
-            }
             WPFTimeClock = new TimeClock(this);
             musicPlayer = new MusicPlayer();
             menuItem = new MenuItem()
@@ -236,12 +232,12 @@ namespace VPet.Plugin.DemoClock
             }
             catch (TaskCanceledException)
             {
-                MessageBox.Show("请求超时，请稍后再试。");
+                MessageBoxX.Show("请求天气数据超时，请稍后再试。");
                 return null;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"请求失败：{ex.Message}");
+                MessageBoxX.Show($"请求天气数据失败：{ex.Message}");
                 return null;
             }
         }

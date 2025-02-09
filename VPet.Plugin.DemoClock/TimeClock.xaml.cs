@@ -67,7 +67,7 @@ namespace VPet.Plugin.DemoClock
             Master.MW.Main.MouseLeave += UserControl_MouseLeave;
             TimeTimer_Tick();
             WeatherControl.OnWeatherPageShow += WeatherControl_OnWeatherPageShow;
-
+            UpdateWeatherState();
         }
 
         private void WeatherControl_OnWeatherPageShow()
@@ -119,17 +119,11 @@ namespace VPet.Plugin.DemoClock
         {
             if (IsPause)
                 return;
-            if (Master.mode != Mode.None)
-            {
-                WeatherControl.Visibility = Visibility.Collapsed;
-                TTimes.Visibility = Visibility.Visible;
-                TDates.Visibility = Visibility.Visible;
-                TDayofWeek.Visibility = Visibility.Visible;
-            }
             switch (Master.mode)
             {
                 default:
                 case Mode.None:
+                    UpdateWeatherState();
                     CountTimer.Stop();
                     break;
                 case Mode.Timing:
@@ -173,7 +167,6 @@ namespace VPet.Plugin.DemoClock
                         var voicetext = "";
                         if (Tools.TryGetInputTypeAndValue(Master.Set.CountDownVoice, out voicetext))
                         {
-                            MessageBox.Show(voicetext);
                             Master.musicPlayer.Play(voicetext);
                         }
                         else
@@ -361,6 +354,7 @@ namespace VPet.Plugin.DemoClock
             CountTimer.Interval = TimeSpan.FromMilliseconds(50);
             CountTimer.Start();
             Master.mode = Mode.Timing;
+            UpdateWeatherState();
         }
         /// <summary>
         /// 暂停计时模式
@@ -399,6 +393,7 @@ namespace VPet.Plugin.DemoClock
             PBTimeLeft.Visibility = Visibility.Visible;
             CountTimer.Interval = TimeSpan.FromSeconds(1);
             CountTimer.Start();
+            UpdateWeatherState();
         }
         /// <summary>
         /// 继续倒计时
@@ -444,6 +439,7 @@ namespace VPet.Plugin.DemoClock
             {
                 Master.MW.Dispatcher.BeginInvoke(() => { Master.MW.Main.SayRnd(voicetext, true); });
             }
+            UpdateWeatherState();
         }
         /// <summary>
         /// 开始休息
@@ -470,6 +466,7 @@ namespace VPet.Plugin.DemoClock
             {
                 Master.MW.Dispatcher.BeginInvoke(() => { Master.MW.Main.SayRnd(voicetext, true); });
             }
+            UpdateWeatherState();
         }
         /// <summary>
         /// 开始长休息
@@ -487,15 +484,21 @@ namespace VPet.Plugin.DemoClock
             PBTimeLeft.Maximum = Master.Set.Tomato_RestTimeLong;
             CountTimer.Interval = TimeSpan.FromSeconds(1);
             CountTimer.Start();
-            var voicetext = "";
+            UpdateWeatherState();
         }
         /// <summary>
-        /// 时钟模式UI更新
+        /// 更新天气模块位置
         /// </summary>
-        private void TimeTimer_Tick(object sender = null, EventArgs e = null)
+        internal void UpdateWeatherState()
         {
-            //相关UI更新
-            if (Master.mode == Mode.None)
+            if (Master.mode != Mode.None)
+            {
+                WeatherControl.Visibility = Visibility.Collapsed;
+                TTimes.Visibility = Visibility.Visible;
+                TDates.Visibility = Visibility.Visible;
+                TDayofWeek.Visibility = Visibility.Visible;
+            }
+            else
             {
                 if (Master.Set.DefaultWeather == true) //TODO:天气模块位置判断挪到对应地方, 你可以新建一个方法叫 UpdateWeatherPosition() 来更新天气模块位置
                 {
@@ -522,6 +525,18 @@ namespace VPet.Plugin.DemoClock
                     TDates.Visibility = Visibility.Visible;
                     TDayofWeek.Visibility = Visibility.Visible;
                 }
+            }
+        }
+
+        /// <summary>
+        /// 时钟模式UI更新
+        /// </summary>
+        private void TimeTimer_Tick(object sender = null, EventArgs e = null)
+        {
+            //相关UI更新
+            if (Master.mode == Mode.None)
+            {
+                
                 if (Master.Set.Hour24)
                 {
                     TTimes.Text = DateTime.Now.ToString("HH:mm");
@@ -584,7 +599,7 @@ namespace VPet.Plugin.DemoClock
             Master.Setting();
         }
         /// <summary>
-        /// 计时模式菜单右键点击响应
+        /// 计时模式菜单左键点击响应
         /// </summary>
         public void TimingMenuItem_Click(object sender, RoutedEventArgs e)
         {
@@ -611,7 +626,7 @@ namespace VPet.Plugin.DemoClock
             }
         }
         /// <summary>
-        /// 工作模式菜单右键点击响应
+        /// 工作模式菜单左键点击响应
         /// </summary>
         public void WorkMenuItem_Click(object sender, RoutedEventArgs e)
         {
@@ -625,6 +640,7 @@ namespace VPet.Plugin.DemoClock
                     PBTimeLeft.Visibility = Visibility.Collapsed;
                     WorkMenuItem.Header = "开始工作".Translate();
                     Master.mTotmatoWork.Header = "开始工作".Translate();
+                    UpdateWeatherState();
                 }
             }
             else if (Master.mode == Mode.Tomato_Rest)
@@ -637,17 +653,31 @@ namespace VPet.Plugin.DemoClock
                     PBTimeLeft.Visibility = Visibility.Collapsed;
                     WorkMenuItem.Header = "开始工作".Translate();
                     Master.mTotmatoWork.Header = "开始工作".Translate();
+                    UpdateWeatherState();
                 }
             }
             else
             {
-                StartWork();
-                WorkMenuItem.Header = "停止工作".Translate();
-                Master.mTotmatoWork.Header = "停止工作".Translate();
+                if (Master.mode == Mode.None)
+                {
+                    StartWork();
+                    WorkMenuItem.Header = "停止工作".Translate();
+                    Master.mTotmatoWork.Header = "停止工作".Translate();
+                }
+                else if (Master.mode == Mode.CountDown_End)
+                {
+                    Master.mode = Mode.None;
+                    CountTimer.IsEnabled = false;
+                    TOthers.Visibility = Visibility.Collapsed;
+                    PBTimeLeft.Visibility = Visibility.Collapsed;
+                    WorkMenuItem.Header = "开始工作".Translate();
+                    Master.mTotmatoWork.Header = "开始工作".Translate();
+                    UpdateWeatherState();
+                }
             }
         }
         /// <summary>
-        /// 长休息菜单右键点击响应
+        /// 长休息菜单左键点击响应
         /// </summary>
         public void RestMenuItem_Click(object sender, RoutedEventArgs e)
         {
@@ -661,6 +691,7 @@ namespace VPet.Plugin.DemoClock
                     PBTimeLeft.Visibility = Visibility.Collapsed;
                     WorkMenuItem.Header = "开始休息".Translate();
                     Master.mTotmatoWork.Header = "开始休息".Translate();
+                    UpdateWeatherState();
                 }
             }
             else
@@ -675,7 +706,7 @@ namespace VPet.Plugin.DemoClock
                     WorkMenuItem.Header = "停止休息";
                     Master.mTotmatoWork.Header = "停止休息";
                 }
-                else
+                else if(Master.Set.Tomato_Count <= Master.Set.Tomato_RestTimeLong / 2)
                 {
                     MessageBoxX.Show("当前番茄不足,不能开始长休息\n休息所需番茄 {0}\n当前拥有番茄 {1}".Translate(need, Master.Set.Tomato_Count),
                         "休息失败,请好好工作".Translate());
@@ -683,7 +714,7 @@ namespace VPet.Plugin.DemoClock
             }
         }
         /// <summary>
-        /// 左键点击响应函数
+        /// 主控件左键点击响应函数
         /// </summary>
         private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -695,6 +726,7 @@ namespace VPet.Plugin.DemoClock
                 PBTimeLeft.Visibility = Visibility.Collapsed;
                 CountDownMenuItem.Header = "开始倒计时";
                 Master.mCountDown.Header = "开始倒计时";
+                UpdateWeatherState();
             }
             else if (TDates.Text == "工作结束".Translate())
                 StartRest();
