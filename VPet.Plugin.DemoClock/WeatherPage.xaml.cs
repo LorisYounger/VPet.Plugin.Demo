@@ -4,10 +4,12 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Controls;
+using Panuon.WPF.UI;
 
 namespace VPet.Plugin.DemoClock
 {
-    public partial class WeatherPage : Window, INotifyPropertyChanged
+    public partial class WeatherPage : Viewbox, INotifyPropertyChanged
     {
         private string _city;
         public string City
@@ -75,7 +77,7 @@ namespace VPet.Plugin.DemoClock
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBoxX.Show($"加载天气信息失败，错误信息为{ex.ToString()}");
                 return false;
             }
         }

@@ -29,29 +29,27 @@
            Width="40" Height="40" 
            FontFamily="pack://application:,,,/Res/#remixicon" 
            Text="{Binding WeatherImage}" 
-           ToolTip="{Binding Description}"
-           FontSize="40"  
-           Foreground="White"/>
+           FontSize="40"
+                    Foreground="{DynamicResource DARKPrimaryText}"/>
 
             <!-- 城市名称 -->
             <TextBlock x:Name="CityText" Text="{ll:Str 城市}" FontSize="16" FontWeight="Bold"
-                       HorizontalAlignment="Center" VerticalAlignment="Center"
-                       Margin="5" Foreground="White"/>
+                       HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Foreground="{DynamicResource DARKPrimaryText}"/>
         </StackPanel>
 
         <!-- 右列：气温、风速、湿度 -->
         <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,10,10,5">
             <!-- 气温 -->
             <TextBlock x:Name="TemperatureText" Text="{ll:Str 25℃}" FontSize="15" FontWeight="Bold"
-                       HorizontalAlignment="Center" Margin="2" Foreground="White"/>
+                    HorizontalAlignment="Center" Margin="2" Foreground="{DynamicResource DARKPrimaryText}"/>
 
             <!-- 风向 -->
             <TextBlock x:Name="WindText" Text="{ll:Str 北风4-6级}" FontSize="15" FontWeight="Bold"
-                       HorizontalAlignment="Center" Margin="2" Foreground="White"/>
+                    HorizontalAlignment="Center" Margin="2" Foreground="{DynamicResource DARKPrimaryText}"/>
 
             <!-- 湿度 -->
             <TextBlock x:Name="HumidityText" Text="{ll:Str 湿度: 65%}" FontSize="15" FontWeight="Bold"
-                       HorizontalAlignment="Center" Margin="2" Foreground="White"/>
+                    HorizontalAlignment="Center" Margin="2" Foreground="{DynamicResource DARKPrimaryText}"/>
         </StackPanel>
     </Grid>
 </UserControl>

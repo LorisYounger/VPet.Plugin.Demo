@@ -108,6 +108,11 @@ namespace VPet.Plugin.DemoClock
                 Master.MW.Main.UIGrid_Back.Children.Remove(Master.WPFTimeClock);
                 Master.MW.Main.UIGrid.Children.Insert(0, Master.WPFTimeClock);
             }
+            else if(Master.Set.PlaceAutoBack == false && Master.MW.Main.UIGrid.Children.Contains(Master.WPFTimeClock))
+            {
+                Master.MW.Main.UIGrid.Children.Remove(Master.WPFTimeClock);
+                Master.MW.Main.UIGrid_Back.Children.Insert(0, Master.WPFTimeClock);
+            }
         }
 
         private void NumTimeDiff_ValueChanged(object sender, Panuon.WPF.SelectedValueChangedRoutedEventArgs<double?> e)
@@ -241,16 +246,19 @@ namespace VPet.Plugin.DemoClock
             if (WeatherPositionSet.SelectedIndex == 0)
             {
                 Set.WeatherPosition = true;
+                Master.WPFTimeClock.UpdateWeatherState();
             }
             else
             {
                 Set.WeatherPosition = false;
+                Master.WPFTimeClock.UpdateWeatherState();
             }
         }
 
         private void DefaultWeather_Checked(object sender, RoutedEventArgs e)
         {
             Set.DefaultWeather = DefaultWeather.IsChecked.Value;
+            Master.WPFTimeClock.UpdateWeatherState();
         }
     }
     public enum WeatherPosition

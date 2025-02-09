@@ -69,7 +69,7 @@ namespace VPet.Plugin.DemoClock
         public long CountDownLength;
         public winSetting winSetting;
         public MusicPlayer musicPlayer;
-        public WeatherPage weatherWindow;
+        public winWeatherPage weatherWindow;
         public ZoneInput Zoneinput;
         public WeatherResponse weather; 
         public DemoClock(IMainWindow mainwin) : base(mainwin)
@@ -80,10 +80,6 @@ namespace VPet.Plugin.DemoClock
         {
             Set = new Setting(MW.Set["DemoClock"]);
             MW.Set["DemoClock"] = Set;
-            if (Set == null)
-            {
-                MessageBox.Show("Error");
-            }
             WPFTimeClock = new TimeClock(this);
             musicPlayer = new MusicPlayer();
             menuItem = new MenuItem()
@@ -155,7 +151,7 @@ namespace VPet.Plugin.DemoClock
                 Header = "天气页面".Translate(),
                 HorizontalContentAlignment = HorizontalAlignment.Center,
             };
-            menuweatherpage.Click += (s, e) => { weatherWindow = new WeatherPage(this); weatherWindow.Show(); };
+            menuweatherpage.Click += (s, e) => { weatherWindow = new winWeatherPage(this); weatherWindow.Show(); };
             var menuregionset = new MenuItem()
             {
                 Header = "地区设置".Translate(),
@@ -236,12 +232,12 @@ namespace VPet.Plugin.DemoClock
             }
             catch (TaskCanceledException)
             {
-                MessageBox.Show("请求超时，请稍后再试。");
+                MessageBoxX.Show("请求天气数据超时，请稍后再试。");
                 return null;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"请求失败：{ex.Message}");
+                MessageBoxX.Show($"请求天气数据失败：{ex.Message}");
                 return null;
             }
         }
