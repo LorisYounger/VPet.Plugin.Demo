@@ -100,7 +100,7 @@ namespace VPet.Plugin.DemoClock
 
         private void SwitchAutoLayer_Checked(object sender, RoutedEventArgs e)
         {
-            if (!AllowChange)
+            if (!Initial)
                 return;
             Set.PlaceAutoBack = SwitchAutoLayer.IsChecked.Value;
             if (Master.Set.PlaceAutoBack && Master.MW.Main.UIGrid_Back.Children.Contains(Master.WPFTimeClock))
@@ -108,10 +108,10 @@ namespace VPet.Plugin.DemoClock
                 Master.MW.Main.UIGrid_Back.Children.Remove(Master.WPFTimeClock);
                 Master.MW.Main.UIGrid.Children.Insert(0, Master.WPFTimeClock);
             }
-            else if(Master.Set.PlaceAutoBack == false && Master.MW.Main.UIGrid.Children.Contains(Master.WPFTimeClock))
+            else if(Master.Set.PlaceAutoBack == false && Master.MW.Main.UIGrid_Back.Children.Contains(Master.WPFTimeClock))
             {
-                Master.MW.Main.UIGrid.Children.Remove(Master.WPFTimeClock);
-                Master.MW.Main.UIGrid_Back.Children.Insert(0, Master.WPFTimeClock);
+                Master.MW.Main.UIGrid_Back.Children.Remove(Master.WPFTimeClock);
+                Master.MW.Main.UIGrid.Children.Insert(0, Master.WPFTimeClock);
             }
         }
 
