@@ -72,18 +72,18 @@ namespace VPet.Plugin.DemoClock
 
         private void WeatherControl_OnWeatherPageShow()
         {
-            if(Master.weatherWindow != null)
+            if (Master.weatherWindow != null)
             {
                 Master.MW.Dispatcher.BeginInvoke(new Action(() =>
                 {
                     Master.weatherWindow.Close();
-                    Master.weatherWindow = new WeatherPage(Master);
+                    Master.weatherWindow = new winWeatherPage(Master);
                     Master.weatherWindow.Show();
                 }));
                 return;
             }
-            Master.weatherWindow = new WeatherPage(Master);
-            Master.MW.Dispatcher.BeginInvoke(new Action(() => {Master.weatherWindow.Show();}));
+            Master.weatherWindow = new winWeatherPage(Master);
+            Master.MW.Dispatcher.BeginInvoke(new Action(() => { Master.weatherWindow.Show(); }));
         }
 
         private void CloseTimer_Elapsed(object sender, ElapsedEventArgs e)
@@ -119,7 +119,7 @@ namespace VPet.Plugin.DemoClock
         {
             if (IsPause)
                 return;
-            if(Master.mode != Mode.None)
+            if (Master.mode != Mode.None)
             {
                 WeatherControl.Visibility = Visibility.Collapsed;
                 TTimes.Visibility = Visibility.Visible;
@@ -497,7 +497,7 @@ namespace VPet.Plugin.DemoClock
             //相关UI更新
             if (Master.mode == Mode.None)
             {
-                if (Master.Set.DefaultWeather == true)
+                if (Master.Set.DefaultWeather == true) //TODO:天气模块位置判断挪到对应地方, 你可以新建一个方法叫 UpdateWeatherPosition() 来更新天气模块位置
                 {
                     WeatherControl.Visibility = Visibility.Visible;
                     if (Master.Set.WeatherPosition == true)
@@ -708,7 +708,7 @@ namespace VPet.Plugin.DemoClock
 
         private void TimeClock_MouseLeave(object sender, MouseEventArgs e)
         {
-            
+
         }
-    }        
+    }
 }

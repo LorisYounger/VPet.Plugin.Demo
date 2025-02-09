@@ -4,10 +4,11 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace VPet.Plugin.DemoClock
 {
-    public partial class WeatherPage : Window, INotifyPropertyChanged
+    public partial class WeatherPage : Viewbox, INotifyPropertyChanged
     {
         private string _city;
         public string City

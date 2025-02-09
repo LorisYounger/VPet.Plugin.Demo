@@ -29,7 +29,6 @@
            Width="40" Height="40" 
            FontFamily="pack://application:,,,/Res/#remixicon" 
            Text="{Binding WeatherImage}" 
-           ToolTip="{Binding Description}"
            FontSize="40"
                     Foreground="{DynamicResource DARKPrimaryText}"/>
 
