@@ -47,7 +47,7 @@
             </Border.Background>
         </Border>
         <!-- 白天天气卡片 -->
-        <Border Grid.Row="2" BorderThickness="2" CornerRadius="10" Background="{DynamicResource DARKPrimaryTransA}" Padding="10" Margin="5" Panel.ZIndex="2">
+        <Border Grid.Row="2" BorderThickness="2" CornerRadius="10" Background="{DynamicResource DARKPrimaryDarker}" Padding="10" Margin="5" Panel.ZIndex="2">
             <Border.BorderBrush>
                 <RadialGradientBrush>
                     <GradientStop Color="#FF00008B" Offset="0"/>
@@ -83,7 +83,7 @@
             </Border.Background>
         </Border>
         <!-- 夜晚天气卡片 -->
-        <Border Grid.Row="3" BorderThickness="2" CornerRadius="10" Background="{DynamicResource DARKPrimaryTransA}" Padding="10" Margin="5" Panel.ZIndex="2">
+        <Border Grid.Row="3" BorderThickness="2" CornerRadius="10" Background="{DynamicResource DARKPrimaryDarker}" Padding="10" Margin="5" Panel.ZIndex="2">
             <Border.BorderBrush>
                 <RadialGradientBrush>
                     <GradientStop Color="#FF00008B" Offset="0"/>

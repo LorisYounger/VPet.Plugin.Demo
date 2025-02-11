@@ -51,7 +51,7 @@ namespace VPet.Plugin.DemoClock
             catch (Exception ex)
             {
                 // 错误处理，显示异常信息
-                MessageBoxX.Show($"加载数据失败: {ex.Message}");
+                MessageBoxX.Show($"加载城市数据失败: {ex.Message}");
             }
         }
 
