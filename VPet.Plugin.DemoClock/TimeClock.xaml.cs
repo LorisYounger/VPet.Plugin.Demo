@@ -67,7 +67,17 @@ namespace VPet.Plugin.DemoClock
             Master.MW.Main.MouseLeave += UserControl_MouseLeave;
             TimeTimer_Tick();
             WeatherControl.OnWeatherPageShow += WeatherControl_OnWeatherPageShow;
+            WeatherControl.ToolTip = "weather";
+            WeatherControl.ToolTipOpening += WeatherControl_ToolTipOpening;
             UpdateWeatherState();
+        }
+
+        private void WeatherControl_ToolTipOpening(object sender, ToolTipEventArgs e)
+        {
+            WeatherControl.ToolTip = new WeatherPage(Master)
+            {
+                Width = 300,
+            };
         }
 
         private void WeatherControl_OnWeatherPageShow()
@@ -536,7 +546,7 @@ namespace VPet.Plugin.DemoClock
             //相关UI更新
             if (Master.mode == Mode.None)
             {
-                
+
                 if (Master.Set.Hour24)
                 {
                     TTimes.Text = DateTime.Now.ToString("HH:mm");
@@ -706,7 +716,7 @@ namespace VPet.Plugin.DemoClock
                     WorkMenuItem.Header = "停止休息";
                     Master.mTotmatoWork.Header = "停止休息";
                 }
-                else if(Master.Set.Tomato_Count <= Master.Set.Tomato_RestTimeLong / 2)
+                else if (Master.Set.Tomato_Count <= Master.Set.Tomato_RestTimeLong / 2)
                 {
                     MessageBoxX.Show("当前番茄不足,不能开始长休息\n休息所需番茄 {0}\n当前拥有番茄 {1}".Translate(need, Master.Set.Tomato_Count),
                         "休息失败,请好好工作".Translate());

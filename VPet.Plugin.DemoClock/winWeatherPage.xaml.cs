@@ -22,7 +22,10 @@ namespace VPet.Plugin.DemoClock
         public winWeatherPage(DemoClock Master)
         {
             InitializeComponent();
-            this.Content = new WeatherPage(Master);
+            this.Content = new WeatherPage(Master)
+            {
+                Margin = new Thickness(20),
+            };
         }
     }
 }

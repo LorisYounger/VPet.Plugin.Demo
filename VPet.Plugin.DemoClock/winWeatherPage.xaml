@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:VPet.Plugin.DemoClock" mc:Ignorable="d"
         xmlns:ll="clr-namespace:LinePutScript.Localization.WPF;assembly=LinePutScript.Localization.WPF"
         Title="{ll:Str 天气预报}" Height="600" Width="600" WindowStartupLocation="CenterScreen"
-        Background="{DynamicResource DARKPrimaryLighter}" SizeToContent="WidthAndHeight">
+        Background="{DynamicResource DARKPrimaryLighter}">
     <Grid>
         
     </Grid>
