@@ -2,3 +2,4 @@
 Token显示#Token display:|
 超过该值后自动删除最早的聊天记录#Automatically deletes the earliest chat log after exceeding this value:|
 在聊天记录中显示消耗的Token数量#Display the number of consumed Token in the chat logs:|
+本文本框可以编辑,以支持其他OPENAI格式的模型调用#This text box can be edited to support other OPENAI format model calls:|

@@ -53,9 +53,34 @@ namespace VPet.Plugin.ChatGPTPlugin
             }
             else
                 tbSystem.Text = "请使用口语化的、可爱的、女性化的、调皮的语言风格和我交流. 你是一只桌宠, 你的名字叫{Name}, 你喜欢玩 虚拟主播模拟器. 你需要尝试体会我与你对话中的感情、产生自己的情感并尽可能给出可爱的回答".Translate();
+            cbModel.SelectionChanged += CbModel_SelectionChanged;
             niKeepHistory.Value = plugin.KeepHistory;
             swShowToken.IsChecked = plugin.ShowToken;
         }
+
+        private void CbModel_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch (cbModel.SelectedIndex)
+            {
+
+                case 0:
+                case 1:
+                case 2:
+                    tbAPIURL.Text = "https://api.openai.com/v1/chat/completions";
+                    return;
+                case 3:
+                case 4:
+                    tbAPIURL.Text = "https://api.deepseek.com/v1/chat/completions";
+                    return;
+                case 5:
+                case 6:
+                    tbAPIURL.Text = "https://open.bigmodel.cn/api/paas/v4/chat/completions";
+                    return;
+                default:
+                    return;
+            }
+        }
+
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             if (tbAPIURL.Text.Split('/').Length <= 2 && !tbAPIURL.Text.Contains("completions"))
@@ -96,6 +121,8 @@ namespace VPet.Plugin.ChatGPTPlugin
             plugin.Save();
             this.Close();
         }
+
+
     }
 }
 

@@ -29,10 +29,10 @@
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
         </Grid.RowDefinitions>
-        <TextBlock Text="API URL" VerticalAlignment="Center" />
-        <TextBlock Grid.Row="2" Text="{ll:Str Web代理}" VerticalAlignment="Center" />
-        <TextBlock Grid.Row="1" Text="API Key" VerticalAlignment="Center" />
-        <TextBlock Grid.Row="3" Text="Model" VerticalAlignment="Center" />
+        <TextBlock Grid.Row="1" Text="API URL" VerticalAlignment="Center" />
+        <TextBlock Grid.Row="3" Text="{ll:Str Web代理}" VerticalAlignment="Center" />
+        <TextBlock Grid.Row="2" Text="API Key" VerticalAlignment="Center" />
+        <TextBlock Grid.Row="0" Text="Model" VerticalAlignment="Center" />
         <TextBlock Grid.Row="4" Text="{ll:Str 初始化文本}" VerticalAlignment="Center" />
         <TextBlock Grid.Row="5" Text="{ll:Str 温度}" VerticalAlignment="Center" />
         <TextBlock Grid.Row="6" Text="{ll:Str 最大花费}" VerticalAlignment="Center" />
@@ -41,21 +41,25 @@
         <TextBlock Grid.Row="9" Text="{ll:Str 保留记录}" VerticalAlignment="Center" />
         <TextBlock Grid.Row="10" Text="{ll:Str Token显示}" VerticalAlignment="Center" />
         <TextBlock Grid.Row="11" Text="{ll:Str 完成设置}" VerticalAlignment="Center" />
-        <TextBox x:Name="tbAPIURL" Grid.Row="0" Grid.Column="2" Style="{DynamicResource StandardTextBoxStyle}"
+        <TextBox x:Name="tbAPIURL" Grid.Row="1" Grid.Column="2" Style="{DynamicResource StandardTextBoxStyle}"
                 FontSize="16" pu:TextBoxHelper.Watermark="{ll:Str 'API 链接 一般为 api.openai.com/v1/chat/completions'}"
                 Text="https://api.openai.com/v1/chat/completions"
                 ToolTip="{ll:Str 'API 链接 一般为 api.openai.com/v1/chat/completions'}" Margin="0,5,0,5" />
-        <TextBox x:Name="tbAPIKey" Grid.Row="1" Grid.Column="2" Style="{DynamicResource StandardTextBoxStyle}"
+        <TextBox x:Name="tbAPIKey" Grid.Row="2" Grid.Column="2" Style="{DynamicResource StandardTextBoxStyle}"
                 FontSize="16" pu:TextBoxHelper.Watermark="{ll:Str '从 OpenAI 获得的 APIKEY 一般`sk-`开头'}"
                 ToolTip="{ll:Str '从 OpenAI 获得的 APIKEY 一般`sk-`开头'}" VerticalAlignment="Top" Margin="0,2,0,0" />
-        <TextBox x:Name="tbWebProxy" Grid.Row="2" Grid.Column="2" Style="{DynamicResource StandardTextBoxStyle}"
+        <TextBox x:Name="tbWebProxy" Grid.Row="3" Grid.Column="2" Style="{DynamicResource StandardTextBoxStyle}"
                 FontSize="16" pu:TextBoxHelper.Watermark="{ll:Str '没有可不填. HTTP 代理服务器 或 SOCKS 代理服务器等 WEB代理链接'}"
                 ToolTip="{ll:Str '没有可不填. HTTP 代理服务器 或 SOCKS 代理服务器等 WEB代理链接'}" VerticalAlignment="Top" Margin="0,2,0,0" />
-        <ComboBox x:Name="cbModel" Style="{DynamicResource StandardComboBoxStyle}" Grid.Row="3" Grid.Column="2"
-                SelectedIndex="0" IsEditable="True" Margin="0,5,0,5">
-            <ComboBoxItem Content="gpt-3.5-turbo" />
-            <ComboBoxItem Content="gpt-4-turbo-preview" />
-            <ComboBoxItem Content="gpt-4" />
+        <ComboBox x:Name="cbModel" Style="{DynamicResource StandardComboBoxStyle}" Grid.Row="0" Grid.Column="2"
+                SelectedIndex="0" IsEditable="True" Margin="0,5,0,5" ToolTip="本文本框可以编辑,以支持其他OPENAI格式的模型调用">
+            <ComboBoxItem Content="gpt-4o-mini" />
+            <ComboBoxItem Content="gpt-4o" />
+            <ComboBoxItem Content="gpt-4-turbo" />
+            <ComboBoxItem Content="deepseek-reasoner" />
+            <ComboBoxItem Content="deepseek-chat" />
+            <ComboBoxItem Content="GLM-4-Flash" />
+            <ComboBoxItem Content="GLM-4-Plus" />
         </ComboBox>
         <TextBox x:Name="tbSystem" Grid.Row="4" Grid.Column="2" Style="{DynamicResource StandardTextBoxStyle}"
                 FontSize="16" pu:TextBoxHelper.Watermark="{ll:Str '不会被忘记的初始化关键字, 字越多越贵'}"
