@@ -1,7 +1,9 @@
 ﻿using Panuon.WPF.UI;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -74,11 +76,17 @@ namespace VPet.Plugin.DemoClock
             try
             {
                 City = city;
+                OnPropertyChanged(nameof(City));
                 Temperature = temperature;
+                OnPropertyChanged(nameof(Temperature));
                 Description = description;
+                OnPropertyChanged(nameof(Description));
                 WeatherImage = WeatherIconMapping.GetWeatherIcon(description);
+                OnPropertyChanged(nameof(WeatherImage));
                 Wind = wind;
+                OnPropertyChanged(nameof(Wind));
                 Humidity = humidity;
+                OnPropertyChanged(nameof(Humidity));
                 return true;
             }
             catch (Exception ex)
@@ -92,6 +100,13 @@ namespace VPet.Plugin.DemoClock
         internal void UserControl_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             OnWeatherPageShow?.Invoke();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
