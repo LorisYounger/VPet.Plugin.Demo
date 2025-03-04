@@ -70,13 +70,12 @@ namespace VPet.Plugin.DemoClock
         public winSetting winSetting;
         public MusicPlayer musicPlayer;
         public winWeatherPage weatherWindow;
-        public ZoneInput Zoneinput;
         public WeatherResponse weather; 
         public DemoClock(IMainWindow mainwin) : base(mainwin)
         {
         }
 
-        public override void LoadPlugin()
+        public async override void LoadPlugin()
         {
             Set = new Setting(MW.Set["DemoClock"]);
             MW.Set["DemoClock"] = Set;
@@ -143,43 +142,23 @@ namespace VPet.Plugin.DemoClock
 
             var menuweather = new MenuItem()
             {
-                Header = "天气".Translate(),
+                Header = "天气设置".Translate(),
                 HorizontalContentAlignment = HorizontalAlignment.Center,
             };
-            var menuweatherpage = new MenuItem()
-            {
-                Header = "天气页面".Translate(),
-                HorizontalContentAlignment = HorizontalAlignment.Center,
-            };
-            menuweatherpage.Click += (s, e) => { weatherWindow = new winWeatherPage(this); weatherWindow.Show(); };
-            var menuregionset = new MenuItem()
-            {
-                Header = "地区设置".Translate(),
-                HorizontalContentAlignment = HorizontalAlignment.Center,
-            };
-            menuregionset.Click += (s, e) => { Zoneinput = new ZoneInput(this); Zoneinput.Show(); };
-            var weatherset = new MenuItem()
-            {
-                Header = "UI设置".Translate(),
-                HorizontalContentAlignment = HorizontalAlignment.Center,
-            };
-            weatherset.Click += (s, e) => { WeatherSetting(); };
-            menuweather.Items.Add(menuregionset);
-            menuweather.Items.Add(weatherset);
+            menuweather.Click += (s, e) => { WeatherSetting(); };
 
             mWeather = new MenuItem()
             {
-                Header = "天气".Translate(),
+                Header = "天气页面".Translate(),
                 HorizontalContentAlignment = HorizontalAlignment.Center,
                 Visibility = Visibility.Visible
             };
-            mWeather.Items.Add(menuweatherpage);
+            mWeather.Click += (s, e) => { weatherWindow = new winWeatherPage(this); weatherWindow.Show(); };
 
             modset.Items.Add(menuweather);
             ///***************** 设置天气 *****************///
-            HandleWeatherAsync();
+            await HandleWeatherAsync();
             Tools.StartRecurringTimer(3, HandleWeatherAsync);
-            //WPFTimeClock.WeatherControl.SetWeather();
             ///***************** 设置天气 *****************///
         }
         public override void LoadDIY()
@@ -190,31 +169,30 @@ namespace VPet.Plugin.DemoClock
 
         internal async Task HandleWeatherAsync()
         {
-            // 获取天气信息
-            weather = await GetWeatherAsync("https://weather.exlb.net/Weather");
-
-            if (weather.Status != 200)
+            if(Set.AdCode == 0)
             {
-                if (Set.AdCode == 0)
+                weather = await GetWeatherAsync("https://weather.exlb.net/Weather");
+                if (weather.Status != 200)
                 {
-                    // 如果没有 AdCode，弹出输入框
-                    Zoneinput = new ZoneInput(this);
-                    MW.Dispatcher.Invoke(() =>
-                    {
-                        Zoneinput.Show();
-                    });
+                    MessageBoxX.Show("请求天气数据失败，请尝试手动设置地区。");
+                    WeatherSetting();
                 }
-                else
+                else if (weather.Status.Equals(200))
                 {
-                    // 如果有 AdCode，使用 AdCode 请求天气
-                    weather = await GetWeatherAsync("https://weather.exlb.net/Weather", $"adcode={Set.AdCode}");
+                    WPFTimeClock.WeatherControl.SetWeather(weather.Lives.Last().City, "温度:" + weather.Lives.Last().TemperatureFloat.ToString("F0") + "℃"
+                        , weather.Lives.Last().Weather.ToString(), weather.Lives.Last().WindDirection.ToString() + "风 " + weather.Lives.Last().WindPower + "级"
+                        , "湿度:" + weather.Lives.Last().HumidityFloat.ToString("F0") + "%");
                 }
             }
-            if(weather.Status.Equals(200))
+            else
             {
-                WPFTimeClock.WeatherControl.SetWeather(weather.Lives.Last().City, "温度:" + weather.Lives.Last().TemperatureFloat.ToString("F0") + "℃"
-                    , weather.Lives.Last().Weather.ToString(), weather.Lives.Last().WindDirection.ToString() + "风 " + weather.Lives.Last().WindPower + "级"
-                    , "湿度:" + weather.Lives.Last().HumidityFloat.ToString("F0") + "%");
+                weather = await GetWeatherAsync("https://weather.exlb.net/Weather", $"adcode={Set.AdCode}");
+                if (weather.Status.Equals(200))
+                {
+                    WPFTimeClock.WeatherControl.SetWeather(weather.Lives.Last().City, "温度:" + weather.Lives.Last().TemperatureFloat.ToString("F0") + "℃"
+                        , weather.Lives.Last().Weather.ToString(), weather.Lives.Last().WindDirection.ToString() + "风 " + weather.Lives.Last().WindPower + "级"
+                        , "湿度:" + weather.Lives.Last().HumidityFloat.ToString("F0") + "%");
+                }
             }
         }
 
