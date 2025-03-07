@@ -11,7 +11,7 @@
         <ResourceDictionary Source="/VPet-Simulator.Windows.Interface;component/ResourceStyle.xaml" />
     </Control.Resources>
 
-    <Grid Margin="5">
+    <Grid>
         <!-- 行和列布局 -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -33,22 +33,22 @@
                     Foreground="{DynamicResource DARKPrimaryText}"/>
 
             <!-- 城市名称 -->
-            <TextBlock x:Name="CityText" Text="{ll:Str 城市}" FontSize="16" FontWeight="Bold"
+            <TextBlock x:Name="CityText" Text="城市" FontSize="16" FontWeight="Bold"
                        HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Foreground="{DynamicResource DARKPrimaryText}"/>
         </StackPanel>
 
         <!-- 右列：气温、风速、湿度 -->
         <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,10,10,5">
             <!-- 气温 -->
-            <TextBlock x:Name="TemperatureText" Text="{ll:Str 25℃}" FontSize="15" FontWeight="Bold"
+            <TextBlock x:Name="TemperatureText" Text="25℃" FontSize="15" FontWeight="Bold"
                     HorizontalAlignment="Center" Margin="2" Foreground="{DynamicResource DARKPrimaryText}"/>
 
             <!-- 风向 -->
-            <TextBlock x:Name="WindText" Text="{ll:Str 北风4-6级}" FontSize="15" FontWeight="Bold"
+            <TextBlock x:Name="WindText" Text="北风4-6级" FontSize="15" FontWeight="Bold"
                     HorizontalAlignment="Center" Margin="2" Foreground="{DynamicResource DARKPrimaryText}"/>
 
             <!-- 湿度 -->
-            <TextBlock x:Name="HumidityText" Text="{ll:Str 湿度: 65%}" FontSize="15" FontWeight="Bold"
+            <TextBlock x:Name="HumidityText" Text="湿度: 65%" FontSize="15" FontWeight="Bold"
                     HorizontalAlignment="Center" Margin="2" Foreground="{DynamicResource DARKPrimaryText}"/>
         </StackPanel>
     </Grid>
