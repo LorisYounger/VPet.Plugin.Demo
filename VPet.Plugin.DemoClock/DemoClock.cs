@@ -158,7 +158,7 @@ namespace VPet.Plugin.DemoClock
             modset.Items.Add(menuweather);
             ///***************** 设置天气 *****************///
             if(Set.DefaultWeather) await HandleWeatherAsync();
-                Tools.StartRecurringTimer(3, HandleWeatherAsync);
+                Tools.StartRecurringTimer(12, HandleWeatherAsync);
             ///***************** 设置天气 *****************///
         }
         public override void LoadDIY()
