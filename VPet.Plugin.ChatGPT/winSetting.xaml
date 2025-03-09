@@ -52,7 +52,7 @@
                 FontSize="16" pu:TextBoxHelper.Watermark="{ll:Str '没有可不填. HTTP 代理服务器 或 SOCKS 代理服务器等 WEB代理链接'}"
                 ToolTip="{ll:Str '没有可不填. HTTP 代理服务器 或 SOCKS 代理服务器等 WEB代理链接'}" VerticalAlignment="Top" Margin="0,2,0,0" />
         <ComboBox x:Name="cbModel" Style="{DynamicResource StandardComboBoxStyle}" Grid.Row="0" Grid.Column="2"
-                SelectedIndex="0" IsEditable="True" Margin="0,5,0,5" ToolTip="本文本框可以编辑,以支持其他OPENAI格式的模型调用">
+                SelectedIndex="0" IsEditable="True" Margin="0,5,0,5" ToolTip="{ll:Str '本文本框可以编辑,以支持其他OPENAI格式的模型调用'}">
             <ComboBoxItem Content="gpt-4o-mini" />
             <ComboBoxItem Content="gpt-4o" />
             <ComboBoxItem Content="gpt-4-turbo" />
@@ -60,6 +60,8 @@
             <ComboBoxItem Content="deepseek-chat" />
             <ComboBoxItem Content="GLM-4-Flash" />
             <ComboBoxItem Content="GLM-4-Plus" />
+            <ComboBoxItem Content="gemini-2.0-flash" />
+            <ComboBoxItem Content="gemini-1.5-pro" />
         </ComboBox>
         <TextBox x:Name="tbSystem" Grid.Row="4" Grid.Column="2" Style="{DynamicResource StandardTextBoxStyle}"
                 FontSize="16" pu:TextBoxHelper.Watermark="{ll:Str '不会被忘记的初始化关键字, 字越多越贵'}"

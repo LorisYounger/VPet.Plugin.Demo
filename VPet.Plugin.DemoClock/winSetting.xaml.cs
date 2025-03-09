@@ -76,8 +76,6 @@ namespace VPet.Plugin.DemoClock
                 AllowChange = true;
             }
             _ = LoadDataAsync();
-            DataContext = this;
-            Initial = true;
         }
 
         private void Switch24h_Checked(object sender, RoutedEventArgs e)
@@ -100,7 +98,7 @@ namespace VPet.Plugin.DemoClock
             if (!AllowChange || !Initial)
                 return;
             Set.Opacity = OpacitySilder.Value / 100;
-            if(Master.WPFTimeClock.Opacity != 0.95)
+            if (Master.WPFTimeClock.Opacity != 0.95)
                 Master.WPFTimeClock.Opacity = Set.Opacity;
         }
 
@@ -114,7 +112,7 @@ namespace VPet.Plugin.DemoClock
                 Master.MW.Main.UIGrid_Back.Children.Remove(Master.WPFTimeClock);
                 Master.MW.Main.UIGrid.Children.Insert(0, Master.WPFTimeClock);
             }
-            else if(Master.Set.PlaceAutoBack == false && Master.MW.Main.UIGrid_Back.Children.Contains(Master.WPFTimeClock))
+            else if (Master.Set.PlaceAutoBack == false && Master.MW.Main.UIGrid_Back.Children.Contains(Master.WPFTimeClock))
             {
                 Master.MW.Main.UIGrid_Back.Children.Remove(Master.WPFTimeClock);
                 Master.MW.Main.UIGrid.Children.Insert(0, Master.WPFTimeClock);
@@ -283,6 +281,7 @@ namespace VPet.Plugin.DemoClock
                 Dispatcher.Invoke(() =>
                 {
                     RegionBox.ItemsSource = _schBoxSource.Take(50);
+                    RegionBox.Text = _data.FirstOrDefault(x => x.AdCode == Set.AdCode).Name;
                 });
             }
             catch (Exception ex)
@@ -290,11 +289,14 @@ namespace VPet.Plugin.DemoClock
                 // 错误处理，显示异常信息
                 MessageBoxX.Show($"加载城市数据失败: {ex.Message}");
             }
+            Dispatcher.Invoke(() => DataContext = this);
+            Initial = true;
         }
 
         private void SchBox_SearchTextChanged(object sender, SearchTextChangedRoutedEventArgs e)
         {
-            var searchBox = sender as SearchBox;
+            if (!Initial)
+                return;
             var searchText = e.Text?.Trim()?.ToLower();
 
             // 异步更新搜索结果，避免阻塞UI线程
@@ -307,13 +309,15 @@ namespace VPet.Plugin.DemoClock
                 // 在UI线程中更新ItemsSource
                 Dispatcher.Invoke(() =>
                 {
-                    searchBox.ItemsSource = filteredData;
+                    RegionBox.ItemsSource = filteredData;
                 });
             });
         }
 
         private async void SchBox_ItemClick(object sender, System.Windows.RoutedEventArgs e)
         {
+            if (!Initial)
+                return;
             // 点击项目后的处理
             var searchBox = sender as SearchBox;
             var selectedText = searchBox.Text?.ToString();

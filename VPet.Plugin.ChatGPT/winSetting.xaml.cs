@@ -76,6 +76,10 @@ namespace VPet.Plugin.ChatGPTPlugin
                 case 6:
                     tbAPIURL.Text = "https://open.bigmodel.cn/api/paas/v4/chat/completions";
                     return;
+                case 7:
+                case 8:
+                    tbAPIURL.Text = "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions";
+                    return;
                 default:
                     return;
             }
@@ -83,10 +87,10 @@ namespace VPet.Plugin.ChatGPTPlugin
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (tbAPIURL.Text.Split('/').Length <= 2 && !tbAPIURL.Text.Contains("completions"))
-            {
-                tbAPIURL.Text += "/v1/chat/completions";
-            }
+            //if (tbAPIURL.Text.Split('/').Length <= 2 && !tbAPIURL.Text.Contains("completions"))
+            //{
+            //    tbAPIURL.Text += "/v1/chat/completions";
+            //}
             plugin.CGPTClient = new ChatGPTClient(tbAPIKey.Text, tbAPIURL.Text)
             {
                 TotalTokensUsage = totalused
@@ -109,8 +113,16 @@ namespace VPet.Plugin.ChatGPTPlugin
                 plugin.CGPTClient.Proxy = null;
             }
             plugin.CGPTClient.Completions["vpet"].model = cbModel.Text;
-            plugin.CGPTClient.Completions["vpet"].frequency_penalty = 0.2;
-            plugin.CGPTClient.Completions["vpet"].presence_penalty = 1;
+            if (plugin.CGPTClient.APIUrl.Contains("googleapis"))
+            {
+                plugin.CGPTClient.Completions["vpet"].frequency_penalty = null;
+                plugin.CGPTClient.Completions["vpet"].presence_penalty = null;
+            }
+            else
+            {
+                plugin.CGPTClient.Completions["vpet"].frequency_penalty = 0.2;
+                plugin.CGPTClient.Completions["vpet"].presence_penalty = 1;
+            }
             plugin.CGPTClient.Completions["vpet"].max_tokens = Math.Min(Math.Max(int.Parse(tbMaxToken.Text), 10), 4000);
             plugin.CGPTClient.Completions["vpet"].temperature = Math.Min(Math.Max(double.Parse(tbTemp.Text), 0.1), 2);
             var l = JsonConvert.DeserializeObject<List<Message>>(tbHistory.Text);
