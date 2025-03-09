@@ -157,8 +157,8 @@ namespace VPet.Plugin.DemoClock
 
             modset.Items.Add(menuweather);
             ///***************** 设置天气 *****************///
-            await HandleWeatherAsync();
-            Tools.StartRecurringTimer(3, HandleWeatherAsync);
+            if(Set.DefaultWeather) await HandleWeatherAsync();
+                Tools.StartRecurringTimer(3, HandleWeatherAsync);
             ///***************** 设置天气 *****************///
         }
         public override void LoadDIY()
@@ -169,6 +169,10 @@ namespace VPet.Plugin.DemoClock
 
         internal async Task HandleWeatherAsync()
         {
+            if(!Set.DefaultWeather)
+            {
+                return;
+            }
             if(Set.AdCode == 0)
             {
                 weather = await GetWeatherAsync("https://weather.exlb.net/Weather");
