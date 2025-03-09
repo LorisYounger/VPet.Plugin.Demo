@@ -259,10 +259,22 @@ namespace VPet.Plugin.DemoClock
             }
         }
 
-        private void DefaultWeather_Checked(object sender, RoutedEventArgs e)
+        private async void DefaultWeather_Checked(object sender, RoutedEventArgs e)
         {
             Set.DefaultWeather = DefaultWeather.IsChecked.Value;
             Master.WPFTimeClock.UpdateWeatherState();
+            if(Set.DefaultWeather)
+            {
+                if (Master.weather == null)
+                {
+                    await Master.HandleWeatherAsync();
+                }
+                Master.mWeather.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                Master.mWeather.Visibility = Visibility.Collapsed;
+            }
         }
 
         private async Task LoadDataAsync()
