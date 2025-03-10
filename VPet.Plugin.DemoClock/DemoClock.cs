@@ -64,7 +64,6 @@ namespace VPet.Plugin.DemoClock
         public MenuItem mTotmatoRest;
         public MenuItem mCountDown;
         public MenuItem mTiming;
-        public MenuItem mWeather;
 
         public long CountDownLength;
         public winSetting winSetting;
@@ -147,28 +146,15 @@ namespace VPet.Plugin.DemoClock
             };
             menuweather.Click += (s, e) => { WeatherSetting(); };
 
-            mWeather = new MenuItem()
-            {
-                Header = "天气页面".Translate(),
-                HorizontalContentAlignment = HorizontalAlignment.Center,
-                Visibility = Visibility.Visible
-            };
-            mWeather.Click += (s, e) => { weatherWindow = new winWeatherPage(this); weatherWindow.Show(); };
-
             modset.Items.Add(menuweather);
             ///***************** 设置天气 *****************///
             if(Set.DefaultWeather) await HandleWeatherAsync();
-            else
-            {
-                mWeather.Visibility = Visibility.Collapsed;
-            }
             Tools.StartRecurringTimer(6, HandleWeatherAsync);
             ///***************** 设置天气 *****************///
         }
         public override void LoadDIY()
         {
             MW.Main.ToolBar.MenuDIY.Items.Add(menuItem);
-            MW.Main.ToolBar.MenuDIY.Items.Add(mWeather);
         }
 
         internal async Task HandleWeatherAsync()

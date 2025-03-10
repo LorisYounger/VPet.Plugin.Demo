@@ -269,11 +269,6 @@ namespace VPet.Plugin.DemoClock
                 {
                     await Master.HandleWeatherAsync();
                 }
-                Master.mWeather.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                Master.mWeather.Visibility = Visibility.Collapsed;
             }
         }
 
