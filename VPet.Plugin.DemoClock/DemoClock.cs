@@ -149,7 +149,7 @@ namespace VPet.Plugin.DemoClock
             modset.Items.Add(menuweather);
             ///***************** 设置天气 *****************///
             if(Set.DefaultWeather) await HandleWeatherAsync();
-            Tools.StartRecurringTimer(6, HandleWeatherAsync);
+            Tools.StartRecurringTimer(3, HandleWeatherAsync);
             ///***************** 设置天气 *****************///
         }
         public override void LoadDIY()
@@ -168,7 +168,7 @@ namespace VPet.Plugin.DemoClock
                 weather = await GetWeatherAsync("https://weather.exlb.net/Weather");
                 if (weather == null || weather.Status != 200)
                 {
-                    MessageBoxX.Show("请求天气数据失败，请尝试手动设置地区。");
+                    MessageBoxX.Show("请求天气数据失败，请尝试手动设置地区。".Translate());
                     WeatherSetting();
                 }
                 else if (weather.Status.Equals(200))
@@ -184,9 +184,9 @@ namespace VPet.Plugin.DemoClock
                 weather = await GetWeatherAsync("https://weather.exlb.net/Weather", $"adcode={Set.AdCode}");
                 if(weather == null)
                 {
-                    WPFTimeClock.WeatherControl.SetWeather(weather.Lives.Last().City, "温度:{0:F0}℃".Translate("错误")
-                        , weather.Lives.Last().Weather.ToString(), "错误"
-                        , "错误");
+                    WPFTimeClock.WeatherControl.SetWeather(weather.Lives.Last().City, "温度:{0:F0}℃".Translate("错误".Translate())
+                        , weather.Lives.Last().Weather.ToString(), "错误".Translate()
+                        , "错误".Translate());
                     return;
                 }
                 if (weather.Status.Equals(200))
