@@ -64,7 +64,6 @@ namespace VPet.Plugin.DemoClock
         public MenuItem mTotmatoRest;
         public MenuItem mCountDown;
         public MenuItem mTiming;
-        public MenuItem mWeather;
 
         public long CountDownLength;
         public winSetting winSetting;
@@ -147,51 +146,54 @@ namespace VPet.Plugin.DemoClock
             };
             menuweather.Click += (s, e) => { WeatherSetting(); };
 
-            mWeather = new MenuItem()
-            {
-                Header = "天气页面".Translate(),
-                HorizontalContentAlignment = HorizontalAlignment.Center,
-                Visibility = Visibility.Visible
-            };
-            mWeather.Click += (s, e) => { weatherWindow = new winWeatherPage(this); weatherWindow.Show(); };
-
             modset.Items.Add(menuweather);
             ///***************** 设置天气 *****************///
-            await HandleWeatherAsync();
+            if(Set.DefaultWeather) await HandleWeatherAsync();
             Tools.StartRecurringTimer(3, HandleWeatherAsync);
             ///***************** 设置天气 *****************///
         }
         public override void LoadDIY()
         {
             MW.Main.ToolBar.MenuDIY.Items.Add(menuItem);
-            MW.Main.ToolBar.MenuDIY.Items.Add(mWeather);
         }
 
         internal async Task HandleWeatherAsync()
         {
+            if(!Set.DefaultWeather)
+            {
+                return;
+            }
             if(Set.AdCode == 0)
             {
                 weather = await GetWeatherAsync("https://weather.exlb.net/Weather");
-                if (weather.Status != 200)
+                if (weather == null || weather.Status != 200)
                 {
-                    MessageBoxX.Show("请求天气数据失败，请尝试手动设置地区。");
+                    MessageBoxX.Show("请求天气数据失败，请尝试手动设置地区。".Translate());
                     WeatherSetting();
                 }
                 else if (weather.Status.Equals(200))
                 {
-                    WPFTimeClock.WeatherControl.SetWeather(weather.Lives.Last().City, "温度:" + weather.Lives.Last().TemperatureFloat.ToString("F0") + "℃"
-                        , weather.Lives.Last().Weather.ToString(), weather.Lives.Last().WindDirection.ToString() + "风 " + weather.Lives.Last().WindPower + "级"
-                        , "湿度:" + weather.Lives.Last().HumidityFloat.ToString("F0") + "%");
+                    WPFTimeClock.WeatherControl.SetWeather(weather.Lives.Last().City, "温度:{0:F0}℃".Translate(weather.Lives.Last().TemperatureFloat.ToString("F0"))
+                        , weather.Lives.Last().Weather.ToString(),"{0}风{1}级".Translate(weather.Lives.Last().WindDirection.ToString(),weather.Lives.Last().WindPower)
+                        , "湿度:{0:F0}%".Translate(weather.Lives.Last().HumidityFloat.ToString("F0")));
+
                 }
             }
             else
             {
                 weather = await GetWeatherAsync("https://weather.exlb.net/Weather", $"adcode={Set.AdCode}");
+                if(weather == null)
+                {
+                    WPFTimeClock.WeatherControl.SetWeather(weather.Lives.Last().City, "温度:{0:F0}℃".Translate("错误".Translate())
+                        , weather.Lives.Last().Weather.ToString(), "错误".Translate()
+                        , "错误".Translate());
+                    return;
+                }
                 if (weather.Status.Equals(200))
                 {
-                    WPFTimeClock.WeatherControl.SetWeather(weather.Lives.Last().City, "温度:" + weather.Lives.Last().TemperatureFloat.ToString("F0") + "℃"
-                        , weather.Lives.Last().Weather.ToString(), weather.Lives.Last().WindDirection.ToString() + "风 " + weather.Lives.Last().WindPower + "级"
-                        , "湿度:" + weather.Lives.Last().HumidityFloat.ToString("F0") + "%");
+                    WPFTimeClock.WeatherControl.SetWeather(weather.Lives.Last().City, "温度:{0:F0}℃".Translate(weather.Lives.Last().TemperatureFloat.ToString("F0"))
+                        , weather.Lives.Last().Weather.ToString(), "{0}风{1}级".Translate(weather.Lives.Last().WindDirection.ToString(), weather.Lives.Last().WindPower)
+                        , "湿度:{0:F0}%".Translate(weather.Lives.Last().HumidityFloat.ToString("F0")));
                 }
             }
         }
