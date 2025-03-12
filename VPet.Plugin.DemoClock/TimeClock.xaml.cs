@@ -181,7 +181,7 @@ namespace VPet.Plugin.DemoClock
                         }
                         else
                         {
-                            Master.MW.Dispatcher.BeginInvoke(() => { Master.MW.Main.SayRnd(voicetext, true); });
+                            Master.MW.Dispatcher.BeginInvoke(() => { Master.MW.Main.SayRnd(string.IsNullOrWhiteSpace(voicetext)?"叮铃铃，计时结束啦!":voicetext, true); });
                         }
                         //**********在此处添加计时结束逻辑**********//
                         return;
@@ -226,11 +226,6 @@ namespace VPet.Plugin.DemoClock
                         Master.mode = Mode.CountDown_End;
                         CountTimer.Stop();
                         //**********在此处添加工作结束逻辑**********//
-                        var replacements = new Dictionary<string, string>
-                        {
-                            { "Mode", "Work".Translate() },
-                            { "模式", "工作".Translate() }
-                        };
                         var voicetext = "";
                         if (Tools.TryGetInputTypeAndValue(Master.Set.Tomato_EndVoice, out voicetext))
                         {
@@ -238,7 +233,7 @@ namespace VPet.Plugin.DemoClock
                         }
                         else
                         {
-                            voicetext = Tools.ReplacePlaceholders(voicetext, replacements);
+                            voicetext = (string.IsNullOrWhiteSpace(voicetext) ? "{mode}结束啦主人" : voicetext).Replace("{mode}", "工作");
                             Master.MW.Dispatcher.Invoke(() => { Master.MW.Main.SayRnd(voicetext, true); });
                         }
                         //**********在此处添加工作结束逻辑**********//
@@ -270,11 +265,6 @@ namespace VPet.Plugin.DemoClock
                         Master.mode = Mode.CountDown_End;
                         CountTimer.Stop();
                         //**********在此处添加休息结束逻辑**********//
-                        var replacements = new Dictionary<string, string>
-                        {
-                            { "Mode", "Rest".Translate() },
-                            { "模式", "休息".Translate() }
-                        };
                         var voicetext = "";
                         if (Tools.TryGetInputTypeAndValue(Master.Set.Tomato_EndVoice, out voicetext))
                         {
@@ -282,7 +272,7 @@ namespace VPet.Plugin.DemoClock
                         }
                         else
                         {
-                            voicetext = Tools.ReplacePlaceholders(voicetext, replacements);
+                            voicetext = (string.IsNullOrWhiteSpace(voicetext) ? "{mode}结束啦主人":voicetext).Replace("{mode}", "休息");
                             Master.MW.Dispatcher.BeginInvoke(() => { Master.MW.Main.SayRnd(voicetext, true); });
                         }
                         //**********在此处添加休息结束逻辑**********//
@@ -315,11 +305,6 @@ namespace VPet.Plugin.DemoClock
                         Master.mode = Mode.CountDown_End;
                         CountTimer.Stop();
                         //**********在此处添加长休息结束逻辑**********//
-                        var replacements = new Dictionary<string, string>
-                        {
-                            { "Mode", "Long Rest".Translate() },
-                            { "模式", "长休息".Translate() }
-                        };
                         var voicetext = "";
                         if (Tools.TryGetInputTypeAndValue(Master.Set.Tomato_EndVoice, out voicetext))
                         {
@@ -327,7 +312,7 @@ namespace VPet.Plugin.DemoClock
                         }
                         else
                         {
-                            voicetext = Tools.ReplacePlaceholders(voicetext, replacements);
+                            voicetext = (string.IsNullOrWhiteSpace(voicetext) ? "休息时间结束了，快打起精神来，让我陪着你继续工作啦" : voicetext).Replace("{mode}", "长休息");
                             Master.MW.Dispatcher.BeginInvoke(() => { Master.MW.Main.SayRnd(voicetext, true); });
                         }
                         //**********在此处添加长休息结束逻辑**********//
@@ -447,7 +432,7 @@ namespace VPet.Plugin.DemoClock
             }
             else
             {
-                Master.MW.Dispatcher.BeginInvoke(() => { Master.MW.Main.SayRnd(voicetext, true); });
+                Master.MW.Dispatcher.BeginInvoke(() => { Master.MW.Main.SayRnd(string.IsNullOrWhiteSpace(voicetext) ? "要完成什么工作呢" : voicetext, true); });
             }
             UpdateWeatherState();
         }
@@ -474,7 +459,7 @@ namespace VPet.Plugin.DemoClock
             }
             else
             {
-                Master.MW.Dispatcher.BeginInvoke(() => { Master.MW.Main.SayRnd(voicetext, true); });
+                Master.MW.Dispatcher.BeginInvoke(() => { Master.MW.Main.SayRnd(string.IsNullOrWhiteSpace(voicetext) ? "主人已经工作这么久了，该好好放松一下啦~" : voicetext, true); });
             }
             UpdateWeatherState();
         }
