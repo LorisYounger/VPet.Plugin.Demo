@@ -34,7 +34,7 @@ namespace VPet.Plugin.Monitor
         public PerformanceCounter RamAVACounter = new PerformanceCounter("Memory", "Available Bytes");
         public PerformanceCounter RamCLCounter = new PerformanceCounter("Memory", "Commit Limit");
 
-        public List<string> NetIntances=new List<string>();
+        public List<string> NetIntances = new List<string>();
         public List<List<string>> GPUIntances = new List<List<string>>();
         public PerformanceCounter NetCounter;
         public PerformanceCounterCategory Founder_GPU = new PerformanceCounterCategory("GPU Engine");
@@ -111,33 +111,40 @@ namespace VPet.Plugin.Monitor
             MoveProcessBar(Bar_RAM, (double)R);
             float N = NetCounter.NextValue();
             ChangeUIText(Using_Net, $"↑↓:{ReadNetByte(N)}");
-            MoveProcessBar(Bar_Net,N);
+            MoveProcessBar(Bar_Net, N);
         }
         public void StartWork()
         {
             if (master.Set.NetSelected == string.Empty)
             {
-
                 Netinit(NetIntances[NetGetIntances()]);
             }
             else
             {
-                NetGetIntances();
-                Netinit(master.Set.NetSelected);
+                try
+                {
+                    NetGetIntances();
+                    Netinit(master.Set.NetSelected);
+                }
+                catch
+                {
+                    Netinit(NetIntances[NetGetIntances()]);
+                }
             }
-                 GPUGetIntances();
-                 GPUinit(master.Set.GPUSelected);
+            GPUGetIntances();
+            GPUinit(master.Set.GPUSelected);
+
         }
         public int NetGetIntances()
         {
             NetIntances.Clear();
-            NetIntances.AddRange ( Founder_Net.GetInstanceNames());
+            NetIntances.AddRange(Founder_Net.GetInstanceNames());
             int NetIndex = 0;
             foreach (string intancename in NetIntances)
             {
                 if (intancename.Contains("WIFI"))
                 {
-                    NetIndex=NetIntances.IndexOf(intancename);
+                    NetIndex = NetIntances.IndexOf(intancename);
                 }
             }
             return NetIndex;
@@ -147,7 +154,7 @@ namespace VPet.Plugin.Monitor
             GpuEnginelist.Clear();
             foreach (string name in GPUIntances[CounterIndex])
             {
-                GpuEnginelist.Add(new PerformanceCounter("GPU Engine","Utilization Percentage",name));
+                GpuEnginelist.Add(new PerformanceCounter("GPU Engine", "Utilization Percentage", name));
             }
         }
         public float GPUCounterValue()
@@ -157,13 +164,13 @@ namespace VPet.Plugin.Monitor
             {
                 foreach (PerformanceCounter counter in GpuEnginelist)
                 {
-                    persentage+=counter.NextValue();
+                    persentage += counter.NextValue();
                 }
             }
             catch
             {
                 GPUGetIntances();
-                GPUinit(Convert.ToInt32( master.Set.GPUSelected));
+                GPUinit(Convert.ToInt32(master.Set.GPUSelected));
             }
             return persentage;
         }
@@ -174,7 +181,7 @@ namespace VPet.Plugin.Monitor
         public void GPUGetIntances()
         {
             GPUintancenames = Founder_GPU.GetInstanceNames();
-            GPUIntances.Clear ();
+            GPUIntances.Clear();
             for (int i = 0; i <= 5; i++)
             {
                 GPUIntances.Add(new List<string>());
@@ -185,7 +192,7 @@ namespace VPet.Plugin.Monitor
                         GPUIntances[i].Add(j);
                     }
                 }
-                if (GPUIntances[i].Count==0)
+                if (GPUIntances[i].Count == 0)
                 {
                     GPUIntances.Remove(GPUIntances[i]);
                     break;
