@@ -3,8 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using VPet_Simulator.Core;
 using VPet_Simulator.Windows.Interface;
 
 namespace VPet.Plugin.ChatGPTPlugin
@@ -62,14 +64,53 @@ namespace VPet.Plugin.ChatGPTPlugin
                     }
                 }
                 content = "[当前状态: {0}, 好感度:{1}({2})]".Translate(Plugin.MW.Core.Save.Mode.ToString().Translate(), like_str[like_ts((int)Plugin.MW.Core.Save.Likability)].Translate(), (int)Plugin.MW.Core.Save.Likability) + content;
-                var resp = Plugin.CGPTClient.Ask("vpet", content);
-                var reply = resp.GetMessageContent();
-                if (resp.choices[0].finish_reason == "length")
+                if (Plugin.UseStream)
                 {
-                    reply += " ...";
+                    SayInfoWithStream sis = new SayInfoWithStream();
+                    DisplayThinkToSayRnd(sis);
+                    Task.Run(() =>
+                    {
+                        try
+                        {
+                            Plugin.CGPTClient.Ask_stream("vpet", content, (x) =>
+                                {
+                                    if (x == null)
+                                    {//有一些厂商不按套路来生成结束, 用这个兼容下
+                                        sis.FinishGenerate();
+                                        return;
+                                    }
+                                    if (!string.IsNullOrEmpty(x.GetDeltaContent()))
+                                    {
+                                        sis.UpdateText(x.GetDeltaContent());
+                                    }
+                                    if (x.GetDelta()?.finish_reason != null)
+                                    {
+                                        if (x.choices[0].delta.finish_reason == "length")
+                                        {
+                                            sis.UpdateText("...");
+                                        }
+                                        sis.FinishGenerate();
+                                    }
+                                });
+                        }
+                        catch (Exception e)
+                        {
+                            sis.UpdateAllText("API调用失败".Translate() + '\n' + e.ToString());
+                            sis.FinishGenerate();
+                        }
+                    });
                 }
-                var showtxt = Plugin.ShowToken ? null : "当前Token使用".Translate() + ": " + resp.usage.total_tokens;
-                DisplayThinkToSayRnd(reply, desc: showtxt);
+                else
+                {
+                    var resp = Plugin.CGPTClient.Ask("vpet", content);
+                    var reply = resp.GetMessageContent();
+                    if (resp.choices[0].finish_reason == "length")
+                    {
+                        reply += " ...";
+                    }
+                    var showtxt = Plugin.ShowToken ? null : "当前Token使用".Translate() + ": " + resp.usage.total_tokens;
+                    DisplayThinkToSayRnd(reply, desc: showtxt);
+                }
             }
             catch (Exception exp)
             {

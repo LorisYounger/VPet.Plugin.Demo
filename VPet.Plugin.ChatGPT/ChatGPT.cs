@@ -75,5 +75,14 @@ namespace VPet.Plugin.ChatGPTPlugin
             get => MW.Set["CGPT"].GetString("webproxy", "");
             set => MW.Set["CGPT"][(gstr)"webproxy"] = value;
         }
+        /// <summary>
+        /// 流式说话开关
+        /// </summary>
+        public bool UseStream
+        {
+            get => !MW.Set["CGPT"][(gbol)"nostream"];
+            set => MW.Set["CGPT"][(gbol)"nostream"] = !value;
+        }
+
     }
 }

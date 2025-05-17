@@ -14,7 +14,7 @@
           "Microsoft.CSharp": "4.7.0",
           "Newtonsoft.Json": "13.0.3",
           "System.Data.DataSetExtensions": "4.5.0",
-          "VPet-Simulator.Windows.Interface": "1.1.0.48"
+          "VPet-Simulator.Windows.Interface": "1.1.0.50"
         },
         "runtime": {
           "VPet.Plugin.ChatGPTPlugin.dll": {}
@@ -59,31 +59,72 @@
           }
         }
       },
-      "Panuon.WPF/1.1.1": {
+      "Panuon.WPF/1.1.3": {
         "runtime": {
           "lib/net8.0-windows/Panuon.WPF.dll": {
-            "assemblyVersion": "1.1.1.0",
-            "fileVersion": "1.1.1.0"
+            "assemblyVersion": "1.1.2.2",
+            "fileVersion": "1.1.2.2"
           }
         }
       },
-      "Panuon.WPF.UI/1.2.4.2": {
+      "Panuon.WPF.UI/1.2.4.10": {
         "dependencies": {
-          "Panuon.WPF": "1.1.1"
+          "Panuon.WPF": "1.1.3"
         },
         "runtime": {
           "lib/net8.0-windows/Panuon.WPF.UI.dll": {
-            "assemblyVersion": "1.2.4.2",
-            "fileVersion": "1.2.4.2"
+            "assemblyVersion": "1.2.4.10",
+            "fileVersion": "1.2.4.10"
+          }
+        }
+      },
+      "SkiaSharp/3.116.1": {
+        "dependencies": {
+          "SkiaSharp.NativeAssets.Win32": "3.116.1",
+          "SkiaSharp.NativeAssets.macOS": "3.116.1"
+        },
+        "runtime": {
+          "lib/net8.0/SkiaSharp.dll": {
+            "assemblyVersion": "3.116.0.0",
+            "fileVersion": "3.116.1.0"
+          }
+        }
+      },
+      "SkiaSharp.NativeAssets.macOS/3.116.1": {
+        "runtimeTargets": {
+          "runtimes/osx/native/libSkiaSharp.dylib": {
+            "rid": "osx",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "SkiaSharp.NativeAssets.Win32/3.116.1": {
+        "runtimeTargets": {
+          "runtimes/win-arm64/native/libSkiaSharp.dll": {
+            "rid": "win-arm64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/libSkiaSharp.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/libSkiaSharp.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
           }
         }
       },
       "System.Data.DataSetExtensions/4.5.0": {},
-      "VPet-Simulator.Core/1.1.0.40": {
+      "VPet-Simulator.Core/1.1.0.50": {
         "dependencies": {
           "LinePutScript": "1.11.9",
           "LinePutScript.Localization.WPF": "1.0.7",
-          "Panuon.WPF.UI": "1.2.4.2"
+          "Panuon.WPF.UI": "1.2.4.10",
+          "SkiaSharp": "3.116.1"
         },
         "runtime": {
           "lib/net8.0/VPet-Simulator.Core.dll": {
@@ -92,9 +133,9 @@
           }
         }
       },
-      "VPet-Simulator.Windows.Interface/1.1.0.48": {
+      "VPet-Simulator.Windows.Interface/1.1.0.50": {
         "dependencies": {
-          "VPet-Simulator.Core": "1.1.0.40"
+          "VPet-Simulator.Core": "1.1.0.50"
         },
         "runtime": {
           "lib/net8.0/VPet-Simulator.Windows.Interface.dll": {
@@ -146,19 +187,40 @@
       "path": "newtonsoft.json/13.0.3",
       "hashPath": "newtonsoft.json.13.0.3.nupkg.sha512"
     },
-    "Panuon.WPF/1.1.1": {
+    "Panuon.WPF/1.1.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-HwkMU3eqOU5NfNYRVqdxFwgBkUN1kBO8dPNPGch9IIhozgN/Vg8HNKnl3hzO/wTxyoec/lCZt1u8qO5DChLpRg==",
-      "path": "panuon.wpf/1.1.1",
-      "hashPath": "panuon.wpf.1.1.1.nupkg.sha512"
+      "sha512": "sha512-YaOjrqWktWKq2vioGibTYku3DxOKGuOlAIch2VCFz5U+PKolf+EZn1Q9RkLOaJk8bB+iUZj8p/c2UXCo4NlbYw==",
+      "path": "panuon.wpf/1.1.3",
+      "hashPath": "panuon.wpf.1.1.3.nupkg.sha512"
     },
-    "Panuon.WPF.UI/1.2.4.2": {
+    "Panuon.WPF.UI/1.2.4.10": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-vUWAE0moyvQENh/dLSR7qiBoRVkMAEHR+SI5wWLm6BDQ+cNCR6BbNo17eFRKT+UVOMPSEUi8yClEAV0Hzn1vFQ==",
-      "path": "panuon.wpf.ui/1.2.4.2",
-      "hashPath": "panuon.wpf.ui.1.2.4.2.nupkg.sha512"
+      "sha512": "sha512-KYII6a5zJGQCyn4NNaoCMvwy5QFaACub7Xl4VnCQojxJ84xt3aIDfcruHKCj1SsTlskF5VQljh5kJlbC97xlKg==",
+      "path": "panuon.wpf.ui/1.2.4.10",
+      "hashPath": "panuon.wpf.ui.1.2.4.10.nupkg.sha512"
+    },
+    "SkiaSharp/3.116.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-DNDwbRjP+aMo27dV2h/uHCVTcWubWWxHnPLiePNyl24f4Pv43mQ8AQQeseOrKR+J3AOCEs6t0sUjo0aa3j3RWQ==",
+      "path": "skiasharp/3.116.1",
+      "hashPath": "skiasharp.3.116.1.nupkg.sha512"
+    },
+    "SkiaSharp.NativeAssets.macOS/3.116.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3KPvpKysDmEMt0NnAZPX5U6KFk0LmG/72/IjAIJemIksIZ0Tjs9pGpr3L+zboVCv1MLVoJLKl3nJDXUG6Jda6A==",
+      "path": "skiasharp.nativeassets.macos/3.116.1",
+      "hashPath": "skiasharp.nativeassets.macos.3.116.1.nupkg.sha512"
+    },
+    "SkiaSharp.NativeAssets.Win32/3.116.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-dRQ75MCI8oz6zAs2Y1w6pq6ARs4MhdNG+gf3doOxOxdnueDXffQLGQIxON54GDoxc0WjKOoHMKBR4DhaduwwQw==",
+      "path": "skiasharp.nativeassets.win32/3.116.1",
+      "hashPath": "skiasharp.nativeassets.win32.3.116.1.nupkg.sha512"
     },
     "System.Data.DataSetExtensions/4.5.0": {
       "type": "package",
@@ -167,19 +229,19 @@
       "path": "system.data.datasetextensions/4.5.0",
       "hashPath": "system.data.datasetextensions.4.5.0.nupkg.sha512"
     },
-    "VPet-Simulator.Core/1.1.0.40": {
+    "VPet-Simulator.Core/1.1.0.50": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-TrtyuT/iOE2FRcFZpd0cfF3Q4Ynvsf1eOOV4tIgkLNJtv1ORdlyac0XEruWU+jUz7/UkFtuklC8ywvJbmyOwEw==",
-      "path": "vpet-simulator.core/1.1.0.40",
-      "hashPath": "vpet-simulator.core.1.1.0.40.nupkg.sha512"
+      "sha512": "sha512-qQsNt6g9pyRJY+q2DEncBFEpRKh7aaZnHXYN5tVQKJn8SaSQT+Lk3DFYu2Jc2/ypM/wgjD/KOURizeACBBu7JA==",
+      "path": "vpet-simulator.core/1.1.0.50",
+      "hashPath": "vpet-simulator.core.1.1.0.50.nupkg.sha512"
     },
-    "VPet-Simulator.Windows.Interface/1.1.0.48": {
+    "VPet-Simulator.Windows.Interface/1.1.0.50": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-4oXvsDTRm/ORji24dZgpLTRxIwi0PvSBl3mcO+fLaGUtC2EtdH01rJt4dE82+ZGizEa9QklikXuX8NkjrcqVtA==",
-      "path": "vpet-simulator.windows.interface/1.1.0.48",
-      "hashPath": "vpet-simulator.windows.interface.1.1.0.48.nupkg.sha512"
+      "sha512": "sha512-aDypIA1EYM/MJMaY7TOIEAc6bgEVjyHwz4+dqz/pKAtoyMAuUpGB2lf4i27iJc6pAegcljBA+NTSIOBeswcY+Q==",
+      "path": "vpet-simulator.windows.interface/1.1.0.50",
+      "hashPath": "vpet-simulator.windows.interface.1.1.0.50.nupkg.sha512"
     }
   }
 }

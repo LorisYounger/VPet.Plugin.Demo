@@ -56,6 +56,7 @@ namespace VPet.Plugin.ChatGPTPlugin
             cbModel.SelectionChanged += CbModel_SelectionChanged;
             niKeepHistory.Value = plugin.KeepHistory;
             swShowToken.IsChecked = plugin.ShowToken;
+            swStream.IsChecked = plugin.UseStream;
         }
 
         private void CbModel_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -130,6 +131,7 @@ namespace VPet.Plugin.ChatGPTPlugin
                 plugin.CGPTClient.Completions["vpet"].messages.AddRange(l);
             plugin.KeepHistory = (int)niKeepHistory.Value.Value;
             plugin.ShowToken = (bool)swShowToken.IsChecked;
+            plugin.UseStream = (bool)swStream.IsChecked;
             plugin.Save();
             this.Close();
         }
