@@ -4,8 +4,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VPet.Plugin.ChatGPTPlugin" mc:Ignorable="d"
         xmlns:ll="clr-namespace:LinePutScript.Localization.WPF;assembly=LinePutScript.Localization.WPF"
-        xmlns:pu="clr-namespace:Panuon.WPF.UI;assembly=Panuon.WPF.UI" Title="{ll:Str 'ChatGPT API 设置'}" Width="450"
-        FontSize="16" Height="Auto" ResizeMode="NoResize" WindowState="Normal" SizeToContent="Height">
+        xmlns:pu="clr-namespace:Panuon.WPF.UI;assembly=Panuon.WPF.UI" Title="{ll:Str 'ChatGPT API 设置'}"
+        Width="{ll:Dbe ChatGPTPluginWidth_450,DefValue=450}" FontSize="16" Height="Auto" ResizeMode="NoResize"
+        WindowState="Normal" SizeToContent="Height">
     <Window.Resources>
         <ResourceDictionary Source="/VPet-Simulator.Windows.Interface;component/ResourceStyle.xaml" />
     </Window.Resources>
