@@ -181,7 +181,7 @@ namespace VPet.Plugin.DemoClock
                         }
                         else
                         {
-                            Master.MW.Dispatcher.BeginInvoke(() => { Master.MW.Main.SayRnd(string.IsNullOrWhiteSpace(voicetext)?"叮铃铃，计时结束啦!":voicetext, true); });
+                            Master.MW.Dispatcher.BeginInvoke(() => { Master.MW.Main.SayRnd(string.IsNullOrWhiteSpace(voicetext) ? "叮铃铃，计时结束啦!".Translate() : voicetext, true); });
                         }
                         //**********在此处添加计时结束逻辑**********//
                         return;
