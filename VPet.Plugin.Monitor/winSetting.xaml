@@ -6,7 +6,7 @@
         xmlns:pu="clr-namespace:Panuon.WPF.UI;assembly=Panuon.WPF.UI"
         xmlns:ll="clr-namespace:LinePutScript.Localization.WPF;assembly=LinePutScript.Localization.WPF"
         Title="{ll:Str 性能监视器 设置}" MinHeight="230" SizeToContent="Height" VerticalAlignment="Top" Height="Auto"
-        Width="450" ResizeMode="NoResize" Closed="Window_Closed" Background="{DynamicResource PrimaryDark}">
+        Width="{ll:Dbe MonitorWidth_450, DefValue=450}" ResizeMode="NoResize" Closed="Window_Closed" Background="{DynamicResource PrimaryDark}">
     <Window.Resources>
         <ResourceDictionary Source="/VPet-Simulator.Windows.Interface;component/ResourceStyle.xaml" />
     </Window.Resources>

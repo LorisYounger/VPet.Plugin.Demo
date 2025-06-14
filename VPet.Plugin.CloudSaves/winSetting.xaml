@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" SizeToContent="Height"
         xmlns:local="clr-namespace:VPet.Plugin.CloudSaves" Background="{DynamicResource PrimaryLighter}"
         xmlns:ll="clr-namespace:LinePutScript.Localization.WPF;assembly=LinePutScript.Localization.WPF" mc:Ignorable="d"
-        Title="{ll:Str 云存档设置}" Height="Auto" Width="500" Closing="Window_Closing">
+        Title="{ll:Str 云存档设置}" Height="Auto" Width="{ll:Dbe CloudSavesWidth_500, DefValue=500}" Closing="Window_Closing">
     <Window.Resources>
         <ResourceDictionary Source="/VPet-Simulator.Windows.Interface;component/ResourceStyle.xaml" />
     </Window.Resources>
