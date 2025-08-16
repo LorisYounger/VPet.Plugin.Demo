@@ -18,10 +18,12 @@ namespace VPet.Plugin.ChatGPTPlugin
     {
         public ChatGPTPlugin(IMainWindow mainwin) : base(mainwin) { }
         public ChatGPTClient CGPTClient;
+        public string ChatGPTSettingPath;
         public override void LoadPlugin()
         {
-            if (File.Exists(ExtensionValue.BaseDirectory + @"\ChatGPTSetting.json"))
-                CGPTClient = ChatGPTClient.Load(File.ReadAllText(ExtensionValue.BaseDirectory + @"\ChatGPTSetting.json"));
+            ChatGPTSettingPath = ExtensionValue.BaseDirectory + $"\\ChatGPTSetting{MW.PrefixSave}.json";
+            if (File.Exists(ChatGPTSettingPath))
+                CGPTClient = ChatGPTClient.Load(File.ReadAllText(ChatGPTSettingPath));
             if (CGPTClient != null)
                 CGPTClient.WebProxy = WebProxy;
             if (!string.IsNullOrWhiteSpace(WebProxy))
@@ -44,7 +46,7 @@ namespace VPet.Plugin.ChatGPTPlugin
         public override void Save()
         {
             if (CGPTClient != null)
-                File.WriteAllText(ExtensionValue.BaseDirectory + @"\ChatGPTSetting.json", CGPTClient.Save());
+                File.WriteAllText(ChatGPTSettingPath, CGPTClient.Save());
         }
         public override void Setting()
         {
@@ -75,5 +77,14 @@ namespace VPet.Plugin.ChatGPTPlugin
             get => MW.Set["CGPT"].GetString("webproxy", "");
             set => MW.Set["CGPT"][(gstr)"webproxy"] = value;
         }
+        /// <summary>
+        /// 流式说话开关
+        /// </summary>
+        public bool UseStream
+        {
+            get => !MW.Set["CGPT"][(gbol)"nostream"];
+            set => MW.Set["CGPT"][(gbol)"nostream"] = !value;
+        }
+
     }
 }

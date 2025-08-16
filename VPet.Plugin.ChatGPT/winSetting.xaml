@@ -4,8 +4,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VPet.Plugin.ChatGPTPlugin" mc:Ignorable="d"
         xmlns:ll="clr-namespace:LinePutScript.Localization.WPF;assembly=LinePutScript.Localization.WPF"
-        xmlns:pu="clr-namespace:Panuon.WPF.UI;assembly=Panuon.WPF.UI" Title="{ll:Str 'ChatGPT API 设置'}" Width="450"
-        FontSize="16" Height="Auto" ResizeMode="NoResize" WindowState="Normal" SizeToContent="Height">
+        xmlns:pu="clr-namespace:Panuon.WPF.UI;assembly=Panuon.WPF.UI" Title="{ll:Str 'ChatGPT API 设置'}"
+        Width="{ll:Dbe ChatGPTPluginWidth_450,DefValue=450}" FontSize="16" Height="Auto" ResizeMode="NoResize"
+        WindowState="Normal" SizeToContent="Height">
     <Window.Resources>
         <ResourceDictionary Source="/VPet-Simulator.Windows.Interface;component/ResourceStyle.xaml" />
     </Window.Resources>
@@ -28,6 +29,7 @@
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="1" Text="API URL" VerticalAlignment="Center" />
         <TextBlock Grid.Row="3" Text="{ll:Str Web代理}" VerticalAlignment="Center" />
@@ -40,7 +42,8 @@
         <TextBlock Grid.Row="8" Text="{ll:Str 历史记录}" VerticalAlignment="Center" />
         <TextBlock Grid.Row="9" Text="{ll:Str 保留记录}" VerticalAlignment="Center" />
         <TextBlock Grid.Row="10" Text="{ll:Str Token显示}" VerticalAlignment="Center" />
-        <TextBlock Grid.Row="11" Text="{ll:Str 完成设置}" VerticalAlignment="Center" />
+        <TextBlock Grid.Row="11" Text="{ll:Str 流式传输}" VerticalAlignment="Center" />
+        <TextBlock Grid.Row="12" Text="{ll:Str 完成设置}" VerticalAlignment="Center" />
         <TextBox x:Name="tbAPIURL" Grid.Row="1" Grid.Column="2" Style="{DynamicResource StandardTextBoxStyle}"
                 FontSize="16" pu:TextBoxHelper.Watermark="{ll:Str 'API 链接 一般为 api.openai.com/v1/chat/completions'}"
                 Text="https://api.openai.com/v1/chat/completions"
@@ -88,8 +91,10 @@
                 ToolTip="{ll:Str '超过该值后自动删除最早的聊天记录'}" Minimum="0" VerticalAlignment="Center" />
         <pu:Switch x:Name="swShowToken" Grid.Row="10" Grid.Column="2" VerticalAlignment="Center"
                 Content="{ll:Str '在聊天记录中显示消耗的Token数量'}" />
+        <pu:Switch x:Name="swStream" Grid.Row="11" Grid.Column="2" VerticalAlignment="Center"
+                Content="{ll:Str '使用流式传输加快聊天反应速度'}" />
         <Button x:Name="btnSave" pu:ButtonHelper.CornerRadius="4" Content="{ll:Str 保存设置}" Margin="4,4,4,4"
-                Grid.Column="2" Background="{DynamicResource SecondaryLight}" Padding="1" Grid.Row="11"
+                Grid.Column="2" Background="{DynamicResource SecondaryLight}" Padding="1" Grid.Row="12"
                 Click="btnSave_Click" />
     </Grid>
 </Window>

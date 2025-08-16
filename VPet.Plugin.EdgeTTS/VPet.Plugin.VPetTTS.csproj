@@ -19,8 +19,8 @@
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Serilog" Version="4.2.0" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
-    <PackageReference Include="VPet-Simulator.Windows.Interface" Version="1.1.0.48" />
-    <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="9.0.2" />
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.1.0" />
+    <PackageReference Include="VPet-Simulator.Windows.Interface" Version="1.1.0.50" />
+    <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="9.0.5" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.1.2" />
   </ItemGroup>
 </Project>

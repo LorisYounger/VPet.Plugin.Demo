@@ -20,18 +20,12 @@
       <Version>1.0.7</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Panuon.WPF">
-      <Version>1.1.3</Version>
-    </PackageReference>
-    <PackageReference Include="Panuon.WPF.UI">
-      <Version>1.2.4.9</Version>
-    </PackageReference>
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
     <PackageReference Include="VPet-Simulator.Core">
-      <Version>1.1.0.48</Version>
+      <Version>1.1.0.50</Version>
     </PackageReference>
     <PackageReference Include="VPet-Simulator.Windows.Interface">
-      <Version>1.1.0.48</Version>
+      <Version>1.1.0.50</Version>
     </PackageReference>
   </ItemGroup>
 </Project>

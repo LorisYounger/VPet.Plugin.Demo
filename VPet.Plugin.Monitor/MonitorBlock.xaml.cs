@@ -35,7 +35,7 @@ namespace VPet.Plugin.Monitor
         public PerformanceCounter RamAVACounter = new PerformanceCounter("Memory", "Available Bytes");
         public PerformanceCounter RamCLCounter = new PerformanceCounter("Memory", "Commit Limit");
 
-        public List<string> NetIntances=new List<string>();
+        public List<string> NetIntances = new List<string>();
         public List<List<string>> GPUIntances = new List<List<string>>();
         public PerformanceCounter NetCounter;
         public PerformanceCounterCategory Founder_GPU = new PerformanceCounterCategory("GPU Engine");
@@ -130,21 +130,27 @@ namespace VPet.Plugin.Monitor
         }
         public void StartWork()
         {
-            if (NetGetIntances() != -1)
+            if (master.Set.NetSelected == string.Empty)
             {
-                if (master.Set.NetSelected == string.Empty)
-                {
-
+                if(NetGetIntances() != -1)
                     Netinit(NetIntances[NetGetIntances()]);
-                }
-                else
+            }
+            else
+            {
+                try
                 {
                     NetGetIntances();
                     Netinit(master.Set.NetSelected);
                 }
+                catch
+                {
+                    if(NetGetIntances() != -1)
+                        Netinit(NetIntances[NetGetIntances()]);
+                }
             }
             GPUGetIntances();
             GPUinit(master.Set.GPUSelected);
+
         }
         public int NetGetIntances()
         {
@@ -173,7 +179,7 @@ namespace VPet.Plugin.Monitor
             GpuEnginelist.Clear();
             foreach (string name in GPUIntances[CounterIndex])
             {
-                GpuEnginelist.Add(new PerformanceCounter("GPU Engine","Utilization Percentage",name));
+                GpuEnginelist.Add(new PerformanceCounter("GPU Engine", "Utilization Percentage", name));
             }
         }
         public float GPUCounterValue()
@@ -183,13 +189,13 @@ namespace VPet.Plugin.Monitor
             {
                 foreach (PerformanceCounter counter in GpuEnginelist)
                 {
-                    persentage+=counter.NextValue();
+                    persentage += counter.NextValue();
                 }
             }
             catch
             {
                 GPUGetIntances();
-                GPUinit(Convert.ToInt32( master.Set.GPUSelected));
+                GPUinit(Convert.ToInt32(master.Set.GPUSelected));
             }
             return persentage;
         }
@@ -219,7 +225,7 @@ namespace VPet.Plugin.Monitor
                         GPUIntances[i].Add(j);
                     }
                 }
-                if (GPUIntances[i].Count==0)
+                if (GPUIntances[i].Count == 0)
                 {
                     GPUIntances.Remove(GPUIntances[i]);
                     break;
