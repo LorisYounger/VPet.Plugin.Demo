@@ -234,7 +234,7 @@ namespace VPet.Plugin.DemoClock
                         else
                         {
                             voicetext = (string.IsNullOrWhiteSpace(voicetext) ? "{mode}结束啦主人" : voicetext).Replace("{mode}", "工作");
-                            Master.MW.Dispatcher.Invoke(() => { Master.MW.Main.SayRnd(voicetext, true); });
+                            Master.MW.Main.SayRnd(voicetext, true);
                         }
                         //**********在此处添加工作结束逻辑**********//
                         return;
@@ -312,7 +312,7 @@ namespace VPet.Plugin.DemoClock
                         }
                         else
                         {
-                            voicetext = (string.IsNullOrWhiteSpace(voicetext) ? "休息时间结束了，快打起精神来，让我陪着你继续工作啦" : voicetext).Replace("{mode}", "长休息");
+                            voicetext = (string.IsNullOrWhiteSpace(voicetext) ? "{mode}时间结束了，快打起精神来，让我陪着你继续工作啦".Translate() : voicetext).Replace("{mode}", "长休息".Translate());
                             Master.MW.Dispatcher.BeginInvoke(() => { Master.MW.Main.SayRnd(voicetext, true); });
                         }
                         //**********在此处添加长休息结束逻辑**********//
@@ -323,15 +323,15 @@ namespace VPet.Plugin.DemoClock
 
                     if (diffleft.TotalMinutes < 1.5)
                     {
-                        TDates.Text = $"休息剩{diffleft.TotalSeconds:f1}秒";
+                        TDates.Text = "休息剩 {0:f1} 秒".Translate(diffleft.TotalSeconds);
                     }
                     else if (diffleft.TotalHours < 1.5)
                     {
-                        TDates.Text = $"休息剩{diffleft.TotalMinutes:f1}分钟";
+                        TDates.Text = "休息剩 {0:f1} 分钟".Translate(diffleft.TotalMinutes);
                     }
                     else
                     {
-                        TDates.Text = $"休息剩{diffleft.Hours:f1}小时";
+                        TDates.Text = "休息剩 {0:f1} 小时".Translate(diffleft.TotalHours);
                     }
                     break;
             }
@@ -459,7 +459,7 @@ namespace VPet.Plugin.DemoClock
             }
             else
             {
-                Master.MW.Dispatcher.BeginInvoke(() => { Master.MW.Main.SayRnd(string.IsNullOrWhiteSpace(voicetext) ? "主人已经工作这么久了，该好好放松一下啦~" : voicetext, true); });
+                Master.MW.Dispatcher.BeginInvoke(() => { Master.MW.Main.SayRnd(string.IsNullOrWhiteSpace(voicetext) ? "主人已经工作这么久了，该好好放松一下啦~".Translate() : voicetext, true); });
             }
             UpdateWeatherState();
         }
