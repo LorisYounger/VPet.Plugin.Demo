@@ -98,7 +98,7 @@ namespace VPet.Plugin.Monitor
                 }
                 catch(Exception e)
                 {
-                    MessageBoxX.Show("数据查找失败".Translate() + $"\n错误信息：\n".Translate()+$"{e.Message}"+$"\n错误堆栈:\n".Translate()+$"{e.StackTrace}","Error".Translate(),icon:MessageBoxIcon.Error);
+                    MessageBoxX.Show("数据查找失败,错误信息:\n{0}\n错误堆栈:\n{1}".Translate(e.Message, e.StackTrace), "性能监视器报错".Translate(), icon: MessageBoxIcon.Error);
                 }
             }
             else
@@ -125,7 +125,7 @@ namespace VPet.Plugin.Monitor
             }
             catch(Exception e)
             {
-                MessageBoxX.Show("数据查找失败".Translate() + $"\n错误信息：\n".Translate() + $"{e.Message}" + $"\n错误堆栈:\n".Translate() + $"{e.StackTrace}", "Error".Translate(), icon: MessageBoxIcon.Error);
+                MessageBoxX.Show("数据查找失败,错误信息:\n{0}\n错误堆栈:\n{1}".Translate(e.Message, e.StackTrace), "性能监视器报错".Translate(), icon: MessageBoxIcon.Error);
             }
         }
         public void StartWork()
@@ -170,7 +170,7 @@ namespace VPet.Plugin.Monitor
             }
             catch(Exception e)
             {
-                MessageBoxX.Show("信息调用失败".Translate() + $"\n错误信息：\n".Translate() + $"{e.Message}" + $"\n错误堆栈:\n".Translate() + $"{e.StackTrace}", "Error".Translate(), icon: MessageBoxIcon.Error);
+                MessageBoxX.Show("信息查找失败,错误信息:\n{0}\n错误堆栈:\n{1}".Translate(e.Message, e.StackTrace), "性能监视器报错".Translate(), icon: MessageBoxIcon.Error);
                 return -1;
             }
         }
@@ -212,7 +212,7 @@ namespace VPet.Plugin.Monitor
             }
             catch (Exception e)
             {
-                MessageBoxX.Show("信息调用失败".Translate() + $"\n错误信息：\n".Translate() + $"{e.Message}" + $"\n错误堆栈:\n".Translate() + $"{e.StackTrace}", "Error".Translate(), icon: MessageBoxIcon.Error);
+                MessageBoxX.Show("信息查找失败,错误信息:\n{0}\n错误堆栈:\n{1}".Translate(e.Message, e.StackTrace), "性能监视器报错".Translate(), icon: MessageBoxIcon.Error);
                 return;
             }
             for (int i = 0; i <= 5; i++)
