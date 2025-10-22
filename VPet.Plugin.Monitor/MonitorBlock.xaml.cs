@@ -3,6 +3,7 @@ using Panuon.WPF.UI;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Metrics;
 using System.IO.Packaging;
 using System.Linq;
 using System.Security.Permissions;
@@ -98,7 +99,11 @@ namespace VPet.Plugin.Monitor
                 }
                 catch(Exception e)
                 {
-                    MessageBoxX.Show("数据查找失败,错误信息:\n{0}\n错误堆栈:\n{1}".Translate(e.Message, e.StackTrace), "性能监视器报错".Translate(), icon: MessageBoxIcon.Error);
+                    master.Set.IsGPUWoring = false;
+                    Dispatcher.Invoke(() =>
+                    {
+                        MessageBoxX.Show("数据查找失败,已自动关闭GPU监控，\n错误信息:\n{0}\n错误堆栈:\n{1}".Translate(e.Message, e.StackTrace), "性能监视器报错".Translate(), icon: MessageBoxIcon.Error);
+                    });
                 }
             }
             else
@@ -123,9 +128,12 @@ namespace VPet.Plugin.Monitor
                 ChangeUIText(Using_Net, $"↑↓:{ReadNetByte(N)}");
                 MoveProcessBar(Bar_Net, N);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                MessageBoxX.Show("数据查找失败,错误信息:\n{0}\n错误堆栈:\n{1}".Translate(e.Message, e.StackTrace), "性能监视器报错".Translate(), icon: MessageBoxIcon.Error);
+                Dispatcher.Invoke(() =>
+                {
+                    MessageBoxX.Show("数据查找失败,错误信息:\n{0}\n错误堆栈:\n{1}".Translate(e.Message, e.StackTrace), "性能监视器报错".Translate(), icon: MessageBoxIcon.Error);
+                });
             }
         }
         public void StartWork()
@@ -170,7 +178,10 @@ namespace VPet.Plugin.Monitor
             }
             catch(Exception e)
             {
-                MessageBoxX.Show("信息查找失败,错误信息:\n{0}\n错误堆栈:\n{1}".Translate(e.Message, e.StackTrace), "性能监视器报错".Translate(), icon: MessageBoxIcon.Error);
+                Dispatcher.Invoke(() =>
+                {
+                    MessageBoxX.Show("信息查找失败,错误信息:\n{0}\n错误堆栈:\n{1}".Translate(e.Message, e.StackTrace), "性能监视器报错".Translate(), icon: MessageBoxIcon.Error);
+                });
                 return -1;
             }
         }
@@ -185,17 +196,9 @@ namespace VPet.Plugin.Monitor
         public float GPUCounterValue()
         {
             float persentage = 0;
-            try
+            foreach (PerformanceCounter counter in GpuEnginelist)
             {
-                foreach (PerformanceCounter counter in GpuEnginelist)
-                {
-                    persentage += counter.NextValue();
-                }
-            }
-            catch
-            {
-                GPUGetIntances();
-                GPUinit(Convert.ToInt32(master.Set.GPUSelected));
+                persentage += counter.NextValue();
             }
             return persentage;
         }
@@ -212,7 +215,10 @@ namespace VPet.Plugin.Monitor
             }
             catch (Exception e)
             {
-                MessageBoxX.Show("信息查找失败,错误信息:\n{0}\n错误堆栈:\n{1}".Translate(e.Message, e.StackTrace), "性能监视器报错".Translate(), icon: MessageBoxIcon.Error);
+                Dispatcher.Invoke(() =>
+                {
+                    MessageBoxX.Show("信息查找失败,错误信息:\n{0}\n错误堆栈:\n{1}".Translate(e.Message, e.StackTrace), "性能监视器报错".Translate(), icon: MessageBoxIcon.Error);
+                });
                 return;
             }
             for (int i = 0; i <= 5; i++)

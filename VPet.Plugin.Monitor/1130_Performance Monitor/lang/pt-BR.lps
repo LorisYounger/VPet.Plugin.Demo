@@ -19,3 +19,6 @@ GPU监视开关#Alternar Monitoramento da GPU:|
 进度条颜色匹配面板#Painel de Correspondência de Cores da Barra de Progresso:|
 程序数值均取自Windows性能监视器，与任务管理器有出入，GPU监视（相当高）和多彩进度条（极少）有CPU损耗。#Os valores do programa são retirados do Monitor de Desempenho do Windows e podem diferir do Gerenciador de Tarefas. O monitoramento da GPU (bastante elevado) e a barra de progresso colorida (muito pouco) consomem recursos da CPU.:|
 前往 设置-MOD设置 启用/停用MOD#Vá para Configurações - Configurações do MOD para ativar/desativar o MOD:|
+数据查找失败,已自动关闭GPU监控，\n错误信息:\n{0}\n错误堆栈:\n{1}#Falha na recuperação de dados, o monitoramento da GPU foi desativado automaticamente,\nMensagem de erro:\n{0}\nPilha de erros:\n{1}:|
+数据查找失败,错误信息:\n{0}\n错误堆栈:\n{1}#Falha na recuperação de dados,\nMensagem de erro:\n{0}\nPilha de erros:\n{1}:|
+性能监视器报错#Erro no Monitor de Desempenho:|

@@ -19,3 +19,6 @@ GPU监视开关#GPU monitor switch:|
 进度条颜色匹配面板#Progress bar color matching panel:|
 程序数值均取自Windows性能监视器，与任务管理器有出入，GPU监视（相当高）和多彩进度条（极少）有CPU损耗。#The program values are taken from Windows Performance Monitor and differ from Task Manager, GPU Monitor (quite high) and Colorful Progress Bar (very low) have CPU loss.:|
 前往 设置-MOD设置 启用/停用MOD#Go to Settings - MOD Settings Enable/Disable MOD:|
+数据查找失败,已自动关闭GPU监控，\n错误信息:\n{0}\n错误堆栈:\n{1}#Data retrieval failed, GPU monitoring has been automatically disabled,\nError message:\n{0}\nError stack:\n{1}:|
+数据查找失败,错误信息:\n{0}\n错误堆栈:\n{1}#Data retrieval failed,\nError message:\n{0}\nError stack:\n{1}:|
+性能监视器报错#Performance Monitor Error:|
