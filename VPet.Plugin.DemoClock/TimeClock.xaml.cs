@@ -432,7 +432,7 @@ namespace VPet.Plugin.DemoClock
             }
             else
             {
-                Master.MW.Dispatcher.BeginInvoke(() => { Master.MW.Main.SayRnd(string.IsNullOrWhiteSpace(voicetext) ? "要完成什么工作呢" : voicetext, true); });
+                Master.MW.Dispatcher.BeginInvoke(() => { Master.MW.Main.SayRnd(string.IsNullOrWhiteSpace(voicetext) ? "要完成什么工作呢".Translate() : voicetext, true); });
             }
             UpdateWeatherState();
         }
