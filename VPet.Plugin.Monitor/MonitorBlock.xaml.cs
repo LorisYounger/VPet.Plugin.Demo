@@ -1,7 +1,9 @@
-﻿using Panuon.WPF.UI;
+﻿using LinePutScript.Localization.WPF;
+using Panuon.WPF.UI;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Metrics;
 using System.IO.Packaging;
 using System.Linq;
 using System.Security.Permissions;
@@ -84,14 +86,25 @@ namespace VPet.Plugin.Monitor
         {
             if (master.Set.IsGPUWoring)
             {
-                if (GPUintancenames.Count() != Founder_GPU.GetInstanceNames().Count())
+                try
                 {
-                    GPUGetIntances();
-                    GPUinit(master.Set.GPUSelected);
+                    if (GPUintancenames.Count() != Founder_GPU.GetInstanceNames().Count())
+                    {
+                        GPUGetIntances();
+                        GPUinit(master.Set.GPUSelected);
+                    }
+                    float G = GPUCounterValue();
+                    ChangeUIText(Using_GPU, "GPU", G);
+                    MoveProcessBar(Bar_GPU, (double)G);
                 }
-                float G = GPUCounterValue();
-                ChangeUIText(Using_GPU, "GPU", G);
-                MoveProcessBar(Bar_GPU, (double)G);
+                catch(Exception e)
+                {
+                    master.Set.IsGPUWoring = false;
+                    Dispatcher.Invoke(() =>
+                    {
+                        MessageBoxX.Show("数据查找失败,已自动关闭GPU监控，\n错误信息:\n{0}\n错误堆栈:\n{1}".Translate(e.Message, e.StackTrace), "性能监视器报错".Translate(), icon: MessageBoxIcon.Error);
+                    });
+                }
             }
             else
             {
@@ -101,23 +114,34 @@ namespace VPet.Plugin.Monitor
         }
         public void DefaultWorking(object o)
         {
-            float C = CpuCounter.NextValue();
-            float CL = RamCLCounter.NextValue();
-            float AVA = RamAVACounter.NextValue();
-            float R = (CL - AVA) / CL * 100;
-            ChangeUIText(Using_CPU, "CPU", C);
-            ChangeUIText(Using_RAM, "RAM", R);
-            MoveProcessBar(Bar_CPU, (double)C);
-            MoveProcessBar(Bar_RAM, (double)R);
-            float N = NetCounter.NextValue();
-            ChangeUIText(Using_Net, $"↑↓:{ReadNetByte(N)}");
-            MoveProcessBar(Bar_Net, N);
+            try
+            {
+                float C = CpuCounter.NextValue();
+                float CL = RamCLCounter.NextValue();
+                float AVA = RamAVACounter.NextValue();
+                float R = (CL - AVA) / CL * 100;
+                ChangeUIText(Using_CPU, "CPU", C);
+                ChangeUIText(Using_RAM, "RAM", R);
+                MoveProcessBar(Bar_CPU, (double)C);
+                MoveProcessBar(Bar_RAM, (double)R);
+                float N = NetCounter.NextValue();
+                ChangeUIText(Using_Net, $"↑↓:{ReadNetByte(N)}");
+                MoveProcessBar(Bar_Net, N);
+            }
+            catch (Exception e)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    MessageBoxX.Show("数据查找失败,错误信息:\n{0}\n错误堆栈:\n{1}".Translate(e.Message, e.StackTrace), "性能监视器报错".Translate(), icon: MessageBoxIcon.Error);
+                });
+            }
         }
         public void StartWork()
         {
             if (master.Set.NetSelected == string.Empty)
             {
-                Netinit(NetIntances[NetGetIntances()]);
+                if(NetGetIntances() != -1)
+                    Netinit(NetIntances[NetGetIntances()]);
             }
             else
             {
@@ -128,7 +152,8 @@ namespace VPet.Plugin.Monitor
                 }
                 catch
                 {
-                    Netinit(NetIntances[NetGetIntances()]);
+                    if(NetGetIntances() != -1)
+                        Netinit(NetIntances[NetGetIntances()]);
                 }
             }
             GPUGetIntances();
@@ -137,17 +162,28 @@ namespace VPet.Plugin.Monitor
         }
         public int NetGetIntances()
         {
-            NetIntances.Clear();
-            NetIntances.AddRange(Founder_Net.GetInstanceNames());
-            int NetIndex = 0;
-            foreach (string intancename in NetIntances)
+            try
             {
-                if (intancename.Contains("WIFI"))
+                NetIntances.Clear();
+                NetIntances.AddRange(Founder_Net.GetInstanceNames());
+                int NetIndex = 0;
+                foreach (string intancename in NetIntances)
                 {
-                    NetIndex = NetIntances.IndexOf(intancename);
+                    if (intancename.Contains("WIFI"))
+                    {
+                        NetIndex = NetIntances.IndexOf(intancename);
+                    }
                 }
+                return NetIndex;
             }
-            return NetIndex;
+            catch(Exception e)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    MessageBoxX.Show("信息查找失败,错误信息:\n{0}\n错误堆栈:\n{1}".Translate(e.Message, e.StackTrace), "性能监视器报错".Translate(), icon: MessageBoxIcon.Error);
+                });
+                return -1;
+            }
         }
         public void GPUinit(int CounterIndex)
         {
@@ -160,17 +196,9 @@ namespace VPet.Plugin.Monitor
         public float GPUCounterValue()
         {
             float persentage = 0;
-            try
+            foreach (PerformanceCounter counter in GpuEnginelist)
             {
-                foreach (PerformanceCounter counter in GpuEnginelist)
-                {
-                    persentage += counter.NextValue();
-                }
-            }
-            catch
-            {
-                GPUGetIntances();
-                GPUinit(Convert.ToInt32(master.Set.GPUSelected));
+                persentage += counter.NextValue();
             }
             return persentage;
         }
@@ -180,8 +208,19 @@ namespace VPet.Plugin.Monitor
         }
         public void GPUGetIntances()
         {
-            GPUintancenames = Founder_GPU.GetInstanceNames();
-            GPUIntances.Clear();
+            try
+            {
+                GPUintancenames = Founder_GPU.GetInstanceNames();
+                GPUIntances.Clear();
+            }
+            catch (Exception e)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    MessageBoxX.Show("信息查找失败,错误信息:\n{0}\n错误堆栈:\n{1}".Translate(e.Message, e.StackTrace), "性能监视器报错".Translate(), icon: MessageBoxIcon.Error);
+                });
+                return;
+            }
             for (int i = 0; i <= 5; i++)
             {
                 GPUIntances.Add(new List<string>());

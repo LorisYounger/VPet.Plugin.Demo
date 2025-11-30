@@ -206,7 +206,7 @@
                         VerticalAlignment="Center" />
                 <pu:SearchBox Grid.Column="2" Grid.Row="3" x:Name="RegionBox" CornerRadius="10" Margin="5"
                         SearchTextChanged="SchBox_SearchTextChanged" ItemClick="SchBox_ItemClick"
-                        Watermark="{ll:Str 查找所在地区}" />
+                        Watermark="{ll:Str 输入所在地区以进行查找}" />
             </Grid>
         </TabItem>
     </TabControl>
