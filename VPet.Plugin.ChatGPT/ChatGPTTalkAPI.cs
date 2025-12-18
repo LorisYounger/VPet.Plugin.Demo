@@ -73,6 +73,8 @@ namespace VPet.Plugin.ChatGPTPlugin
                         try
                         {
                             Plugin.CGPTClient.Ask_stream("vpet", content, (x) =>
+                            {
+                                try
                                 {
                                     if (x == null)
                                     {//有一些厂商不按套路来生成结束, 用这个兼容下
@@ -91,7 +93,13 @@ namespace VPet.Plugin.ChatGPTPlugin
                                         }
                                         sis.FinishGenerate();
                                     }
-                                });
+                                }
+                                catch (Exception e)
+                                {
+                                    sis.UpdateAllText("API调用失败".Translate() + '\n' + e.ToString());
+                                    sis.FinishGenerate();
+                                }
+                            });
                         }
                         catch (Exception e)
                         {
