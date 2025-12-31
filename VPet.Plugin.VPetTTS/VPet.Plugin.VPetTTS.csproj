@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <OutputType>Library</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWPF>true</UseWPF>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="1102_VPetTTS\**" />
+    <EmbeddedResource Remove="1102_VPetTTS\**" />
+    <Page Remove="1102_VPetTTS\**" />
+    <None Include="1102_VPetTTS\**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="LinePutScript" Version="1.11.9" />
+    <PackageReference Include="LinePutScript.Localization.WPF" Version="1.0.7" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Serilog" Version="4.2.0" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+    <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="9.0.5" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.1.2" />
+    <PackageReference Include="VPet-Simulator.Core" Version="1.1.0.58" />
+    <PackageReference Include="VPet-Simulator.Windows.Interface" Version="1.1.0.58" />
+  </ItemGroup>
+  
+  <!-- 编译后自动复制 DLL 到 plugin 目录 -->
+  <Target Name="CopyToPlugin" AfterTargets="Build">
+    <MakeDir Directories="$(ProjectDir)1102_VPetTTS\plugin\" Condition="!Exists('$(ProjectDir)1102_VPetTTS\plugin\')" />
+    <ItemGroup>
+      <PluginFiles Include="$(OutputPath)*.dll" Exclude="$(OutputPath)VPet-Simulator*.dll;$(OutputPath)LinePutScript*.dll" />
+      <PluginFiles Include="$(OutputPath)*.json" />
+    </ItemGroup>
+    <Copy SourceFiles="@(PluginFiles)" DestinationFolder="$(ProjectDir)1102_VPetTTS\plugin\" SkipUnchangedFiles="true" />
+  </Target>
+</Project>

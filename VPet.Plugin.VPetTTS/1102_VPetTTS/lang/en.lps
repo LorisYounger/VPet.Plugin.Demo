@@ -1,0 +1,32 @@
+VPetTTS#VPetTTS:|
+你好,主人\n现在是#Hello, master\n is now:|
+生成失败#Generation Failed:|
+错误代码: {0}\n消息: {1}#Error Code: {0}\n Message: {1}:|
+VPetTTS 设置#VPetTTS Settings:|
+启用#Enable:|
+启用缓存#Enable Cache:|
+TTS提供商#TTS Provider:|
+启用 VPetTTS#Enable VPetTTS:|
+测试#Test:|
+清理缓存#Clear Cache:|
+Free TTS#Free TTS:|
+OpenAI TTS#OpenAI TTS:|
+GPT-SoVITS#GPT-SoVITS:|
+自定义URL#Custom URL:|
+DIY TTS#DIY TTS:|
+API密钥#API Key:|
+模型#Model:|
+语言#Language:|
+音色#Voice:|
+说话人#Speaker:|
+服务器地址#Server Address:|
+端口#Port:|
+Free TTS 使用免费服务#Free TTS uses free service:|
+语言设置:#Language Setting::|
+自动检测#Auto Detect:|
+中文#Chinese:|
+英语#English:|
+日语#Japanese:|
+粤语#Cantonese:|
+韩语#Korean:|
+auto: 自动检测语言\nzh: 中文\nen: 英语\nja: 日语\nyue: 粤语\nko: 韩语#auto: Auto detect\nzh: Chinese\nen: English\nja: Japanese\nyue: Cantonese\nko: Korean:|
