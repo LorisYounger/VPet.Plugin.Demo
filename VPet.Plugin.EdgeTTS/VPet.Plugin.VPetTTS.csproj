@@ -13,7 +13,6 @@
     <Page Remove="1101_EdgeTTS\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="EdgeTTS.Framework" Version="1.0.4" />
     <PackageReference Include="LinePutScript" Version="1.11.9" />
     <PackageReference Include="LinePutScript.Localization.WPF" Version="1.0.7" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />

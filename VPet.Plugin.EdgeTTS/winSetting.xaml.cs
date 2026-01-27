@@ -1,5 +1,4 @@
-﻿using EdgeTTS;
-using LinePutScript.Converter;
+﻿using LinePutScript.Converter;
 using LinePutScript.Localization.WPF;
 using Panuon.WPF.UI;
 using System;

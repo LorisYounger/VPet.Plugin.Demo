@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VPet_Simulator.Windows.Interface;
-using EdgeTTS;
 using LinePutScript.Converter;
 using LinePutScript;
 using System.IO;
