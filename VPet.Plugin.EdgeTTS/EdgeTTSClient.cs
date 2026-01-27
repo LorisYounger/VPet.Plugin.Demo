@@ -22,6 +22,13 @@ namespace VPet.Plugin.VPetTTS
         private const string WssUrlBase = "wss://speech.platform.bing.com/consumer/speech/synthesize/readaloud/edge/v1";
         private static readonly string UserAgent = $"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/{ChromiumVersion} Safari/537.36 Edg/{ChromiumVersion}";
 
+        // Configuration constants
+        private const int WebSocketBufferSize = 8192; // 8KB buffer for WebSocket communication
+        private const int TokenValidityIntervalSeconds = 300; // Token valid for 5 minutes
+        private const long HundredNanosecondsPerSecond = 10_000_000; // 100-nanosecond intervals per second
+        // Windows Epoch: Seconds between 1601-01-01 (Windows) and 1970-01-01 (Unix Epoch)
+        private const long WinEpochSeconds = 11644473600;
+
         public EdgeTTSClient()
         {
         }
@@ -94,7 +101,7 @@ namespace VPet.Plugin.VPetTTS
                     await SendMessageAsync(ws, ssmlMsg);
 
                     // Receive and process audio stream
-                    var buffer = new byte[8192]; // 8KB buffer
+                    var buffer = new byte[WebSocketBufferSize];
                     bool receivedAudio = false;
 
                     while (ws.State == WebSocketState.Open)
@@ -177,20 +184,17 @@ namespace VPet.Plugin.VPetTTS
         /// </summary>
         private string GenerateSecMsGec()
         {
-            // Windows Epoch: 11644473600 seconds
-            const long WinEpochSeconds = 11644473600;
-
             // Get current Unix timestamp
             long unixTs = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
 
             // Convert to Windows Epoch
             double ticks = unixTs + WinEpochSeconds;
 
-            // Round down to nearest 5 minutes (300 seconds)
-            ticks -= ticks % 300;
+            // Round down to nearest 5 minutes
+            ticks -= ticks % TokenValidityIntervalSeconds;
 
             // Convert to 100-nanosecond intervals
-            ticks *= 10_000_000;
+            ticks *= HundredNanosecondsPerSecond;
 
             // Create string to hash
             string strToHash = $"{ticks:F0}{TrustedClientToken}";
