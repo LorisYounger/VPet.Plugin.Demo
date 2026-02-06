@@ -33,6 +33,7 @@ namespace VPet.Plugin.Monitor
         public Timer GPUWorker;
         public float MaxNet = 0;
         private long GPUErrTimes = 0;
+        private bool GPUError = false;
         public PerformanceCounter CpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
         public PerformanceCounter RamAVACounter = new PerformanceCounter("Memory", "Available Bytes");
         public PerformanceCounter RamCLCounter = new PerformanceCounter("Memory", "Commit Limit");
@@ -98,14 +99,19 @@ namespace VPet.Plugin.Monitor
                     ChangeUIText(Using_GPU, "GPU", G);
                     MoveProcessBar(Bar_GPU, (double)G);
                     GPUErrTimes = 0;
+                    GPUError = false;
                 }
                 catch (Exception e)
                 {
-                    GPUErrTimes += 1;
-                    if (GPUErrTimes > 10)
+                    if (GPUErrTimes > 10 && GPUError == false)
                     {
+                        GPUError = true;
                         master.MB.Using_GPU.Dispatcher.BeginInvoke(new Action(() => { master.MB.Using_GPU.Text = "GPU:O.o"; }));
                         master.MB.Bar_GPU.Dispatcher.BeginInvoke(new Action(() => { master.MB.Bar_GPU.Width = 67.25; }));
+                    }
+                    else
+                    {
+                        GPUErrTimes += 1;
                     }
                 }
             }
