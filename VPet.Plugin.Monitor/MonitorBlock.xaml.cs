@@ -157,8 +157,6 @@ namespace VPet.Plugin.Monitor
                 {
                     if (NetGetIntances() != -1)
                         Netinit(NetIntances[NetGetIntances()]);
-                    if (NetGetIntances() != -1)
-                        Netinit(NetIntances[NetGetIntances()]);
                 }
             }
             GPUGetIntances();
