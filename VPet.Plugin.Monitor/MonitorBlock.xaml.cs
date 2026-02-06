@@ -32,6 +32,7 @@ namespace VPet.Plugin.Monitor
         public Timer DefaultWorker;
         public Timer GPUWorker;
         public float MaxNet = 0;
+        private long GPUErrTimes = 0;
         public PerformanceCounter CpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
         public PerformanceCounter RamAVACounter = new PerformanceCounter("Memory", "Available Bytes");
         public PerformanceCounter RamCLCounter = new PerformanceCounter("Memory", "Commit Limit");
@@ -96,14 +97,16 @@ namespace VPet.Plugin.Monitor
                     float G = GPUCounterValue();
                     ChangeUIText(Using_GPU, "GPU", G);
                     MoveProcessBar(Bar_GPU, (double)G);
+                    GPUErrTimes = 0;
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
-                    master.Set.IsGPUWoring = false;
-                    Dispatcher.Invoke(() =>
+                    GPUErrTimes += 1;
+                    if (GPUErrTimes > 10)
                     {
-                        MessageBoxX.Show("数据查找失败,已自动关闭GPU监控，\n错误信息:\n{0}\n错误堆栈:\n{1}".Translate(e.Message, e.StackTrace), "性能监视器报错".Translate(), icon: MessageBoxIcon.Error);
-                    });
+                        master.MB.Using_GPU.Dispatcher.BeginInvoke(new Action(() => { master.MB.Using_GPU.Text = "GPU:O.o"; }));
+                        master.MB.Bar_GPU.Dispatcher.BeginInvoke(new Action(() => { master.MB.Bar_GPU.Width = 67.25; }));
+                    }
                 }
             }
             else
@@ -140,7 +143,7 @@ namespace VPet.Plugin.Monitor
         {
             if (master.Set.NetSelected == string.Empty)
             {
-                if(NetGetIntances() != -1)
+                if (NetGetIntances() != -1)
                     Netinit(NetIntances[NetGetIntances()]);
             }
             else
@@ -152,7 +155,9 @@ namespace VPet.Plugin.Monitor
                 }
                 catch
                 {
-                    if(NetGetIntances() != -1)
+                    if (NetGetIntances() != -1)
+                        Netinit(NetIntances[NetGetIntances()]);
+                    if (NetGetIntances() != -1)
                         Netinit(NetIntances[NetGetIntances()]);
                 }
             }
@@ -176,7 +181,7 @@ namespace VPet.Plugin.Monitor
                 }
                 return NetIndex;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Dispatcher.Invoke(() =>
                 {
