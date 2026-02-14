@@ -22,10 +22,10 @@
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
     <PackageReference Include="VPet-Simulator.Core">
-      <Version>1.1.0.50</Version>
+      <Version>1.1.0.58</Version>
     </PackageReference>
     <PackageReference Include="VPet-Simulator.Windows.Interface">
-      <Version>1.1.0.50</Version>
+      <Version>1.1.0.58</Version>
     </PackageReference>
   </ItemGroup>
 </Project>

@@ -9,8 +9,8 @@
       "VPet.MutiPlayer.Stream.x64/1.0.0": {
         "dependencies": {
           "Facepunch.Steamworks": "2.3.3",
-          "ToolGood.Words": "3.1.0.2",
-          "VPet-Simulator.Windows.Interface": "1.1.0.50"
+          "ToolGood.Words": "3.1.0.3",
+          "VPet-Simulator.Windows.Interface": "1.1.0.58"
         },
         "runtime": {
           "VPet.MutiPlayer.Stream.x64.dll": {}
@@ -102,15 +102,15 @@
           }
         }
       },
-      "ToolGood.Words/3.1.0.2": {
+      "ToolGood.Words/3.1.0.3": {
         "runtime": {
           "lib/net8.0/ToolGood.Words.dll": {
-            "assemblyVersion": "3.1.0.2",
-            "fileVersion": "3.1.0.2"
+            "assemblyVersion": "3.1.0.3",
+            "fileVersion": "3.1.0.3"
           }
         }
       },
-      "VPet-Simulator.Core/1.1.0.50": {
+      "VPet-Simulator.Core/1.1.0.58": {
         "dependencies": {
           "LinePutScript": "1.11.9",
           "LinePutScript.Localization.WPF": "1.0.7",
@@ -124,9 +124,9 @@
           }
         }
       },
-      "VPet-Simulator.Windows.Interface/1.1.0.50": {
+      "VPet-Simulator.Windows.Interface/1.1.0.58": {
         "dependencies": {
-          "VPet-Simulator.Core": "1.1.0.50"
+          "VPet-Simulator.Core": "1.1.0.58"
         },
         "runtime": {
           "lib/net8.0/VPet-Simulator.Windows.Interface.dll": {
@@ -199,26 +199,26 @@
       "path": "skiasharp.nativeassets.win32/3.116.1",
       "hashPath": "skiasharp.nativeassets.win32.3.116.1.nupkg.sha512"
     },
-    "ToolGood.Words/3.1.0.2": {
+    "ToolGood.Words/3.1.0.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-UcLdUjzkN0yeT8q591XpDsAs6bKue2T7Z6smYju3ku5ABuuSFVAr8WCTTzjVqpmlpEN/O3gC2Jai2Ujlir+BLg==",
-      "path": "toolgood.words/3.1.0.2",
-      "hashPath": "toolgood.words.3.1.0.2.nupkg.sha512"
+      "sha512": "sha512-+rqHT30SJW/dtJKxt1pVe76Rvv2tGy4j/7swRkAxUTj3AAPVL4dPB2YswMNnIVxXWQfMvUTaU4clliiFbC994Q==",
+      "path": "toolgood.words/3.1.0.3",
+      "hashPath": "toolgood.words.3.1.0.3.nupkg.sha512"
     },
-    "VPet-Simulator.Core/1.1.0.50": {
+    "VPet-Simulator.Core/1.1.0.58": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-qQsNt6g9pyRJY+q2DEncBFEpRKh7aaZnHXYN5tVQKJn8SaSQT+Lk3DFYu2Jc2/ypM/wgjD/KOURizeACBBu7JA==",
-      "path": "vpet-simulator.core/1.1.0.50",
-      "hashPath": "vpet-simulator.core.1.1.0.50.nupkg.sha512"
+      "sha512": "sha512-Mrwt4dbxNsxkS3sUBoheMH2D1iAlT6r0LCJ9XoXPq21lFMq8EnixX6oLq4NPQQr7rY3Yet75NxgRQxLqG7VNiQ==",
+      "path": "vpet-simulator.core/1.1.0.58",
+      "hashPath": "vpet-simulator.core.1.1.0.58.nupkg.sha512"
     },
-    "VPet-Simulator.Windows.Interface/1.1.0.50": {
+    "VPet-Simulator.Windows.Interface/1.1.0.58": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-aDypIA1EYM/MJMaY7TOIEAc6bgEVjyHwz4+dqz/pKAtoyMAuUpGB2lf4i27iJc6pAegcljBA+NTSIOBeswcY+Q==",
-      "path": "vpet-simulator.windows.interface/1.1.0.50",
-      "hashPath": "vpet-simulator.windows.interface.1.1.0.50.nupkg.sha512"
+      "sha512": "sha512-5saApxJSg9X+r5b7/lUAe52Tk41KvNlbLiZVyshHpfwar7176suSKRsyZH04ssByZNWq5BuTJMNg5w06rcq6rg==",
+      "path": "vpet-simulator.windows.interface/1.1.0.58",
+      "hashPath": "vpet-simulator.windows.interface.1.1.0.58.nupkg.sha512"
     }
   }
 }

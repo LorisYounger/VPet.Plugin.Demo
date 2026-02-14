@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	  <UseWPF>true</UseWPF>
+	  <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+  </PropertyGroup>
+	<ItemGroup>
+		<Compile Remove="1123_MutiRedEnvelope\**" />
+		<EmbeddedResource Remove="1123_MutiRedEnvelope\**" />
+		<None Remove="1123_MutiRedEnvelope\**" />
+		<Page Remove="1123_MutiRedEnvelope\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+    <PackageReference Include="VPet-Simulator.Windows.Interface" Version="1.1.0.58" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="TabRedEnv.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>
+
+</Project>
