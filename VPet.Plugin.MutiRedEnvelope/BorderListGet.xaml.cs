@@ -22,14 +22,14 @@ namespace VPet.Plugin.MutiRedEnvelope
     /// </summary>
     public partial class BorderListGet : Border
     {
-        public BorderListGet(IMPFriend friend, GetData data)
+        public BorderListGet(IMPFriend? friend, GetData data)
         {
             InitializeComponent();
-            uname.Content = friend.Name;
-            uimg.Source = friend.Avatar;
+            uname.Content = friend?.Name ?? "someone";
+            uimg.Source = friend?.Avatar;
             utime.Content = data.GetTime.ToShortTimeString();
             umoney.Content = data.Money.ToString("f2");
-            if(friend.IsMe)
+            if (friend?.IsMe == true)
             {
                 Background = new SolidColorBrush(Color.FromArgb(255, 255, 132, 76));
             }

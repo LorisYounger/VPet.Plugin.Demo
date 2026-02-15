@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:pu="https://opensource.panuon.com/wpf-ui"
         xmlns:ll="clr-namespace:LinePutScript.Localization.WPF;assembly=LinePutScript.Localization.WPF"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Margin="5" CornerRadius="5"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" Background="OrangeRed"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" Background="#f4511e"
         xmlns:local="clr-namespace:VPet.Plugin.MutiRedEnvelope" mc:Ignorable="d" d:DesignWidth="414">
     <Border.Resources>
         <ResourceDictionary Source="/VPet-Simulator.Windows.Interface;component/ResourceStyle.xaml" />
@@ -17,24 +17,26 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Label FontFamily="pack://application:,,,/Res/#remixicon" Content="&#xF05F;" Background="{x:Null}"
-                    FontSize="50" Foreground="White" Padding="0" VerticalAlignment="Center" />
-            <Image x:Name="uimg" Height="50" Width="50" Grid.Column="0" />
-            <TextBlock FontSize="16" Foreground="White" Grid.Column="2" TextWrapping="WrapWithOverflow">
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>           
+            <Image x:Name="uimg" Height="50" Width="50" Grid.Column="0" Margin="5"/>
+            <Label FontFamily="pack://application:,,,/Res/#remixicon" Content="&#xF060;" Background="{x:Null}"
+                    FontSize="50" Foreground="#afff" Padding="0" VerticalAlignment="Center" Margin="5" />
+            <TextBlock FontSize="12" Foreground="LightGray" Grid.Column="2" TextWrapping="WrapWithOverflow">
                     <Run x:Name="hostName" Text="XXX" /><Run Text="{ll:Str 的s}" /><Run x:Name="rPetName" Text="萝莉斯" />
-                 <Run Text="{ll:Str 发送的}" /> <Run x:Name="Type" Text="拼手气" /> <Run Text="{ll:Str 红包}" />
-                <LineBreak />
-                     <Run Text="{ll:Str 总金额}" />
-                        :
-                <Run x:Name="totalvalue" Text="XXX" FontWeight="Bold" FontSize="40" />
-                <Run x:Name="isfake" Text="{ll:Str '(玩具钞)'}" />
+                 <Run Text="{ll:Str 发送的}" /> <Run x:Name="redType" Text="拼手气" /> <Run Text="{ll:Str 红包}" />
+                <LineBreak /> 
+                <Run FontSize="16" Text="恭喜发财" Foreground="White" x:Name="msg" />
+               <LineBreak /> <Run Text="{ll:Str 总金额}" FontSize="14" Foreground="WhiteSmoke" /> : <Run x:Name="totalvalue"
+                        Text="XXX" FontWeight="Bold" FontSize="32" Foreground="White" />
+                <Run x:Name="isfake" />
+                <Run x:Name="tosomeone" />
             </TextBlock>
-            <Button FontSize="16" Foreground="White" pu:ButtonHelper.CornerRadius="10" Grid.Column="3"
-                    Background="#ff9800" BorderBrush="#c66900" BorderThickness="2" Content="打开" />
-            <StackPanel Grid.Row="1" Grid.ColumnSpan="4" x:Name="MoreInfo">
+            <Button x:Name="btnOpen" FontSize="16" Foreground="White" pu:ButtonHelper.CornerRadius="10" Grid.Column="3" 
+                    Background="#ff9800" BorderBrush="#c66900" BorderThickness="2" Content="打开" Click="btnOpen_Click" />
+            <StackPanel Grid.Row="1" Grid.ColumnSpan="4" x:Name="MoreInfo" Visibility="Collapsed">
                 <TextBlock FontSize="14" Foreground="LightGray">
                     <Run Text="{ll:Str '已领取'}" /> <Run x:Name="receivedCount" Text="0" /> <Run Text="/" /> <Run
                             x:Name="totalCount" Text="0" />

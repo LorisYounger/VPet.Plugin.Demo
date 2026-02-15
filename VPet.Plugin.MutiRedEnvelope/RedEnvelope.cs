@@ -13,7 +13,7 @@ namespace VPet.Plugin.MutiRedEnvelope
 
         private void MW_MutiPlayerHandle(IMPWindows obj)
         {
-            MW.Dispatcher.Invoke(() => new TabRedEnv(obj));
+            MW.Dispatcher.Invoke(() => new TabRedEnv(obj, MW));
         }
 
         public override string PluginName => "RedEnvelope";

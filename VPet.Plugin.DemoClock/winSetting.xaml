@@ -160,14 +160,6 @@
                         Style="{DynamicResource StandardTextBoxStyle}" FontSize="16" Margin="5" Width="auto"
                         MinWidth="200" HorizontalAlignment="Center" Text="pack://application:,,,/Res/End.mp3"
                         LostKeyboardFocus="TextTomatoEnd_LostKeyboardFocus" IsEnabled="True" />
-
-                <!--<ComboBox x:Name="PetBox" Grid.Column="2" Style="{DynamicResource StandardComboBoxStyle}" Margin="5"
-                        FontSize="16" Grid.Row="6" Grid.ColumnSpan="2" IsEnabled="False">
-                    <ComboBoxItem>默认系统声音 - Win10</ComboBoxItem>
-                    <ComboBoxItem>少女 - NyaSwarm</ComboBoxItem>
-                    <ComboBoxItem>秘书 - 杨远</ComboBoxItem>
-                    <ComboBoxItem>萝莉 - 喵霸霸</ComboBoxItem>
-                </ComboBox>-->
             </Grid>
         </TabItem>
         <TabItem Header="天气设置">

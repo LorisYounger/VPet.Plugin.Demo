@@ -16,13 +16,14 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Image x:Name="uimg" Height="30" Width="30" Margin="10,5" Grid.RowSpan="2" />
+        <Image x:Name="uimg" Height="35" Width="35" Margin="10,2" Grid.RowSpan="2" />
         <Label x:Name="uname" Background="{x:Null}" Content="洛里斯杨远" Grid.Column="1" FontSize="14"
                 VerticalAlignment="Center" />
         <Label x:Name="utime" Background="{x:Null}" Content="16:00:00" Grid.Column="1" Grid.Row="1" FontSize="10"
                 Foreground="#616161" />
-        <Label x:Name="umoney" Background="{x:Null}" Content="$100.00" Grid.Column="2" VerticalAlignment="Center" />
-        <Label x:Name="ubest" Background="#fedb73" Content="{ll:Str '手气最佳'}" Grid.Column="2" Grid.Row="1" FontSize="10"
+        <Label x:Name="umoney" Background="{x:Null}" Content="$100.00" Grid.Column="2" VerticalAlignment="Center"
+                Margin="5,2" />
+        <Label x:Name="ubest" Background="#fedb73" Content="{ll:Str '手气最佳'}" Grid.Column="2" Grid.Row="1" FontSize="12"
                 BorderBrush="#c79100" BorderThickness="1" pu:LabelHelper.CornerRadius="3" FontWeight="Bold"
                 Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="2"
                 Foreground="#cb6500" />

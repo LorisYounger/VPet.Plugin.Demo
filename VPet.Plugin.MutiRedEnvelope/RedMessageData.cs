@@ -85,5 +85,27 @@ namespace VPet.Plugin.MutiRedEnvelope
         /// 剩余金额，领取后更新
         /// </summary>
         public double LeftMoney { get; set; }
+
+        public List<GetData> GetDatas { get; set; } = new List<GetData>();
+
+
+    }
+    /// <summary>
+    /// 返回领取红包结果
+    /// </summary>
+    public class ReturnGetRed
+    {
+        /// <summary>
+        /// 是否领取成功
+        /// </summary>
+        public bool IsSuccess { get; set; }
+        /// <summary>
+        /// 领取金额
+        /// </summary>
+        public double Money { get; set; }
+        /// <summary>
+        /// 红包ID
+        /// </summary>
+        public int RedID { get; set; }
     }
 }
