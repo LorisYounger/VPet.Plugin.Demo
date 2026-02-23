@@ -30,7 +30,7 @@ namespace VPet.Plugin.MutiRedEnvelope
         /// </summary>
         public int Count { get; set; }
         /// <summary>
-        /// 祝福/拼手气
+        /// 祝福
         /// </summary>
         public string Message { get; set; } = "";
         /// <summary>

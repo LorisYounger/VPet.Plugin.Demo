@@ -9,12 +9,15 @@
     <TabItem.Resources>
         <ResourceDictionary Source="/VPet-Simulator.Windows.Interface;component/ResourceStyle.xaml" />
     </TabItem.Resources>
-    <TabControl x:Name="TabCR" pu:TabControlHelper.HeaderPanelBackground="#ff5722" pu:TabControlHelper.ItemsHoverBackground="#ffa270"
-            pu:TabControlHelper.ItemsSelectedBackground="#ff8a50" FontSize="16" Background="#ff8a50"
-            SelectionChanged="TabControl_SelectionChanged">
+    <TabControl x:Name="TabCR" pu:TabControlHelper.HeaderPanelBackground="#ff5722"
+            pu:TabControlHelper.ItemsHoverBackground="#ffa270" pu:TabControlHelper.ItemsSelectedBackground="#ff8a50"
+            FontSize="16" Background="#ff8a50" SelectedIndex="0" SelectionChanged="TabControl_SelectionChanged">
         <TabItem Header="{ll:Str 红包消息}">
             <ScrollViewer x:Name="SVStack">
                 <Grid>
+                    <Label x:Name="NotiNoHost" Content="{ll:Str '等待主持人相应'}" FontSize="20" Foreground="#ab000d"
+                            Background="{x:Null}" HorizontalAlignment="Center" Margin="0,10" FontWeight="Bold"
+                            Visibility="Collapsed" />
                     <Label x:Name="NotiNoRed" Content="{ll:Str '暂无红包'}" FontSize="20" Foreground="#ab000d"
                             Background="{x:Null}" HorizontalAlignment="Center" Margin="0,10" FontWeight="Bold"
                             VerticalAlignment="Center" />
@@ -60,7 +63,7 @@
             <Run x:Name="runMaxNumber" Text="2" />
                 </TextBlock>
                 <Label Grid.Row="3" Grid.Column="0" Content="{ll:Str 祝福}" Background="{x:Null}" FontSize="16" />
-                <TextBox x:Name="TxtWishes" Grid.Row="3" Grid.Column="2" Text="恭喜发财" FontSize="16"
+                <TextBox x:Name="TxtWishes" Grid.Row="3" Grid.Column="2" Text="恭喜发财, 大吉大利" FontSize="16"
                         Style="{DynamicResource StandardTextBoxStyle}" MaxLength="256" />
                 <Label Content="{ll:Str '类型'}" Grid.Row="4" Grid.Column="0" Background="{x:Null}" />
                 <ComboBox x:Name="combType" Grid.Column="2" pu:ComboBoxHelper.CornerRadius="4" Grid.Row="4" Margin="2,6"
@@ -71,9 +74,9 @@
                     <ComboBoxItem Content="{ll:Str '口令'}" />
                 </ComboBox>
                 <Label x:Name="labTarget" Content="{ll:Str '发送对象'}" Grid.Row="5" Grid.Column="0" VerticalAlignment="Top"
-                        Background="{x:Null}" />
+                        Background="{x:Null}" Visibility="Collapsed" />
                 <ComboBox x:Name="combTarget" Grid.Column="2" pu:ComboBoxHelper.CornerRadius="4" Margin="2,6"
-                        Grid.Row="5" />
+                        Grid.Row="5" Visibility="Collapsed" FontSize="16" />
                 <Label Content="{ll:Str '玩具钞'}" Grid.Row="6" Grid.Column="0" VerticalAlignment="Top"
                         Background="{x:Null}" />
                 <pu:Switch x:Name="chkFake" Grid.Row="6" Grid.Column="2" Background="Transparent" BorderBrush="#c63f17"

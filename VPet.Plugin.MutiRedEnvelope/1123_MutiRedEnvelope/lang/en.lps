@@ -1,0 +1,40 @@
+联机红包#Online Red Packets:|
+红包消息#Red Packet Message:|
+等待主持人相应#Waiting for host response:|
+暂无红包#No red packets available:|
+发红包#Send Red Packet:|
+金额#Amount:|
+最大金额限制#Maximum Amount Limit:|
+最大数量限制#Maximum Quantity Limit:|
+祝福#Blessing:|
+拼手气#Luck Draw:|
+平分#Split Evenly:|
+专属#Exclusive:|
+口令#Password:|
+发送对象#Recipients:|
+玩具钞#Toy Money:|
+不消耗金钱发红包#Send red packets without spending money:|
+塞钱进红包#Add money to red packet:|
+恭喜发财, 大吉大利#Wishing you wealth and prosperity, good fortune and success:|
+[联机红包]{0}发送一个{1}红包, 请在联机面板中查看 (需要订阅联机红包MOD)#[Online Red Packet]{0}Send a {1}red packet. Check the online panel (requires subscribing to the Online Red Packet MOD):|
+红包发送成功,快来让好友领取吧#Red packet sent successfully! Invite friends to claim it now:|
+的s#'s:|
+发送的#Sent:|
+红包#Red Packet:|
+总金额#Total Amount:|
+已领取#Claimed:|
+个, 共#of:|
+领取#Claim:|
+成功领取红包! 金额: $#Successfully claimed red packet! Amount: $:|
+收起#Collapse:|
+手气最佳#Best Luck:|
+联机结束未领取红包退款 ${0:f2}#Online session ended. Unclaimed red envelopes refunded ${0:f2}:|
+展开#Expand:|
+(玩具钞)#(Toy Money):|
+领取红包失败! 红包已经被领完了#Red envelope claim failed! All red envelopes have been claimed.:|
+红包金额不能小于10#Red envelope amount cannot be less than 10:|
+红包金额不能大于{0}#Red envelope amount cannot exceed {0}:|
+红包数量不能小于1#Red envelope quantity cannot be less than 1:|
+红包数量不能大于{0}#Red envelope quantity cannot exceed {0}:|
+请指定红包的目标玩家#Please specify the target player for the red envelope:|
+你的金钱不足, 无法发送红包#Insufficient funds to send red envelop:|

@@ -1,5 +1,7 @@
-vupmod#RedEnvelope:|author#LorisYounger:|gamever#11063:|ver#100:|
-intro#联机发红包MOD, 可以在访客表中收发红包:|
-lang#en:|联机发红包MOD, 可以在访客表中收发红包#Online red envelope sending mod, you can send and receive red envelopes in the visitor list:|RedEnvelope#Mutiplayer Red Envelope:|
-lang#zh-Hans:|联机发红包MOD, 可以在访客表中收发红包#联机发红包MOD, 可以在访客表中收发红包:|RedEnvelope#联机发红包:|
-lang#zh-Hant:|联机发红包MOD, 可以在访客表中收发红包#聯機發紅包MOD, 可以在訪客表中收發紅包:|RedEnvelope#聯機發紅包:|
+vupmod#RedEnvelope:|author#LorisYounger[认证]:|gamever#11064:|ver#100:|
+intro#联机发红包MOD/com 可以在访客表中收发红包./n这算是联机代码插件的参考案例:|
+lang#en:|联机发红包MOD, 可以在访客表中收发红包./n这算是联机代码插件的参考案例#Online Red Packet MOD, enabling sending and receiving red packets in the visitor list./nThis serves as a reference example for online code plugins.:|RedEnvelope#Online Red Envelope:|
+lang#zh-Hans:|联机发红包MOD, 可以在访客表中收发红包./n这算是联机代码插件的参考案例#联机发红包MOD, 可以在访客表中收发红包./n这算是联机代码插件的参考案例:|RedEnvelope#联机发红包:|
+lang#zh-Hant:|联机发红包MOD, 可以在访客表中收发红包./n这算是联机代码插件的参考案例#聯機發紅包MOD, 可以在訪客表中收發紅包./n這算是聯機代碼插件的參考案例:|RedEnvelope#聯機發紅包:|
+authorid#253101309:|
+itemid#3667506536:|

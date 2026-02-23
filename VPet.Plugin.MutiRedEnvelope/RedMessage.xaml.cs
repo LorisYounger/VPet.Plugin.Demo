@@ -62,7 +62,16 @@ namespace VPet.Plugin.MutiRedEnvelope
                     redType.Text = "平分".Translate();
                     break;
                 case RedMessageData.RedMessageType.Someone:
-                    redType.Text = "专属".Translate();
+                    IMPFriend? target;
+                    if (data.TargetID == imw.SteamID)
+                    {
+                        target = imp.SelftoIMPFriend();
+                    }
+                    else
+                    {
+                        target = IMP.Friends.FirstOrDefault(x => x.FriendID == data.TargetID);
+                    }
+                    redType.Text = "专属".Translate() + target?.Name ?? "";
                     break;
                 case RedMessageData.RedMessageType.Talk:
                     redType.Text = "口令".Translate();
@@ -95,6 +104,10 @@ namespace VPet.Plugin.MutiRedEnvelope
             int dataids = data.GetDatas.FindIndex(x => x.GetterID == imw.SteamID);
             if (dataids != -1)
             {
+                isget = true;
+            }
+            else if (data.Type == RedMessageData.RedMessageType.Someone && data.TargetID != imw.SteamID)
+            {//如果是专属红包, 但是不是自己的, 那么就当做领过了
                 isget = true;
             }
             UpdateButton();

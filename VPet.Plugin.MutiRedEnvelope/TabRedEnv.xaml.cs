@@ -41,14 +41,31 @@ namespace VPet.Plugin.MutiRedEnvelope
             IMP.TabControl.Items.Add(this);
             imp.ClosingMutiPlayer += IMP_ClosingMutiPlayer;
             imp.ReceivedMessage += IMP_ReceivedMessage;
-
+            imp.OnMemberLeave += Imp_OnMemberLeave;
+            TxtWishes.Text = "恭喜发财, 大吉大利".Translate();
             if (!imp.IsHost)
             {//如果不是主机, 就请求红包列表
                 MPMessage mpm = new MPMessage();
                 mpm.Type = (int)MPType.REDENV_Want_List;
+                NotiNoHost.Visibility = Visibility.Visible;
+                TabCR.IsEnabled = false;                
                 IMP.SendMessage(IMP.HostID, mpm);
             }
         }
+
+        private void Imp_OnMemberLeave(ulong obj)
+        {
+            if (IMP.IsHost)
+            {
+                //如果是主机, 因为这个玩家离开退款了, 把这个玩家的红包剩余金钱更新为0, 并群发红包列表更新
+                RedList.FindAll(x => x.SenderID == obj).ForEach(x => x.LeftMoney = 0);
+                var mpm = new MPMessage();
+                mpm.Type = (int)MPType.REDENV_RedList;
+                mpm.SetContent(RedList);
+                IMP.SendMessageALL(mpm);
+            }
+        }
+
         /// <summary>
         /// 红包使用的通信频道 -192000-192999
         /// </summary>
@@ -103,8 +120,17 @@ namespace VPet.Plugin.MutiRedEnvelope
                     {
                         //收到红包列表, 更新本地数据
                         var list = message.GetContent<List<RedMessageData>>();
+                        RedList = list;//缓存红包列表数据, 以后可以用来退款等操作
                         //更新界面
-                        Dispatcher.Invoke(() => UpdateRedList(list));
+                        Dispatcher.Invoke(() =>
+                        {
+                            UpdateRedList(list);
+                            if (TabCR.IsEnabled == false)
+                            {
+                                NotiNoHost.Visibility = Visibility.Collapsed;
+                                TabCR.IsEnabled = true;
+                            }
+                        });
                     }
                     break;
                 case (int)MPType.REDENV_CreateRed:
@@ -140,6 +166,23 @@ namespace VPet.Plugin.MutiRedEnvelope
                         {
                             if (resp.IsSuccess)
                             {
+                                var red = RedList.FirstOrDefault(x => x.REDID == resp.RedID);
+                                if (red != null && red.Type == RedMessageData.RedMessageType.Talk)
+                                {
+                                    var simp = IMP.SelftoIMPFriend();
+                                    MPMessage msg = new();
+                                    msg.Type = (int)MSGType.Chat;
+                                    msg.SetContent(new Chat()
+                                    {
+                                        Content = red.Message,
+                                        ChatType = Chat.Type.Public,
+                                        SendName = simp.Name,
+                                    });
+                                    msg.To = simp.FriendID;
+                                    IMP.SendMessageALL(msg);
+                                    IMW.Main.Say("{0} 对大家说: {1}".Translate(simp.Name, red.Message));
+                                    IMP.Log("{0} 对大家说: {1}".Translate(simp.Name, red.Message));
+                                }
                                 MessageBoxX.Show($"成功领取红包! 金额: $".Translate() + resp.Money.ToString("f2"));
                                 IMP.Log($"成功领取红包! 金额: $".Translate() + resp.Money.ToString("f2"));
                             }
@@ -173,6 +216,32 @@ namespace VPet.Plugin.MutiRedEnvelope
             var red = RedList.FirstOrDefault(x => x.REDID == rid);
             if (red != null && !red.GetDatas.Any(x => x.GetterID == from))
             {//如果红包存在并且这个玩家没有领取过, 就处理领取
+                //看看能不能领
+                if (red.Type == RedMessageData.RedMessageType.Someone && red.TargetID != from)
+                {
+                    //如果是指定红包, 但是领取者不是目标玩家, 就不给领
+                    if (isself)
+                    {
+                        IMP.Log("领取红包失败! 红包已经被领完了".Translate());
+                        MessageBoxX.Show("领取红包失败! 红包已经被领完了".Translate());
+                    }
+                    else
+                    {
+                        var resp = new MPMessage();
+                        resp.Type = (int)MPType.REDENV_GetRedResp;
+                        resp.SetContent(new ReturnGetRed()
+                        {
+                            RedID = rid,
+                            IsSuccess = false,
+                            Money = 0,
+                        });
+                        IMP.SendMessage(from, resp);
+                    }
+                    return;
+                }
+
+
+                //领取
                 if (red.Count == red.GetDatas.Count)
                 {
                     //红包已经被领完了
@@ -217,8 +286,20 @@ namespace VPet.Plugin.MutiRedEnvelope
                     }
                     else
                     {
-                        double max = red.LeftMoney / vcount * 2;//随机金额, 平均金额的两倍
-                        double money = (int)(new Random().NextDouble() * max * 100) / 100;//保留两位小数
+                        double money;
+                        if (red.Type == RedMessageData.RedMessageType.Normal)
+                        {
+                            money = Math.Round((double)red.Money / red.Count, 2);//平均金额, 保留两位小数
+                            if (red.LeftMoney < money)
+                            {
+                                money = red.LeftMoney / vcount;
+                            }
+                        }
+                        else
+                        {
+                            double max = red.LeftMoney / vcount * 2;//随机金额, 平均金额的两倍
+                            money = (int)(new Random().NextDouble() * max * 100) / 100;//保留两位小数
+                        }
                         if (money < 0.01)
                         {
                             money = 0.01;
@@ -237,7 +318,28 @@ namespace VPet.Plugin.MutiRedEnvelope
                         //如果是自己领取的,就进行加钱等操作,并进行通知
                         MessageBoxX.Show("成功领取红包! 金额: $".Translate() + ReturnGetRed.Money.ToString("f2"));
                         IMP.Log("成功领取红包! 金额: $".Translate() + ReturnGetRed.Money.ToString("f2"));
-                        //TODO:加钱等操作
+                        //加钱等操作
+                        if (!red.IsFake)
+                        {
+                            IMW.Core.Save.Money += ReturnGetRed.Money;
+                        }
+                        //如果是口令红包,群发口令
+                        if (red.Type == RedMessageData.RedMessageType.Talk)
+                        {
+                            var simp = IMP.SelftoIMPFriend();
+                            MPMessage msg = new();
+                            msg.Type = (int)MSGType.Chat;
+                            msg.SetContent(new Chat()
+                            {
+                                Content = red.Message,
+                                ChatType = Chat.Type.Public,
+                                SendName = simp.Name,
+                            });
+                            msg.To = simp.FriendID;
+                            IMP.SendMessageALL(msg);
+                            IMW.Main.Say("{0} 对大家说: {1}".Translate(simp.Name, red.Message));
+                            IMP.Log("{0} 对大家说: {1}".Translate(simp.Name, red.Message));
+                        }
                     }
                     else
                     {
@@ -259,15 +361,26 @@ namespace VPet.Plugin.MutiRedEnvelope
         }
 
         private void IMP_ClosingMutiPlayer()
-        {//TODO给红包发送者退款
+        {//给红包发送者退款
             IMP.ClosingMutiPlayer -= IMP_ClosingMutiPlayer;
             IMP.ReceivedMessage -= IMP_ReceivedMessage;
+            IMP.OnMemberLeave -= Imp_OnMemberLeave;
+            var refound = RedList.Where(x => x.SenderID == IMW.SteamID && !x.IsFake).Select(x => x.LeftMoney).Sum();
+            if (refound > 0)
+            {
+                IMW.Main.LabelDisplayShow("联机结束未领取红包退款 ${0:f2}".Translate(refound), 5000);
+                IMW.Core.Save.Money += refound;
+            }
         }
-
+        bool isselecge = false;
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+        {//这玩意好像会被调用几百次的样子, 加个防止多次调用的判断
+            if (!IsLoaded) return;
+            if (isselecge) return;
+            isselecge = true;
             UpdateLimitInfo();
             SVStack.ScrollToEnd();
+            isselecge = false;
         }
         /// <summary>
         /// 单次大可以发送的红包金额
@@ -284,22 +397,87 @@ namespace VPet.Plugin.MutiRedEnvelope
                 chkFake.IsChecked = true;
                 chkFake.IsEnabled = false;
             }
-            var simp = IMP.SelftoIMPFriend();
-            pmaxmoney = (int)(IMP.Friends.Select(x => x.Core.Save.Level).Average() * 10) + 50 + (100 * (IMW.GameSavesData.GameSave.LevelMax + 1) + IMW.GameSavesData.GameSave.Level * 10);
+            pmaxmoney = 50 + (50 * (IMW.GameSavesData.GameSave.LevelMax + 1) + IMW.GameSavesData.GameSave.Level * 5);
+            if (IMP.Friends.Count() != 0)
+            {
+                pmaxmoney += (int)IMP.Friends.Select(x => x.Core.Save.Level).Average() * 5;
+            }
             runMaxValue.Text = pmaxmoney.ToString();
             runMaxNumber.Text = (IMP.Friends.Count() + 1).ToString();
+            if(combTarget.Items.Count == IMP.Friends.Count())
+            {
+                return;
+            }
             combTarget.Items.Clear();
             foreach (var f in IMP.Friends)
             {
                 combTarget.Items.Add(f.Name);
             }
+            combTarget.SelectedIndex = 0;
         }
         /// <summary>
         /// 发送红包
         /// </summary>
         private void BtnSendRedEnv_Click(object sender, RoutedEventArgs e)
         {
-            //TODO:检查限制
+            //检查限制
+            if (!int.TryParse(TxtAmount.Text, out int money))
+            {
+                return;
+            }
+            if (money < 10)
+            {
+                MessageBoxX.Show("红包金额不能小于10".Translate());
+                return;
+            }
+            if (money > pmaxmoney)
+            {
+                MessageBoxX.Show("红包金额不能大于{0}".Translate(pmaxmoney));
+                return;
+            }
+            if (!int.TryParse(TxtCount.Text, out int count))
+            {
+                return;
+            }
+            if (count < 1)
+            {
+                MessageBoxX.Show("红包数量不能小于1".Translate());
+                return;
+            }
+            if (count > IMP.Friends.Count() + 1)
+            {
+                MessageBoxX.Show("红包数量不能大于{0}".Translate(IMP.Friends.Count() + 1));
+                return;
+            }
+            ulong targetid = 0;
+            if (combType.SelectedIndex == 2)
+            {
+                if (combTarget.SelectedIndex == -1)
+                {
+                    MessageBoxX.Show("请指定红包的目标玩家".Translate());
+                    return;
+                }
+                else
+                {
+                    targetid = IMP.Friends.FirstOrDefault(x => x.Name == combTarget.Text)?.FriendID ?? IMW.SteamID;
+                    count = 1;//指定红包只能发一个
+                }
+            }
+            if (string.IsNullOrWhiteSpace(TxtWishes.Text))
+            {
+                TxtWishes.Text = "恭喜发财, 大吉大利".Translate();
+            }
+            if (chkFake.IsChecked != true)
+            {
+                if (IMW.Core.Save.Money < money)
+                {
+                    MessageBoxX.Show("你的金钱不足, 无法发送红包".Translate());
+                    return;
+                }
+                //扣除金钱
+                IMW.Core.Save.Money -= money;
+            }
+
             var red = new RedMessageData()
             {
                 SenderID = IMW.SteamID,
@@ -308,9 +486,9 @@ namespace VPet.Plugin.MutiRedEnvelope
                 Message = TxtWishes.Text,
                 Type = (RedMessageData.RedMessageType)combType.SelectedIndex,
                 IsFake = (chkFake.IsChecked == true),
+                TargetID = targetid,
             };
             red.LeftMoney = red.Money;
-            //TODO金钱相关的操作, 等会写
 
             if (IMP.IsHost)
             {
@@ -325,7 +503,7 @@ namespace VPet.Plugin.MutiRedEnvelope
             }
             else
             {
-                //发送给主机, 让主机处理              
+                //发送给主机, 让主机处理           
                 var mpm = new MPMessage();
                 mpm.Type = (int)MPType.REDENV_CreateRed;
                 mpm.SetContent(red);
@@ -333,7 +511,7 @@ namespace VPet.Plugin.MutiRedEnvelope
             }
             var simp = IMP.SelftoIMPFriend();
             //普通的通知信息
-            MPMessage msg = new MPMessage();
+            MPMessage msg = new();
             msg.Type = (int)MSGType.Chat;
             msg.SetContent(new Chat()
             {
