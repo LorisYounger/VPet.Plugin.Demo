@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="1112_DoingDisplay\**" />
+    <EmbeddedResource Remove="1112_DoingDisplay\**" />
+    <None Remove="1112_DoingDisplay\**" />
+    <Page Remove="1112_DoingDisplay\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="VPet-Simulator.Windows.Interface" Version="1.1.0.66" />
+  </ItemGroup>
+
+</Project>
