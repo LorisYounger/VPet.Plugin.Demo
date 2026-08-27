@@ -11,11 +11,8 @@
           "EdgeTTS.Framework": "1.0.5",
           "LinePutScript": "1.11.9",
           "LinePutScript.Localization.WPF": "1.0.7",
-          "Microsoft.CSharp": "4.7.0",
-          "Serilog": "4.3.0",
-          "System.Data.DataSetExtensions": "4.5.0",
-          "System.Diagnostics.DiagnosticSource": "10.0.2",
-          "System.Runtime.CompilerServices.Unsafe": "6.1.2",
+          "Serilog": "4.3.1",
+          "System.Diagnostics.DiagnosticSource": "10.0.3",
           "VPet-Simulator.Windows.Interface": "1.1.0.58"
         },
         "runtime": {
@@ -25,7 +22,7 @@
       "EdgeTTS.Framework/1.0.5": {
         "dependencies": {
           "Newtonsoft.Json": "13.0.3",
-          "Serilog": "4.3.0"
+          "Serilog": "4.3.1"
         },
         "runtime": {
           "lib/net6.0/EdgeTTS.Net.dll": {
@@ -53,7 +50,6 @@
           }
         }
       },
-      "Microsoft.CSharp/4.7.0": {},
       "Newtonsoft.Json/13.0.3": {
         "runtime": {
           "lib/net6.0/Newtonsoft.Json.dll": {
@@ -81,7 +77,7 @@
           }
         }
       },
-      "Serilog/4.3.0": {
+      "Serilog/4.3.1": {
         "runtime": {
           "lib/net8.0/Serilog.dll": {
             "assemblyVersion": "4.3.0.0",
@@ -129,16 +125,14 @@
           }
         }
       },
-      "System.Data.DataSetExtensions/4.5.0": {},
-      "System.Diagnostics.DiagnosticSource/10.0.2": {
+      "System.Diagnostics.DiagnosticSource/10.0.3": {
         "runtime": {
           "lib/net8.0/System.Diagnostics.DiagnosticSource.dll": {
             "assemblyVersion": "10.0.0.0",
-            "fileVersion": "10.0.225.61305"
+            "fileVersion": "10.0.326.7603"
           }
         }
       },
-      "System.Runtime.CompilerServices.Unsafe/6.1.2": {},
       "VPet-Simulator.Core/1.1.0.58": {
         "dependencies": {
           "LinePutScript": "1.11.9",
@@ -193,13 +187,6 @@
       "path": "lineputscript.localization.wpf/1.0.7",
       "hashPath": "lineputscript.localization.wpf.1.0.7.nupkg.sha512"
     },
-    "Microsoft.CSharp/4.7.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-pTj+D3uJWyN3My70i2Hqo+OXixq3Os2D1nJ2x92FFo6sk8fYS1m1WLNTs0Dc1uPaViH0YvEEwvzddQ7y4rhXmA==",
-      "path": "microsoft.csharp/4.7.0",
-      "hashPath": "microsoft.csharp.4.7.0.nupkg.sha512"
-    },
     "Newtonsoft.Json/13.0.3": {
       "type": "package",
       "serviceable": true,
@@ -221,12 +208,12 @@
       "path": "panuon.wpf.ui/1.2.4.10",
       "hashPath": "panuon.wpf.ui.1.2.4.10.nupkg.sha512"
     },
-    "Serilog/4.3.0": {
+    "Serilog/4.3.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-+cDryFR0GRhsGOnZSKwaDzRRl4MupvJ42FhCE4zhQRVanX0Jpg6WuCBk59OVhVDPmab1bB+nRykAnykYELA9qQ==",
-      "path": "serilog/4.3.0",
-      "hashPath": "serilog.4.3.0.nupkg.sha512"
+      "sha512": "sha512-savYe7h5yRlkqBVOwP8cIRDOdqKiPmYCU4W87JH38sBmcKD5EBoXvQIw6bNEvZ/pTe1gsiye3VFCzBsoppGkXQ==",
+      "path": "serilog/4.3.1",
+      "hashPath": "serilog.4.3.1.nupkg.sha512"
     },
     "SkiaSharp/3.116.1": {
       "type": "package",
@@ -249,26 +236,12 @@
       "path": "skiasharp.nativeassets.win32/3.116.1",
       "hashPath": "skiasharp.nativeassets.win32.3.116.1.nupkg.sha512"
     },
-    "System.Data.DataSetExtensions/4.5.0": {
+    "System.Diagnostics.DiagnosticSource/10.0.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-221clPs1445HkTBZPL+K9sDBdJRB8UN8rgjO3ztB0CQ26z//fmJXtlsr6whGatscsKGBrhJl5bwJuKSA8mwFOw==",
-      "path": "system.data.datasetextensions/4.5.0",
-      "hashPath": "system.data.datasetextensions.4.5.0.nupkg.sha512"
-    },
-    "System.Diagnostics.DiagnosticSource/10.0.2": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-lYWBy8fKkJHaRcOuw30d67PrtVjR5754sz5Wl76s8P+vJ9FSThh9b7LIcTSODx1LY7NB3Srvg+JMnzd67qNZOw==",
-      "path": "system.diagnostics.diagnosticsource/10.0.2",
-      "hashPath": "system.diagnostics.diagnosticsource.10.0.2.nupkg.sha512"
-    },
-    "System.Runtime.CompilerServices.Unsafe/6.1.2": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-2hBr6zdbIBTDE3EhK7NSVNdX58uTK6iHW/P/Axmm9sl1xoGSLqDvMtpecn226TNwHByFokYwJmt/aQQNlO5CRw==",
-      "path": "system.runtime.compilerservices.unsafe/6.1.2",
-      "hashPath": "system.runtime.compilerservices.unsafe.6.1.2.nupkg.sha512"
+      "sha512": "sha512-IuZXyF3K5X+mCsBKIQ87Cn/V4Nyb39vyCbzfH/AkoneSWNV/ExGQ/I0m4CEaVAeFh9fW6kp2NVObkmevd1Ys7A==",
+      "path": "system.diagnostics.diagnosticsource/10.0.3",
+      "hashPath": "system.diagnostics.diagnosticsource.10.0.3.nupkg.sha512"
     },
     "VPet-Simulator.Core/1.1.0.58": {
       "type": "package",

@@ -26,6 +26,9 @@ namespace VPet.Plugin.VPetTTS
         public override void LoadPlugin()
         {
             Set = LPSConvert.DeserializeObject<Setting>(MW.Set["EdgeTTS"]);
+            //旧配置里没有这一节，补一份默认值免得后面到处判空
+            if (Set.TextFilter == null)
+                Set.TextFilter = new TextFilterSetting();
 
             if (!Directory.Exists(GraphCore.CachePath + @"\voice"))
                 Directory.CreateDirectory(GraphCore.CachePath + @"\voice");
@@ -55,6 +58,12 @@ namespace VPet.Plugin.VPetTTS
         //}
         public void Main_OnSay(string saythings)
         {//说话语音
+            //剔除括号里的动作描写：气泡照旧显示原文，这里只加工要念出来的副本。
+            //放在算缓存名之前，缓存才会跟过滤后的文本对齐。
+            saythings = SpeechTextFilter.Apply(saythings, Set.TextFilter);
+            if (string.IsNullOrWhiteSpace(saythings))
+                return;//整句都是动作描写，本次不发声
+
             var path = GraphCore.CachePath + $"\\voice\\{Sub.GetHashCode(saythings):X}.mp3";
             if (File.Exists(path))
             {

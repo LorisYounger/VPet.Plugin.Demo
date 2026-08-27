@@ -25,12 +25,14 @@
             <RowDefinition Height="40" />
             <RowDefinition Height="0" />
             <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="{ll:Str 启用}" VerticalAlignment="Center" />
         <TextBlock Grid.Row="1" Text="{ll:Str 音量}" VerticalAlignment="Center" />
         <TextBlock Grid.Row="2" Text="{ll:Str 音调}" VerticalAlignment="Center" />
         <TextBlock Grid.Row="3" Text="{ll:Str 语速}" VerticalAlignment="Center" />
         <TextBlock Grid.Row="4" Text="{ll:Str 讲述人}" VerticalAlignment="Center" />
+        <TextBlock Grid.Row="6" Text="{ll:Str 括号过滤}" VerticalAlignment="Center" />
         <!--<TextBlock Grid.Row="5" Text="{ll:Str 参数URL}" VerticalAlignment="Center" TextDecorations="Underline"
                 Foreground="{DynamicResource DARKPrimaryDarker}" MouseLeftButtonDown="ToolTipShow" />-->
 
@@ -365,11 +367,24 @@
             <System:String>http://123.207.46.66:8086/api/getGec</System:String>
             <System:String>https://edge-sec.myaitool.top/?key=edge</System:String>
         </ComboBox>-->
+        <!--括号过滤：括号里的动作描写只在气泡显示，不送去合成-->
+        <pu:Switch x:Name="SwitchTextFilter" Grid.Row="6" Grid.Column="2"
+                BorderBrush="{DynamicResource DARKPrimaryDark}"
+                CheckedBackground="{DynamicResource DARKPrimary}" CheckedBorderBrush="{DynamicResource DARKPrimary}"
+                Background="Transparent" BoxWidth="35" BoxHeight="18" ToggleSize="14" ToggleShadowColor="{x:Null}"
+                ToggleBrush="{DynamicResource DARKPrimaryDark}" Content="{ll:Str 不朗读括号内的动作描写}"
+                ToolTip="{ll:Str 括号内的内容仍会显示在气泡里，只是不会被念出来；整句都是动作描写时本次不发声}"
+                CheckedToggleBrush="{DynamicResource DARKPrimaryText}" />
+        <Button x:Name="TextFilterConfig" Grid.Row="6" Grid.Column="3" pu:ButtonHelper.CornerRadius="4"
+                Content="{ll:Str 括号类型}" Background="{DynamicResource SecondaryLight}"
+                BorderBrush="{DynamicResource SecondaryDark}" BorderThickness="2" Margin="5,5,5,5"
+                Click="TextFilterConfig_Click" />
+
         <Button pu:ButtonHelper.CornerRadius="4" Content="{ll:Str 保存设置}" Background="{DynamicResource SecondaryLight}"
-                BorderBrush="{DynamicResource SecondaryDark}" BorderThickness="2" Grid.Row="6" Margin="5,5,5,5"
+                BorderBrush="{DynamicResource SecondaryDark}" BorderThickness="2" Grid.Row="7" Margin="5,5,5,5"
                 Grid.ColumnSpan="3" Click="Save_Click" />
         <Button x:Name="Test" pu:ButtonHelper.CornerRadius="4" Content="{ll:Str 测试}"
                 Background="{DynamicResource SecondaryLight}" BorderBrush="{DynamicResource SecondaryDark}"
-                BorderThickness="2" Grid.Row="6" Margin="5,5,5,5" Grid.ColumnSpan="1" Click="Test_Click" Grid.Column="3" />
+                BorderThickness="2" Grid.Row="7" Margin="5,5,5,5" Grid.ColumnSpan="1" Click="Test_Click" Grid.Column="3" />
     </Grid>
 </Window>
