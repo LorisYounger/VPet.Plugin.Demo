@@ -25,7 +25,25 @@ namespace VPet.Plugin.ChatGPTPlugin
             if (File.Exists(ChatGPTSettingPath))
                 CGPTClient = ChatGPTClient.Load(File.ReadAllText(ChatGPTSettingPath));
             if (CGPTClient != null)
+            {
                 CGPTClient.WebProxy = WebProxy;
+                if (CGPTClient.Completions.ContainsKey("vpet"))
+                {
+                    if (CGPTClient.Completions["vpet"].thinking == null)
+                    {
+                        CGPTClient.Completions["vpet"].thinking = new Completions.Thinking() { type = "disabled" };
+                    }
+                    if (CGPTClient.Completions["vpet"].model == "deepseek-chat")
+                    {//旧版本更新
+                        CGPTClient.Completions["vpet"].model = "deepseek-v4-flash";
+                    }
+                    else if (CGPTClient.Completions["vpet"].model == "deepseek-reasoner")
+                    {
+                        CGPTClient.Completions["vpet"].model = "deepseek-v4-flash";
+                        CGPTClient.Completions["vpet"].thinking = new Completions.Thinking() { type = "enabled" };
+                    }
+                }
+            }
             if (!string.IsNullOrWhiteSpace(WebProxy))
             {
                 CGPTClient.Proxy = new HttpClientHandler()
@@ -42,6 +60,7 @@ namespace VPet.Plugin.ChatGPTPlugin
             };
             menuItem.Click += (s, e) => { Setting(); };
             MW.Main.ToolBar.MenuMODConfig.Items.Add(menuItem);
+
         }
         public override void Save()
         {

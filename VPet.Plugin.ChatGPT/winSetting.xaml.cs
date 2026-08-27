@@ -1,7 +1,7 @@
 ﻿using ChatGPT.API.Framework;
 using LinePutScript.Localization.WPF;
-using Newtonsoft.Json;
 using System;
+using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -27,10 +27,21 @@ namespace VPet.Plugin.ChatGPTPlugin
     {
         ChatGPTPlugin plugin;
         long totalused = 0;
+        private readonly ObservableCollection<EditableMessage> editableHistoryMessages = new ObservableCollection<EditableMessage>();
+        public List<Message.RoleType> RoleOptions { get; } = Enum.GetValues(typeof(Message.RoleType)).Cast<Message.RoleType>().ToList();
+
+        private class EditableMessage
+        {
+            public Message.RoleType Role { get; set; }
+            public string Content { get; set; } = string.Empty;
+            public string ReasoningContent { get; set; } = string.Empty;
+        }
+
         public winSetting(ChatGPTPlugin plugin)
         {
             InitializeComponent();
             Resources = Application.Current.Resources;
+            lbHistoryEditor.ItemsSource = editableHistoryMessages;
 
             this.plugin = plugin;
             if (plugin.CGPTClient != null)
@@ -46,7 +57,7 @@ namespace VPet.Plugin.ChatGPTPlugin
                     cbModel.Text = plugin.CGPTClient.Completions["vpet"].model;
                     var msgs = plugin.CGPTClient.Completions["vpet"].messages.ToList();
                     msgs.RemoveAt(0);
-                    tbHistory.Text = JsonConvert.SerializeObject(msgs);
+                    //tbHistory.Text = JsonConvert.SerializeObject(msgs);
                     lbSpend.Content = plugin.CGPTClient.TotalTokensUsage.ToString() + " Token";
                     totalused = plugin.CGPTClient.TotalTokensUsage;
                 }
@@ -57,32 +68,82 @@ namespace VPet.Plugin.ChatGPTPlugin
             niKeepHistory.Value = plugin.KeepHistory;
             swShowToken.IsChecked = plugin.ShowToken;
             swStream.IsChecked = plugin.UseStream;
+            swThink.IsChecked = plugin.CGPTClient?.Completions["vpet"]?.thinking?.type == "enabled";
+            tbReasoning.Text = plugin.CGPTClient?.Completions["vpet"]?.reasoning_effort ?? "high";
+            LoadHistoryMessages();
+        }
+
+        private void LoadHistoryMessages()
+        {
+            if (plugin?.CGPTClient == null
+                || !plugin.CGPTClient.Completions.TryGetValue("vpet", out var vpetCompletion)
+                || vpetCompletion?.messages == null
+                || vpetCompletion.messages.Count == 0)
+            {
+                editableHistoryMessages.Clear();
+                tbNoHistory.Visibility = Visibility.Visible;
+                return;
+            }
+
+            editableHistoryMessages.Clear();
+            foreach (var message in vpetCompletion.messages.Skip(1))
+            {
+                editableHistoryMessages.Add(new EditableMessage
+                {
+                    Role = message.role,
+                    Content = message.content ?? string.Empty,
+                    ReasoningContent = message.reasoning_content ?? string.Empty
+                });
+            }
+            tbNoHistory.Visibility = editableHistoryMessages.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void btnAddHistory_Click(object sender, RoutedEventArgs e)
+        {
+            editableHistoryMessages.Add(new EditableMessage
+            {
+                Role = Message.RoleType.user,
+                Content = string.Empty,
+                ReasoningContent = string.Empty
+            });
+            tbNoHistory.Visibility = Visibility.Collapsed;
+        }
+
+        private void btnRemoveHistory_Click(object sender, RoutedEventArgs e)
+        {
+            if (lbHistoryEditor.SelectedItem is EditableMessage selected)
+            {
+                editableHistoryMessages.Remove(selected);
+                tbNoHistory.Visibility = editableHistoryMessages.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+
+        private void btnRefreshHistory_Click(object sender, RoutedEventArgs e)
+        {
+            LoadHistoryMessages();
         }
 
         private void CbModel_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            switch (cbModel.SelectedIndex)
-            {
+            var modelId = cbModel.Text?.Trim();
+            if (string.IsNullOrWhiteSpace(modelId))
+                return;
 
-                case 0:
-                case 1:
-                case 2:
-                    tbAPIURL.Text = "https://api.openai.com/v1/chat/completions";
-                    return;
-                case 3:
-                case 4:
-                    tbAPIURL.Text = "https://api.deepseek.com/v1/chat/completions";
-                    return;
-                case 5:
-                case 6:
-                    tbAPIURL.Text = "https://open.bigmodel.cn/api/paas/v4/chat/completions";
-                    return;
-                case 7:
-                case 8:
-                    tbAPIURL.Text = "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions";
-                    return;
-                default:
-                    return;
+            if (modelId.StartsWith("gpt-"))
+            {
+                tbAPIURL.Text = "https://api.openai.com/v1/chat/completions";
+            }
+            else if (modelId.StartsWith("glm-"))
+            {
+                tbAPIURL.Text = "https://open.bigmodel.cn/api/paas/v4/chat/completions";
+            }
+            else if (modelId.StartsWith("deepseek-"))
+            {
+                tbAPIURL.Text = "https://api.deepseek.com/v1/chat/completions";
+            }
+            else if (modelId.StartsWith("gemini-"))
+            {
+                tbAPIURL.Text = "https://generativelanguage.googleapis.com/v1beta/openai/";
             }
         }
 
@@ -114,21 +175,21 @@ namespace VPet.Plugin.ChatGPTPlugin
                 plugin.CGPTClient.Proxy = null;
             }
             plugin.CGPTClient.Completions["vpet"].model = cbModel.Text;
-            if (plugin.CGPTClient.APIUrl.Contains("googleapis"))
+#pragma warning disable CS0612 // 类型或成员已过时
+            plugin.CGPTClient.Completions["vpet"].frequency_penalty = null;
+            plugin.CGPTClient.Completions["vpet"].presence_penalty = null;
+#pragma warning restore CS0612 // 类型或成员已过时
+            plugin.CGPTClient.Completions["vpet"].max_tokens = Math.Min(Math.Max(int.Parse(tbMaxToken.Text), 10), 4000);
+            plugin.CGPTClient.Completions["vpet"].temperature = Math.Min(Math.Max(double.Parse(tbTemp.Text), 0.1), 2);
+            if (swThink.IsChecked == true)
             {
-                plugin.CGPTClient.Completions["vpet"].frequency_penalty = null;
-                plugin.CGPTClient.Completions["vpet"].presence_penalty = null;
+                plugin.CGPTClient.Completions["vpet"].thinking = new Completions.Thinking() { type = "enabled" };
             }
             else
             {
-                plugin.CGPTClient.Completions["vpet"].frequency_penalty = 0.2;
-                plugin.CGPTClient.Completions["vpet"].presence_penalty = 1;
+                plugin.CGPTClient.Completions["vpet"].thinking = new Completions.Thinking() { type = "disabled" };
             }
-            plugin.CGPTClient.Completions["vpet"].max_tokens = Math.Min(Math.Max(int.Parse(tbMaxToken.Text), 10), 4000);
-            plugin.CGPTClient.Completions["vpet"].temperature = Math.Min(Math.Max(double.Parse(tbTemp.Text), 0.1), 2);
-            var l = JsonConvert.DeserializeObject<List<Message>>(tbHistory.Text);
-            if (l != null)
-                plugin.CGPTClient.Completions["vpet"].messages.AddRange(l);
+            plugin.CGPTClient.Completions["vpet"].reasoning_effort = tbReasoning.Text;
             plugin.KeepHistory = (int)niKeepHistory.Value.Value;
             plugin.ShowToken = (bool)swShowToken.IsChecked;
             plugin.UseStream = (bool)swStream.IsChecked;
@@ -136,7 +197,19 @@ namespace VPet.Plugin.ChatGPTPlugin
             this.Close();
         }
 
-
+        private void btnSaveHistory_Click(object sender, RoutedEventArgs e)
+        {
+            plugin.CGPTClient.Completions["vpet"].messages.AddRange(editableHistoryMessages
+                .Where(message => !string.IsNullOrWhiteSpace(message.Content)
+                    || !string.IsNullOrWhiteSpace(message.ReasoningContent))
+                .Select(message => new Message
+                {
+                    role = message.Role,
+                    content = message.Content,
+                    reasoning_content = message.ReasoningContent
+                }));
+            plugin.Save();
+        }
     }
 }
 

@@ -8,93 +8,208 @@
         Width="{ll:Dbe ChatGPTPluginWidth_450,DefValue=450}" FontSize="16" Height="Auto" ResizeMode="NoResize"
         WindowState="Normal" SizeToContent="Height">
     <Window.Resources>
-        <ResourceDictionary Source="/VPet-Simulator.Windows.Interface;component/ResourceStyle.xaml" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/VPet-Simulator.Windows.Interface;component/ResourceStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="ReasoningSectionVisibilityStyle" TargetType="{x:Type FrameworkElement}">
+                <Setter Property="Visibility" Value="Visible" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding ReasoningContent}" Value="{x:Null}">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding ReasoningContent}" Value="">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
     </Window.Resources>
-    <Grid Margin="16">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="15" />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="Auto" MinHeight="40" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="Auto" MinHeight="40" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="40" />
-        </Grid.RowDefinitions>
-        <TextBlock Grid.Row="1" Text="API URL" VerticalAlignment="Center" />
-        <TextBlock Grid.Row="3" Text="{ll:Str Web代理}" VerticalAlignment="Center" />
-        <TextBlock Grid.Row="2" Text="API Key" VerticalAlignment="Center" />
-        <TextBlock Grid.Row="0" Text="Model" VerticalAlignment="Center" />
-        <TextBlock Grid.Row="4" Text="{ll:Str 初始化文本}" VerticalAlignment="Center" />
-        <TextBlock Grid.Row="5" Text="{ll:Str 温度}" VerticalAlignment="Center" />
-        <TextBlock Grid.Row="6" Text="{ll:Str 最大花费}" VerticalAlignment="Center" />
-        <TextBlock Grid.Row="7" Text="{ll:Str 累计花费}" VerticalAlignment="Center" />
-        <TextBlock Grid.Row="8" Text="{ll:Str 历史记录}" VerticalAlignment="Center" />
-        <TextBlock Grid.Row="9" Text="{ll:Str 保留记录}" VerticalAlignment="Center" />
-        <TextBlock Grid.Row="10" Text="{ll:Str Token显示}" VerticalAlignment="Center" />
-        <TextBlock Grid.Row="11" Text="{ll:Str 流式传输}" VerticalAlignment="Center" />
-        <TextBlock Grid.Row="12" Text="{ll:Str 完成设置}" VerticalAlignment="Center" />
-        <TextBox x:Name="tbAPIURL" Grid.Row="1" Grid.Column="2" Style="{DynamicResource StandardTextBoxStyle}"
-                FontSize="16" pu:TextBoxHelper.Watermark="{ll:Str 'API 链接 一般为 api.openai.com/v1/chat/completions'}"
-                Text="https://api.openai.com/v1/chat/completions"
-                ToolTip="{ll:Str 'API 链接 一般为 api.openai.com/v1/chat/completions'}" Margin="0,5,0,5" />
-        <TextBox x:Name="tbAPIKey" Grid.Row="2" Grid.Column="2" Style="{DynamicResource StandardTextBoxStyle}"
-                FontSize="16" pu:TextBoxHelper.Watermark="{ll:Str '从 OpenAI 获得的 APIKEY 一般`sk-`开头'}"
-                ToolTip="{ll:Str '从 OpenAI 获得的 APIKEY 一般`sk-`开头'}" VerticalAlignment="Top" Margin="0,2,0,0" />
-        <TextBox x:Name="tbWebProxy" Grid.Row="3" Grid.Column="2" Style="{DynamicResource StandardTextBoxStyle}"
-                FontSize="16" pu:TextBoxHelper.Watermark="{ll:Str '没有可不填. HTTP 代理服务器 或 SOCKS 代理服务器等 WEB代理链接'}"
-                ToolTip="{ll:Str '没有可不填. HTTP 代理服务器 或 SOCKS 代理服务器等 WEB代理链接'}" VerticalAlignment="Top" Margin="0,2,0,0" />
-        <ComboBox x:Name="cbModel" Style="{DynamicResource StandardComboBoxStyle}" Grid.Row="0" Grid.Column="2"
-                SelectedIndex="0" IsEditable="True" Margin="0,5,0,5" ToolTip="{ll:Str '本文本框可以编辑,以支持其他OPENAI格式的模型调用'}">
-            <ComboBoxItem Content="gpt-4o-mini" />
-            <ComboBoxItem Content="gpt-4o" />
-            <ComboBoxItem Content="gpt-4-turbo" />
-            <ComboBoxItem Content="deepseek-reasoner" />
-            <ComboBoxItem Content="deepseek-chat" />
-            <ComboBoxItem Content="GLM-4-Flash" />
-            <ComboBoxItem Content="GLM-4-Plus" />
-            <ComboBoxItem Content="gemini-2.0-flash" />
-            <ComboBoxItem Content="gemini-1.5-pro" />
-        </ComboBox>
-        <TextBox x:Name="tbSystem" Grid.Row="4" Grid.Column="2" Style="{DynamicResource StandardTextBoxStyle}"
-                FontSize="16" pu:TextBoxHelper.Watermark="{ll:Str '不会被忘记的初始化关键字, 字越多越贵'}"
-                ToolTip="{ll:Str '不会被忘记的初始化关键字, 字越多越贵'}" AcceptsReturn="True" TextWrapping="WrapWithOverflow"
-                Height="Auto" MaxHeight="100" VerticalScrollBarVisibility="Visible"
-                Text="请使用口语化的、可爱的、女性化的、调皮的语言风格和我交流. &#13;你是一只桌宠, 你的名字叫{Name}, 你喜欢玩 虚拟主播模拟器. &#13;你需要尝试体会我与你对话中的感情、产生自己的情感并尽可能给出可爱的回答"
-                Margin="0,5,0,5" />
-        <TextBox x:Name="tbTemp" Grid.Row="5" Grid.Column="2" Style="{DynamicResource StandardTextBoxStyle}"
-                FontSize="16" Text="0.6" pu:TextBoxHelper.InputLimit="Digit,Point"
-                pu:TextBoxHelper.Watermark="{ll:Str '0-2之间 0.2更稳定 0.8更随机'}" ToolTip="{ll:Str '0-2之间 0.2更稳定 0.8更随机'}"
-                Margin="0,5,0,5" />
-        <TextBox x:Name="tbMaxToken" Grid.Row="6" Grid.Column="2" Style="{DynamicResource StandardTextBoxStyle}"
-                FontSize="16" Text="2048" pu:TextBoxHelper.InputLimit="Digit"
-                pu:TextBoxHelper.Watermark="{ll:Str '读取最大花费Token数量 1千Token=$0.02'}"
-                ToolTip="{ll:Str '读取最大花费Token数量 1千Token=$0.02'}" Margin="0,5,0,5" />
-        <TextBox x:Name="tbHistory" Grid.Row="8" Grid.Column="2" Style="{DynamicResource StandardTextBoxStyle}"
-                FontSize="16" Text="[]" TextWrapping="WrapWithOverflow" pu:TextBoxHelper.Watermark="{ll:Str 聊天历史记录}"
-                ToolTip="{ll:Str 聊天历史记录}" Height="Auto" VerticalScrollBarVisibility="Visible" AcceptsReturn="True"
-                MaxHeight="200" Margin="0,5,0,5" />
-        <Label x:Name="lbSpend" Grid.Row="7" Grid.Column="2" Content="0 Token" Background="{x:Null}"
-                VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0"
-                ToolTip="{ll:Str '累计在此花费的Token个数 1千Token=$0.02'}" />
-        <pu:NumberInput x:Name="niKeepHistory" Grid.Row="9" Grid.Column="2" Value="10"
-                ToolTip="{ll:Str '超过该值后自动删除最早的聊天记录'}" Minimum="0" VerticalAlignment="Center" />
-        <pu:Switch x:Name="swShowToken" Grid.Row="10" Grid.Column="2" VerticalAlignment="Center"
-                Content="{ll:Str '在聊天记录中显示消耗的Token数量'}" />
-        <pu:Switch x:Name="swStream" Grid.Row="11" Grid.Column="2" VerticalAlignment="Center"
-                Content="{ll:Str '使用流式传输加快聊天反应速度'}" />
-        <Button x:Name="btnSave" pu:ButtonHelper.CornerRadius="4" Content="{ll:Str 保存设置}" Margin="4,4,4,4"
-                Grid.Column="2" Background="{DynamicResource SecondaryLight}" Padding="1" Grid.Row="12"
-                Click="btnSave_Click" />
-    </Grid>
+    <TabControl pu:TabControlHelper.ItemsSelectedBackground="White"
+            pu:TabControlHelper.ItemsBackground="{DynamicResource SecondaryLight}"
+            pu:TabControlHelper.HeaderPanelBackground="{DynamicResource SecondaryLight}">
+        <TabItem Header="{ll:Str 设置}">
+            <Grid Margin="0,8,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="Auto" MinHeight="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="Auto" MinHeight="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="1" Text="API URL" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="3" Text="{ll:Str Web代理}" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="2" Text="API Key" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="0" Text="Model" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="4" Text="{ll:Str 初始化文本}" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="5" Text="{ll:Str 思考模式}" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="6" Text="{ll:Str 温度}" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="7" Text="{ll:Str 最大花费}" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="8" Text="{ll:Str 累计花费}" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="9" Text="{ll:Str 推理强度}" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="10" Text="{ll:Str 保留记录}" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="11" Text="{ll:Str Token显示}" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="12" Text="{ll:Str 流式传输}" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="13" Text="{ll:Str 完成设置}" VerticalAlignment="Center" />
+                <TextBox x:Name="tbAPIURL" Grid.Row="1" Grid.Column="2" Style="{DynamicResource StandardTextBoxStyle}"
+                        FontSize="16"
+                        pu:TextBoxHelper.Watermark="{ll:Str 'API 链接 一般为 api.openai.com/v1/chat/completions'}"
+                        Text="https://api.openai.com/v1/chat/completions"
+                        ToolTip="{ll:Str 'API 链接 一般为 api.openai.com/v1/chat/completions'}" Margin="0,5,0,5" />
+                <TextBox x:Name="tbAPIKey" Grid.Row="2" Grid.Column="2" Style="{DynamicResource StandardTextBoxStyle}"
+                        FontSize="16" pu:TextBoxHelper.Watermark="{ll:Str '从 OpenAI 获得的 APIKEY 一般`sk-`开头'}"
+                        ToolTip="{ll:Str '从 服务商 获得的 APIKEY 一般`sk-`开头'}" VerticalAlignment="Top" Margin="0,2,0,0" />
+                <TextBox x:Name="tbWebProxy" Grid.Row="3" Grid.Column="2" Style="{DynamicResource StandardTextBoxStyle}"
+                        FontSize="16" pu:TextBoxHelper.Watermark="{ll:Str '没有可不填. HTTP 代理服务器 或 SOCKS 代理服务器等 WEB代理链接'}"
+                        ToolTip="{ll:Str '没有可不填. HTTP 代理服务器 或 SOCKS 代理服务器等 WEB代理链接'}" VerticalAlignment="Top"
+                        Margin="0,2,0,0" />
+                <ComboBox x:Name="cbModel" Style="{DynamicResource StandardComboBoxStyle}" Grid.Row="0" Grid.Column="2"
+                        SelectedIndex="0" IsEditable="True" Margin="0,5,0,5"
+                        ToolTip="{ll:Str '本文本框可以编辑,以支持其他OPENAI格式的模型调用'}">
+                    <ComboBoxItem Content="gpt-5.6-sol" />
+                    <ComboBoxItem Content="gpt-5.6-terra" />
+                    <ComboBoxItem Content="gpt-5.6-luna" />
+                    <ComboBoxItem Content="glm-5.2" />
+                    <ComboBoxItem Content="glm-5-turbo" />
+                    <ComboBoxItem Content="glm-4.7-flash" />
+                    <ComboBoxItem Content="glm-4.5-air" />
+                    <ComboBoxItem Content="deepseek-v4-flash" />
+                    <ComboBoxItem Content="deepseek-v4-pro" />
+                    <ComboBoxItem Content="gemini-3.6-flash" />
+                    <ComboBoxItem Content="gemini-3.5-flash-lite" />
+                    <ComboBoxItem Content="gemini-3.5-flash-cyber" />
+                </ComboBox>
+                <TextBox x:Name="tbSystem" Grid.Row="4" Grid.Column="2" Style="{DynamicResource StandardTextBoxStyle}"
+                        FontSize="16" pu:TextBoxHelper.Watermark="{ll:Str '不会被忘记的初始化关键字, 字越多越贵'}"
+                        ToolTip="{ll:Str '不会被忘记的初始化关键字, 字越多越贵'}" AcceptsReturn="True" TextWrapping="WrapWithOverflow"
+                        Height="Auto" MaxHeight="100" VerticalScrollBarVisibility="Visible"
+                        Text="请使用口语化的、可爱的、女性化的、调皮的语言风格和我交流. &#13;你是一只桌宠, 你的名字叫{Name}, 你喜欢玩 虚拟主播模拟器. &#13;你需要尝试体会我与你对话中的感情、产生自己的情感并尽可能给出可爱的回答"
+                        Margin="0,5,0,5" />
+                <pu:Switch x:Name="swThink" Grid.Row="5" Grid.Column="2" FontSize="16" Margin="0,5,0,5"
+                        Background="Transparent" BorderBrush="{DynamicResource PrimaryDark}" BoxHeight="18"
+                        BoxWidth="35" CheckedBackground="{DynamicResource Primary}"
+                        CheckedBorderBrush="{DynamicResource Primary}"
+                        CheckedToggleBrush="{DynamicResource DARKPrimaryText}" ToggleShadowColor="{x:Null}"
+                        ToggleSize="14" Content="{ll:Str 思考模式}" ToggleBrush="{DynamicResource PrimaryDark}"
+                        ToolTip="{ll:Str '思考模式：在输出最终回答之前，模型会先输出一段思维链内容，以提升最终答案的准确性'}" />
+                <TextBox x:Name="tbTemp" Grid.Row="6" Grid.Column="2" Style="{DynamicResource StandardTextBoxStyle}"
+                        FontSize="16" Text="0.6" pu:TextBoxHelper.InputLimit="Digit,Point"
+                        pu:TextBoxHelper.Watermark="{ll:Str '0-2之间 0.2更稳定 0.8更随机'}"
+                        ToolTip="{ll:Str '0-2之间 0.2更稳定 0.8更随机'}" Margin="0,5,0,5" />
+                <TextBox x:Name="tbMaxToken" Grid.Row="7" Grid.Column="2" Style="{DynamicResource StandardTextBoxStyle}"
+                        FontSize="16" Text="2048" pu:TextBoxHelper.InputLimit="Digit"
+                        pu:TextBoxHelper.Watermark="{ll:Str '读取最大花费Token数量 1千Token=$0.02'}"
+                        ToolTip="{ll:Str '读取最大花费Token数量 1千Token=$0.02'}" Margin="0,5,0,5" />
+                <ComboBox x:Name="tbReasoning" Grid.Row="9" Grid.Column="2" IsEditable="True"
+                        Style="{DynamicResource StandardComboBoxStyle}" FontSize="16" Height="Auto" Margin="0,5,0,5"
+                        SelectedIndex="2" ToolTip="{ll:Str 控制模型的推理强度}">
+                    <ComboBoxItem Content="low" />
+                    <ComboBoxItem Content="medium" />
+                    <ComboBoxItem Content="high" />
+                    <ComboBoxItem Content="xhigh" />
+                    <ComboBoxItem Content="max" />
+                </ComboBox>
+                <Label x:Name="lbSpend" Grid.Row="8" Grid.Column="2" Content="0 Token" Background="{x:Null}"
+                        VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0"
+                        ToolTip="{ll:Str '累计在此花费的Token个数 1千Token=$0.02'}" />
+                <pu:NumberInput x:Name="niKeepHistory" Grid.Row="10" Grid.Column="2" Value="10"
+                        ToolTip="{ll:Str '超过该值后自动删除最早的聊天记录'}" Minimum="0" VerticalAlignment="Center" />
+                <pu:Switch x:Name="swShowToken" Grid.Row="11" Grid.Column="2" VerticalAlignment="Center"
+                        Content="{ll:Str '在聊天记录中显示消耗的Token数量'}" Margin="0,5,0,5" Background="Transparent"
+                        BorderBrush="{DynamicResource PrimaryDark}" BoxHeight="18" BoxWidth="35"
+                        CheckedBackground="{DynamicResource Primary}" CheckedBorderBrush="{DynamicResource Primary}"
+                        CheckedToggleBrush="{DynamicResource DARKPrimaryText}" ToggleShadowColor="{x:Null}"
+                        ToggleSize="14" ToggleBrush="{DynamicResource PrimaryDark}" />
+                <pu:Switch x:Name="swStream" Grid.Row="12" Grid.Column="2" VerticalAlignment="Center"
+                        Content="{ll:Str '使用流式传输加快聊天反应速度'}" Margin="0,5,0,5" Background="Transparent"
+                        BorderBrush="{DynamicResource PrimaryDark}" BoxHeight="18" BoxWidth="35"
+                        CheckedBackground="{DynamicResource Primary}" CheckedBorderBrush="{DynamicResource Primary}"
+                        CheckedToggleBrush="{DynamicResource DARKPrimaryText}" ToggleShadowColor="{x:Null}"
+                        ToggleSize="14" ToggleBrush="{DynamicResource PrimaryDark}" />
+                <Button x:Name="btnSave" pu:ButtonHelper.CornerRadius="4" Content="{ll:Str 保存设置}" Margin="4,4,4,4"
+                        Grid.Column="2" Background="{DynamicResource SecondaryLight}" Padding="1" Grid.Row="13"
+                        Click="btnSave_Click" />
+            </Grid>
+        </TabItem>
+        <TabItem Header="{ll:Str 历史记录}">
+            <Grid Margin="0,8,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,8">
+                    <Button x:Name="btnAddHistory" Margin="0,0,8,0" Content="{ll:Str 新增}" Click="btnAddHistory_Click"
+                            pu:ButtonHelper.CornerRadius="4" Background="{DynamicResource SecondaryLight}" />
+                    <Button x:Name="btnRemoveHistory" Margin="0,0,8,0" Content="{ll:Str 删除选中}"
+                            Background="{DynamicResource SecondaryLight}" Click="btnRemoveHistory_Click"
+                            pu:ButtonHelper.CornerRadius="4" />
+                    <Button x:Name="btnRefreshHistory" Content="{ll:Str 刷新}" Click="btnRefreshHistory_Click"
+                            Margin="0,0,8,0" Background="{DynamicResource SecondaryLight}"
+                            pu:ButtonHelper.CornerRadius="4" />
+                    <Button x:Name="btnSaveHistory" Content="{ll:Str 保存记录}"
+                            Background="{DynamicResource SecondaryLight}" pu:ButtonHelper.CornerRadius="4"
+                            Click="btnSaveHistory_Click" />
+                </StackPanel>
+                <Grid Grid.Row="1">
+                    <ListBox x:Name="lbHistoryEditor" MinHeight="220" MaxHeight="800" BorderThickness="0"
+                            Background="Transparent" HorizontalContentAlignment="Stretch"
+                            ScrollViewer.VerticalScrollBarVisibility="Auto"
+                            ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                <Setter Property="Padding" Value="0" />
+                                <Setter Property="Margin" Value="0" />
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="#33000000" BorderThickness="1" CornerRadius="4" Padding="8"
+                                        Margin="0,0,0,8">
+                                    <StackPanel>
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                                            <TextBlock Text="{ll:Str 角色}" VerticalAlignment="Center" Margin="0,0,8,0" />
+                                            <ComboBox Width="160" Style="{DynamicResource StandardComboBoxStyle}"
+                                                    ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=RoleOptions}"
+                                                    SelectedItem="{Binding Role, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        </StackPanel>
+                                        <TextBlock Text="{ll:Str 内容}" Margin="0,0,0,4" />
+                                        <TextBox
+                                                Text="{Binding Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                AcceptsReturn="True" TextWrapping="Wrap"
+                                                VerticalScrollBarVisibility="Auto" MaxHeight="100"
+                                                HorizontalScrollBarVisibility="Disabled" />
+                                        <TextBlock Text="{ll:Str 思考}" Margin="0,8,0,4"
+                                                Style="{StaticResource ReasoningSectionVisibilityStyle}" />
+                                        <TextBox
+                                                Text="{Binding ReasoningContent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                AcceptsReturn="True" TextWrapping="Wrap"
+                                                VerticalScrollBarVisibility="Auto"
+                                                HorizontalScrollBarVisibility="Disabled" MaxHeight="50"
+                                                Style="{StaticResource ReasoningSectionVisibilityStyle}" />
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <TextBlock x:Name="tbNoHistory" Text="{ll:Str 暂无历史记录}" Foreground="Gray"
+                            HorizontalAlignment="Center" VerticalAlignment="Center" IsHitTestVisible="False" />
+                </Grid>
+            </Grid>
+        </TabItem>
+    </TabControl>
 </Window>
