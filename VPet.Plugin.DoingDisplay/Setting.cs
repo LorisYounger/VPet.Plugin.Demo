@@ -10,6 +10,7 @@ namespace VPet.Plugin.DoingDisplay
 
     public class Setting
     {
+        public bool ShowDoing { get; set; } = true;
         public List<SoftwareStatistical> Statisticals { get; set; } = new List<SoftwareStatistical>();
         public List<DailyStatistical> Dailies { get; set; } = new List<DailyStatistical>();
         /// <summary>

@@ -42,7 +42,7 @@ namespace VPet.Plugin.DoingDisplay
         private void Timer_Elapsed(object? sender, ElapsedEventArgs e)
         {
             var fgapp = ForegroundAppHelper.GetForegroundAppInfo();
-            if (MW.Main.NowWork != null)
+            if (MW.Main.NowWork != null && Set.ShowDoing)
             {
                 MW.Main.NowWork.nametrans = fgapp.WindowTitle;
             }
@@ -91,7 +91,7 @@ namespace VPet.Plugin.DoingDisplay
             }
         }
 
-        Timer timer = new Timer(60000)
+        Timer timer = new Timer(59000) //-1s
         {
             AutoReset = true,
             Enabled = true

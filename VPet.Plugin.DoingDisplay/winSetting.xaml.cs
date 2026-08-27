@@ -24,6 +24,7 @@ namespace VPet.Plugin.DoingDisplay
             Resources = Application.Current.Resources;
             this.plugin = plugin;
             RefreshData();
+            ShowBox.IsChecked = plugin.Set.ShowDoing;
         }
 
         private List<SoftwareStatisticalVM> BuildViewModels()
@@ -181,6 +182,12 @@ namespace VPet.Plugin.DoingDisplay
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             plugin.winSetting = null;
+        }
+
+        private void ShowBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if (!IsLoaded) return;
+            plugin.Set.ShowDoing = ShowBox.IsChecked == true;
         }
     }
 

@@ -23,7 +23,7 @@
             <Run Text="{ll:Str '记录各软件的使用时长统计信息'}" /><LineBreak />
             <Run Text="{ll:Str '如需展示在Steam状态, 请进行任意工作/玩耍/学习'}" />
         </TextBlock>
-
+      
         <TabControl Grid.Row="1" Background="{DynamicResource PrimaryLighter}" BorderThickness="0"
                 pu:TabControlHelper.HeaderPanelBackground="{DynamicResource PrimaryLight}"
                 pu:TabControlHelper.ItemsSelectedBackground="{DynamicResource PrimaryLighter}">
@@ -199,7 +199,12 @@
                 </Grid>
             </TabItem>
         </TabControl>
-
+        <pu:Switch x:Name="ShowBox" Grid.Row="1" Background="Transparent" BorderBrush="{DynamicResource PrimaryDark}"
+                BoxHeight="18" BoxWidth="35" CheckedBackground="{DynamicResource Primary}" Margin="0,5,0,0"
+                CheckedBorderBrush="{DynamicResource Primary}" CheckedToggleBrush="{DynamicResource DARKPrimaryText}"
+                Content="{ll:Str 展示在Steam状态}" ToggleBrush="{DynamicResource PrimaryDark}" ToggleShadowColor="{x:Null}"
+                ToggleSize="14" VerticalAlignment="Top" HorizontalAlignment="Right" Checked="ShowBox_Checked"
+                Unchecked="ShowBox_Checked" />
         <Grid Grid.Row="2" Margin="0,6,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
