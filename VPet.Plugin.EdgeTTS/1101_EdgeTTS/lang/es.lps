@@ -9,6 +9,32 @@ EdgeTTS 设置#EdgeTTS Settings:|
 语速#Velocidad de voz:|
 讲述人#Nucleo hablante:|
 启用 EdgeTTS#Enable EdgeTTS:|
+保存设置#Guardar ajustes:|
 测试#Probar:|
 参数URL#URL de parámetro:|
 目前EdgeTTS在中国大陆需要额外的验证秘钥(Sec-MS-GEC)\r目前只能通过抓包Edge来获得该参数, 而且每600秒过期.\r有许多大佬制作了API免费给大家用, 谢谢他们\r如果你不在中国大陆,保持为空即可#Actualmente, EdgeTTS requiere una clave de verificación adicional (Sec-MS-GEC) en la China continental.\rActualmente, este parámetro solo se puede obtener capturando Edge, y caduca cada 600 segundos.\rMuchos grandes han hecho API gratuitas para que todos las usen, agradézcanles.\rSi no estás en la China continental, déjalo vacío:|
+括号过滤#Filtro de paréntesis:|
+括号类型#Tipos de paréntesis:|
+不朗读括号内的动作描写#No leer las acotaciones entre paréntesis:|
+括号内的内容仍会显示在气泡里，只是不会被念出来；整句都是动作描写时本次不发声#El texto entre paréntesis se sigue mostrando en el bocadillo, solo que no se lee. Si toda la frase es una acotación, no se pronuncia nada:|
+括号过滤设置#Ajustes del filtro de paréntesis:|
+勾选的括号，其内部内容不会被朗读。气泡里依然显示原文，所以动作描写看得到、听不到。#Lo que esté dentro de un paréntesis marcado no se leerá. El bocadillo sigue mostrando el texto original, así que las acotaciones se ven pero no se oyen.:|
+圆括号　( )　（ ）#Paréntesis　( )　（ ）:|
+方括号　[ ]　【 】　〔 〕#Corchetes　[ ]　【 】　〔 〕:|
+花括号　｛ ｝　半角同样生效#Llaves　｛ ｝　también las de ancho medio:|
+尖括号　< >　＜ ＞#Ángulos　< >　＜ ＞:|
+书名号　《 》　〈 〉#Comillas de título　《 》　〈 〉:|
+默认关闭：开了之后《活着》这类书名也会被跳过#Desactivado por defecto: al activarlo también se omiten títulos como 《活着》:|
+默认关闭：大于小于号会被误伤#Desactivado por defecto: también afecta a los signos mayor/menor:|
+成对星号　*动作*　**动作**#Asteriscos emparejados　*acción*　**acción**:|
+自定义括号对（开闭两个字符一组，可用空格分隔）#Pares personalizados (dos caracteres por par, apertura y cierre, separados por espacios):|
+例如：「」『』#Por ejemplo: 「」『』:|
+效果预览#Vista previa:|
+（整句都是动作描写，本次不会发声）#(Toda la frase es una acotación, así que no se pronunciaría nada):|
+预览失败: {0}#Error en la vista previa: {0}:|
+确定#Aceptar:|
+取消#Cancelar:|
+自定义正则（每行一条，命中的内容不朗读）#Expresiones regulares propias (una por línea, lo que coincida no se lee):|
+每行一条正则；以井号开头的行当注释；写错的那条只会被跳过，不影响其他规则#Una expresión por línea; las líneas que empiezan por almohadilla son comentarios; si una está mal escrita solo se omite esa:|
+成对标签　<动作>摸摸头</动作>#Etiquetas emparejadas　<accion>caricia</accion>:|
+连标签带里面的内容一起跳过；首尾同名才算，所以普通的大于小于号不会被误伤#Omite la etiqueta junto con todo su contenido. Solo cuenta si el nombre de apertura y cierre coincide, así que los signos mayor/menor normales no se ven afectados:|

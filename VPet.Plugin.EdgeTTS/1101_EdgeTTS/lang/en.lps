@@ -9,6 +9,32 @@ EdgeTTS 设置#EdgeTTS Settings:|
 语速#Speed of speech:|
 讲述人#Narrator:|
 启用 EdgeTTS#Enable EdgeTTS:|
+保存设置#Save Settings:|
 测试#Test:|
 参数URL#Parameter URL:|
 目前EdgeTTS在中国大陆需要额外的验证秘钥(Sec-MS-GEC)\r目前只能通过抓包Edge来获得该参数, 而且每600秒过期.\r有许多大佬制作了API免费给大家用, 谢谢他们\r如果你不在中国大陆,保持为空即可#Currently, EdgeTTS requires an additional verification key (Sec-MS-GEC) in mainland China.\rCurrently, this parameter can only be obtained by capturing Edge, and it expires every 600 seconds.\rMany bigwigs have made API free for everyone to use, thank them.\rIf you are not in mainland China, keep it empty:|
+括号过滤#Bracket Filter:|
+括号类型#Bracket Types:|
+不朗读括号内的动作描写#Don't read out action text in brackets:|
+括号内的内容仍会显示在气泡里，只是不会被念出来；整句都是动作描写时本次不发声#Bracketed text still shows in the speech bubble, it just isn't spoken. If the whole line is action text, nothing is spoken at all:|
+括号过滤设置#Bracket Filter Settings:|
+勾选的括号，其内部内容不会被朗读。气泡里依然显示原文，所以动作描写看得到、听不到。#Whatever sits inside a checked bracket won't be spoken. The speech bubble still shows the original text, so action text stays visible but silent.:|
+圆括号　( )　（ ）#Parentheses　( )　（ ）:|
+方括号　[ ]　【 】　〔 〕#Square brackets　[ ]　【 】　〔 〕:|
+花括号　｛ ｝　半角同样生效#Curly braces　｛ ｝　half-width ones count too:|
+尖括号　< >　＜ ＞#Angle brackets　< >　＜ ＞:|
+书名号　《 》　〈 〉#Title marks　《 》　〈 〉:|
+默认关闭：开了之后《活着》这类书名也会被跳过#Off by default: turning it on also skips book titles like 《活着》:|
+默认关闭：大于小于号会被误伤#Off by default: less/greater-than signs get caught too:|
+成对星号　*动作*　**动作**#Paired asterisks　*action*　**action**:|
+自定义括号对（开闭两个字符一组，可用空格分隔）#Custom bracket pairs (two characters per pair, open then close, separated by spaces):|
+例如：「」『』#For example: 「」『』:|
+效果预览#Preview:|
+（整句都是动作描写，本次不会发声）#(The whole line is action text, so nothing would be spoken):|
+预览失败: {0}#Preview failed: {0}:|
+确定#OK:|
+取消#Cancel:|
+自定义正则（每行一条，命中的内容不朗读）#Custom regex (one per line, matches are not spoken):|
+每行一条正则；以井号开头的行当注释；写错的那条只会被跳过，不影响其他规则#One regex per line; lines starting with a hash are comments; a broken one is just skipped and the rest still apply:|
+成对标签　<动作>摸摸头</动作>#Paired tags　<action>pats head</action>:|
+连标签带里面的内容一起跳过；首尾同名才算，所以普通的大于小于号不会被误伤#Skips the tag along with everything inside it. Only counts when the opening and closing names match, so ordinary less/greater-than signs are safe:|

@@ -16,6 +16,8 @@ namespace VPet.Plugin.VPetTTS
     public partial class winSetting : Window
     {
         EdgeTTS vts;
+        /// <summary>子窗口改的是这份副本，点「保存设置」才写回 vts.Set.TextFilter</summary>
+        TextFilterSetting pendingFilter;
         public winSetting(EdgeTTS vts)
         {
             InitializeComponent();
@@ -28,6 +30,27 @@ namespace VPet.Plugin.VPetTTS
             RateSilder.Value = vts.Set.Rate;
             CombSpeaker.Text = vts.Set.Speaker;
             //CombCodeURL.Text = vts.Set.Sec_MS_GEC_URL;
+
+            //括号类型在子窗口里改，先拿一份副本；用户不点「保存设置」就不会落到真配置上
+            pendingFilter = vts.Set.TextFilter.Clone();
+            SwitchTextFilter.IsChecked = pendingFilter.Enable;
+
+            //总开关关着时把「括号类型」按钮一起灰掉，免得以为改了就生效
+            SwitchTextFilter.Checked += (s, e) => UpdateTextFilterConfigState();
+            SwitchTextFilter.Unchecked += (s, e) => UpdateTextFilterConfigState();
+            UpdateTextFilterConfigState();
+        }
+
+        private void UpdateTextFilterConfigState()
+        {
+            TextFilterConfig.IsEnabled = SwitchTextFilter.IsChecked == true;
+        }
+
+        private void TextFilterConfig_Click(object sender, RoutedEventArgs e)
+        {
+            var win = new winTextFilter(pendingFilter);
+            win.Owner = this;
+            win.ShowDialog();
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
@@ -43,6 +66,10 @@ namespace VPet.Plugin.VPetTTS
             vts.Set.Pitch = PitchSilder.Value;
             vts.Set.Rate = RateSilder.Value;
             vts.Set.Speaker = CombSpeaker.Text;
+
+            pendingFilter.Enable = SwitchTextFilter.IsChecked == true;
+            vts.Set.TextFilter.CopyFrom(pendingFilter);
+
             vts.MW.Main.PlayVoiceVolume = VolumeSilder.Value / 100;
             vts.MW.Set["EdgeTTS"] = LPSConvert.SerializeObject(vts.Set, "EdgeTTS");
             foreach (var tmpfile in Directory.GetFiles(GraphCore.CachePath + @"\voice"))
