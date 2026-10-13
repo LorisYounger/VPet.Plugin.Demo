@@ -68,45 +68,34 @@ namespace VPet.Plugin.ChatGPTPlugin
                 {
                     SayInfoWithStream sis = new SayInfoWithStream();
                     DisplayThinkToSayRnd(sis);
-                    Task.Run(() =>
+                    try
                     {
-                        try
+                        // Responded 已由 TalkBox 在后台线程调用，等待整个流才能捕获请求异常。
+                        Plugin.CGPTClient.Ask_stream_async("vpet", content, (x) =>
                         {
-                            Plugin.CGPTClient.Ask_stream("vpet", content, (x) =>
+                            if (x == null)
                             {
-                                try
-                                {
-                                    if (x == null)
-                                    {//有一些厂商不按套路来生成结束, 用这个兼容下
-                                        sis.FinishGenerate();
-                                        return;
-                                    }
-                                    if (!string.IsNullOrEmpty(x.GetDeltaContent()))
-                                    {
-                                        sis.UpdateText(x.GetDeltaContent());
-                                    }
-                                    if (x.GetDelta()?.finish_reason != null)
-                                    {
-                                        if (x.choices[0].delta.finish_reason == "length")
-                                        {
-                                            sis.UpdateText("...");
-                                        }
-                                        sis.FinishGenerate();
-                                    }
-                                }
-                                catch (Exception e)
-                                {
-                                    sis.UpdateAllText("API调用失败".Translate() + '\n' + e.ToString());
-                                    sis.FinishGenerate();
-                                }
-                            });
-                        }
-                        catch (Exception e)
-                        {
-                            sis.UpdateAllText("API调用失败".Translate() + '\n' + e.ToString());
-                            sis.FinishGenerate();
-                        }
-                    });
+                                return;
+                            }
+                            var text = x.GetDeltaContent();
+                            if (!string.IsNullOrEmpty(text))
+                            {
+                                sis.UpdateText(text);
+                            }
+                            if (x.GetFinishReason() == "length")
+                            {
+                                sis.UpdateText("...");
+                            }
+                        }).GetAwaiter().GetResult();
+                    }
+                    catch (Exception e)
+                    {
+                        sis.UpdateAllText("API调用失败".Translate() + '\n' + e.ToString());
+                    }
+                    finally
+                    {
+                        sis.FinishGenerate();
+                    }
                 }
                 else
                 {
@@ -130,7 +119,10 @@ namespace VPet.Plugin.ChatGPTPlugin
                 }
                 DisplayThinkToSayRnd("API调用失败".Translate() + $",{str}\n{e}");//, GraphCore.Helper.SayType.Serious);
             }
-            Dispatcher.Invoke(() => this.IsEnabled = true);
+            finally
+            {
+                Dispatcher.Invoke(() => this.IsEnabled = true);
+            }
         }
 
         public override void Setting() => Plugin.Setting();

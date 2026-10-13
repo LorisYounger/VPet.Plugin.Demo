@@ -71,7 +71,7 @@ namespace VPet.Plugin.VPetTTS
         /// 总开关。关闭时文本原样朗读
         /// </summary>
         [Line]
-        public bool Enable { get; set; } = false;
+        public bool Enable { get; set; } = true;
 
         /// <summary>圆括号 ( ) （ ）</summary>
         [Line]

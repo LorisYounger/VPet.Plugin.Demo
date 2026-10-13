@@ -8,26 +8,24 @@
     ".NETCoreApp,Version=v8.0": {
       "VPet.Plugin.ChatGPTPlugin/1.0.0": {
         "dependencies": {
-          "ChatGPT.API.Framework": "1.2.0",
+          "ChatGPT.API.Framework": "1.2.1",
           "LinePutScript": "1.11.9",
           "LinePutScript.Localization.WPF": "1.0.7",
-          "Microsoft.CSharp": "4.7.0",
           "Newtonsoft.Json": "13.0.4",
-          "System.Data.DataSetExtensions": "4.5.0",
           "VPet-Simulator.Windows.Interface": "1.1.0.66"
         },
         "runtime": {
           "VPet.Plugin.ChatGPTPlugin.dll": {}
         }
       },
-      "ChatGPT.API.Framework/1.2.0": {
+      "ChatGPT.API.Framework/1.2.1": {
         "dependencies": {
           "Newtonsoft.Json": "13.0.4"
         },
         "runtime": {
           "lib/net6.0/ChatGPT.API.Framework.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
+            "assemblyVersion": "1.2.1.0",
+            "fileVersion": "1.2.1.0"
           }
         }
       },
@@ -50,7 +48,6 @@
           }
         }
       },
-      "Microsoft.CSharp/4.7.0": {},
       "Newtonsoft.Json/13.0.4": {
         "runtime": {
           "lib/net6.0/Newtonsoft.Json.dll": {
@@ -118,7 +115,6 @@
           }
         }
       },
-      "System.Data.DataSetExtensions/4.5.0": {},
       "VPet-Simulator.Core/1.1.0.66": {
         "dependencies": {
           "LinePutScript": "1.11.9",
@@ -152,12 +148,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "ChatGPT.API.Framework/1.2.0": {
+    "ChatGPT.API.Framework/1.2.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-OzGbeiZ2lqBoWnEgbDhEHw/ppXa2X4ZQeUZJGWDvLV7vGKXddbg+YZG1dd5gN0rFCMZshQCBkji88r47KgWeEQ==",
-      "path": "chatgpt.api.framework/1.2.0",
-      "hashPath": "chatgpt.api.framework.1.2.0.nupkg.sha512"
+      "sha512": "sha512-s2n8NLc+sTtc0xYU8G7K/x5yqJ5LGH9/3+1VMN3bBnVfGpswPSQPUqFYm9bmReHsBKgKOaggqWQldQYW4LT/CA==",
+      "path": "chatgpt.api.framework/1.2.1",
+      "hashPath": "chatgpt.api.framework.1.2.1.nupkg.sha512"
     },
     "LinePutScript/1.11.9": {
       "type": "package",
@@ -172,13 +168,6 @@
       "sha512": "sha512-n9Hh57jE8pNwzFypx2RUu6hYFMotZ+RDQYvpHwtHojLrFnZ35zJRgTXK3WKtYZHn7Ldm17+Q7NKQnXG1hkSrnQ==",
       "path": "lineputscript.localization.wpf/1.0.7",
       "hashPath": "lineputscript.localization.wpf.1.0.7.nupkg.sha512"
-    },
-    "Microsoft.CSharp/4.7.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-pTj+D3uJWyN3My70i2Hqo+OXixq3Os2D1nJ2x92FFo6sk8fYS1m1WLNTs0Dc1uPaViH0YvEEwvzddQ7y4rhXmA==",
-      "path": "microsoft.csharp/4.7.0",
-      "hashPath": "microsoft.csharp.4.7.0.nupkg.sha512"
     },
     "Newtonsoft.Json/13.0.4": {
       "type": "package",
@@ -221,13 +210,6 @@
       "sha512": "sha512-dRQ75MCI8oz6zAs2Y1w6pq6ARs4MhdNG+gf3doOxOxdnueDXffQLGQIxON54GDoxc0WjKOoHMKBR4DhaduwwQw==",
       "path": "skiasharp.nativeassets.win32/3.116.1",
       "hashPath": "skiasharp.nativeassets.win32.3.116.1.nupkg.sha512"
-    },
-    "System.Data.DataSetExtensions/4.5.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-221clPs1445HkTBZPL+K9sDBdJRB8UN8rgjO3ztB0CQ26z//fmJXtlsr6whGatscsKGBrhJl5bwJuKSA8mwFOw==",
-      "path": "system.data.datasetextensions/4.5.0",
-      "hashPath": "system.data.datasetextensions.4.5.0.nupkg.sha512"
     },
     "VPet-Simulator.Core/1.1.0.66": {
       "type": "package",
