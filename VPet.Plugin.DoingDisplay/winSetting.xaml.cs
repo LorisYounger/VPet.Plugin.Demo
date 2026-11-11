@@ -1,4 +1,4 @@
-﻿using LinePutScript.Localization.WPF;
+using LinePutScript.Localization.WPF;
 using Panuon.WPF.UI;
 using System;
 using System.Collections.Generic;
@@ -6,154 +6,188 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace VPet.Plugin.DoingDisplay
 {
-    /// <summary>
-    /// winSetting.xaml 的交互逻辑
-    /// </summary>
     public partial class winSetting : Window
     {
         private readonly DoingDisplay plugin;
         private SortMode _sortMode = SortMode.LastUse;
-        private bool _sortAscending = false;
+        private bool _sortAscending;
+        private DateTime statisticsDate;
+        private readonly Setting.DailyStatistical?[] recentDays = new Setting.DailyStatistical?[7];
+        private Dictionary<string, Setting.SoftwareStatistical> historySoftware = new();
 
         public winSetting(DoingDisplay plugin)
         {
-            InitializeComponent();
-            Resources = Application.Current.Resources;
             this.plugin = plugin;
+            InitializeComponent();
+            Resources.MergedDictionaries.Add(Application.Current.Resources);
             RefreshData();
             ShowBox.IsChecked = plugin.Set.ShowDoing;
         }
 
-        private List<SoftwareStatisticalVM> BuildViewModels()
-        {
-            var today = DateTime.Now.Date;
-            var last7Days = Enumerable.Range(0, 7)
-                .Select(i => today.AddDays(-6 + i))
-                .ToList();
-            var todayDaily = plugin.Set.Dailies.Find(d => d.Date == today);
-
-            var vms = plugin.Set.Statisticals.Select(stat =>
-            {
-                var dailyStats = last7Days.Select(date =>
-                {
-                    var daily = plugin.Set.Dailies.Find(d => d.Date == date);
-                    int minutes = daily?.SoftwareUsage.GetValueOrDefault(stat.SoftWareProcessName, 0) ?? 0;
-                    return new DayUsage
-                    {
-                        Day = date.ToString("ddd"),
-                        DateStr = date.ToString("MM/dd"),
-                        Minute = minutes
-                    };
-                }).ToList();
-
-                int maxMin = dailyStats.Max(d => d.Minute);
-                foreach (var day in dailyStats)
-                    day.BarHeight = maxMin > 0
-                        ? (day.Minute > 0 ? Math.Max(2, day.Minute * 36.0 / maxMin) : 0)
-                        : 0;
-
-                int todayMin = todayDaily?.SoftwareUsage.GetValueOrDefault(stat.SoftWareProcessName, 0) ?? 0;
-                return new SoftwareStatisticalVM(stat, dailyStats, todayMin);
-            });
-
-            return (_sortMode switch
-            {
-                SortMode.Name        => _sortAscending ? vms.OrderBy(v => v.SoftWare)      : vms.OrderByDescending(v => v.SoftWare),
-                SortMode.TodayMinute => _sortAscending ? vms.OrderBy(v => v.TodayMinute)   : vms.OrderByDescending(v => v.TodayMinute),
-                SortMode.TotalMinute => _sortAscending ? vms.OrderBy(v => v.TotalMinute)   : vms.OrderByDescending(v => v.TotalMinute),
-                _                    => _sortAscending ? vms.OrderBy(v => v.LastUse)       : vms.OrderByDescending(v => v.LastUse),
-            }).ToList();
-        }
-
-        private List<HistoryEntryVM> BuildDailyHistory()
-        {
-            return plugin.Set.Dailies
-                .OrderByDescending(d => d.Date)
-                .Select(d =>
-                {
-                    var items = d.SoftwareUsage
-                        .Select(kv => new SoftwareUsageItem
-                        {
-                            Name = plugin.Set.Statisticals.Find(s => s.SoftWareProcessName == kv.Key)?.SoftWare ?? kv.Key,
-                            Minute = kv.Value
-                        })
-                        .OrderByDescending(s => s.Minute)
-                        .ToList();
-                    int maxMin = items.Count > 0 ? items[0].Minute : 0;
-                    foreach (var s in items)
-                        s.Fraction = maxMin > 0 ? (double)s.Minute / maxMin * 100 : 0;
-                    return new HistoryEntryVM
-                    {
-                        Header = d.Date.ToString("yyyy-MM-dd"),
-                        SubHeader = d.Date.ToString("ddd"),
-                        Minute = d.Minute,
-                        TopSoftware = items
-                    };
-                }).ToList();
-        }
-
-        private List<HistoryEntryVM> BuildMonthlyHistory()
-        {
-            return plugin.Set.Dailies
-                .GroupBy(d => new DateTime(d.Date.Year, d.Date.Month, 1))
-                .OrderByDescending(g => g.Key)
-                .Select(g =>
-                {
-                    var dict = new Dictionary<string, int>();
-                    foreach (var day in g)
-                        foreach (var kv in day.SoftwareUsage)
-                        {
-                            dict.TryGetValue(kv.Key, out int existing);
-                            dict[kv.Key] = existing + kv.Value;
-                        }
-                    var items = dict
-                        .Select(kv => new SoftwareUsageItem
-                        {
-                            Name = plugin.Set.Statisticals.Find(s => s.SoftWareProcessName == kv.Key)?.SoftWare ?? kv.Key,
-                            Minute = kv.Value
-                        })
-                        .OrderByDescending(s => s.Minute)
-                        .ToList();
-                    int maxMin = items.Count > 0 ? items[0].Minute : 0;
-                    foreach (var s in items)
-                        s.Fraction = maxMin > 0 ? (double)s.Minute / maxMin * 100 : 0;
-                    return new HistoryEntryVM
-                    {
-                        Header = $"{g.Key.Year}年{g.Key.Month:D2}月",
-                        SubHeader = string.Empty,
-                        Minute = g.Sum(d => d.Minute),
-                        TopSoftware = items
-                    };
-                }).ToList();
-        }
-
         private void RefreshData()
         {
-            icStatisticals.ItemsSource = BuildViewModels();
-            RefreshHistory();
+            statisticsDate = DateTime.Today;
+            for (int i = 0; i < recentDays.Length; i++)
+            {
+                var date = statisticsDate.AddDays(i - 6);
+                recentDays[i] = plugin.Set.Dailies.Find(d => d.Date == date);
+            }
+
+            var items = new List<SoftwareStatisticalVM>();
+            for (int i = 0; i < plugin.Set.Statisticals.Count; i++)
+            {
+                var stat = plugin.Set.Statisticals[i];
+                int todayMinute = recentDays[6]?.SoftwareUsage.GetValueOrDefault(stat.SoftWareProcessName, 0) ?? 0;
+                items.Add(new SoftwareStatisticalVM(stat, todayMinute));
+            }
+            icStatisticals.ItemsSource = items;
+            ApplySort();
+            icHistory.ItemsSource = null;
+            historySoftware.Clear();
+            if (tabs.SelectedIndex == 1)
+                RefreshHistory();
+            else
+                UpdateExpandAllButton();
+        }
+
+        private void ApplySort()
+        {
+            var view = CollectionViewSource.GetDefaultView(icStatisticals.ItemsSource);
+            string property = _sortMode switch
+            {
+                SortMode.Name => nameof(SoftwareStatisticalVM.SoftWare),
+                SortMode.TodayMinute => nameof(SoftwareStatisticalVM.TodayMinute),
+                SortMode.TotalMinute => nameof(SoftwareStatisticalVM.TotalMinute),
+                _ => nameof(SoftwareStatisticalVM.LastUse),
+            };
+            using (view.DeferRefresh())
+            {
+                view.SortDescriptions.Clear();
+                view.SortDescriptions.Add(new SortDescription(property,
+                    _sortAscending ? ListSortDirection.Ascending : ListSortDirection.Descending));
+            }
         }
 
         private void RefreshHistory()
         {
-            if (icHistory == null) return;
-            icHistory.ItemsSource = rbDaily?.IsChecked == true
-                ? BuildDailyHistory()
-                : BuildMonthlyHistory();
+            historySoftware.Clear();
+            for (int i = 0; i < plugin.Set.Statisticals.Count; i++)
+            {
+                var stat = plugin.Set.Statisticals[i];
+                historySoftware[stat.SoftWareProcessName] = stat;
+            }
+
+            var entries = new List<HistoryEntryVM>();
+            var months = new Dictionary<DateTime, HistoryEntryVM>();
+            for (int i = 0; i < plugin.Set.Dailies.Count; i++)
+            {
+                var day = plugin.Set.Dailies[i];
+                if (rbDaily.IsChecked == true)
+                {
+                    entries.Add(new HistoryEntryVM
+                    {
+                        Date = day.Date,
+                        Header = day.Date.ToString("yyyy-MM-dd"),
+                        SubHeader = day.Date.ToString("ddd"),
+                        Minute = day.Minute,
+                        Days = new List<Setting.DailyStatistical> { day }
+                    });
+                }
+                else
+                {
+                    var month = new DateTime(day.Date.Year, day.Date.Month, 1);
+                    if (!months.TryGetValue(month, out var entry))
+                    {
+                        entry = new HistoryEntryVM { Date = month, Header = $"{month.Year}年{month.Month:D2}月" };
+                        months.Add(month, entry);
+                        entries.Add(entry);
+                    }
+                    entry.Minute += day.Minute;
+                    entry.Days.Add(day);
+                }
+            }
+            icHistory.ItemsSource = entries.OrderByDescending(e => e.Date).ToList();
+            UpdateExpandAllButton();
         }
 
-        private void RbDaily_Checked(object sender, RoutedEventArgs e) => RefreshHistory();
-        private void RbMonthly_Checked(object sender, RoutedEventArgs e) => RefreshHistory();
+        private void Details_Loaded(object sender, RoutedEventArgs e) => RefreshDetails((ItemsControl)sender);
+
+        private void Details_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            var control = (ItemsControl)sender;
+            if (control.IsLoaded)
+                RefreshDetails(control);
+        }
+
+        private void RefreshDetails(ItemsControl control)
+        {
+            if (control.DataContext is SoftwareStatisticalVM stat)
+            {
+                var days = new List<DayUsage>();
+                for (int i = 0; i < recentDays.Length; i++)
+                {
+                    var date = statisticsDate.AddDays(i - 6);
+                    days.Add(new DayUsage
+                    {
+                        Day = date.ToString("ddd"),
+                        DateStr = date.ToString("MM/dd"),
+                        Minute = recentDays[i]?.SoftwareUsage.GetValueOrDefault(stat.SoftWareProcessName, 0) ?? 0
+                    });
+                }
+                int maxMinute = days.Max(d => d.Minute);
+                foreach (var day in days)
+                    day.BarHeight = maxMinute > 0 && day.Minute > 0 ? Math.Max(2, day.Minute * 36.0 / maxMinute) : 0;
+                control.ItemsSource = days;
+            }
+            else if (control.DataContext is HistoryEntryVM entry)
+            {
+                var usage = new Dictionary<string, int>();
+                foreach (var day in entry.Days)
+                    foreach (var item in day.SoftwareUsage)
+                    {
+                        usage.TryGetValue(item.Key, out int minute);
+                        usage[item.Key] = minute + item.Value;
+                    }
+                var items = usage.Select(item => new SoftwareUsageItem
+                {
+                    Name = historySoftware.TryGetValue(item.Key, out var software) ? software.SoftWare : item.Key,
+                    Minute = item.Value
+                }).OrderByDescending(item => item.Minute).ToList();
+                int maxMinute = items.Count > 0 ? items[0].Minute : 0;
+                foreach (var item in items)
+                    item.Fraction = maxMinute > 0 ? item.Minute * 100.0 / maxMinute : 0;
+                control.ItemsSource = items;
+            }
+        }
+
+        private void Tabs_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (IsLoaded && e.Source == tabs)
+            {
+                if (tabs.SelectedIndex == 1)
+                    RefreshHistory();
+                else
+                    UpdateExpandAllButton();
+            }
+        }
+
+        private void HistoryMode_Checked(object sender, RoutedEventArgs e)
+        {
+            if (IsLoaded && tabs.SelectedIndex == 1)
+                RefreshHistory();
+        }
 
         private void RbSort_Checked(object sender, RoutedEventArgs e)
         {
-            if (sender is FrameworkElement fe && Enum.TryParse<SortMode>(fe.Tag?.ToString(), out var mode))
+            if (IsLoaded)
             {
-                _sortMode = mode;
-                if (icStatisticals != null)
-                    icStatisticals.ItemsSource = BuildViewModels();
+                _sortMode = Enum.Parse<SortMode>((string)((RadioButton)sender).Tag);
+                ApplySort();
             }
         }
 
@@ -161,7 +195,36 @@ namespace VPet.Plugin.DoingDisplay
         {
             _sortAscending = !_sortAscending;
             btnSortDir.Content = _sortAscending ? "↑" : "↓";
-            icStatisticals.ItemsSource = BuildViewModels();
+            ApplySort();
+        }
+
+        private void BtnExpandAll_Click(object sender, RoutedEventArgs e)
+        {
+            bool expanded = !AllDetailsExpanded;
+            if (tabs.SelectedIndex == 0)
+            {
+                foreach (SoftwareStatisticalVM item in icStatisticals.Items)
+                    item.IsExpanded = expanded;
+            }
+            else
+            {
+                foreach (HistoryEntryVM item in icHistory.Items)
+                    item.IsExpanded = expanded;
+            }
+            UpdateExpandAllButton();
+        }
+
+        private void DetailToggle_Click(object sender, RoutedEventArgs e) => UpdateExpandAllButton();
+
+        private bool AllDetailsExpanded => tabs.SelectedIndex == 0
+            ? icStatisticals.Items.Count > 0 && icStatisticals.Items.Cast<SoftwareStatisticalVM>().All(item => item.IsExpanded)
+            : icHistory.Items.Count > 0 && icHistory.Items.Cast<HistoryEntryVM>().All(item => item.IsExpanded);
+
+        private void UpdateExpandAllButton()
+        {
+            bool allExpanded = AllDetailsExpanded;
+            expandAllIcon.Text = allExpanded ? "\uF497" : "\uF491";
+            btnExpandAll.ToolTip = (allExpanded ? "折叠当前页的全部详情" : "展开当前页的全部详情").Translate();
         }
 
         private void BtnClear_Click(object sender, RoutedEventArgs e)
@@ -174,20 +237,14 @@ namespace VPet.Plugin.DoingDisplay
             }
         }
 
-        private void BtnSave_Click(object sender, RoutedEventArgs e)
-        {
-            RefreshData();
-        }
+        private void BtnSave_Click(object sender, RoutedEventArgs e) => RefreshData();
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            plugin.winSetting = null;
-        }
+        private void Window_Closing(object sender, CancelEventArgs e) => plugin.winSetting = null;
 
         private void ShowBox_Checked(object sender, RoutedEventArgs e)
         {
-            if (!IsLoaded) return;
-            plugin.Set.ShowDoing = ShowBox.IsChecked == true;
+            if (IsLoaded)
+                plugin.Set.ShowDoing = ShowBox.IsChecked == true;
         }
     }
 
@@ -205,12 +262,23 @@ namespace VPet.Plugin.DoingDisplay
     public class SoftwareStatisticalVM : INotifyPropertyChanged
     {
         private readonly Setting.SoftwareStatistical _stat;
+        private bool isExpanded;
 
-        public SoftwareStatisticalVM(Setting.SoftwareStatistical stat, List<DayUsage> dailyStats, int todayMinute)
+        public SoftwareStatisticalVM(Setting.SoftwareStatistical stat, int todayMinute)
         {
             _stat = stat;
-            DailyStats = dailyStats;
             TodayMinute = todayMinute;
+        }
+
+        public bool IsExpanded
+        {
+            get => isExpanded;
+            set
+            {
+                if (isExpanded == value) return;
+                isExpanded = value;
+                OnPropertyChanged();
+            }
         }
 
         public string SoftWare
@@ -228,14 +296,10 @@ namespace VPet.Plugin.DoingDisplay
         }
 
         public string SoftWareProcessName => _stat.SoftWareProcessName;
-        /// <summary>
-        /// 格式化后的使用时长, 用于显示
-        /// </summary>
         public string DurationText => _stat.Minute >= 60 ? $"{_stat.Minute / 60}h {_stat.Minute % 60}m" : $"{_stat.Minute}m";
         public DateTime LastUse => _stat.LastUse;
         public int TodayMinute { get; }
         public int TotalMinute => _stat.Minute;
-        public List<DayUsage> DailyStats { get; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string? name = null)
@@ -250,13 +314,27 @@ namespace VPet.Plugin.DoingDisplay
         public string DurationText => Minute >= 60 ? $"{Minute / 60}h {Minute % 60}m" : $"{Minute}m";
     }
 
-    public class HistoryEntryVM
+    public class HistoryEntryVM : INotifyPropertyChanged
     {
+        private bool isExpanded;
+        public bool IsExpanded
+        {
+            get => isExpanded;
+            set
+            {
+                if (isExpanded == value) return;
+                isExpanded = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsExpanded)));
+            }
+        }
+
+        public DateTime Date { get; set; }
         public string Header { get; set; } = string.Empty;
         public string SubHeader { get; set; } = string.Empty;
         public int Minute { get; set; }
         public string DurationText => Minute >= 60 ? $"{Minute / 60}h {Minute % 60}m" : $"{Minute}m";
-        public List<SoftwareUsageItem> TopSoftware { get; set; } = new();
+        public List<Setting.DailyStatistical> Days { get; set; } = new();
+        public event PropertyChangedEventHandler? PropertyChanged;
     }
 
     public enum SortMode { LastUse, Name, TodayMinute, TotalMinute }

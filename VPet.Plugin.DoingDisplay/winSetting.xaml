@@ -4,12 +4,133 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ll="clr-namespace:LinePutScript.Localization.WPF;assembly=LinePutScript.Localization.WPF"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:local="clr-namespace:VPet.Plugin.DoingDisplay" mc:Ignorable="d"
+        mc:Ignorable="d"
         xmlns:pu="clr-namespace:Panuon.WPF.UI;assembly=Panuon.WPF.UI" Title="{ll:Str '在做了在做了'}" Width="550" Height="650"
         MinWidth="300" MinHeight="300" FontSize="16" ResizeMode="CanResize"
         Background="{DynamicResource PrimaryLighter}" Closing="Window_Closing">
     <Window.Resources>
-        <ResourceDictionary Source="/VPet-Simulator.Windows.Interface;component/ResourceStyle.xaml" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/VPet-Simulator.Windows.Interface;component/ResourceStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- The list owns its scroll viewport; an outer ScrollViewer disables virtualization. -->
+            <Style x:Key="StatisticsList" TargetType="ListBox">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+                <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
+                <Setter Property="VirtualizingPanel.IsVirtualizing" Value="True" />
+                <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Recycling" />
+                <Setter Property="VirtualizingPanel.ScrollUnit" Value="Pixel" />
+                <Setter Property="ItemsPanel">
+                    <Setter.Value>
+                        <ItemsPanelTemplate><VirtualizingStackPanel /></ItemsPanelTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListBox">
+                            <ScrollViewer Focusable="False" CanContentScroll="True"
+                                    HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                    VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
+                                <ItemsPresenter />
+                            </ScrollViewer>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="ItemContainerStyle">
+                    <Setter.Value>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            <Setter Property="Focusable" Value="False" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBoxItem">
+                                        <ContentPresenter HorizontalAlignment="Stretch" />
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="DetailToggle" TargetType="ToggleButton">
+                <EventSetter Event="Click" Handler="DetailToggle_Click" />
+                <Setter Property="IsChecked" Value="{Binding IsExpanded, Mode=TwoWay}" />
+                <Setter Property="Content" Value="▶" />
+                <Setter Property="ToolTip" Value="{ll:Str '展开'}" />
+                <Setter Property="FontSize" Value="10" />
+                <Setter Property="Padding" Value="3" />
+                <Setter Property="Margin" Value="4,0,0,0" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ToggleButton">
+                            <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" CornerRadius="3">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="{DynamicResource SecondaryLight}" />
+                    </Trigger>
+                    <Trigger Property="IsChecked" Value="True">
+                        <Setter Property="Content" Value="▼" />
+                        <Setter Property="ToolTip" Value="{ll:Str '折叠'}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <DataTemplate x:Key="SoftwareDetails">
+                <ItemsControl Margin="0,8,0,0" Loaded="Details_Loaded" DataContextChanged="Details_DataContextChanged">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate><UniformGrid Rows="1" /></ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel HorizontalAlignment="Center" Margin="2,0">
+                                <TextBlock Text="{Binding DurationText}" FontSize="9" HorizontalAlignment="Center"
+                                        Foreground="Gray" Margin="0,0,0,2" />
+                                <Grid Height="36" Width="24">
+                                    <Rectangle Fill="{DynamicResource SecondaryLight}" Opacity="0.4" RadiusX="2" RadiusY="2" />
+                                    <Rectangle Fill="{DynamicResource Secondary}" Height="{Binding BarHeight}"
+                                            VerticalAlignment="Bottom" RadiusX="2" RadiusY="2" />
+                                </Grid>
+                                <TextBlock Text="{Binding Day}" FontSize="10" HorizontalAlignment="Center" Margin="0,2,0,0" />
+                                <TextBlock Text="{Binding DateStr}" FontSize="9" HorizontalAlignment="Center" Foreground="Gray" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </DataTemplate>
+            <DataTemplate x:Key="HistoryDetails">
+                <ListBox Style="{StaticResource StatisticsList}" MaxHeight="260" Margin="0,6,0,0"
+                        Loaded="Details_Loaded" DataContextChanged="Details_DataContextChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="110" />
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding Name}" ToolTip="{Binding Name}" FontSize="11"
+                                        VerticalAlignment="Center" TextTrimming="CharacterEllipsis" />
+                                <ProgressBar Grid.Column="1" Value="{Binding Fraction}" Maximum="100" Height="8"
+                                        VerticalAlignment="Center" />
+                                <TextBlock Grid.Column="2" Text="{Binding DurationText}" FontSize="11"
+                                        VerticalAlignment="Center" Margin="8,0,0,0" Foreground="Gray" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DataTemplate>
+        </ResourceDictionary>
     </Window.Resources>
     <Grid Margin="8">
         <Grid.RowDefinitions>
@@ -17,200 +138,156 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-
-        <TextBlock Grid.Row="0" Margin="0,0,0,6" TextWrapping="WrapWithOverflow">
-            <Run Text="{ll:Str DoingDisplay}" FontWeight="Bold" /> : 
+        <TextBlock Margin="0,0,0,6" TextWrapping="WrapWithOverflow">
+            <Run Text="{ll:Str DoingDisplay}" FontWeight="Bold" /> :
             <Run Text="{ll:Str '记录各软件的使用时长统计信息'}" /><LineBreak />
             <Run Text="{ll:Str '如需展示在Steam状态, 请进行任意工作/玩耍/学习'}" />
         </TextBlock>
-      
-        <TabControl Grid.Row="1" Background="{DynamicResource PrimaryLighter}" BorderThickness="0"
+        <TabControl x:Name="tabs" Grid.Row="1" Background="{DynamicResource PrimaryLighter}" BorderThickness="0"
+                SelectedIndex="0" SelectionChanged="Tabs_SelectionChanged"
                 pu:TabControlHelper.HeaderPanelBackground="{DynamicResource PrimaryLight}"
                 pu:TabControlHelper.ItemsSelectedBackground="{DynamicResource PrimaryLighter}">
-            <!-- Tab 1: 软件统计 -->
             <TabItem Header="{ll:Str '软件统计'}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="1*" />
                     </Grid.RowDefinitions>
-                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,4,0,6">
+                    <WrapPanel Margin="0,4,0,6">
                         <TextBlock Text="{ll:Str '排序:'}" VerticalAlignment="Center" Margin="0,0,6,0" FontSize="13" />
                         <RadioButton x:Name="rbSortLastUse" Content="{ll:Str '最近使用'}" GroupName="SortGroup"
                                 IsChecked="True" Tag="LastUse" Checked="RbSort_Checked" Margin="0,0,10,0" />
-                        <RadioButton x:Name="rbSortName" Content="{ll:Str '软件名称'}" GroupName="SortGroup" Tag="Name"
-                                Checked="RbSort_Checked" Margin="0,0,10,0" />
+                        <RadioButton x:Name="rbSortName" Content="{ll:Str '软件名称'}" GroupName="SortGroup"
+                                Tag="Name" Checked="RbSort_Checked" Margin="0,0,10,0" />
                         <RadioButton x:Name="rbSortToday" Content="{ll:Str '今日时长'}" GroupName="SortGroup"
                                 Tag="TodayMinute" Checked="RbSort_Checked" Margin="0,0,10,0" />
                         <RadioButton x:Name="rbSortTotal" Content="{ll:Str '累计时长'}" GroupName="SortGroup"
                                 Tag="TotalMinute" Checked="RbSort_Checked" />
                         <Button x:Name="btnSortDir" Content="↓" Width="28" Margin="8,0,0,0"
                                 pu:ButtonHelper.CornerRadius="4" BorderBrush="{DynamicResource SecondaryDark}"
-                                BorderThickness="1" Background="{DynamicResource SecondaryLight}"
-                                Click="BtnSortDir_Click" />
-                    </StackPanel>
-                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-                        <ItemsControl x:Name="icStatisticals">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Border Margin="0,0,0,6" Padding="8,6" BorderBrush="{DynamicResource SecondaryDark}"
-                                            BorderThickness="1" CornerRadius="4">
+                                BorderThickness="1" Background="{DynamicResource SecondaryLight}" Click="BtnSortDir_Click" />
+                    </WrapPanel>
+                    <ListBox x:Name="icStatisticals" Grid.Row="1" Style="{StaticResource StatisticsList}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border Margin="0,0,0,6" Padding="8,6" BorderBrush="{DynamicResource SecondaryDark}"
+                                        BorderThickness="1" CornerRadius="4">
+                                    <StackPanel>
                                         <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto" />
-                                                <RowDefinition Height="Auto" />
-                                            </Grid.RowDefinitions>
-
-                                            <!-- 软件信息行 -->
-                                            <Grid Grid.Row="0">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="1*" />
-                                                    <ColumnDefinition Width="Auto" />
-                                                    <ColumnDefinition Width="Auto" />
-                                                </Grid.ColumnDefinitions>
-                                                <StackPanel Grid.Column="0">
-                                                    <TextBox
-                                                            Text="{Binding SoftWare, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                            FontSize="14" FontWeight="SemiBold"
-                                                            BorderThickness="0,0,0,1"
-                                                            BorderBrush="{DynamicResource SecondaryDark}"
-                                                            Background="Transparent" ToolTip="{ll:Str '点击可编辑软件名称'}" />
-                                                    <TextBlock Text="{Binding SoftWareProcessName}" FontSize="11"
-                                                            Foreground="Gray" Margin="2,2,0,0" />
-                                                </StackPanel>
-                                                <TextBlock Grid.Column="1" Text="{Binding DurationText}"
-                                                        ToolTip="{ll:Str '累计时长'}" VerticalAlignment="Center"
-                                                        Margin="12,0" FontSize="14" FontWeight="SemiBold" />
-                                                <TextBlock Grid.Column="2"
-                                                        Text="{Binding LastUse, StringFormat='{}{0:yyyy-MM-dd HH:mm}'}"
-                                                        VerticalAlignment="Center" FontSize="11" Foreground="Gray"
-                                                        Margin="0,0,4,0" ToolTip="{ll:Str '最近使用'}" />
-                                            </Grid>
-
-                                            <!-- 最近7天使用柱状图 -->
-                                            <ItemsControl Grid.Row="1" ItemsSource="{Binding DailyStats}"
-                                                    Margin="0,8,0,0">
-                                                <ItemsControl.ItemsPanel>
-                                                    <ItemsPanelTemplate>
-                                                        <UniformGrid Rows="1" />
-                                                    </ItemsPanelTemplate>
-                                                </ItemsControl.ItemsPanel>
-                                                <ItemsControl.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <StackPanel HorizontalAlignment="Center" Margin="2,0">
-                                                            <TextBlock Text="{Binding DurationText}" FontSize="9"
-                                                                    HorizontalAlignment="Center" Foreground="Gray"
-                                                                    Margin="0,0,0,2" />
-                                                            <Grid Height="36" Width="24">
-                                                                <Rectangle Fill="{DynamicResource SecondaryLight}"
-                                                                        Opacity="0.4" RadiusX="2" RadiusY="2" />
-                                                                <Rectangle Fill="{DynamicResource Secondary}"
-                                                                        Height="{Binding BarHeight}"
-                                                                        VerticalAlignment="Bottom" RadiusX="2"
-                                                                        RadiusY="2" />
-                                                            </Grid>
-                                                            <TextBlock Text="{Binding Day}" FontSize="10"
-                                                                    HorizontalAlignment="Center" Margin="0,2,0,0" />
-                                                            <TextBlock Text="{Binding DateStr}" FontSize="9"
-                                                                    HorizontalAlignment="Center" Foreground="Gray" />
-                                                        </StackPanel>
-                                                    </DataTemplate>
-                                                </ItemsControl.ItemTemplate>
-                                            </ItemsControl>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="1*" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel>
+                                                <TextBox Text="{Binding SoftWare, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                        FontSize="14" FontWeight="SemiBold" BorderThickness="0,0,0,1"
+                                                        BorderBrush="{DynamicResource SecondaryDark}" Background="Transparent"
+                                                        ToolTip="{ll:Str '点击可编辑软件名称'}" />
+                                                <TextBlock Text="{Binding SoftWareProcessName}" FontSize="11"
+                                                        Foreground="Gray" Margin="2,2,0,0" TextTrimming="CharacterEllipsis" />
+                                            </StackPanel>
+                                            <TextBlock Grid.Column="1" Text="{Binding DurationText}" ToolTip="{ll:Str '累计时长'}"
+                                                    VerticalAlignment="Center" Margin="12,0" FontSize="14" FontWeight="SemiBold" />
+                                            <TextBlock Grid.Column="2" Text="{Binding LastUse, StringFormat='{}{0:yyyy-MM-dd HH:mm}'}"
+                                                    VerticalAlignment="Center" FontSize="11" Foreground="Gray"
+                                                    Margin="0,0,4,0" ToolTip="{ll:Str '最近使用'}" />
+                                            <ToggleButton Grid.Column="3" Style="{StaticResource DetailToggle}" />
                                         </Grid>
-                                    </Border>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </ScrollViewer>
+                                        <ContentControl>
+                                            <ContentControl.Style>
+                                                <Style TargetType="ContentControl">
+                                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsExpanded}" Value="True">
+                                                            <Setter Property="Content" Value="{Binding}" />
+                                                            <Setter Property="ContentTemplate" Value="{StaticResource SoftwareDetails}" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </ContentControl.Style>
+                                        </ContentControl>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </Grid>
             </TabItem>
-
-            <!-- Tab 2: 使用历史 -->
             <TabItem Header="{ll:Str '使用历史'}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="1*" />
                     </Grid.RowDefinitions>
-                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,4,0,6">
-                        <RadioButton x:Name="rbDaily" Content="{ll:Str '每日'}" IsChecked="True" Margin="0,0,16,0"
-                                Checked="RbDaily_Checked" />
-                        <RadioButton x:Name="rbMonthly" Content="{ll:Str '每月'}" Checked="RbMonthly_Checked" />
+                    <StackPanel Orientation="Horizontal" Margin="0,4,0,6">
+                        <RadioButton x:Name="rbDaily" Content="{ll:Str '每日'}" IsChecked="True"
+                                GroupName="HistoryMode" Margin="0,0,16,0" Checked="HistoryMode_Checked" />
+                        <RadioButton x:Name="rbMonthly" Content="{ll:Str '每月'}" GroupName="HistoryMode" Checked="HistoryMode_Checked" />
                     </StackPanel>
-                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-                        <ItemsControl x:Name="icHistory">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Border Margin="0,0,0,6" Padding="8,6" BorderBrush="{DynamicResource SecondaryDark}"
-                                            BorderThickness="1" CornerRadius="4">
+                    <ListBox x:Name="icHistory" Grid.Row="1" Style="{StaticResource StatisticsList}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border Margin="0,0,0,6" Padding="8,6" BorderBrush="{DynamicResource SecondaryDark}"
+                                        BorderThickness="1" CornerRadius="4">
+                                    <StackPanel>
                                         <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto" />
-                                                <RowDefinition Height="Auto" />
-                                            </Grid.RowDefinitions>
-
-                                            <!-- 日期/月份标题行 -->
-                                            <Grid Grid.Row="0">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="1*" />
-                                                    <ColumnDefinition Width="Auto" />
-                                                </Grid.ColumnDefinitions>
-                                                <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                                    <TextBlock Text="{Binding Header}" FontSize="14"
-                                                            FontWeight="SemiBold" />
-                                                    <TextBlock Text="{Binding SubHeader}" FontSize="12"
-                                                            Foreground="Gray" VerticalAlignment="Bottom"
-                                                            Margin="6,0,0,1" />
-                                                </StackPanel>
-                                                <TextBlock Grid.Column="1" Text="{Binding DurationText}" FontSize="14"
-                                                        FontWeight="SemiBold" VerticalAlignment="Center" />
-                                            </Grid>
-
-                                            <!-- 各软件用量条形列表 -->
-                                            <ItemsControl Grid.Row="1" ItemsSource="{Binding TopSoftware}"
-                                                    Margin="0,6,0,0">
-                                                <ItemsControl.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <Grid Margin="0,2">
-                                                            <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="110" />
-                                                                <ColumnDefinition Width="1*" />
-                                                                <ColumnDefinition Width="Auto" />
-                                                            </Grid.ColumnDefinitions>
-                                                            <TextBlock Grid.Column="0" Text="{Binding Name}"
-                                                                    FontSize="11" VerticalAlignment="Center"
-                                                                    TextTrimming="CharacterEllipsis" />
-                                                            <ProgressBar Grid.Column="1" Value="{Binding Fraction}"
-                                                                    Maximum="100" Height="8" VerticalAlignment="Center" />
-                                                            <TextBlock Grid.Column="2" Text="{Binding DurationText}"
-                                                                    FontSize="11" VerticalAlignment="Center"
-                                                                    Margin="8,0,0,0" Foreground="Gray" />
-                                                        </Grid>
-                                                    </DataTemplate>
-                                                </ItemsControl.ItemTemplate>
-                                            </ItemsControl>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="1*" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                <TextBlock Text="{Binding Header}" FontSize="14" FontWeight="SemiBold" />
+                                                <TextBlock Text="{Binding SubHeader}" FontSize="12" Foreground="Gray"
+                                                        VerticalAlignment="Bottom" Margin="6,0,0,1" />
+                                            </StackPanel>
+                                            <TextBlock Grid.Column="1" Text="{Binding DurationText}" FontSize="14"
+                                                    FontWeight="SemiBold" VerticalAlignment="Center" />
+                                            <ToggleButton Grid.Column="2" Style="{StaticResource DetailToggle}" />
                                         </Grid>
-                                    </Border>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </ScrollViewer>
+                                        <ContentControl>
+                                            <ContentControl.Style>
+                                                <Style TargetType="ContentControl">
+                                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsExpanded}" Value="True">
+                                                            <Setter Property="Content" Value="{Binding}" />
+                                                            <Setter Property="ContentTemplate" Value="{StaticResource HistoryDetails}" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </ContentControl.Style>
+                                        </ContentControl>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </Grid>
             </TabItem>
         </TabControl>
-        <pu:Switch x:Name="ShowBox" Grid.Row="1" Background="Transparent" BorderBrush="{DynamicResource PrimaryDark}"
-                BoxHeight="18" BoxWidth="35" CheckedBackground="{DynamicResource Primary}" Margin="0,5,0,0"
+        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,5,0,0">
+            <Button x:Name="btnExpandAll" Click="BtnExpandAll_Click" Width="24" Height="22" Padding="0"
+                    Margin="0,0,6,0" Background="Transparent" BorderThickness="0"
+                    ToolTip="{ll:Str '展开当前页的全部详情'}"
+                    AutomationProperties.Name="{ll:Str '展开或折叠当前页的全部详情'}">
+                <TextBlock x:Name="expandAllIcon" Text="&#xF491;" FontFamily="{DynamicResource RemixIcon}" FontSize="20" />
+            </Button>
+            <pu:Switch x:Name="ShowBox" Background="Transparent" BorderBrush="{DynamicResource PrimaryDark}"
+                BoxHeight="18" BoxWidth="35" CheckedBackground="{DynamicResource Primary}"
                 CheckedBorderBrush="{DynamicResource Primary}" CheckedToggleBrush="{DynamicResource DARKPrimaryText}"
                 Content="{ll:Str 展示在Steam状态}" ToggleBrush="{DynamicResource PrimaryDark}" ToggleShadowColor="{x:Null}"
                 ToggleSize="14" VerticalAlignment="Top" HorizontalAlignment="Right" Checked="ShowBox_Checked"
                 Unchecked="ShowBox_Checked" />
+        </StackPanel>
         <Grid Grid.Row="2" Margin="0,6,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="{ll:Str '清空统计'}" Margin="0,0,4,0" Background="{DynamicResource Secondary}"
+            <Button Content="{ll:Str '清空统计'}" Margin="0,0,4,0" Background="{DynamicResource Secondary}"
                     pu:ButtonHelper.CornerRadius="4" BorderBrush="{DynamicResource SecondaryDark}" BorderThickness="2"
                     Click="BtnClear_Click" />
             <Button Grid.Column="1" Content="{ll:Str '刷新统计时长'}" Margin="4,0,0,0"

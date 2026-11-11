@@ -8,18 +8,18 @@
     ".NETCoreApp,Version=v8.0": {
       "VPet.Plugin.VPetTTS/1.0.0": {
         "dependencies": {
-          "EdgeTTS.Framework": "1.0.5",
+          "EdgeTTS.Framework": "1.0.6",
           "LinePutScript": "1.11.9",
           "LinePutScript.Localization.WPF": "1.0.7",
           "Serilog": "4.3.1",
           "System.Diagnostics.DiagnosticSource": "10.0.3",
-          "VPet-Simulator.Windows.Interface": "1.1.0.58"
+          "VPet-Simulator.Windows.Interface": "1.1.0.72"
         },
         "runtime": {
           "VPet.Plugin.VPetTTS.dll": {}
         }
       },
-      "EdgeTTS.Framework/1.0.5": {
+      "EdgeTTS.Framework/1.0.6": {
         "dependencies": {
           "Newtonsoft.Json": "13.0.3",
           "Serilog": "4.3.1"
@@ -133,7 +133,7 @@
           }
         }
       },
-      "VPet-Simulator.Core/1.1.0.58": {
+      "VPet-Simulator.Core/1.1.0.72": {
         "dependencies": {
           "LinePutScript": "1.11.9",
           "LinePutScript.Localization.WPF": "1.0.7",
@@ -147,9 +147,9 @@
           }
         }
       },
-      "VPet-Simulator.Windows.Interface/1.1.0.58": {
+      "VPet-Simulator.Windows.Interface/1.1.0.72": {
         "dependencies": {
-          "VPet-Simulator.Core": "1.1.0.58"
+          "VPet-Simulator.Core": "1.1.0.72"
         },
         "runtime": {
           "lib/net8.0/VPet-Simulator.Windows.Interface.dll": {
@@ -166,12 +166,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "EdgeTTS.Framework/1.0.5": {
+    "EdgeTTS.Framework/1.0.6": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-KflN9pv1zoh53rdmN9fliToWqpRXRE8ZHbTU5PbVr8FLOc8xA339hq2WBogc1J8knY0JOKOPNpBbb6iKZ8GWYg==",
-      "path": "edgetts.framework/1.0.5",
-      "hashPath": "edgetts.framework.1.0.5.nupkg.sha512"
+      "sha512": "sha512-HyJlRqmdpLemFDS4741ydsWsQNvNAdcRudU9XPyxHMip4Up+7LUkVMjEga1hwPXVyBnkqzlxQbH1jsN6oUzvDw==",
+      "path": "edgetts.framework/1.0.6",
+      "hashPath": "edgetts.framework.1.0.6.nupkg.sha512"
     },
     "LinePutScript/1.11.9": {
       "type": "package",
@@ -243,19 +243,19 @@
       "path": "system.diagnostics.diagnosticsource/10.0.3",
       "hashPath": "system.diagnostics.diagnosticsource.10.0.3.nupkg.sha512"
     },
-    "VPet-Simulator.Core/1.1.0.58": {
+    "VPet-Simulator.Core/1.1.0.72": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Mrwt4dbxNsxkS3sUBoheMH2D1iAlT6r0LCJ9XoXPq21lFMq8EnixX6oLq4NPQQr7rY3Yet75NxgRQxLqG7VNiQ==",
-      "path": "vpet-simulator.core/1.1.0.58",
-      "hashPath": "vpet-simulator.core.1.1.0.58.nupkg.sha512"
+      "sha512": "sha512-kHIXITmLZEZEi3+Ra5TR/AM5qNH7AesluFP6QA7gEyz7h8yK7nVPteZ0yAT1za7nmxlZTFesoA62AIgHsvmyGg==",
+      "path": "vpet-simulator.core/1.1.0.72",
+      "hashPath": "vpet-simulator.core.1.1.0.72.nupkg.sha512"
     },
-    "VPet-Simulator.Windows.Interface/1.1.0.58": {
+    "VPet-Simulator.Windows.Interface/1.1.0.72": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-5saApxJSg9X+r5b7/lUAe52Tk41KvNlbLiZVyshHpfwar7176suSKRsyZH04ssByZNWq5BuTJMNg5w06rcq6rg==",
-      "path": "vpet-simulator.windows.interface/1.1.0.58",
-      "hashPath": "vpet-simulator.windows.interface.1.1.0.58.nupkg.sha512"
+      "sha512": "sha512-bJPxIVh7Uva3nD9BPpSglbLVwkdyEUhqlCxvS7/ufwuJrq2aS84XEvfaiHMiyVA1OI74Q6PhMGO/cfiLb5empg==",
+      "path": "vpet-simulator.windows.interface/1.1.0.72",
+      "hashPath": "vpet-simulator.windows.interface.1.1.0.72.nupkg.sha512"
     }
   }
 }
